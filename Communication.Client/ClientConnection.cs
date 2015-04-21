@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CommunicationClient
+namespace Communication.Client
 {
     public class ClientConnection : IClientConnection
     {

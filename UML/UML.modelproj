@@ -23,33 +23,33 @@
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
     <Folder Include="ModelDefinition\" />
-    <Content Include="CommunicationClient.classdiagram">
+    <Content Include="Communication\CommunicationClient.classdiagram">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="CommunicationClient.classdiagram.layout">
+    <Content Include="Communication\CommunicationClient.classdiagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>CommunicationClient.classdiagram</DependentUpon>
+      <DependentUpon>Communication\CommunicationClient.classdiagram</DependentUpon>
     </Content>
-    <Content Include="CommunicationCommon.classdiagram">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="CommunicationCommon.classdiagram.layout">
-      <SubType>Content</SubType>
-      <DependentUpon>CommunicationCommon.classdiagram</DependentUpon>
-    </Content>
-    <Content Include="CommunicationServer.classdiagram">
+    <Content Include="Communication\CommunicationCommon.classdiagram">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="CommunicationServer.classdiagram.layout">
+    <Content Include="Communication\CommunicationCommon.classdiagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>CommunicationServer.classdiagram</DependentUpon>
+      <DependentUpon>Communication\CommunicationCommon.classdiagram</DependentUpon>
     </Content>
-    <Content Include="DataTransferObjects.classdiagram">
+    <Content Include="Communication\CommunicationServer.classdiagram">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="DataTransferObjects.classdiagram.layout">
+    <Content Include="Communication\CommunicationServer.classdiagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>DataTransferObjects.classdiagram</DependentUpon>
+      <DependentUpon>Communication\CommunicationServer.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="Communication\DataTransferObjects.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Communication\DataTransferObjects.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Communication\DataTransferObjects.classdiagram</DependentUpon>
     </Content>
     <Content Include="ModelDefinition\Package1_1020.uml">
       <SubType>Content</SubType>
@@ -102,5 +102,6 @@
     <Content Include="ModelDefinition\UML.uml">
       <SubType>Content</SubType>
     </Content>
+    <Folder Include="Communication" />
   </ItemGroup>
 </Project>

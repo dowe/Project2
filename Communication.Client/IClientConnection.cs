@@ -1,5 +1,5 @@
 ﻿using System;
-namespace CommunicationClient
+namespace Communication.Client
 {
     public interface IClientConnection
     {

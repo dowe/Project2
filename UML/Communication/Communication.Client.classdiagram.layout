@@ -3,7 +3,7 @@
   <logicalClassDesignerModelMoniker Id="21964a1c-04b8-4902-a620-95a19c8bdb00" />
   <nestedChildShapes>
     <packageShape Id="d91cdf6a-a1fd-4cef-9e76-038569bc0b16" absoluteBounds="0.75, 0.75, 2.25, 7.25" customColor="255, 249, 230" hideQualifiedName="false">
-      <packageMoniker Id="d96fed51-1cd1-4dfd-80c3-39e38f834de1" LastKnownName="CommunicationClient" />
+      <packageMoniker Id="d96fed51-1cd1-4dfd-80c3-39e38f834de1" LastKnownName="Communication.Client" />
       <nestedChildShapes>
         <classShape Id="5b4d73b6-8dee-4533-a3ba-6873f768d52a" absoluteBounds="1.125, 3.125, 1.5, 4.5511167651414866" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
           <classMoniker Id="ba901638-d6e3-45c0-98c0-51117d75e3f6" LastKnownName="ClientConnection" />
