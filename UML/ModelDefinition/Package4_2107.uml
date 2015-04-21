@@ -1,72 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
-  Id="a6fcaba8-ebe0-440d-b561-5a030e3af3af"
-  name="Threading"
+  Id="c99b54b6-4c19-4030-9aaf-b99a78122e06"
+  name="Client"
   visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
   <referencesInternal>
     <reference
-      Id="34cd0f9c-fad0-49f4-93f8-84658c4b1737"
-      handle="viewcode://./CodeSchema_Namespace?Namespace%3DSystem.Threading"
+      Id="0802da66-6cfd-4884-b670-c5a5708368ab"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMicrosoft.AspNet.SignalR.Client"
       tag="ViewCode" />
   </referencesInternal>
   <packagedElements>
     <packageHasNamedElement>
-      <packageMoniker
-        Id="dc80514f-f9cc-4d53-891c-bf8f2fcee71a"
-        LastKnownName="Tasks"
-        LastKnownLocation="Package5_1020.uml" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <class
-        Id="2b55e32d-8381-4a5a-809b-056a5bcea1f7"
-        name="ReaderWriterLockSlim"
+        Id="fcbcc985-0397-4b81-a3a0-9d7cc2d2569b"
+        name="Connection"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
         <referencesInternal>
           <reference
-            Id="fb92c2ec-18e6-4010-afe6-6de3429b03cb"
-            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2FSystem.Core.dll&quot; Namespace%3DSystem.Threading Type%3DReaderWriterLockSlim"
+            Id="70cacdc4-6300-4f87-98a8-3462d72b2127"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FMicrosoft.AspNet.SignalR.Client.dll&quot; Namespace%3DMicrosoft.AspNet.SignalR.Client Type%3DConnection"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>
           <stereotypeInstance
-            Id="9df5fded-4cd1-486a-86c9-db9117f63ea8"
+            Id="ba1b3238-badc-41c8-b1cc-d2672416ae6e"
             name="class"
             profile="CSharpProfile">
             <propertyInstances>
               <stereotypeInstanceHasPropertyInstances
-                Id="62de8318-527f-471d-b210-17dc4599fffc">
+                Id="3cb06e2c-320a-4b88-88d3-556b8baffdde">
                 <propertyInstance
-                  Id="2c6ef10e-4f7d-4e28-94e8-ff94649f6621"
+                  Id="2e0e0641-8615-4663-85e1-8db3b08e7e4d"
                   name="ClrAttributes" />
               </stereotypeInstanceHasPropertyInstances>
               <stereotypeInstanceHasPropertyInstances
-                Id="7434dac7-5b4c-479b-b90f-7bd6bfca917d">
+                Id="19ec22c7-d1de-4000-8e84-737f12f20d15">
                 <propertyInstance
-                  Id="f2fe2fd7-7f71-494d-ad20-bcbab425603a"
+                  Id="9912f370-4a5a-4630-a94b-c17c0d3fc052"
                   name="IsPartial"
                   value="false" />
               </stereotypeInstanceHasPropertyInstances>
               <stereotypeInstanceHasPropertyInstances
-                Id="f3ddc981-bdd2-4c4b-a739-7b0c6261db20">
+                Id="b8bf740d-2910-455e-8805-6b223405a35c">
                 <propertyInstance
-                  Id="850734a6-8963-4111-b8aa-10dc98388473"
+                  Id="b597bf43-d082-4bf4-a135-2aff8f8ba450"
                   name="IsStatic"
                   value="False" />
               </stereotypeInstanceHasPropertyInstances>
               <stereotypeInstanceHasPropertyInstances
-                Id="853fff6f-aa26-48c2-af95-7028270de699">
+                Id="de423b7c-5e6e-4a1a-9fe0-3f1ddac5cb0d">
                 <propertyInstance
-                  Id="d8f07e04-ee0f-40fd-bed8-7ed9b4fd7379"
+                  Id="c5479d9e-bc52-4edb-af1f-7de218ffe704"
                   name="IsUnsafe"
                   value="false" />
               </stereotypeInstanceHasPropertyInstances>
               <stereotypeInstanceHasPropertyInstances
-                Id="dcc500a7-52ab-48cc-9d42-131dcd8b2e53">
+                Id="d308ccd4-c1fb-4fc0-afa5-f4a4f7c103b9">
                 <propertyInstance
-                  Id="8cd77d0f-b664-4794-b227-9cadd23de4e3"
+                  Id="20af8334-f291-4665-ac8b-d73b288939dc"
                   name="PackageVisibility"
                   value="internal" />
               </stereotypeInstanceHasPropertyInstances>

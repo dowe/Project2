@@ -419,7 +419,7 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="99df17f0-6b59-4499-8813-67e1cc560369" name="Command" isAbstract="true" isLeaf="false" isActiveClass="false">
         <referencesInternal>
-          <reference Id="1ae949ec-2aaa-4c14-9ca1-f4b709e3352a" handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand" tag="ViewCode">
+          <reference Id="1ae949ec-2aaa-4c14-9ca1-f4b709e3352a" handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand" tag="ViewCode">
             <elementDefinition Id="02b3cde5-2e81-4265-89d3-4d949d2d1e25" />
           </reference>
         </referencesInternal>
@@ -1209,7 +1209,7 @@
     <logicalClassDesignerModelHasTypes>
       <Interface Id="8f21d0a1-7b40-4900-9dd8-e1fe172526d1" name="ICommandHandler" isAbstract="false" isLeaf="false">
         <referencesInternal>
-          <reference Id="d88505f5-afd4-4022-88b9-c0eb4ebce51e" handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandHandler" tag="ViewCode">
+          <reference Id="d88505f5-afd4-4022-88b9-c0eb4ebce51e" handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandHandler" tag="ViewCode">
             <elementDefinition Id="68502845-8af2-4d5b-9f59-f9530ef7498d" />
           </reference>
         </referencesInternal>
@@ -1406,7 +1406,7 @@
     <logicalClassDesignerModelHasTypes>
       <Interface Id="de81c4c3-f715-4f4c-b31b-df94399dad40" name="ICommandSerializer" isAbstract="false" isLeaf="false">
         <referencesInternal>
-          <reference Id="3b001702-c42d-4c8b-9d2e-126762a75ce9" handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandSerializer" tag="ViewCode">
+          <reference Id="3b001702-c42d-4c8b-9d2e-126762a75ce9" handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandSerializer" tag="ViewCode">
             <elementDefinition Id="0c65c942-0708-4d23-959e-e1a70ce8709f" />
           </reference>
         </referencesInternal>
@@ -1872,7 +1872,7 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="b72a69dd-3c1e-4f9b-ba75-d45ab7a14fe7" name="InputCommandPipeline" isAbstract="false" isLeaf="false" isActiveClass="false">
         <referencesInternal>
-          <reference Id="1fad1cfd-cab3-4b79-9586-9354f596f93a" handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DInputCommandPipeline" tag="ViewCode">
+          <reference Id="1fad1cfd-cab3-4b79-9586-9354f596f93a" handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DInputCommandPipeline" tag="ViewCode">
             <elementDefinition Id="d93a2031-a3a9-4551-8afb-40be7c04828c" />
           </reference>
         </referencesInternal>
@@ -2960,7 +2960,7 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="894b6d98-3e47-4413-a2a3-7301974a0de8" name="OutputCommandPipeline" isAbstract="false" isLeaf="false" isActiveClass="false">
         <referencesInternal>
-          <reference Id="edca2753-6f1c-4aaf-8df8-5e70cea1ed0f" handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DOutputCommandPipeline" tag="ViewCode">
+          <reference Id="edca2753-6f1c-4aaf-8df8-5e70cea1ed0f" handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DOutputCommandPipeline" tag="ViewCode">
             <elementDefinition Id="414fecaa-343c-45e7-a414-a482c402110a" />
           </reference>
         </referencesInternal>

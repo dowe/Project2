@@ -21,7 +21,7 @@
         <referencesInternal>
           <reference
             Id="02b3cde5-2e81-4265-89d3-4d949d2d1e25"
-            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>
@@ -1525,7 +1525,7 @@
         <referencesInternal>
           <reference
             Id="68502845-8af2-4d5b-9f59-f9530ef7498d"
-            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandHandler"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandHandler"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>
@@ -2019,7 +2019,7 @@
         <referencesInternal>
           <reference
             Id="0c65c942-0708-4d23-959e-e1a70ce8709f"
-            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandSerializer"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandSerializer"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>
@@ -2628,7 +2628,7 @@
         <referencesInternal>
           <reference
             Id="d93a2031-a3a9-4551-8afb-40be7c04828c"
-            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DInputCommandPipeline"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DInputCommandPipeline"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>
@@ -4702,7 +4702,7 @@
         <referencesInternal>
           <reference
             Id="414fecaa-343c-45e7-a414-a482c402110a"
-            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DOutputCommandPipeline"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DOutputCommandPipeline"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>

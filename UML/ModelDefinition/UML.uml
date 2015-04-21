@@ -36,6 +36,26 @@
         LastKnownName="System"
         LastKnownLocation="Package_1020.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f3f2f81f-c24c-4883-800d-358dd67cc72c"
+        name="Class1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="1039277b-da43-48ad-bbd3-3a566c242769"
+        LastKnownName="CommunicationClient"
+        LastKnownLocation="Package_2107.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="41d7c624-f8d2-4632-9420-4e4757e56332"
+        LastKnownName="Microsoft"
+        LastKnownLocation="Package1_2107.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

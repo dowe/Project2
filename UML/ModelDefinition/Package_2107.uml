@@ -1,0 +1,1888 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="1039277b-da43-48ad-bbd3-3a566c242769"
+  name="CommunicationClient"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="4c9ec582-a1a0-46a4-847f-4650f502ab92"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DCommunicationClient"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="12aa927f-1af4-417a-a284-ec86a397bc5a"
+        name="ClientConnection"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="923d6002-de42-4314-b768-bbffe7abc3c8"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="4b0710a7-8426-4f38-8568-c7234a5737ad"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="98b78870-f9ac-44e0-a8d0-42cf9c416160">
+                <propertyInstance
+                  Id="41ebf04b-232f-4551-ba3e-d81ce25c9f91"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="11140019-8633-482c-ab01-5714be0d99d6">
+                <propertyInstance
+                  Id="40e1dfcb-144a-4c82-881b-0e42eed90485"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c8c064a5-a109-4325-a76d-99b432f23c3c">
+                <propertyInstance
+                  Id="97858328-866b-4bc4-9096-bd25fc8518cf"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="04b4eb13-36dc-4203-9198-6d238b605bc1">
+                <propertyInstance
+                  Id="037040c8-8370-443b-b913-573976efc80e"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7c3124d1-db52-42eb-82ee-e3c364c9f724">
+                <propertyInstance
+                  Id="38d6c0d4-cf76-4b4b-80fc-c2938461740d"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="6655b160-1837-4463-bcef-898146b6cfa9">
+            <interfaceMoniker
+              Id="3d8bd6a3-b95b-4352-a37b-d4f210ef1993"
+              LastKnownName="IClientConnection"
+              LastKnownLocation="Package_2107.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="ef9e15f1-d1d8-4a04-a198-1aa41af04cf5"
+            name="DEFAULT_RESPONSE_TIMEOUT_IN_MS"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="eb9cdfb9-1bf4-4951-97c6-834060682698"
+                handle="viewcode://./CodeSchema_Field?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3DDEFAULT_RESPONSE_TIMEOUT_IN_MS"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="15ace66f-e23d-4682-874a-0c84060246ca"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a003cde4-1f5a-48bb-96dc-b9a284a43b6f">
+                    <propertyInstance
+                      Id="d8de6223-a198-40f2-b865-e83b38e57f24"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="02e4bba8-6146-479f-92a2-2427f8974f24">
+                    <propertyInstance
+                      Id="701ec30a-1cab-4fbb-b01a-9b1bd8ec60dc"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e920eaff-a3d0-4896-a418-ba2fb16e4b47">
+                    <propertyInstance
+                      Id="91ed52c1-fa4b-4376-b38b-ade39a3f8a85"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cdbf9460-e8fb-457f-b395-0b648dc51078">
+                    <propertyInstance
+                      Id="ed1fa560-53a6-4280-81dc-c4db7722bc0b"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="765b6d85-a679-41d9-9d8c-c0f649cecf05">
+                    <propertyInstance
+                      Id="f64840e3-fdaf-4187-ad38-cafafcacc018"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </property>
+          <property
+            Id="9f88a3d7-d88a-454d-979a-bd16a115dc52"
+            name="connection"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="146488cc-d7d0-471a-af1e-c9d717b2c54f"
+                handle="viewcode://./CodeSchema_Field?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3Dconnection"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="0433fcc8-a3e2-4999-b4f7-8a3ea3ace4c1"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e7b17258-b109-4468-a6e8-ee2ef943f282">
+                    <propertyInstance
+                      Id="93e70617-c82c-4b01-ae6b-d6926e636ae0"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="11861374-9406-491a-acb4-3680f7cd6e57">
+                    <propertyInstance
+                      Id="52b102c3-f9e6-42a4-864f-e383d47c1ac3"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6aa330b6-5f8b-4408-87f6-bf3960107c6d">
+                    <propertyInstance
+                      Id="4bbf7ca0-f167-4dbb-9ff1-bb66b23eb14c"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="07629157-6949-4665-9874-2d1fb3e9e534">
+                    <propertyInstance
+                      Id="ecbfda86-7e50-4d17-8c45-716df84f8452"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5397c9c6-0a80-4b04-87e0-bf963bea7b7b">
+                    <propertyInstance
+                      Id="991c2332-d4f9-4bc7-8839-075436baf93e"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="fcbcc985-0397-4b81-a3a0-9d7cc2d2569b"
+                LastKnownName="Connection"
+                LastKnownLocation="Package4_2107.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="61488ae3-ee6f-4818-b245-56df92e7ab5a"
+            name="connectionLock"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="f609193b-fd7f-4c6b-b7d9-f697e8b4d0ef"
+                handle="viewcode://./CodeSchema_Field?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3DconnectionLock"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="a8dd6bd9-2b8c-4cc2-9a2f-3f3feb006d90"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5bf0a646-c4af-4967-be86-3113ed9cd4a5">
+                    <propertyInstance
+                      Id="3b3cdd6a-eabb-4486-9676-cc290db00288"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3554bc1d-c886-4933-a29b-a63e0ce54ca1">
+                    <propertyInstance
+                      Id="c16aae6d-a187-4730-81ca-4b91e207424f"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="989e9712-d457-428f-827e-0131c1e1159c">
+                    <propertyInstance
+                      Id="1a4ec390-3605-463a-8cea-b9d987562d51"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="22516f12-daae-4ca8-a897-00634e2b99f4">
+                    <propertyInstance
+                      Id="4106126c-e980-4416-9fdf-8e988c6e05fd"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e11ad0c7-51ee-4e82-996c-8d19085c33a7">
+                    <propertyInstance
+                      Id="907cfb20-6c94-41ce-96b7-b24d5a373db6"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="2b55e32d-8381-4a5a-809b-056a5bcea1f7"
+                LastKnownName="ReaderWriterLockSlim"
+                LastKnownLocation="Package4_1020.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="4da02b88-0ac0-4332-8abf-0bf3adcc64ce"
+            name="pipelineRunning"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="abfcf6c0-dc5a-4ee1-bdce-a1eb6beb5355"
+                handle="viewcode://./CodeSchema_Field?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3DpipelineRunning"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="00897b58-d29f-47b6-a0a8-7ec227ca4bc7"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3d5255f8-6ba9-4f3b-b9e1-d5964ed029ed">
+                    <propertyInstance
+                      Id="dfe6652b-a0b5-4622-b7f4-4982295590c3"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3160d168-5c30-4a28-a025-6d8987431f10">
+                    <propertyInstance
+                      Id="95792ffa-b39c-429d-aeec-67775dab0048"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="458ab13c-bd12-48b0-b566-3d4c20f7bc7b">
+                    <propertyInstance
+                      Id="2f86f42a-f02a-43b5-b3ee-7be728d1d45f"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fcec7cc9-cda1-4e14-9b95-0207cdfd5a98">
+                    <propertyInstance
+                      Id="37ef94dd-a408-43a7-9e81-134b7230e00c"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="16640833-9aa7-4d19-aebc-b1fb636e314d">
+                    <propertyInstance
+                      Id="31e7603d-b03e-4ec9-85f1-5bf1e99e4535"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+                LastKnownName="Boolean"
+                LastKnownLocation="UML.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="982304fb-8576-4c17-9cc5-0e5c97da84f4"
+            name="input"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="ed0073ed-39b1-458a-82a7-f5fae9c0e329"
+                handle="viewcode://./CodeSchema_Field?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3Dinput"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="86692a26-520c-495c-8717-4b4f1e12d976"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="949db37a-fb70-47f7-9370-55dfbc8d1843">
+                    <propertyInstance
+                      Id="49eef766-a5cd-4712-a170-59d7775cca00"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="816a1e42-07a4-435a-81c9-3e1fab51bc5a">
+                    <propertyInstance
+                      Id="79a2a579-896a-4082-8aee-f8debef78000"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7853065f-a780-4f3a-b352-e7c9ede723f1">
+                    <propertyInstance
+                      Id="5dc27735-6abf-46ef-9bff-f2c26e1e366f"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="87334e6e-1cd6-4072-9948-e2866aac85a8">
+                    <propertyInstance
+                      Id="72bc4aec-e8f9-4d44-b334-263b4a927a37"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="745a0db2-879d-482c-a606-93d2dd64714a">
+                    <propertyInstance
+                      Id="188a4377-f729-4228-8f38-3f3d2e853bd6"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="1e6a4db7-4553-4d72-9c1d-ed69a004ba06"
+                LastKnownName="InputCommandPipeline"
+                LastKnownLocation="Package_1019.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="27c0f4a2-2518-4a5b-ad8e-d03ab3e6182c"
+            name="output"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="58bb67b1-3d08-4bad-a7ec-339281a0f88e"
+                handle="viewcode://./CodeSchema_Field?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3Doutput"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="624b50c1-f566-4259-9d38-c33b67f4db19"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6d9d023a-5203-49e5-864d-19adf3af5531">
+                    <propertyInstance
+                      Id="1a0b80f0-6572-4fbf-b2a5-dd6b5b2a278b"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1a0b7d81-3e82-47b7-8b88-16276849685d">
+                    <propertyInstance
+                      Id="1c609c83-08ca-4f3e-8d97-be813add192c"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b1437b9f-8a81-4282-99d7-4679af95379b">
+                    <propertyInstance
+                      Id="83d3a88d-8ca6-4e1b-b8e7-2f1077c7f689"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c2eb0807-7370-4561-a35a-5aa8eacfed06">
+                    <propertyInstance
+                      Id="5698c82f-f960-43a9-bb6f-1ea9e7ff8b37"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="19da2354-f422-429f-b78c-8ee955a96a5a">
+                    <propertyInstance
+                      Id="6915f0e8-3362-4f75-8a02-21be65702ea8"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="b2861243-043f-4985-9e6f-ab24f39030bb"
+                LastKnownName="OutputCommandPipeline"
+                LastKnownLocation="Package_1019.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="b9ff61be-5950-4ddf-973e-d9807e2e3a78"
+            name="Closed"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="6739a295-4d17-4e9f-bcef-5cae266d3cf9"
+                handle="viewcode://./CodeSchema_Event?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3DClosed"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="f4ea39ed-8e94-4d1a-9474-54bc67f2a5aa"
+                name="event"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b68058b4-55bb-4a7e-8ad1-6c607c19197e">
+                    <propertyInstance
+                      Id="a002c83d-650e-4304-8c9e-21e6c01b97a8"
+                      name="Add"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b2799db9-a25b-4166-807a-bf2a8bce94a8">
+                    <propertyInstance
+                      Id="4d90531d-34bb-4868-a7ff-dfce31d82f78"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="538d808c-3e1d-4277-825f-1e4af088a1af">
+                    <propertyInstance
+                      Id="81a8801c-ea43-4d11-a8fb-7d8e151bd9d9"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="434f7cff-2846-4b64-80c0-5a7c69db707e">
+                    <propertyInstance
+                      Id="1eee53a3-71c5-4e46-96e6-cb40a5f55190"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="00ec3119-8800-4827-8053-a27f9bc61877">
+                    <propertyInstance
+                      Id="5fb7a287-e72f-4bef-b09c-93d540e855ad"
+                      name="Remove"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="3d70db3d-c377-49f9-8d1d-745e73e2119a"
+                LastKnownName="Action"
+                LastKnownLocation="Package_1020.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="e7f2ea2f-6ad2-41c6-963a-f29722ac8f8f"
+            name="Reconnecting"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="8eb45a2f-eafa-4d0f-961b-58aa97963bd2"
+                handle="viewcode://./CodeSchema_Event?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3DReconnecting"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="26d347d8-1529-48f0-8ffc-260cc095affe"
+                name="event"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="067280a8-946d-49c0-afae-670a3f666dd3">
+                    <propertyInstance
+                      Id="7ca7ade6-d0ad-4072-b3ed-2da226ad24b3"
+                      name="Add"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="56bc85cc-915e-4f33-87f7-7a9fba2b69b3">
+                    <propertyInstance
+                      Id="fb9904ef-3bc1-4e41-8ac3-782dc24daaad"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="30386dfa-e2f3-4192-9ccc-f242adcbd65e">
+                    <propertyInstance
+                      Id="76c7c997-3f43-4c39-a868-a3a1c1859133"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="90e6699d-ca93-429e-aef5-e95130a87aa7">
+                    <propertyInstance
+                      Id="e5673780-779e-4756-8697-c407dac753b3"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3643f915-cc69-4d5f-817a-aa4e7e9e3da9">
+                    <propertyInstance
+                      Id="dfcb54d6-384c-4a93-94fc-d4b728024a12"
+                      name="Remove"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="3d70db3d-c377-49f9-8d1d-745e73e2119a"
+                LastKnownName="Action"
+                LastKnownLocation="Package_1020.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="f67da606-ccbf-4759-818e-34d9f82e2035"
+            name="Reconnected"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="cf8dda9d-dd1d-406e-9b94-38154ce51596"
+                handle="viewcode://./CodeSchema_Event?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3DReconnected"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="8b9d35b8-28cc-4866-a957-30df8c5958bd"
+                name="event"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5333bd0e-e247-44f9-8291-d01a8a98b1ff">
+                    <propertyInstance
+                      Id="ac7a9096-6f2b-41a1-8d3c-e617e2c7c510"
+                      name="Add"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9a306174-a921-4ca0-8e6e-2849fbaf38ca">
+                    <propertyInstance
+                      Id="5ba391f3-5367-4b54-bb4a-4094567c3ac4"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ede57448-483a-4630-ab71-0bcec8746a52">
+                    <propertyInstance
+                      Id="7bd4c6a9-b9b2-4757-9854-db503601fa08"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="35a6c748-b06e-4007-a457-7c336a016317">
+                    <propertyInstance
+                      Id="38d0356f-1bfe-422a-9bb6-c6e71789ea19"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="096de351-e67f-45d1-b6d1-2c57ac37ff83">
+                    <propertyInstance
+                      Id="1dff7467-f1c9-49a4-be27-e6a892775284"
+                      name="Remove"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="3d70db3d-c377-49f9-8d1d-745e73e2119a"
+                LastKnownName="Action"
+                LastKnownLocation="Package_1020.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="df74e5b8-2a1c-44bc-90af-d3dda8a69ffc"
+            name="ClientConnection"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="2d531cd6-e055-45dd-9f4e-a948879b9327"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3D.ctor OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="0770c7d9-191d-4ac7-b564-1b5678dd7151"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="99e2c7b1-a99a-4d7a-a023-946273558353">
+                    <propertyInstance
+                      Id="f43ea297-8474-4c22-80cc-4dfb7c0bff48"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4f572b07-46a6-4fc7-b931-9ac912bb3e0a">
+                    <propertyInstance
+                      Id="69b18a16-80d3-4a6f-b697-f94b2ab169c3"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0fcc7b03-3f8b-4292-a2ee-007ad7589aad">
+                    <propertyInstance
+                      Id="c4c68738-f902-420f-9832-822545bad697"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e439f0bd-e847-4192-bfae-818b89dec68b">
+                    <propertyInstance
+                      Id="355f3960-487c-47ce-8d8f-228c5abf375c"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2e3eccb8-f684-49a6-9504-80197f0a11ce">
+                    <propertyInstance
+                      Id="fa0c8851-9e8c-4ba6-9b8b-8c06d051512c"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6db8a6fc-ec63-4bdd-ae22-9a6505af4696">
+                    <propertyInstance
+                      Id="95822330-9caa-4db5-85f0-9b84633df4cd"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c7fa4f42-1fdf-4fb4-95ef-3b8d1193af4a"
+                  name="serverAddress"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="3d924594-0571-4539-8317-efcc89c387cc"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3D.ctor OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)]) ParameterIdentifier%3DserverAddress"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="UML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="a7555118-7b45-4120-a7b6-03cd3bb0023d"
+            name="ClientConnection"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="62a19b4c-e001-4253-959b-b7d48f887805"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3D.ctor OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandSerializer)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="e574bcf2-f25a-407a-b337-e0055e71f6cc"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6e9e0a99-9cac-4298-8f84-72633e0d07fb">
+                    <propertyInstance
+                      Id="35ff075a-31d2-4243-96c1-02ff51fd8156"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="04b0646d-316d-441c-a18c-5678ebc1d577">
+                    <propertyInstance
+                      Id="788741a2-594d-41b7-a0b8-b135ac023a66"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="854c6506-8af9-4c6c-b7dd-5af61d0dfd79">
+                    <propertyInstance
+                      Id="275ab63b-96d4-4fad-a696-9031cf96e74d"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bfae60ae-19d6-46a0-9a7b-b2e87c1405ae">
+                    <propertyInstance
+                      Id="fa60eae6-c31e-4e74-8ba0-45575c7da712"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="80a9e21a-d3f7-4ebd-b757-7595e9824f9b">
+                    <propertyInstance
+                      Id="30a09b00-8c9d-4b8f-856d-c42cea6537f2"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="feb6e399-9c61-46e3-997a-c502cc5183cc">
+                    <propertyInstance
+                      Id="1491f834-c0a6-4c59-bb06-78ddfffc618d"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a9b99bd0-8f79-48ae-b8b8-8447b8715257"
+                  name="serverAddress"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="c10d1479-0e47-4452-92a0-98ce3ef2aab4"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3D.ctor OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandSerializer)]) ParameterIdentifier%3DserverAddress"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="UML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8006b9b4-3e43-4913-8c44-5f13b948835d"
+                  name="serializer"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="e15ab11b-adf5-4187-b7be-d91a8528e583"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3D.ctor OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandSerializer)]) ParameterIdentifier%3Dserializer"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="daa540a2-7f59-4c9d-a289-a62650f17360"
+                      LastKnownName="ICommandSerializer"
+                      LastKnownLocation="Package_1019.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="fd5a94b7-cb04-4841-ab29-c210bc3d46d4"
+            name="Start"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="a1c51f58-3201-4fbd-be8c-f0bf7d232beb"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3DStart"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="088222e5-3387-4519-b10a-2c6fa3d3a642"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="03ea625c-f6d8-4155-a106-ec734de7b721">
+                    <propertyInstance
+                      Id="abf0996e-6009-4cee-8152-b3b23bfa437c"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7c065f08-5d71-4e01-ad8a-d9a59f71219f">
+                    <propertyInstance
+                      Id="f5409993-f138-4881-8c05-f16e45dc254f"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8476539c-d65f-4cf8-8460-4008af2c0883">
+                    <propertyInstance
+                      Id="89ce3afc-b02b-4f87-a1ec-7a4fbaa21886"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a5cdf147-6fde-472b-9aa2-f842762c3180">
+                    <propertyInstance
+                      Id="4794b888-6653-43fd-9a8f-27892b99b56d"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8d9d0cbb-10fd-4889-8641-71127f969885">
+                    <propertyInstance
+                      Id="2c1745e0-163b-430b-9737-b9d39690eb7b"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="799c4447-b136-4c6e-a6f8-f75e8724202a">
+                    <propertyInstance
+                      Id="b35e766e-1e71-4b50-9899-08423f252fc1"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="8ae082d3-5594-42ef-830e-834f2598c636"
+            name="Stop"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="2a28d6ef-a095-42cf-b164-0f067dc83330"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3DStop"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="fd0896e1-fcbd-40f8-8e59-df2dd76faee8"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="619e062b-c7ba-4524-8684-3228904fac4d">
+                    <propertyInstance
+                      Id="04867f03-1c90-4808-abaf-934c9bab1b7d"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="50c81668-4c62-4006-ba4b-ea3ed2385c48">
+                    <propertyInstance
+                      Id="23f94197-7832-453e-9239-5dcce1dc77ce"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="415e59a3-0eb3-4ce8-8d4b-5d2aaa98f217">
+                    <propertyInstance
+                      Id="18353020-f2fe-4b7e-8be9-35b42f161af4"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="73b0fad7-89b9-426e-9295-2c09826259ee">
+                    <propertyInstance
+                      Id="bf08fb87-fdcf-4ac3-bc44-17a38d2ea615"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f892df1b-7ea0-4878-ba53-b5467cb17a10">
+                    <propertyInstance
+                      Id="631cd7ae-7377-4005-955b-c497a1bcfc04"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="58f7c64c-d246-4c39-b74a-581a509ec08d">
+                    <propertyInstance
+                      Id="f3f9c31b-d7c4-4caa-bf32-1e30b1eb08a2"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="b79d70db-53e4-4ddf-92c0-2da8d48fb704"
+            name="Connect"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="82d61f04-da43-4428-9d7b-d745bdbbbed3"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3DConnect"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="e6332353-3d67-4f5e-9899-dfd8188e3fd1"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3c910879-7d73-496f-be9e-88a75fc7b7ee">
+                    <propertyInstance
+                      Id="03c97f19-4439-4019-ba81-c545d0f87de8"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4ba25135-756c-4a3a-90e0-039ac25bc529">
+                    <propertyInstance
+                      Id="dfaabaf5-db28-4ad9-9523-ee5153051b3a"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e5e366bf-53a9-4057-a155-740b76e7a40e">
+                    <propertyInstance
+                      Id="48bf0f51-a113-44d7-82f0-c172937a4bcf"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e3e29715-80f3-440e-8b83-5a3bbad22b21">
+                    <propertyInstance
+                      Id="e9495323-0f40-4a4a-a8c3-77b5f9f3ccd3"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c7ef7410-5f38-4536-872b-abef97182f18">
+                    <propertyInstance
+                      Id="a00b6f59-7558-4cae-8280-289cc127c150"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dac1fe15-2c87-4bb0-9c34-a7b17da7a4b1">
+                    <propertyInstance
+                      Id="dd72e94f-89fc-42bb-bf07-2ac95529dda7"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="d59be5e2-3c1e-4296-800c-6025d6ccaad4"
+            name="connection_Received"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="eb7e260a-84d4-4bfb-ab95-a92b6fcf62e3"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3Dconnection_Received OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="fc6d3f19-85f3-40c1-8a07-43a85031763d"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="16e7a2b9-462e-4c0e-be45-ee1d61bce6f4">
+                    <propertyInstance
+                      Id="82a4f5b9-efc1-4f6f-8130-f55e2d25be0d"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="31f01a34-bd18-4584-a3b9-478570214bc8">
+                    <propertyInstance
+                      Id="12e9ecca-f360-49b8-b270-baa59b2add31"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d99ccdcf-8337-48e7-a90b-93553d7b65e8">
+                    <propertyInstance
+                      Id="c5e2899b-61ae-4a2e-bfdc-e15515426dc8"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9d333325-469d-4a59-9cc9-bd13ae630f2f">
+                    <propertyInstance
+                      Id="494b894a-a310-4432-ae28-7f6c539338c7"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4f451328-9993-4c62-91bb-4caccc34a60f">
+                    <propertyInstance
+                      Id="4c60aa6e-ba41-4f56-a7f7-4e1e3ee41ef8"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c77b8b22-8899-4c90-ad2c-7f93423a040c">
+                    <propertyInstance
+                      Id="21a41b81-3f38-438a-ac61-3ce7a1a49062"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c23b5f96-2939-4b1b-a6d6-c1274a75701e"
+                  name="obj"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="404cc5a6-7d68-4000-b155-7e6156a553c5"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3Dconnection_Received OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)]) ParameterIdentifier%3Dobj"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="UML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="00648b1e-026a-4c52-aecb-bff8805ed8b7"
+            name="connection_Reconnected"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="a96bbf28-2010-44b7-af5e-3d5063fbe487"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3Dconnection_Reconnected"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="c576288c-fb23-41fd-b510-483ef9919893"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1a3990ee-ae07-4e7b-a29d-88235ee7b54b">
+                    <propertyInstance
+                      Id="349e4d8e-b81d-46b0-af91-8d433b5f1ab8"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5f743bf2-0a95-4f44-ab40-d773c8edf0ac">
+                    <propertyInstance
+                      Id="967caecf-9c52-4319-8157-94ddf1bf3a13"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="150d5a72-11b9-4528-be60-f9fd0a167048">
+                    <propertyInstance
+                      Id="34afa388-7940-4c8a-897e-c997766ba6ac"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="08734b22-d9a2-47a6-b2da-4c132d712f08">
+                    <propertyInstance
+                      Id="62fe0872-c493-4ea3-b25e-e643b3dcb874"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8ff9a043-61d7-431b-b698-5db44790e9fa">
+                    <propertyInstance
+                      Id="6a6e7e5c-5a61-4ebc-93fe-20edfd536f2d"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="28e16ff8-08d6-4e71-862c-976b03a038ae">
+                    <propertyInstance
+                      Id="feca0734-6fa4-4feb-b807-9472c4c57ff2"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="f7b4df97-cd63-458c-9a9f-1adcc2eafdd7"
+            name="connection_Reconnecting"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="61fee6a7-e102-47ed-995f-7fbe695e8767"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3Dconnection_Reconnecting"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="ba4eec88-6607-4ac6-84d8-4e5f875f5cf8"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a6ff83c9-58a9-4acb-9d5b-1b7faba9090b">
+                    <propertyInstance
+                      Id="60c8dd5e-63f4-4e85-a875-134d03ff1a81"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="85efbdf4-a98c-41bd-b8d1-c69d599602e4">
+                    <propertyInstance
+                      Id="000308b1-ae35-40e1-b356-c3ff810ed939"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6d475597-9aa0-46ce-a808-861cbef2cd65">
+                    <propertyInstance
+                      Id="80657f2e-b087-4760-aaf3-c5dfbab10e58"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6d425a4e-7c47-4992-93d7-2610d9d80f1e">
+                    <propertyInstance
+                      Id="4c30210c-57ab-4f0a-af78-dd2fa94a0379"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="50e4f5b8-d2ba-48b8-9792-303a75f24c4e">
+                    <propertyInstance
+                      Id="5c8e5f90-a4a4-433f-b579-e75554e5de44"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2924ed42-6290-4497-9a0d-152d26627f2e">
+                    <propertyInstance
+                      Id="2e558231-60b7-4f37-bf3b-a66248fe0c0f"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="77fcd8b9-35f5-4d35-a009-4771b3452dba"
+            name="connection_Closed"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="f163275e-1876-40aa-b0f8-67b13a5bc626"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3Dconnection_Closed"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="c41e9805-b782-4fba-9fcb-95d053d88b35"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5b41f2de-e6de-4ab6-b6f1-25dfe84aceb3">
+                    <propertyInstance
+                      Id="fc0ebdac-f054-498b-be4c-8bf0edc8d6b7"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5dd07c51-69e4-495d-8f2f-8d724a6db60a">
+                    <propertyInstance
+                      Id="bf0b4e64-3a55-4595-ae21-8bd5bcdfc392"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="eee69d51-b190-4d1c-9883-07d9928361ff">
+                    <propertyInstance
+                      Id="9bb03b0d-3661-46ea-8566-916ee66ed9ed"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8f29b1fc-410d-49aa-aa01-4aa7ced4e85c">
+                    <propertyInstance
+                      Id="58198244-37a9-49d5-a28b-e40814e27033"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e9faabdd-14ee-4796-9152-c6cf7985fd2d">
+                    <propertyInstance
+                      Id="7622573c-6936-413d-85ac-86268e79dab9"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e80dbd80-a17c-4951-b922-012fa404096a">
+                    <propertyInstance
+                      Id="8bdbecce-47bf-44ca-8a96-b960ef0638e9"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="7d237c18-12e8-4a90-b210-bd06f3e84289"
+            name="Send"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="f5f93331-7788-4d79-8282-8f2a11083bf8"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DSend OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="b2d237be-6029-481f-9d30-22660e80d1b5"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="41b91b0e-ef23-4e2c-80b1-f568e4a3097c">
+                    <propertyInstance
+                      Id="7b1f1f72-8ff9-4951-b5c8-fd054ad8bfbc"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="701eea7c-bdd8-480d-9491-b5692c3e3dfc">
+                    <propertyInstance
+                      Id="0c211bd0-118d-4cea-a396-6cfe42901468"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="483c155a-d7b8-43a6-8c73-9937ecae5b3b">
+                    <propertyInstance
+                      Id="99b5f8e4-29f4-4137-9e83-62726f39bf2d"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3c30830d-84a4-4767-ac55-cc42f4fcfbb7">
+                    <propertyInstance
+                      Id="4cf363c1-933d-45c4-8fa1-85f466479764"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f8023b68-675f-4887-8edc-19862c7a0a11">
+                    <propertyInstance
+                      Id="c899b74a-60ce-4b90-96cf-c8448d243394"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b1cf9a6c-532e-4781-ba50-37f20dc4122c">
+                    <propertyInstance
+                      Id="0b9ca8fa-5b3f-40ec-af58-3695635afdee"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="56ab4c67-23c7-4609-bef3-31ed7ecc80ee"
+                  name="command"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="3edd2d75-81ac-4d41-b404-d3c2309d0700"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DSend OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)]) ParameterIdentifier%3Dcommand"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="6dbefedd-2131-487f-aa89-3e7155cc4f0a"
+                      LastKnownName="Command"
+                      LastKnownLocation="Package_1019.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="579954c9-c22f-42ac-80db-aae7a353bb56"
+            name="SendWait‎&lt;T‎&gt;"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="80254c05-7580-4870-82b2-d374700494ea"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DSendWait GenericParameterCount%3D1 OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="98bf8204-1c12-42f7-9030-3d4db3f199f4"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ec0a31f8-9e6b-48dd-b493-a7fea7c64631">
+                    <propertyInstance
+                      Id="9e4a57d5-ef5c-43ed-9f96-f81b16f29cd5"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="95ecacfb-d5c9-4a28-8471-86153193bbcd">
+                    <propertyInstance
+                      Id="1a457f17-d0af-40e4-bc95-9143abae151c"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6d3980d3-f1b2-425f-bf2e-678587d5d9e6">
+                    <propertyInstance
+                      Id="1974b722-15d2-4fcd-9b8c-d2a74397686c"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f743181c-c0f7-44ab-8895-57ac5fcb4a7c">
+                    <propertyInstance
+                      Id="64b1f689-6310-4e03-95b2-5ecef6e124d0"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4158daec-1f16-46b6-ae1a-b16e3629d2d2">
+                    <propertyInstance
+                      Id="48e32237-6c77-4178-8a47-c24afe7fc568"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5daa800e-f4e9-4266-8253-92242785638e">
+                    <propertyInstance
+                      Id="72df4e60-01ba-4cf8-97f4-89e6f1191ccc"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f554fd25-ed1d-43f1-8be7-20827304ec1c"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="9f81f011-f2b5-4be7-8f9d-05a845073b0d"
+                      LastKnownName="T"
+                      LastKnownLocation="Package_2107.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8ae780ea-a1d0-448a-a78e-12940c5347fa"
+                  name="command"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="b5835f98-3f39-49d5-9e15-455490a22a82"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DSendWait GenericParameterCount%3D1 OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)]) ParameterIdentifier%3Dcommand"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="6dbefedd-2131-487f-aa89-3e7155cc4f0a"
+                      LastKnownName="Command"
+                      LastKnownLocation="Package_1019.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="6a39bc86-e1d5-4ba5-9421-8cbdc61a4f78"
+            name="SendWait‎&lt;T‎&gt;"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="abab6ab4-fb72-460d-bc84-b8d6290615c6"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DSendWait GenericParameterCount%3D1 OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="6d8d7788-18a5-4e73-a615-05530176253f"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1ce5568c-8ce2-4ce6-bb21-cdaea59ede82">
+                    <propertyInstance
+                      Id="a70fe45b-e8a7-4387-873c-010f3c7f6ab4"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e9d9f689-bdb7-4610-86a4-2e20e6be9c18">
+                    <propertyInstance
+                      Id="1673ae47-83e3-4a30-b55f-c89990d932d4"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="931b371a-b775-4541-84fc-8d03de67dab5">
+                    <propertyInstance
+                      Id="d2e9f148-ad56-47b2-9e0f-b9722b9c5ff5"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7a0a929f-a366-4df0-8d2a-3c70f615eb27">
+                    <propertyInstance
+                      Id="ca9ca20d-0918-43f0-8ce1-b3e2b3f41ffd"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5b4ff72b-7861-40c5-84f2-a581ad3e917a">
+                    <propertyInstance
+                      Id="adf5fd2e-2adc-4493-982a-7a5b14eda65b"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2e8707ec-ea11-41ad-8ff8-708149beaf3b">
+                    <propertyInstance
+                      Id="cefa4457-c37c-47a3-88df-869f7f31a89a"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="518d1577-e172-490f-8cf8-b0a96c9644f3"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="9f81f011-f2b5-4be7-8f9d-05a845073b0d"
+                      LastKnownName="T"
+                      LastKnownLocation="Package_2107.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a5a8c4d2-25d5-49fa-82cf-5c2ab6f89a70"
+                  name="command"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="b0fa3e4b-9a3e-4281-885d-a9e10166a537"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DSendWait GenericParameterCount%3D1 OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3Dcommand"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="6dbefedd-2131-487f-aa89-3e7155cc4f0a"
+                      LastKnownName="Command"
+                      LastKnownLocation="Package_1019.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="56ab48ff-f4d2-4bd6-8bc1-d65c05d63dc2"
+                  name="timeout"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="33a64781-3571-4e14-a5c2-4287e313d2d2"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DSendWait GenericParameterCount%3D1 OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3Dtimeout"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="UML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="92dce50d-7b5b-46a7-8774-f9b493a1f75f"
+            name="RegisterCommandHandler"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="927ded64-f575-4a6f-a1b4-8922bb6014e2"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DRegisterCommandHandler OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandHandler)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="eca3f2b0-02f4-4287-9fc1-f55151a438d8"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="49cc3e68-683d-4795-90cd-f0a7de574f25">
+                    <propertyInstance
+                      Id="562588b4-d414-4236-a4ce-55627ae78ea4"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3a754eea-c395-448b-8490-ec9d9ecbc6e9">
+                    <propertyInstance
+                      Id="0b25710c-3513-411c-a8ea-79cc9dac8bcf"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="10a353d9-9091-4dd5-b2ef-dd25e8171243">
+                    <propertyInstance
+                      Id="740e1654-ebed-4d61-a4e6-cd3a5397188d"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f6e26b90-8c0f-48b5-ab31-a8cb49ab23a0">
+                    <propertyInstance
+                      Id="9c5e88c7-869a-4eb7-ba09-dab570031165"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3d9052b8-98f7-469b-8c2e-a95584990592">
+                    <propertyInstance
+                      Id="ac7c55b8-0942-4bd4-8c58-11bcd9e5b99a"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b08a568a-cb43-4c01-8528-ed992299249d">
+                    <propertyInstance
+                      Id="c33b359c-d065-4c1b-811d-51fac0a220a5"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="527c9c57-5b4a-4c31-b103-3be5d5fe780a"
+                  name="handler"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="1e159168-b20c-4a5e-8a6a-98a96f87fc7f"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DRegisterCommandHandler OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DICommandHandler)]) ParameterIdentifier%3Dhandler"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="08acade0-b582-48b7-85df-41ebe2fb6313"
+                      LastKnownName="ICommandHandler"
+                      LastKnownLocation="Package_1019.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="9f81f011-f2b5-4be7-8f9d-05a845073b0d"
+        name="T">
+        <referencesInternal>
+          <reference
+            Id="1dc3c6c3-94ed-4e27-89c6-4bace250219a"
+            handle="viewcode://./CodeSchema_GenericParameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DSendWait GenericParameterCount%3D1 OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3D0"
+            tag="ViewCode" />
+        </referencesInternal>
+      </undefinedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="3d8bd6a3-b95b-4352-a37b-d4f210ef1993"
+        name="IClientConnection"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="35316360-f444-4361-b366-b11066f0eeb8"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DIClientConnection"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="f01c0896-a4ea-46b9-a569-aac442c28dc1"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ea2d8565-0b38-436d-8525-45dbe001b868">
+                <propertyInstance
+                  Id="05116124-ffb6-4014-a29c-918c0f096cb2"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3d3b46c0-dbd4-4baf-a53c-e06b8943fbfa">
+                <propertyInstance
+                  Id="80231716-ffd4-403e-9c10-5d4a705ded17"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7ddf0c98-7374-4f8e-bf2a-ed563c293831">
+                <propertyInstance
+                  Id="9872d147-a07f-475d-a06e-c48be32d1f62"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8c4e5c18-eae8-4d45-8abc-16d9f0644882">
+                <propertyInstance
+                  Id="36fa577c-a6b3-43e5-8ea8-c0ed03d10736"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedOperations>
+          <operation
+            Id="87659771-d149-4d2c-9162-27e476ef8bdb"
+            name="Send"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="d263b551-6a0b-41dc-a5f5-2193cea7c2ff"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DIClientConnection Member%3D(Name%3DSend OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="b0dae02f-959d-43ad-ac83-3a4f90300971"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3b687748-eaa9-47fa-8556-e9f8c6cfba66">
+                    <propertyInstance
+                      Id="59c5ddb9-9967-42a9-be42-a73311e796b0"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b8cf2782-c2ae-4047-8578-2e56cbe61f4f">
+                    <propertyInstance
+                      Id="4cde6601-d519-466b-9a15-8dd6a0673903"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a7f906a2-e9bd-4185-b925-590af43aecaa">
+                    <propertyInstance
+                      Id="8de1c372-69cb-45e5-bd86-27e741c7edad"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4bfdc6ee-fe76-42c6-a224-1273b0c0965c">
+                    <propertyInstance
+                      Id="df3bf9e5-bb8c-4467-88be-8e06274121cf"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ab43477f-011c-46a7-89ef-317eaf07ace0">
+                    <propertyInstance
+                      Id="7c48b0e2-9c23-4fbf-ba1d-74c65389939e"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fa3fac35-077d-4d4b-b036-434b5a617741">
+                    <propertyInstance
+                      Id="fb1f05b3-8d8b-43d9-95cb-898baf44fafc"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="04e01451-1d1f-43bb-b1db-e2ae2774cbbe"
+                  name="command"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="d27c40a2-75fa-4dea-93f3-2c12a4e745d9"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DIClientConnection Member%3D(Name%3DSend OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)]) ParameterIdentifier%3Dcommand"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="6dbefedd-2131-487f-aa89-3e7155cc4f0a"
+                      LastKnownName="Command"
+                      LastKnownLocation="Package_1019.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
