@@ -44,6 +44,13 @@
       <SubType>Content</SubType>
       <DependentUpon>CommunicationServer.classdiagram</DependentUpon>
     </Content>
+    <Content Include="DataTransferObjects.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="DataTransferObjects.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>DataTransferObjects.classdiagram</DependentUpon>
+    </Content>
     <Content Include="ModelDefinition\Package1_1020.uml">
       <SubType>Content</SubType>
     </Content>
@@ -87,6 +94,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package_2109.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_2136.uml">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\UML.uml">

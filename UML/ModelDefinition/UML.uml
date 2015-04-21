@@ -37,14 +37,6 @@
         LastKnownLocation="Package_1020.uml" />
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <class
-        Id="f3f2f81f-c24c-4883-800d-358dd67cc72c"
-        name="Class1"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <packageMoniker
         Id="1039277b-da43-48ad-bbd3-3a566c242769"
         LastKnownName="CommunicationClient"
@@ -67,6 +59,52 @@
         Id="721f749f-944a-422a-92fa-f124d77948ab"
         LastKnownName="Owin"
         LastKnownLocation="Package1_2109.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="7f8f30e4-7398-4f00-8a52-56150a263c88"
+        name="string" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="2246b22c-8247-433b-8ed3-d54f34bde3cb"
+        name="bool" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="8ffbc72a-9f8d-4d73-a99a-398d9d6a6068"
+        name="float" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="992626f1-6927-4135-bf55-fc64e9a5f165"
+        name="DateTime" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f7e47b46-1d19-4e1e-a1aa-2877795c9d80"
+        name="Guid" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="5726851f-c90c-495c-8e8a-95f6136fbaac"
+        name="long" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f46ea36f-9888-4e5a-bd45-5b21d8cc90ce"
+        name="BLOB" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="360a13b4-d58e-4fbc-9c2c-b0ca4b3abaf5"
+        name="Date" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="2f107764-79ac-4823-8bb6-7c1cf77ab93b"
+        LastKnownName="Package1"
+        LastKnownLocation="Package_2136.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
