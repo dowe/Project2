@@ -37,10 +37,20 @@
       <SubType>Content</SubType>
       <DependentUpon>CommunicationCommon.classdiagram</DependentUpon>
     </Content>
+    <Content Include="CommunicationServer.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="CommunicationServer.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>CommunicationServer.classdiagram</DependentUpon>
+    </Content>
     <Content Include="ModelDefinition\Package1_1020.uml">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package1_2107.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_2109.uml">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package2_1020.uml">
@@ -74,6 +84,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package_2107.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_2109.uml">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\UML.uml">

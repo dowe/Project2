@@ -1,79 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
-  Id="dc80514f-f9cc-4d53-891c-bf8f2fcee71a"
-  name="Tasks"
+  Id="721f749f-944a-422a-92fa-f124d77948ab"
+  name="Owin"
   visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
   <referencesInternal>
     <reference
-      Id="82c78d34-8df6-4187-9e3e-7b38b3e6d0c2"
-      handle="viewcode://./CodeSchema_Namespace?Namespace%3DSystem.Threading.Tasks"
+      Id="e8750ab5-f047-4f7b-8bc8-77ef9f32c896"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DOwin"
       tag="ViewCode" />
   </referencesInternal>
   <packagedElements>
     <packageHasNamedElement>
-      <packageMoniker
-        Id="3e07211c-2a91-48f6-b66a-f4a34dad3181"
-        LastKnownName="Dataflow"
-        LastKnownLocation="Package6_1020.uml" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <class
-        Id="b3d8500b-f631-4f75-a694-80ff560e86e0"
-        name="Task"
+      <Interface
+        Id="715a7d2f-f9aa-49e9-b74b-9064dd4411d8"
+        name="IAppBuilder"
         isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false">
+        isLeaf="false">
         <referencesInternal>
           <reference
-            Id="c580a5dd-221f-4f57-8e32-38313190305e"
-            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem.Threading.Tasks Type%3DTask"
+            Id="4dd6fdb6-5cc3-4131-bb5b-f98440d80c9d"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationServer%2Fbin%2FDebug%2FOwin.dll&quot; Namespace%3DOwin Type%3DIAppBuilder"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>
           <stereotypeInstance
-            Id="ba8fc91f-dd6f-4b81-8063-94ee743c70aa"
-            name="class"
+            Id="5252f3c4-71f6-4de7-8fcd-743e5e481f92"
+            name="interface"
             profile="CSharpProfile">
             <propertyInstances>
               <stereotypeInstanceHasPropertyInstances
-                Id="928034a8-78fd-4dfc-a9c2-494de1bf47fc">
+                Id="0e42907e-c661-49b2-a922-f0b4892b3341">
                 <propertyInstance
-                  Id="b3bbadf2-1f94-41e5-983d-a9f5605cda7e"
+                  Id="0b5e1754-3946-478b-9705-b1a111bd668c"
                   name="ClrAttributes" />
               </stereotypeInstanceHasPropertyInstances>
               <stereotypeInstanceHasPropertyInstances
-                Id="c224310b-4859-484a-ae14-023217715713">
+                Id="a144c92c-e9cd-42ab-919f-bd7084459dea">
                 <propertyInstance
-                  Id="028ffcaf-2780-408b-b7d0-e98ca4a323a1"
+                  Id="1c63ef71-b33a-43c6-87aa-9b155c9ba81d"
                   name="IsPartial"
                   value="false" />
               </stereotypeInstanceHasPropertyInstances>
               <stereotypeInstanceHasPropertyInstances
-                Id="f8896787-bcb2-49d0-8a0b-d78f90c2dc56">
+                Id="33bcff2d-d079-4956-b332-51ef42844115">
                 <propertyInstance
-                  Id="79b4ad71-2f3b-4d07-8b79-e62994c85063"
-                  name="IsStatic"
-                  value="False" />
-              </stereotypeInstanceHasPropertyInstances>
-              <stereotypeInstanceHasPropertyInstances
-                Id="bdf8f7ed-ce7f-4fb7-98b9-afd24a8ad951">
-                <propertyInstance
-                  Id="a027d757-95d9-4f62-bb89-a29caa9bceb7"
+                  Id="ef2b4b20-9e95-42b7-a78e-de28a14fe834"
                   name="IsUnsafe"
                   value="false" />
               </stereotypeInstanceHasPropertyInstances>
               <stereotypeInstanceHasPropertyInstances
-                Id="c73348bd-4875-453f-9fea-79c382d131d1">
+                Id="b528d413-ba0a-4c57-86bb-d3855aa6581c">
                 <propertyInstance
-                  Id="88c7fc03-4ad4-40b5-b683-0839d62e5573"
+                  Id="b5114791-4b41-4329-b625-098cc0e3ab48"
                   name="PackageVisibility"
                   value="internal" />
               </stereotypeInstanceHasPropertyInstances>
             </propertyInstances>
           </stereotypeInstance>
         </appliedStereotypesInternal>
-      </class>
+      </Interface>
     </packageHasNamedElement>
   </packagedElements>
 </package>

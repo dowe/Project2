@@ -1684,7 +1684,7 @@
     <logicalClassDesignerModelHasTypes>
       <Interface Id="6228a0f9-a23a-4ae9-9283-ba15a6200e69" name="IInputCommandPipeline" isAbstract="false" isLeaf="false">
         <referencesInternal>
-          <reference Id="d5ae97c6-5ae0-454e-a960-b652a3ee7011" handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DIInputCommandPipeline" tag="ViewCode">
+          <reference Id="d5ae97c6-5ae0-454e-a960-b652a3ee7011" handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DIInputCommandPipeline" tag="ViewCode">
             <elementDefinition Id="7918d030-1b62-4c9c-b9a4-b410fa6d84f4" />
           </reference>
         </referencesInternal>

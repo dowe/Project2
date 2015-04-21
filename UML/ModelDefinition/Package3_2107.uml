@@ -17,5 +17,213 @@
         LastKnownName="Client"
         LastKnownLocation="Package4_2107.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="0f69264c-16bc-4b0a-9542-35003f5ea82c"
+        name="IDependencyResolver"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="33398cdc-7c69-44e5-8f1a-c48a2975054a"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationServer%2Fbin%2FDebug%2FMicrosoft.AspNet.SignalR.Core.dll&quot; Namespace%3DMicrosoft.AspNet.SignalR Type%3DIDependencyResolver"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="cf5041cc-6b0e-483c-877a-c6b648ea152c"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5fc5496f-59de-49e5-96be-e1ba2dcca763">
+                <propertyInstance
+                  Id="64b27add-2ffa-4c77-855d-2907d4a1ae28"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d41722af-745c-4899-adb4-296e46858acb">
+                <propertyInstance
+                  Id="de265000-82f9-47dd-a3f7-826eb9b14ee7"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f1518735-d22a-42e5-a51c-eb1ab933821e">
+                <propertyInstance
+                  Id="de234294-c8a5-4036-9491-d6a2a024fa69"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="280f755b-8989-45a8-84d1-0e181fb67892">
+                <propertyInstance
+                  Id="316c3ca4-7284-40bf-87d8-f9c3cad74ecd"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="1b6f4aff-a98c-43c8-9176-86232da356c5"
+        name="IRequest"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="30c12e77-9430-4af9-a949-1b970b72f0fd"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationServer%2Fbin%2FDebug%2FMicrosoft.AspNet.SignalR.Core.dll&quot; Namespace%3DMicrosoft.AspNet.SignalR Type%3DIRequest"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="4766a1a5-4339-433a-a99e-d6e815078520"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b3509451-8c48-43c2-a090-bc7413b08a18">
+                <propertyInstance
+                  Id="65ced1de-9b23-47f0-951a-54f0825e2e72"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="df33478b-472c-45cd-8246-48fc3ded6564">
+                <propertyInstance
+                  Id="accfc73a-a6c7-4c91-894e-2805eff7f044"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="414f4948-67ba-4219-89ba-1d18f2d4e4cb">
+                <propertyInstance
+                  Id="af318bd4-c5f3-4d87-ad21-70828a6a5df8"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ec219520-7519-4e11-9c6a-8f404b4ff920">
+                <propertyInstance
+                  Id="416cdc26-44a1-4135-b9d8-558f357122d9"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="998d0aa2-4039-4199-84da-f42f79d9857c"
+        name="PersistentConnection"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="33f90cea-5b81-4244-892d-fc1d46a07fa0"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationServer%2Fbin%2FDebug%2FMicrosoft.AspNet.SignalR.Core.dll&quot; Namespace%3DMicrosoft.AspNet.SignalR Type%3DPersistentConnection"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="0e9bf177-700c-408e-b18b-f8366f7be31a"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4d5d99f9-ef24-431a-95b9-be52d073fae4">
+                <propertyInstance
+                  Id="e11e3530-ab51-48c3-88fc-ee603c5b72d3"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d9a7cf41-1812-404c-bbd8-45981d3dcec2">
+                <propertyInstance
+                  Id="73071c99-ac25-46e1-ba51-705469aef4b5"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="143c6700-8643-4596-8964-b236f74d2612">
+                <propertyInstance
+                  Id="6e2e0296-8626-43a9-8a63-dba6c4b6dd79"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="6cc8d3b3-a73b-4dfd-923a-117cfde882e6">
+                <propertyInstance
+                  Id="c70f99ee-f4ed-4354-9749-807fc09b9f4f"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d1b8dd06-0f02-49be-9f7e-6bb7cca8a48e">
+                <propertyInstance
+                  Id="02fc41b3-069d-466b-b4c1-5c285545a30c"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="47336a98-5b2d-4405-bb01-abb0d6c646e2"
+        name="IPersistentConnectionContext"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="9f96f734-6b12-435f-bec9-65c8f85d7b25"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationServer%2Fbin%2FDebug%2FMicrosoft.AspNet.SignalR.Core.dll&quot; Namespace%3DMicrosoft.AspNet.SignalR Type%3DIPersistentConnectionContext"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="ce10c177-fab6-4c93-8ffc-b13cd9cd9d32"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7595f762-8e5e-4452-8dfb-24afefa30860">
+                <propertyInstance
+                  Id="fafdc3b6-318b-4cee-b360-08d0c74d0454"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3f710c9e-9859-4cf0-a726-c355526c3701">
+                <propertyInstance
+                  Id="7032b312-61d3-4567-8215-d3ccb7104766"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="eff52356-9eb9-40b4-a1e6-fa19ea0c7f4c">
+                <propertyInstance
+                  Id="68976b7a-31f5-4755-9e3d-b7ce95cf7e27"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="62ef2577-2fc5-4cec-82ed-d9fea47d2753">
+                <propertyInstance
+                  Id="3e1678e1-020d-46e5-94d1-c4a0fc61f6d3"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </Interface>
+    </packageHasNamedElement>
   </packagedElements>
 </package>

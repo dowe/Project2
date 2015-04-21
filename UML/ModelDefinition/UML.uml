@@ -56,6 +56,18 @@
         LastKnownName="Microsoft"
         LastKnownLocation="Package1_2107.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="b3ff3c9e-ae13-4d01-855e-6c660526d096"
+        LastKnownName="CommunicationServer"
+        LastKnownLocation="Package_2109.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="721f749f-944a-422a-92fa-f124d77948ab"
+        LastKnownName="Owin"
+        LastKnownLocation="Package1_2109.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

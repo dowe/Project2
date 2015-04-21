@@ -2384,7 +2384,7 @@
         <referencesInternal>
           <reference
             Id="7918d030-1b62-4c9c-b9a4-b410fa6d84f4"
-            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FTests%2FSignalR%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DIInputCommandPipeline"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DIInputCommandPipeline"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>
