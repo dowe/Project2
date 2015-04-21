@@ -27,7 +27,7 @@
     <packageHasNamedElement>
       <packageMoniker
         Id="d2568f4a-0f08-44df-a371-50fd2356889b"
-        LastKnownName="CommunicationCommon"
+        LastKnownName="Common.Communication"
         LastKnownLocation="Package_1019.uml" />
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -39,7 +39,7 @@
     <packageHasNamedElement>
       <packageMoniker
         Id="1039277b-da43-48ad-bbd3-3a566c242769"
-        LastKnownName="CommunicationClient"
+        LastKnownName="Common.Communication.Client"
         LastKnownLocation="Package_2107.uml" />
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -51,7 +51,7 @@
     <packageHasNamedElement>
       <packageMoniker
         Id="b3ff3c9e-ae13-4d01-855e-6c660526d096"
-        LastKnownName="CommunicationServer"
+        LastKnownName="Common.Communication.Server"
         LastKnownLocation="Package_2109.uml" />
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -103,8 +103,24 @@
     <packageHasNamedElement>
       <packageMoniker
         Id="2f107764-79ac-4823-8bb6-7c1cf77ab93b"
-        LastKnownName="Package1"
+        LastKnownName="Common.DataTransferObjects"
         LastKnownLocation="Package_2136.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f561b62f-0cd9-4464-b42f-b3be1f7af528"
+        name="DelegateCommand" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="60b308c1-07e3-471b-9409-5d19996c274b"
+        name="int" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="4016f864-5a23-4a71-af2f-9cc25972f6ca"
+        LastKnownName="Administration.ViewModel"
+        LastKnownLocation="Package_2303.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
