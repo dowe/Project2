@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicationServer", "Comm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTransferObjects", "DataTransferObjects\DataTransferObjects.csproj", "{3476B14D-B58A-457C-8357-CE9801106AAE}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UML", "UML\UML.modelproj", "{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3476B14D-B58A-457C-8357-CE9801106AAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3476B14D-B58A-457C-8357-CE9801106AAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3476B14D-B58A-457C-8357-CE9801106AAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
