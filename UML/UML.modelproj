@@ -30,6 +30,13 @@
       <SubType>Content</SubType>
       <DependentUpon>Administration.ViewModel.classdiagram</DependentUpon>
     </Content>
+    <Content Include="Common.Commands.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Common.Commands.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Common.Commands.classdiagram</DependentUpon>
+    </Content>
     <Content Include="Common.Communication.classdiagram">
       <SubType>Content</SubType>
     </Content>
@@ -95,6 +102,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package_1020.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1527.uml">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package_2107.uml">
