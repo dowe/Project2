@@ -167,7 +167,7 @@
       </referencedType>
     </packageHasNamedElement>
     <logicalClassDesignerModelHasPackages>
-      <package Id="6cd73bb9-25ee-498c-9059-c475466d3726" name="Package1">
+      <package Id="6cd73bb9-25ee-498c-9059-c475466d3726" name="Common.DataTransferObjects">
         <elementDefinition Id="28052c3e-1dad-4f21-8ba6-766def9ee5f1" />
         <packagedElements>
           <packageHasNamedElement>

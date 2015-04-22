@@ -113,9 +113,6 @@
     <Content Include="ModelDefinition\Package_2109.uml">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="ModelDefinition\Package_2136.uml">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="ModelDefinition\Package_2303.uml">
       <SubType>Content</SubType>
     </Content>
