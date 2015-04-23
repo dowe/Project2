@@ -1,33 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
-  Id="d3f020c8-3deb-44c7-99b3-7432a0c94cad"
-  name="Collections"
+  Id="7799f9a0-c84d-4130-808e-e47f9aa371f5"
+  name="Common"
   visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
   <referencesInternal>
     <reference
-      Id="0f398ef3-46de-488e-afae-3a79dd3cb19b"
-      handle="viewcode://./CodeSchema_Namespace?Namespace%3DSystem.Collections"
+      Id="0223d3bd-8d83-4ca7-a7ab-6f6f83058010"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DCommon"
       tag="ViewCode" />
   </referencesInternal>
   <packagedElements>
     <packageHasNamedElement>
       <packageMoniker
-        Id="6d4dbb26-5ec6-4fbe-bcf0-18cc23861357"
-        LastKnownName="Generic"
-        LastKnownLocation="Package2_1020.uml" />
+        Id="11c8444e-e938-4200-8a09-c5b56a1cb4b5"
+        LastKnownName="Commands"
+        LastKnownLocation="Package2_0017.uml" />
     </packageHasNamedElement>
     <packageHasNamedElement>
       <packageMoniker
-        Id="02d9d5d2-e620-458f-a559-28cc1429a4e8"
-        LastKnownName="Concurrent"
-        LastKnownLocation="Package3_1020.uml" />
+        Id="f1c20fe6-a80d-4176-a365-437f14df9ea7"
+        LastKnownName="Communication"
+        LastKnownLocation="Package1_0017.uml" />
     </packageHasNamedElement>
     <packageHasNamedElement>
       <packageMoniker
-        Id="6385c74f-62c1-4a5c-879d-d64de95b5b4b"
-        LastKnownName="ObjectModel"
-        LastKnownLocation="Package4_0017.uml" />
+        Id="a197e6ec-27c0-43ff-9908-eac5bca24d01"
+        LastKnownName="DataTransferObjects"
+        LastKnownLocation="Package_0017.uml" />
     </packageHasNamedElement>
   </packagedElements>
 </package>

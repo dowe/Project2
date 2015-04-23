@@ -278,6 +278,18 @@
         LastKnownName="Smartphone.Customer.ViewModel"
         LastKnownLocation="Package_1437.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="7799f9a0-c84d-4130-808e-e47f9aa371f5"
+        LastKnownName="Common"
+        LastKnownLocation="Package3_0017.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="f5aa5b96-8617-4d08-8c09-7d34d8e052e9"
+        LastKnownName="Common.Command"
+        LastKnownLocation="Package_0018.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

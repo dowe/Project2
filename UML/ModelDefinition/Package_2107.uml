@@ -1500,10 +1500,10 @@
                   Id="f554fd25-ed1d-43f1-8be7-20827304ec1c"
                   direction="Return">
                   <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="9f81f011-f2b5-4be7-8f9d-05a845073b0d"
+                    <classMoniker
+                      Id="951278ab-c4ec-4af8-8a6d-56fd8820785e"
                       LastKnownName="T"
-                      LastKnownLocation="Package_2107.uml" />
+                      LastKnownLocation="Package4_0017.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -1598,10 +1598,10 @@
                   Id="518d1577-e172-490f-8cf8-b0a96c9644f3"
                   direction="Return">
                   <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="9f81f011-f2b5-4be7-8f9d-05a845073b0d"
+                    <classMoniker
+                      Id="951278ab-c4ec-4af8-8a6d-56fd8820785e"
                       LastKnownName="T"
-                      LastKnownLocation="Package_2107.uml" />
+                      LastKnownLocation="Package4_0017.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -1733,18 +1733,6 @@
           </operation>
         </ownedOperationsInternal>
       </class>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <undefinedType
-        Id="9f81f011-f2b5-4be7-8f9d-05a845073b0d"
-        name="T">
-        <referencesInternal>
-          <reference
-            Id="1dc3c6c3-94ed-4e27-89c6-4bace250219a"
-            handle="viewcode://./CodeSchema_GenericParameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationClient%2Fbin%2FDebug%2FCommunicationClient.dll&quot; Namespace%3DCommunicationClient Type%3DClientConnection Member%3D(Name%3DSendWait GenericParameterCount%3D1 OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommunicationCommon%2Fbin%2FDebug%2FCommunicationCommon.dll&quot; Namespace%3DCommunicationCommon Type%3DCommand)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3D0"
-            tag="ViewCode" />
-        </referencesInternal>
-      </undefinedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <Interface
