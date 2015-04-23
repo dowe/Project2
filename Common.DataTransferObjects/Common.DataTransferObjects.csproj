@@ -49,6 +49,7 @@
     <Compile Include="CarLogbook.cs" />
     <Compile Include="CarLogbookEntry.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="DailyStatistic.cs" />
     <Compile Include="DayEntry.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="Employee.cs" />
@@ -60,12 +61,6 @@
     <Compile Include="ShiftSchedule.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="TestState.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common.Communication\Common.Communication.csproj">
-      <Project>{abbc028f-adef-4399-a133-e97f82582bdb}</Project>
-      <Name>Common.Communication</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

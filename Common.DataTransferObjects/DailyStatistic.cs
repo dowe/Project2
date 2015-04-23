@@ -11,21 +11,33 @@ namespace Common.DataTransferObjects
 	using System.Linq;
 	using System.Text;
 
-	public class DayEntry
+	public class DailyStatistic
 	{
-		public virtual DateTime Date
+		public virtual int NumberOfOrderedOrders
 		{
 			get;
 			set;
 		}
 
-		public virtual IEnumerable<Employee> AM
+		public virtual int NumberOfOrdersInProgress
 		{
 			get;
 			set;
 		}
 
-		public virtual IEnumerable<Employee> PM
+		public virtual int NumberOfNewOrders
+		{
+			get;
+			set;
+		}
+
+		public virtual int NumberOfTestsInProgress
+		{
+			get;
+			set;
+		}
+
+		public virtual int NumberOfCompletedTests
 		{
 			get;
 			set;

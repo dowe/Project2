@@ -6,87 +6,24 @@
   <MessageClass Name="Error" Label="Error" Option="Show errors" />
   <MessageClass Name="Property" Label="Property" Option="Show metadata" />
   <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
-  <Message Timestamp="2015-04-22T15:20:50" Importance="High" Text="Code generation or text transformation started." />
-  <Message Timestamp="2015-04-22T15:20:51" Importance="Diagnostic" Text="Name = ClassTemplate" />
-  <Message Timestamp="2015-04-22T15:20:51" Importance="Diagnostic" Text="Overwrite = True" />
-  <Message Timestamp="2015-04-22T15:20:51" Importance="Diagnostic" Text="ProjectPath = ..\UMLLib\UMLLib.csproj" />
-  <Message Timestamp="2015-04-22T15:20:51" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
-  <Message Timestamp="2015-04-22T15:20:51" Importance="Diagnostic" Text="TargetName = {Name}" />
-  <Message Timestamp="2015-04-22T15:20:51" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
-  <Message Timestamp="2015-04-22T15:20:51" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
-  <Message Timestamp="2015-04-22T15:20:51" Importance="Medium" Text="UML's Text Template Binding: 'ClassTemplate' will apply ClassTemplate.t4 to: 'UML::Common.DataTransferObjects::Employee' -  (Class), 'UML::Common.DataTransferObjects::Customer' -  (Class), 'UML::Common.DataTransferObjects::Address' -  (Class), 'UML::Common.DataTransferObjects::BankAccount' -  (Class), 'UML::Common.DataTransferObjects::Driver' -  (Class), 'UML::Common.DataTransferObjects::Car' -  (Class), 'UML::Common.DataTransferObjects::GPSPosition' -  (Class), 'UML::Common.DataTransferObjects::CarLogbookEntry' -  (Class), 'UML::Common.DataTransferObjects::CarLogbook' -  (Class), 'UML::Common.DataTransferObjects::ShiftSchedule' -  (Class), 'UML::Common.DataTransferObjects::LabAssistant' -  (Class), 'UML::Common.DataTransferObjects::AdministrationAssistant' -  (Class), 'UML::Common.DataTransferObjects::Analysis' -  (Class), 'UML::Common.DataTransferObjects::Test' -  (Class), 'UML::Common.DataTransferObjects::Order' -  (Class), 'UML::Common.DataTransferObjects::Bill' -  (Class), 'UML::Common.DataTransferObjects::DayEntry' -  (Class) " />
-  <Message Timestamp="2015-04-22T15:20:52" Importance="Medium" Text="'UML::Common.DataTransferObjects::Employee' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\Employee.cs" />
-  <Message Timestamp="2015-04-22T15:20:53" Importance="Medium" Text="'UML::Common.DataTransferObjects::Customer' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\Customer.cs" />
-  <Message Timestamp="2015-04-22T15:20:53" Importance="Medium" Text="'UML::Common.DataTransferObjects::Address' -  (Class) : success (file replaced) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\Address.cs" />
-  <Message Timestamp="2015-04-22T15:20:54" Importance="Medium" Text="'UML::Common.DataTransferObjects::BankAccount' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\BankAccount.cs" />
-  <Message Timestamp="2015-04-22T15:20:54" Importance="Medium" Text="'UML::Common.DataTransferObjects::Driver' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\Driver.cs" />
-  <Message Timestamp="2015-04-22T15:20:54" Importance="Medium" Text="'UML::Common.DataTransferObjects::Car' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\Car.cs" />
-  <Message Timestamp="2015-04-22T15:20:55" Importance="Medium" Text="'UML::Common.DataTransferObjects::GPSPosition' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\GPSPosition.cs" />
-  <Message Timestamp="2015-04-22T15:20:55" Importance="Medium" Text="'UML::Common.DataTransferObjects::CarLogbookEntry' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\CarLogbookEntry.cs" />
-  <Message Timestamp="2015-04-22T15:20:56" Importance="Medium" Text="'UML::Common.DataTransferObjects::CarLogbook' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\CarLogbook.cs" />
-  <Message Timestamp="2015-04-22T15:20:56" Importance="Medium" Text="'UML::Common.DataTransferObjects::ShiftSchedule' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\ShiftSchedule.cs" />
-  <Message Timestamp="2015-04-22T15:20:56" Importance="Medium" Text="'UML::Common.DataTransferObjects::LabAssistant' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\LabAssistant.cs" />
-  <Message Timestamp="2015-04-22T15:20:57" Importance="Medium" Text="'UML::Common.DataTransferObjects::AdministrationAssistant' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\AdministrationAssistant.cs" />
-  <Message Timestamp="2015-04-22T15:20:57" Importance="Medium" Text="'UML::Common.DataTransferObjects::Analysis' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\Analysis.cs" />
-  <Message Timestamp="2015-04-22T15:20:58" Importance="Medium" Text="'UML::Common.DataTransferObjects::Test' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\Test.cs" />
-  <Message Timestamp="2015-04-22T15:20:59" Importance="Medium" Text="'UML::Common.DataTransferObjects::Order' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\Order.cs" />
-  <Message Timestamp="2015-04-22T15:20:59" Importance="Medium" Text="'UML::Common.DataTransferObjects::Bill' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\Bill.cs" />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Medium" Text="'UML::Common.DataTransferObjects::DayEntry' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\DayEntry.cs" />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Diagnostic" Text="Name = EnumTemplate" />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Diagnostic" Text="Overwrite = True" />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Diagnostic" Text="ProjectPath = ..\UMLLib\UMLLib.csproj" />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Diagnostic" Text="TargetName = {Name}" />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\EnumTemplate.t4" />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\EnumTemplate.t4" />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Medium" Text="UML's Text Template Binding: 'EnumTemplate' will apply EnumTemplate.t4 to: 'UML::Common.DataTransferObjects::SampleType' -  (Enumeration), 'UML::Common.DataTransferObjects::TestState' -  (Enumeration), 'UML::Common.DataTransferObjects::AlarmState' -  (Enumeration) " />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Medium" Text="'UML::Common.DataTransferObjects::SampleType' -  (Enumeration) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\SampleType.cs" />
-  <Message Timestamp="2015-04-22T15:21:00" Importance="Medium" Text="'UML::Common.DataTransferObjects::TestState' -  (Enumeration) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\TestState.cs" />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Medium" Text="'UML::Common.DataTransferObjects::AlarmState' -  (Enumeration) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\AlarmState.cs" />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="Name = StructTemplate" />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="Overwrite = True" />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="ProjectPath = ..\UMLLib\UMLLib.csproj" />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="TargetName = {Name}" />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Medium" Text="UML's Text Template Binding: 'StructTemplate' will apply StructTemplate.t4 to: 'UML::Common.DataTransferObjects::Employee' -  (Class), 'UML::Common.DataTransferObjects::Customer' -  (Class), 'UML::Common.DataTransferObjects::Address' -  (Class), 'UML::Common.DataTransferObjects::BankAccount' -  (Class), 'UML::Common.DataTransferObjects::Driver' -  (Class), 'UML::Common.DataTransferObjects::Car' -  (Class), 'UML::Common.DataTransferObjects::GPSPosition' -  (Class), 'UML::Common.DataTransferObjects::CarLogbookEntry' -  (Class), 'UML::Common.DataTransferObjects::CarLogbook' -  (Class), 'UML::Common.DataTransferObjects::ShiftSchedule' -  (Class), 'UML::Common.DataTransferObjects::LabAssistant' -  (Class), 'UML::Common.DataTransferObjects::AdministrationAssistant' -  (Class), 'UML::Common.DataTransferObjects::Analysis' -  (Class), 'UML::Common.DataTransferObjects::Test' -  (Class), 'UML::Common.DataTransferObjects::Order' -  (Class), 'UML::Common.DataTransferObjects::Bill' -  (Class), 'UML::Common.DataTransferObjects::DayEntry' -  (Class) " />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::Employee' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::Customer' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::Address' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::BankAccount' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::Driver' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::Car' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:01" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::GPSPosition' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:02" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::CarLogbookEntry' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:02" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::CarLogbook' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:02" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::ShiftSchedule' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:02" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::LabAssistant' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:02" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::AdministrationAssistant' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:02" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::Analysis' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:02" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::Test' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:02" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::Order' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:02" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::Bill' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:02" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::DayEntry' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="The selection included 19 elements which were not bound to a template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects' -  (Package): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::' -  (Association): no bound template." />
-  <Message Timestamp="2015-04-22T15:21:03" Importance="High" Text="Code generation complete. Errors: 0. Warnings: 0." />
+  <Message Timestamp="2015-04-23T11:37:06" Importance="High" Text="Code generation or text transformation started." />
+  <Message Timestamp="2015-04-23T11:37:06" Importance="Diagnostic" Text="Name = ClassTemplate" />
+  <Message Timestamp="2015-04-23T11:37:06" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2015-04-23T11:37:06" Importance="Diagnostic" Text="ProjectPath = ..\UMLLib\UMLLib.csproj" />
+  <Message Timestamp="2015-04-23T11:37:06" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2015-04-23T11:37:06" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2015-04-23T11:37:06" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2015-04-23T11:37:06" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2015-04-23T11:37:06" Importance="Medium" Text="UML's Text Template Binding: 'ClassTemplate' will apply ClassTemplate.t4 to: 'UML::Common.DataTransferObjects::ShiftSchedule' -  (Class) " />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="Medium" Text="'UML::Common.DataTransferObjects::ShiftSchedule' -  (Class) : success (file created) - E:\Visual Studio\Project2\UMLLib\GeneratedCode\Common.DataTransferObjects\ShiftSchedule.cs" />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="Diagnostic" Text="Name = StructTemplate" />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="Diagnostic" Text="ProjectPath = ..\UMLLib\UMLLib.csproj" />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="Medium" Text="UML's Text Template Binding: 'StructTemplate' will apply StructTemplate.t4 to: 'UML::Common.DataTransferObjects::ShiftSchedule' -  (Class) " />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="Diagnostic" Text="'UML::Common.DataTransferObjects::ShiftSchedule' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2015-04-23T11:37:08" Importance="High" Text="Code generation complete. Errors: 0. Warnings: 0." />
 </Log>

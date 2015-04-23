@@ -65,6 +65,9 @@
       <SubType>Content</SubType>
       <DependentUpon>Common.DataTransferObjects.classdiagram</DependentUpon>
     </Content>
+    <Content Include="GPSPosition.cs">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ModelDefinition\Package1_1020.uml">
       <SubType>Content</SubType>
     </Content>

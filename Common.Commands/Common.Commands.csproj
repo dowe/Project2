@@ -39,14 +39,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdGetAllCars.cs" />
+    <Compile Include="CmdGetAllOrders.cs" />
     <Compile Include="CmdGetAnalyses.cs" />
+    <Compile Include="CmdGetCustomerAddress.cs" />
+    <Compile Include="CmdGetDailyStatistic.cs" />
+    <Compile Include="CmdGetShiftSchedules.cs" />
+    <Compile Include="CmdRegisterCustomer.cs" />
+    <Compile Include="CmdReturnAllOrders.cs" />
     <Compile Include="CmdReturnAnalyses.cs" />
+    <Compile Include="CmdReturnGetAllCars.cs" />
+    <Compile Include="CmdReturnGetDailyStatistic.cs" />
+    <Compile Include="CmdReturnRegisterCustomer.cs" />
+    <Compile Include="CmdReturnShiftSchedule.cs" />
+    <Compile Include="CmdSetFirstAlertReceived.cs" />
+    <Compile Include="CmdSetOrderReceived.cs" />
+    <Compile Include="CmdSetTestResult.cs" />
+    <Compile Include="CmdUpdateOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Communication\Common.Communication.csproj">
       <Project>{abbc028f-adef-4399-a133-e97f82582bdb}</Project>
       <Name>Common.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.DataTransferObjects\Common.DataTransferObjects.csproj">
+      <Project>{3476b14d-b58a-457c-8357-ce9801106aae}</Project>
+      <Name>Common.DataTransferObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

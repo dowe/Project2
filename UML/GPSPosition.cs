@@ -11,26 +11,8 @@ namespace Common.DataTransferObjects
 	using System.Linq;
 	using System.Text;
 
-	public class DayEntry
+	public class GPSPosition
 	{
-		public virtual DateTime Date
-		{
-			get;
-			set;
-		}
-
-		public virtual IEnumerable<Employee> AM
-		{
-			get;
-			set;
-		}
-
-		public virtual IEnumerable<Employee> PM
-		{
-			get;
-			set;
-		}
-
 	}
 }
 
