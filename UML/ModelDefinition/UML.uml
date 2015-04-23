@@ -210,6 +210,62 @@
         LastKnownName="Common.DataTransferObjects"
         LastKnownLocation="Package_1527.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="01a2c8ee-160c-40ad-bfd3-72ccae89b70f"
+        name="ActionResult" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f6060970-1fd9-4610-92b3-877f2c9f120c"
+        name="UserModel" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="083bbb00-573d-49f6-b757-fc30adebf380"
+        name="OrderModel" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="6001c568-2ce1-427c-8895-1144d9695b0a"
+        name="List&lt;SelectListItem&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="2ae80b0a-dc46-4392-be37-58e0606c97f1"
+        name="List&lt;Patient&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="7b4ab9da-671b-4ad7-8078-64fcdf77910f"
+        name="List&lt;AnalysisEnum&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="940cfa82-0c20-4bbc-9d78-a51801319560"
+        name="List&lt;SampleEnum&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="a2edd218-dee4-4441-bd41-aa440b9a6f72"
+        name="StatusEnum" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="b97e9fc5-766a-4694-bb6b-c243c7fd9d35"
+        name="AnalysisEnum" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="858a6730-a404-4d79-a562-50120326c6ed"
+        name="Datetime" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="a2fac125-a1d9-42ad-80af-fa7e6419eb68"
+        LastKnownName="AspServer.MVC"
+        LastKnownLocation="Package_1202.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

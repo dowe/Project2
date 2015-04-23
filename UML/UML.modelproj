@@ -30,6 +30,13 @@
       <SubType>Content</SubType>
       <DependentUpon>Administration.ViewModel.classdiagram</DependentUpon>
     </Content>
+    <Content Include="AspServer.MVC.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="AspServer.MVC.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>AspServer.MVC.classdiagram</DependentUpon>
+    </Content>
     <Content Include="Common.Commands.classdiagram">
       <SubType>Content</SubType>
     </Content>
@@ -64,9 +71,6 @@
     <Content Include="Common.DataTransferObjects.classdiagram.layout">
       <SubType>Content</SubType>
       <DependentUpon>Common.DataTransferObjects.classdiagram</DependentUpon>
-    </Content>
-    <Content Include="GPSPosition.cs">
-      <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package1_1020.uml">
       <SubType>Content</SubType>
@@ -105,6 +109,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package_1020.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1202.uml">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package_1527.uml">
