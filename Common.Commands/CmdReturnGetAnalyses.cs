@@ -9,14 +9,14 @@ using Common.DataTransferObjects;
 
 namespace Common.Commands
 {
-    public class CmdReturnShiftSchedule : Command
+    public class CmdReturnGetAnalyses : Command
     {
 
-        public ReadOnlyCollection<ShiftSchedule> Schedules { get; private set; }
+        public ReadOnlyCollection<Analysis> Analyses { get; private set; }
 
-        public CmdReturnShiftSchedule(List<ShiftSchedule> schedules)
+        public CmdReturnGetAnalyses(List<Analysis> analyses)
         {
-            Schedules = schedules.AsReadOnly();
+            Analyses = analyses.AsReadOnly();
         }
 
     }

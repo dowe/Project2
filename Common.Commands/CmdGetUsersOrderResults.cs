@@ -7,14 +7,14 @@ using Common.Communication;
 
 namespace Common.Commands
 {
-    public class CmdSetOrderReceived : Command
+    public class CmdGetUsersOrderResults : Command
     {
 
-        public long OrderId { get; private set; }
+        public string Username { get; private set; }
 
-        public CmdSetOrderReceived(long orderId)
+        public CmdGetUsersOrderResults(string username)
         {
-            OrderId = orderId;
+            Username = username;
         }
 
     }

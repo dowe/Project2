@@ -9,14 +9,15 @@ using Common.DataTransferObjects;
 
 namespace Common.Commands
 {
-    public class CmdReturnAnalyses : Command
+    public class CmdReturnGetAllOrders : Command
     {
 
-        public CmdReturnAnalyses(List<Analysis> analyses)
+        public ReadOnlyCollection<Order> Orders { get; private set; }
+
+        public CmdReturnGetAllOrders(List<Order> orders)
         {
-            Analyses = analyses.AsReadOnly();
+            Orders = orders.AsReadOnly();
         }
 
-        public ReadOnlyCollection<Analysis> Analyses { get; private set; }
     }
 }

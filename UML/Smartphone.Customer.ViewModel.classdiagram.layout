@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Smartphone.Customer.ViewModel">
+  <logicalClassDesignerModelMoniker Id="1a0bad70-0415-42b7-8b09-8960906dae77" />
+  <nestedChildShapes>
+    <packageShape Id="961c780f-8abe-4088-89d8-8bebefdfea40" absoluteBounds="0.5, 0.5, 6.625, 4" customColor="255, 249, 230" hideQualifiedName="false">
+      <packageMoniker Id="33f79504-595f-41cf-92b9-dd2b34902607" LastKnownName="Smartphone.Customer.ViewModel" />
+      <nestedChildShapes>
+        <classShape Id="056dc88d-3377-474b-846d-0ddd8f9db352" absoluteBounds="0.875, 1.125, 1.5, 1.2226562251647315" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+          <classMoniker Id="b06ca94b-dd1e-4855-8c76-151ab7b5b317" LastKnownName="CredentialsVM" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="d1f87df2-4550-4a6f-9351-57e3a1e12b87" absoluteBounds="0.89000000000000057, 1.5150000000000001, 1.4700000000000002, 0.52148435761531187" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="28fc3907-7874-4740-a803-9b339d434079" absoluteBounds="0.89000000000000057, 2.046484357615312, 1.4700000000000002, 0.20117186754941951" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
+        <classShape Id="435a4f89-7692-487e-86f2-f1f1cb9d4d3a" absoluteBounds="3, 1.125, 1.5, 1.0624999801317849" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+          <classMoniker Id="69bd676a-4c53-413e-90fb-f6daec7b372e" LastKnownName="PatientListVM" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="74d19ac7-c28a-4df9-adee-9c5b0632aa8a" absoluteBounds="3.015, 1.5150000000000001, 1.4700000000000002, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="23eb29ea-7524-46d9-a85f-3b3b6c8337c1" absoluteBounds="3.015, 1.8863281125823657, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
+        <classShape Id="31efbced-2dfe-4de3-9ee2-28ecb4cae4d2" absoluteBounds="4.875, 2.625, 1.5, 1.2226562251647311" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+          <classMoniker Id="38b7b925-6093-4f0a-8164-08cf52022f28" LastKnownName="LogoutVM" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="90d003dd-6996-44df-b355-a8c36ce06202" absoluteBounds="4.89, 3.015, 1.4700000000000002, 0.52148435761531187" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="c1ceead7-c0e7-49c8-bc44-b92e5b467c02" absoluteBounds="4.89, 3.546484357615312, 1.4700000000000002, 0.20117186754941951" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
+        <classShape Id="83202119-8c59-4c56-a2ab-7a9fa0d2bf5c" absoluteBounds="2.75, 2.75, 1.5, 1.0624999801317845" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+          <classMoniker Id="bfd1e140-5ed8-473e-a0d4-1cf72588b8b7" LastKnownName="PatientM" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="80e14bce-64d0-471c-9f8e-cbe88af24c14" absoluteBounds="2.765, 3.14, 1.4700000000000002, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="3cd49ef5-7258-43da-8666-569917cc473e" absoluteBounds="2.765, 3.5113281125823654, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
+      </nestedChildShapes>
+    </packageShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>

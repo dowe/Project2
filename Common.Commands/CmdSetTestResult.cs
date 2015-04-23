@@ -9,6 +9,7 @@ namespace Common.Commands
 {
     public class CmdSetTestResult : Command
     {
+
         public Guid TestId { get; private set; }
         public float Result { get; private set; }
 
@@ -17,5 +18,6 @@ namespace Common.Commands
             TestId = testId;
             Result = result;
         }
+
     }
 }

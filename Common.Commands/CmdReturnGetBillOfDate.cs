@@ -7,14 +7,14 @@ using Common.Communication;
 
 namespace Common.Commands
 {
-    public class CmdSetOrderReceived : Command
+    public class CmdReturnGetBillOfDate : Command
     {
 
-        public long OrderId { get; private set; }
+        public byte[] PDF { get; private set; }
 
-        public CmdSetOrderReceived(long orderId)
+        public CmdReturnGetBillOfDate(byte[] pdf)
         {
-            OrderId = orderId;
+            PDF = pdf;
         }
 
     }

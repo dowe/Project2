@@ -266,6 +266,18 @@
         LastKnownName="AspServer.MVC"
         LastKnownLocation="Package_1202.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="6f4d6aae-9535-4722-ad1a-80afcc8157e8"
+        LastKnownName="Package1"
+        LastKnownLocation="Package_1357.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="16f19f02-426b-4619-918c-8e5327db80b5"
+        LastKnownName="Smartphone.Customer.ViewModel"
+        LastKnownLocation="Package_1437.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

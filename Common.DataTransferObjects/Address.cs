@@ -13,9 +13,9 @@ namespace Common.DataTransferObjects
 
 	public class Address
 	{
-		public virtual string Street
-		{
-			get;
+		public virtual string Street 
+        { 
+            get;
 			set;
 		}
 
