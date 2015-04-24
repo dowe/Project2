@@ -3,6 +3,16 @@
   dslVersion="1.0.0.0"
   Id="41d044d9-13f8-4e5b-a528-cd3067600a56"
   name="UML" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="fdf7779b-606a-49ab-96ce-7eb8220e332e">
+      <body>PushNotificationAlgorithm</body>
+    </comment>
+    <comment
+      Id="bca8bab6-87bb-4da8-93ad-89c904d31c03">
+      <body>Server Management</body>
+    </comment>
+  </ownedCommentsInternal>
   <appliedStereotypesInternal>
     <stereotypeInstance
       Id="b2f4236a-a681-4d95-9c5f-dbd3cc1e6fb7"
@@ -289,6 +299,210 @@
         Id="f5aa5b96-8617-4d08-8c09-7d34d8e052e9"
         LastKnownName="Common.Command"
         LastKnownLocation="Package_0018.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="32622c6e-3241-4619-8083-692502b60da7"
+        name="List&lt;Analysis&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="848a1a2e-a5e6-44e5-bbb4-4b44591ce59f"
+        name="Func&lt;Analysis" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="19a217ea-6ceb-4e01-ac8c-efd204ab039e"
+        name="List&lt;ShiftSchedule&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="85bd0c00-9869-4207-8568-5c16cb38bb2b"
+        name="List&lt;Order&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="42284f65-698c-481f-86d3-389b65979d71"
+        name="Func&lt;Order" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="bb8cb456-e275-4e52-895a-b188bdbb1a39"
+        name="Order" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="723e3f62-056c-432f-9950-1f4d88484ca7"
+        name="Test" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="34b04e5b-d9d1-4c9b-b1e9-fd9e9c3a9ad9"
+        name="Feindesign::DatabaseCommunication::TransactionEndOperation" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="536554f5-3a2c-4476-8cd5-6997daaee26d"
+        name="Customer" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="9548731e-4274-413b-a372-fe053dfe56bc"
+        name="List&lt;Test&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="2e78ef64-a66a-4c0a-b545-f251f50172ac"
+        name="Func&lt;Test" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="38260d65-9e86-4808-b37f-a04c45d7c5a3"
+        name="List&lt;Car&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="d4eccab9-31c9-44ff-ac1f-6ab2aae9867b"
+        name="Func&lt;Car" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="1cb46283-d85e-411c-a2ab-fff0ca207396"
+        name="List&lt;Customer&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="790b52f1-622b-476d-8c9e-a30f308326bb"
+        name="Func&lt;Customer" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="ce01526b-b52a-4506-aec3-fc45fb4b89dd"
+        name="Address" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="4f5ef042-d84c-4c02-bd4f-c09fccf4fb8d"
+        name="Func&lt;Bill" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="e819adde-a678-422b-b25c-9b0284fa7932"
+        name="List&lt;Bill&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="52c15abd-241b-41ce-855f-63c80486d5ce"
+        name="List&lt;Date&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="a1223dee-120a-4caf-801d-8a4166961740"
+        name="Bill" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="a282760a-a948-4288-ba90-5fd459846c4b"
+        name="Func&lt;Driver" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="2e534b4d-efcb-46e9-a9f3-2985b1462305"
+        name="List&lt;Driver&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="7c82c580-0007-43fe-bb75-1b510daba42e"
+        name="Driver" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f1ef346e-c609-479d-bc02-749b666ac331"
+        name="Car" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="6703f089-6775-41dd-865d-ee1330ccb656"
+        name="CarLogbookEntry" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="d8fbf8bf-fd78-4d6e-9db1-99bdf04004eb"
+        name="IDatabaseCommunicator" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="679c0bc8-a8c9-4c44-a0a3-e20ba931918a"
+        name="IServerConnection" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="91f973e8-147e-4dde-a775-6887b446226e"
+        name="GPSPosition" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="2f05379c-af01-4c31-ab6a-54446c1c30c7"
+        name="void" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="b4950297-5d54-433b-ab0e-95ef1a1f2c70"
+        name="ShiftSchedule" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="8cf5095e-82fa-4b17-8dce-f19a71e2d9e7"
+        LastKnownName="DatabaseCommunication"
+        LastKnownLocation="Package_2059.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="4ca33282-5d60-4282-a2a6-8a8fec171e52"
+        LastKnownName="CommandHandling"
+        LastKnownLocation="Package1_2059.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="29a5b14b-14de-46fe-a417-57b90fdeada5"
+        LastKnownName="DriverControlling"
+        LastKnownLocation="Package2_2059.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="989f3007-b7dd-41df-85c5-72fa512e4ee2"
+        LastKnownName="DistanceCalculation"
+        LastKnownLocation="Package3_2059.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="a2436088-d199-4b28-a27e-6eb0d0f34e57"
+        LastKnownName="BillCalculation"
+        LastKnownLocation="Package4_2059.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="365d5473-45f4-454d-85c0-92a3aeb82f78"
+        LastKnownName="ExtremeValueChecker"
+        LastKnownLocation="Package5_2059.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="e10b0ccb-fa38-47c7-a521-ddc101a20bb9"
+        LastKnownName="DailyStatisticsCreator"
+        LastKnownLocation="Package6_2059.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="8656ea1a-ab95-4dbe-ac9c-a83872188208"
+        LastKnownName="SMSSending"
+        LastKnownLocation="Package7_2059.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="3935dcb0-05dd-433e-b4b0-76ca4da7f7bd"
+        LastKnownName="ShiftScheduleCreator"
+        LastKnownLocation="Package8_2059.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

@@ -25,13 +25,37 @@
     <Content Include="ModelDefinition\Package1_0017.uml">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="ModelDefinition\Package1_2059.uml">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ModelDefinition\Package2_0017.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_2059.uml">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package3_0017.uml">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="ModelDefinition\Package3_2059.uml">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ModelDefinition\Package4_0017.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package4_2059.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package5_2059.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package6_2059.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package7_2059.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package8_2059.uml">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ModelDefinition\Package_0017.uml">
@@ -45,6 +69,16 @@
     </Content>
     <Content Include="ModelDefinition\Package_1437.uml">
       <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_2059.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server.Logic.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server.Logic.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Server.Logic.classdiagram</DependentUpon>
     </Content>
     <Content Include="Smartphone.Customer.ViewModel.classdiagram">
       <SubType>Content</SubType>
