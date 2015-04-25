@@ -83,7 +83,7 @@
         <elementDefinition Id="16f19f02-426b-4619-918c-8e5327db80b5" />
         <packagedElements>
           <packageHasNamedElement>
-            <class Id="b06ca94b-dd1e-4855-8c76-151ab7b5b317" name="CredentialsVM" isAbstract="false" isLeaf="false" isActiveClass="false">
+            <class Id="b06ca94b-dd1e-4855-8c76-151ab7b5b317" name="LoginVM" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="f052bb2a-cf18-4323-965e-e1fb0d51b9ca" />
               <ownedAttributesInternal>
                 <property Id="519baf3d-5729-486f-8384-cd59cc213079" name="Username" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -96,6 +96,18 @@
                   <elementDefinition Id="205e561f-76fe-4ef5-87cd-16886a375d1e" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="2027b8a0-8ad0-4295-8407-52125d75268b" LastKnownName="String" />
+                  </type_NamedElement>
+                </property>
+                <property Id="2af7ea64-23eb-4f6f-ba3a-6060f5ba0ec2" name="login" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="58e0a1c2-2bd3-4198-82b0-116778ade410" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="0fe61bd6-9a3d-49b1-bb28-adbff84c06bb" LastKnownName="RelayCommand" />
+                  </type_NamedElement>
+                </property>
+                <property Id="4a7fda06-3f18-4073-b7d0-1b42d5e5d4f0" name="Login" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="23e42734-eb7f-4c27-8f85-2dcd0f29bfa9" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="0fe61bd6-9a3d-49b1-bb28-adbff84c06bb" LastKnownName="RelayCommand" />
                   </type_NamedElement>
                 </property>
               </ownedAttributesInternal>

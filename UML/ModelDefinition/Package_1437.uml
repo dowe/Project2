@@ -7,7 +7,7 @@
     <packageHasNamedElement>
       <class
         Id="f052bb2a-cf18-4323-965e-e1fb0d51b9ca"
-        name="CredentialsVM"
+        name="LoginVM"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -46,6 +46,43 @@
                 Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
                 LastKnownName="String"
                 LastKnownLocation="UML.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="58e0a1c2-2bd3-4198-82b0-116778ade410"
+            name="login"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="c033c31e-27fa-427d-8653-460f8e1f1483"
+                LastKnownName="RelayCommand"
+                LastKnownLocation="Package_1437.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="23e42734-eb7f-4c27-8f85-2dcd0f29bfa9"
+            name="Login"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="c033c31e-27fa-427d-8653-460f8e1f1483"
+                LastKnownName="RelayCommand"
+                LastKnownLocation="Package_1437.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
