@@ -506,9 +506,9 @@
     </packageHasNamedElement>
     <packageHasNamedElement>
       <packageMoniker
-        Id="08cf47b0-a591-4e02-a1bc-595eecbc12b7"
+        Id="1e244a52-c698-448a-b7c7-fa0ff8dc5c5d"
         LastKnownName="Smartphone.Driver.ViewModel"
-        LastKnownLocation="Package_1038.uml" />
+        LastKnownLocation="Package_1047.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
