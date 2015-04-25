@@ -54,30 +54,63 @@
     <packageHasNamedElement>
       <class
         Id="620753f6-a5a3-4a83-884c-51e2e10257cf"
-        name="PatientListVM"
+        name="OrderVM"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
-        <ownedAttributesInternal>
-          <property
-            Id="49973b25-dfc2-43ec-9ed1-e238201387f9"
-            name="Patients"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
+        <targetEnds>
+          <association
+            Id="d4543d7e-dc7d-4ef5-8c68-d9ed64aa4711"
             isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="2ae80b0a-dc46-4392-be37-58e0606c97f1"
-                LastKnownName="List&lt;Patient&gt;"
-                LastKnownLocation="UML.uml" />
-            </type_NamedElement>
-          </property>
-        </ownedAttributesInternal>
+            sourceEndRoleName=""
+            targetEndRoleName="Patients"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="0ff929ad-844f-4f61-989c-0327bd65d2ec"
+              LastKnownName="PatientM"
+              LastKnownLocation="Package_1437.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5add2e4a-0806-4826-bd71-ebf5dee27d9e"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5fcb89a9-2a12-40e2-9d94-c13c820232e4"
+                  name="Patients"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="f8267441-451d-497f-b4b9-0672d87b931b"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="93173d0d-2e02-4005-a42f-886a007c363a"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -133,6 +166,43 @@
                 LastKnownLocation="Package_1437.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="de49c9d6-129a-40c6-9285-6c77e7486fc9"
+            name="SendOrder"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="c033c31e-27fa-427d-8653-460f8e1f1483"
+                LastKnownName="RelayCommand"
+                LastKnownLocation="Package_1437.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="0f46e311-7bcc-417f-97a3-331462ddb270"
+            name="sendOrder"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="c033c31e-27fa-427d-8653-460f8e1f1483"
+                LastKnownName="RelayCommand"
+                LastKnownLocation="Package_1437.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
@@ -148,27 +218,27 @@
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
-        Id="189ee900-e81b-42b9-90e3-54db431c0b12"
+        Id="0ff929ad-844f-4f61-989c-0327bd65d2ec"
         name="PatientM"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
         <targetEnds>
           <association
-            Id="a9d3a4f4-060b-441c-a4bb-5e9442c6b17f"
+            Id="a0d39125-f220-4631-819c-4c567ce27c7f"
             isDerived="false"
             sourceEndRoleName=""
-            targetEndRoleName="AvailableAnalysis"
+            targetEndRoleName="AnalysisM"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
-              Id="d8d3ba6f-9d8d-4aa4-ae50-fd793392fdef"
-              LastKnownName="AnalysisEntryM"
-              LastKnownLocation="Package_2303.uml" />
+              Id="ba9eb774-a7da-49c0-9c9f-fbeb9a8b3061"
+              LastKnownName="AnalysisM"
+              LastKnownLocation="Package_1437.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="ec8c587f-0372-4cc7-bf41-38013991b682"
+                  Id="e95082f4-ee84-4f8a-bd14-1f2dca1d94cb"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -176,113 +246,27 @@
                   isDerivedUnion="false"
                   aggregation="None"
                   isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="df9cbcb8-8958-48c8-9426-3e7875ac3c1d"
-                      name="Lower" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="07f0a048-36c7-45cf-95d6-ede136a659c9"
-                      name="Upper" />
-                  </upperValueInternal>
-                </memberEnd>
+                  isNavigableOwned="false" />
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="a9fc69b6-f132-4652-ad09-e22e752db845"
-                  name="AvailableAnalysis"
+                  Id="1ce44478-294e-42c3-a1a9-8b21e5000c14"
+                  name="AnalysisM"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="ea32fa12-d322-4371-aca7-74f6e70d9a3a"
-                      name="Lower"
-                      value="*" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="5abc3ed8-29e5-484e-9c98-12b968bc6aef"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-          <association
-            Id="89f2a3c0-1ae8-40e0-9bd1-8be1aa8d9b1e"
-            isDerived="false"
-            sourceEndRoleName=""
-            targetEndRoleName="SelectedAnalysis"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="d8d3ba6f-9d8d-4aa4-ae50-fd793392fdef"
-              LastKnownName="AnalysisEntryM"
-              LastKnownLocation="Package_2303.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="672f032a-c8cc-4d14-955e-f3df9584fee9"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="0a2d6871-d758-46de-b72d-1870e04f0c63"
-                      name="Lower" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="375c3cdf-ce6e-4f57-9c1a-01d60aac2b00"
-                      name="Upper" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="fb2f37bc-a166-4091-bfda-01f5465865e8"
-                  name="SelectedAnalysis"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="e2ce8264-2bc7-4947-b9d0-a2c230793c7a"
-                      name="Lower"
-                      value="*" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="0092d646-33f9-4f33-a140-fbe7c3e89029"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
+                  isComposite="false" />
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
         <ownedAttributesInternal>
           <property
-            Id="2126862c-c266-4367-a729-1a6af075c3fb"
-            name="PatientIDs"
+            Id="f2d35108-c876-42d3-b864-0806d44f1adb"
+            name="PatientId"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -295,6 +279,53 @@
               <undefinedTypeMoniker
                 Id="7f8f30e4-7398-4f00-8a52-56150a263c88"
                 LastKnownName="string"
+                LastKnownLocation="UML.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ba9eb774-a7da-49c0-9c9f-fbeb9a8b3061"
+        name="AnalysisM"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="74836136-1b6d-46cc-92f7-7108413fa8e5"
+            name="Name"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="7f8f30e4-7398-4f00-8a52-56150a263c88"
+                LastKnownName="string"
+                LastKnownLocation="UML.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="31b53728-a955-4735-826b-5418338c1813"
+            name="Selected"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="2246b22c-8247-433b-8ed3-d54f34bde3cb"
+                LastKnownName="bool"
                 LastKnownLocation="UML.uml" />
             </type_NamedElement>
           </property>

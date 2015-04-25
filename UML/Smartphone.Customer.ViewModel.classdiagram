@@ -72,32 +72,6 @@
       </propertyInstances>
     </stereotypeInstance>
   </appliedStereotypesInternal>
-  <profileInstances>
-    <packageHasProfileInstances Id="6197d076-5b2d-4fb1-a1ef-8f62159fca90">
-      <profileInstance Id="f584d1dd-d71a-42b3-85f9-fabbbbe12b2c" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="6aa2d13f-380b-4497-8bb6-317e7fc84d67">
-      <profileInstance Id="65a7b3c6-f504-4f95-912f-492cde5271ee" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="82223d5b-0bf0-4801-80e3-9df4df6365e6">
-      <profileInstance Id="1818b590-71ea-4228-829b-3162c572e096" name="CSharpProfile">
-        <elementDefinition Id="f55e2a50-610e-4ed2-b46c-9894c7bc2247" />
-      </profileInstance>
-      <elementDefinition Id="25270fbd-b104-4bd8-a719-a8127079291c" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="ec02cbe4-7d7c-41fe-b5fc-7cd868bf3b1d">
-      <profileInstance Id="2b08f6ea-d1fb-40ac-a805-9c42e1e07e30" name="TextTemplateBindings">
-        <elementDefinition Id="d15280d6-8461-4d67-b16b-5ad638646911" />
-      </profileInstance>
-      <elementDefinition Id="77a2fc9a-4f9a-427b-bad5-c83b6ec8d6db" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <packageHasNamedElement>
       <referencedType Id="2027b8a0-8ad0-4295-8407-52125d75268b" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
@@ -128,16 +102,36 @@
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="69bd676a-4c53-413e-90fb-f6daec7b372e" name="PatientListVM" isAbstract="false" isLeaf="false" isActiveClass="false">
+            <class Id="69bd676a-4c53-413e-90fb-f6daec7b372e" name="OrderVM" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="620753f6-a5a3-4a83-884c-51e2e10257cf" />
-              <ownedAttributesInternal>
-                <property Id="5497c632-4e8d-4844-a760-3c300084c7da" name="Patients" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="49973b25-dfc2-43ec-9ed1-e238201387f9" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="4377190a-9c1c-44d7-b474-d0e5e7df06f5" LastKnownName="List&lt;Patient&gt;" />
-                  </type_NamedElement>
-                </property>
-              </ownedAttributesInternal>
+              <targetEnds>
+                <association Id="4557df57-e3f1-4041-8699-a97c5f5aec55" isDerived="false" sourceEndRoleName="" targetEndRoleName="Patients" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="64600580-e407-4c60-be14-73e25d77bf91" LastKnownName="PatientM" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="af26e447-92ab-46ef-ba65-883491429867" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                        <elementDefinition Id="5add2e4a-0806-4826-bd71-ebf5dee27d9e" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="cd280285-a424-4e52-9154-a0fc1ba855ee" name="Patients" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <lowerValueInternal>
+                          <literalString Id="2ebb14d3-034f-46c4-8f19-98a7614b0f0c" name="Lower" value="*">
+                            <elementDefinition Id="f8267441-451d-497f-b4b9-0672d87b931b" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="367b2ef7-64c1-464f-a7eb-f693a9655446" name="Upper" value="*">
+                            <elementDefinition Id="93173d0d-2e02-4005-a42f-886a007c363a" />
+                          </literalString>
+                        </upperValueInternal>
+                        <elementDefinition Id="5fcb89a9-2a12-40e2-9d94-c13c820232e4" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="d4543d7e-dc7d-4ef5-8c68-d9ed64aa4711" />
+                </association>
+              </targetEnds>
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
@@ -156,17 +150,66 @@
                     <referencedTypeMoniker Id="0fe61bd6-9a3d-49b1-bb28-adbff84c06bb" LastKnownName="RelayCommand" />
                   </type_NamedElement>
                 </property>
+                <property Id="34d0eb31-e154-4377-85ab-795f36cf991b" name="SendOrder" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="de49c9d6-129a-40c6-9285-6c77e7486fc9" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="0fe61bd6-9a3d-49b1-bb28-adbff84c06bb" LastKnownName="RelayCommand" />
+                  </type_NamedElement>
+                </property>
+                <property Id="5ee171ed-4a35-4ade-9c00-0f5b26cb4f8f" name="sendOrder" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="0f46e311-7bcc-417f-97a3-331462ddb270" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="0fe61bd6-9a3d-49b1-bb28-adbff84c06bb" LastKnownName="RelayCommand" />
+                  </type_NamedElement>
+                </property>
               </ownedAttributesInternal>
             </class>
           </packageHasNamedElement>
           <packageHasNamedElement>
-            <class Id="bfd1e140-5ed8-473e-a0d4-1cf72588b8b7" name="PatientM" isAbstract="false" isLeaf="false" isActiveClass="false">
-              <elementDefinition Id="189ee900-e81b-42b9-90e3-54db431c0b12" />
+            <class Id="64600580-e407-4c60-be14-73e25d77bf91" name="PatientM" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="0ff929ad-844f-4f61-989c-0327bd65d2ec" />
+              <targetEnds>
+                <association Id="3b2952f7-02f9-47b0-89db-30b041dc709f" isDerived="false" sourceEndRoleName="" targetEndRoleName="AnalysisM" isLeaf="false" isAbstract="false">
+                  <classMoniker Id="14ba684e-b5b8-4052-9736-ac5e89dd2836" LastKnownName="AnalysisM" />
+                  <relationshipOwnedElementsInternal>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="39db896f-d5b9-4c41-b0f7-cbe23ef375c9" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                        <elementDefinition Id="e95082f4-ee84-4f8a-bd14-1f2dca1d94cb" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                    <associationHasOwnedEnds>
+                      <memberEnd Id="77f8e6c7-c3e4-4d5c-83ea-ddc38f87d234" name="AnalysisM" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="1ce44478-294e-42c3-a1a9-8b21e5000c14" />
+                      </memberEnd>
+                    </associationHasOwnedEnds>
+                  </relationshipOwnedElementsInternal>
+                  <elementDefinition Id="a0d39125-f220-4631-819c-4c567ce27c7f" />
+                </association>
+              </targetEnds>
               <ownedAttributesInternal>
-                <property Id="a102e536-4673-44c2-a7a2-8ed8439423ef" name="PatientIDs" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="2126862c-c266-4367-a729-1a6af075c3fb" />
+                <property Id="96b0fb5e-c320-4ab5-b906-2a34728abe19" name="PatientId" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="f2d35108-c876-42d3-b864-0806d44f1adb" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="99298ef0-b61c-4b48-b045-f3e8e7065870" LastKnownName="string" />
+                    <referencedTypeMoniker Id="c5bd3483-c338-4f62-9c0c-b7a7c7ca7be6" LastKnownName="string" />
+                  </type_NamedElement>
+                </property>
+              </ownedAttributesInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="14ba684e-b5b8-4052-9736-ac5e89dd2836" name="AnalysisM" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="ba9eb774-a7da-49c0-9c9f-fbeb9a8b3061" />
+              <ownedAttributesInternal>
+                <property Id="7cc23d3b-c5e7-4f3e-9a52-528b6cc87246" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="74836136-1b6d-46cc-92f7-7108413fa8e5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="c5bd3483-c338-4f62-9c0c-b7a7c7ca7be6" LastKnownName="string" />
+                  </type_NamedElement>
+                </property>
+                <property Id="a4cf1332-255f-464e-9aa9-33d0750fe4d9" name="Selected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="31b53728-a955-4735-826b-5418338c1813" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="8b73df87-cfb7-4624-8914-7f5ab885a55a" LastKnownName="bool" />
                   </type_NamedElement>
                 </property>
               </ownedAttributesInternal>
@@ -181,17 +224,43 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="4377190a-9c1c-44d7-b474-d0e5e7df06f5" name="List&lt;Patient&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;Patient&gt;">
-        <elementDefinition Id="2ae80b0a-dc46-4392-be37-58e0606c97f1" />
+      <referencedType Id="c5bd3483-c338-4f62-9c0c-b7a7c7ca7be6" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="7f8f30e4-7398-4f00-8a52-56150a263c88" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="99298ef0-b61c-4b48-b045-f3e8e7065870" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
-        <elementDefinition Id="7f8f30e4-7398-4f00-8a52-56150a263c88" />
+      <referencedType Id="8b73df87-cfb7-4624-8914-7f5ab885a55a" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
+        <elementDefinition Id="2246b22c-8247-433b-8ed3-d54f34bde3cb" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>
   <package Id="c99fbb05-cdc2-48b6-b241-c312817473f0" name="UML">
     <elementDefinition Id="41d044d9-13f8-4e5b-a528-cd3067600a56" />
+    <profileInstances>
+      <packageHasProfileInstances Id="6197d076-5b2d-4fb1-a1ef-8f62159fca90">
+        <profileInstance Id="f584d1dd-d71a-42b3-85f9-fabbbbe12b2c" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="6aa2d13f-380b-4497-8bb6-317e7fc84d67">
+        <profileInstance Id="65a7b3c6-f504-4f95-912f-492cde5271ee" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="82223d5b-0bf0-4801-80e3-9df4df6365e6">
+        <profileInstance Id="1818b590-71ea-4228-829b-3162c572e096" name="CSharpProfile">
+          <elementDefinition Id="f55e2a50-610e-4ed2-b46c-9894c7bc2247" />
+        </profileInstance>
+        <elementDefinition Id="25270fbd-b104-4bd8-a719-a8127079291c" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="ec02cbe4-7d7c-41fe-b5fc-7cd868bf3b1d">
+        <profileInstance Id="2b08f6ea-d1fb-40ac-a805-9c42e1e07e30" name="TextTemplateBindings">
+          <elementDefinition Id="d15280d6-8461-4d67-b16b-5ad638646911" />
+        </profileInstance>
+        <elementDefinition Id="77a2fc9a-4f9a-427b-bad5-c83b6ec8d6db" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>

@@ -504,6 +504,12 @@
         LastKnownName="ShiftScheduleCreator"
         LastKnownLocation="Package8_2059.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="08cf47b0-a591-4e02-a1bc-595eecbc12b7"
+        LastKnownName="Smartphone.Driver.ViewModel"
+        LastKnownLocation="Package_1038.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"
