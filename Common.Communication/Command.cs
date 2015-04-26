@@ -6,38 +6,19 @@ namespace Common.Communication
     public abstract class Command
     {
 
-        private Guid id = Guid.Empty;
-        private string commandTypeString = null;
+        [JsonProperty]
+        public Guid Id { get; protected set; }
+        [JsonProperty]
+        protected string CommandTypeString { get; private set; }
 
         public Command(Guid id)
         {
-            this.id = id;
-            commandTypeString = GetType().ToString();
+            Id = id;
+            CommandTypeString = GetType().ToString();
         }
 
         public Command() : this (Guid.NewGuid())
         {
-        }
-
-        public string CommandTypeString
-        {
-            get
-            {
-                return commandTypeString;
-            }
-        }
-
-        [JsonProperty]
-        public Guid Id
-        {
-            get
-            {
-                return id;
-            }
-            protected set // This is necessary for the JSON Deserialization.
-            {
-                id = value;
-            }
         }
 
     }
