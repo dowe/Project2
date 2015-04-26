@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPServer.Tests", "ASPServe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Communication.Tests", "Common.Communication.Tests\Common.Communication.Tests.csproj", "{F4535560-DD7F-4F79-BF33-B5E5B9CC010D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{FF3DCEBD-8438-436C-81FF-39A5F1F9A78C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{F4535560-DD7F-4F79-BF33-B5E5B9CC010D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4535560-DD7F-4F79-BF33-B5E5B9CC010D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4535560-DD7F-4F79-BF33-B5E5B9CC010D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF3DCEBD-8438-436C-81FF-39A5F1F9A78C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF3DCEBD-8438-436C-81FF-39A5F1F9A78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF3DCEBD-8438-436C-81FF-39A5F1F9A78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF3DCEBD-8438-436C-81FF-39A5F1F9A78C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
