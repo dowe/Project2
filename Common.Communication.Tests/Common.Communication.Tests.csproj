@@ -56,6 +56,7 @@
     <Compile Include="InputCommandPipelineTests.cs" />
     <Compile Include="OutputCommandPipelineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CommandHandlerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Communication\Common.Communication.csproj">
