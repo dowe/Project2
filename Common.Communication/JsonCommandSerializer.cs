@@ -33,7 +33,7 @@ namespace Common.Communication
             return (Command)JsonConvert.DeserializeObject(jsonCommand, matchingType);
         }
 
-        public string ParseSerializedCommandType(string jsonCommand)
+        private string ParseSerializedCommandType(string jsonCommand)
         {
             JObject jObject = JObject.Parse(jsonCommand);
             return jObject.GetValue("CommandTypeString").Value<string>();
