@@ -30,7 +30,7 @@ namespace Common.Communication
             }
         }
 
-        public T WaitForAnswer(int waitTimeInMs)
+        public T WaitForResponse(int waitTimeInMs)
         {
             T result = null;
 

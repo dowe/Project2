@@ -154,7 +154,7 @@ namespace Common.Communication.Client
 
             Send(command);
 
-            response = responseHandler.WaitForAnswer(timeout);
+            response = responseHandler.WaitForResponse(timeout);
 
             input.DeregisterResponseCommandHandler(responseHandler);
 
