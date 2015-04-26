@@ -49,9 +49,29 @@ namespace Common.Communication.Tests
             Assert.IsNull(receivedCommand);
         }
 
+        [TestMethod]
+        public void Test_WaitForResponse_AfterReceivingResponseWithNotMatchingType_ReturnsNull()
+        {
+            var acceptedId = Guid.NewGuid();
+            ResponseCommandHandler<DummyCommand> testee = CreateTestee(acceptedId);
+            var otherDummyCommand = new OtherDummyCommand(acceptedId);
+
+            testee.TryHandleCommand(otherDummyCommand, "Look at me I am a connectionId.");
+            var receivedCommand = testee.WaitForResponse(0);
+
+            Assert.IsNull(receivedCommand);
+        }
+
         private class DummyCommand : Command
         {
             public DummyCommand(Guid id) : base(id)
+            {
+            }
+        }
+
+        private class OtherDummyCommand : Command
+        {
+            public OtherDummyCommand(Guid id) : base(id)
             {
             }
         }
