@@ -5,11 +5,11 @@
     <packageShape Id="d210b399-176a-40e7-a7da-f6c98bc79b68" absoluteBounds="1, 0.875, 7.375, 10.625" customColor="255, 249, 230" hideQualifiedName="false">
       <packageMoniker Id="a1cf7708-b34a-4119-84ac-799789f2bdf1" LastKnownName="Common.Communication" />
       <nestedChildShapes>
-        <classShape Id="0a07dfa5-8e1e-487d-9f99-ea1a25a215bb" absoluteBounds="1.5, 7.375, 1.5, 1.4988888557751956" hideQualifiedName="false" increaseHeight="0.17411457836627961" customColor="181, 193, 223">
+        <classShape Id="0a07dfa5-8e1e-487d-9f99-ea1a25a215bb" absoluteBounds="1.5, 7.375, 1.875, 1.4988888557751956" hideQualifiedName="false" increaseHeight="0.17411457836627961" customColor="181, 193, 223">
           <classMoniker Id="ac081d67-6ef9-4884-b2da-22b1db597dc9" LastKnownName="Command" />
           <nestedChildShapes>
-            <AttributeElementListCompartment Id="6b4da3be-c622-416d-b5a2-e536134a2884" absoluteBounds="1.515, 7.8810763855775194, 1.4700000000000002, 0.52148435761531176" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
-            <OperationElementListCompartment Id="2b2669f1-a25d-40ef-ad4c-0841d14f1db9" absoluteBounds="1.515, 8.41256074319283, 1.4700000000000002, 0.36132811258236575" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <AttributeElementListCompartment Id="6b4da3be-c622-416d-b5a2-e536134a2884" absoluteBounds="1.515, 7.8810763855775194, 1.8450000000000002, 0.52148435761531176" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="2b2669f1-a25d-40ef-ad4c-0841d14f1db9" absoluteBounds="1.515, 8.41256074319283, 1.8450000000000002, 0.36132811258236575" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
           </nestedChildShapes>
         </classShape>
         <classShape Id="051a9e07-35f2-4975-b694-d3f070d5fc6c" absoluteBounds="1.5, 3.375, 1.5, 1.6590451008081431" hideQualifiedName="false" increaseHeight="0.17411457836627961" customColor="181, 193, 223">
@@ -31,11 +31,11 @@
             <OperationElementListCompartment Id="10637034-0150-4d4b-abd9-6039f341866e" absoluteBounds="4.64, 2.7875607431928318, 1.4700000000000002, 0.84179684768120455" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
           </nestedChildShapes>
         </classShape>
-        <classShape Id="ffa11278-9b1a-44ac-814f-697b2e98a75e" absoluteBounds="1.5, 9.75, 1.5, 1.1785763657093042" hideQualifiedName="false" increaseHeight="0.17411457836627961" customColor="181, 193, 223">
+        <classShape Id="ffa11278-9b1a-44ac-814f-697b2e98a75e" absoluteBounds="1.5, 9.75, 2, 1.1785763657093042" hideQualifiedName="false" increaseHeight="0.17411457836627961" customColor="181, 193, 223">
           <classMoniker Id="acee9739-c574-44a7-ac17-98f0d2395848" LastKnownName="ConnectionException" />
           <nestedChildShapes>
-            <AttributeElementListCompartment Id="44ceab0d-5713-42f7-83df-d69cc1d0b899" absoluteBounds="1.515, 10.25607638557752, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
-            <OperationElementListCompartment Id="bc62513a-fabe-46f8-bee9-2d1f01178837" absoluteBounds="1.515, 10.46724825312694, 1.4700000000000002, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <AttributeElementListCompartment Id="44ceab0d-5713-42f7-83df-d69cc1d0b899" absoluteBounds="1.515, 10.25607638557752, 1.9700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="bc62513a-fabe-46f8-bee9-2d1f01178837" absoluteBounds="1.515, 10.46724825312694, 1.9700000000000002, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
           </nestedChildShapes>
         </classShape>
         <classShape Id="f81db2dd-f48b-4655-9f9b-f3c74b40a7da" absoluteBounds="6.375, 4.25, 1.5, 2.7801388160387672" hideQualifiedName="false" increaseHeight="0.17411457836627961" customColor="181, 193, 223">

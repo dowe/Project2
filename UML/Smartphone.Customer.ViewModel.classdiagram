@@ -191,6 +191,16 @@
                     </associationHasOwnedEnds>
                     <associationHasOwnedEnds>
                       <memberEnd Id="77f8e6c7-c3e4-4d5c-83ea-ddc38f87d234" name="AnalysisM" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <lowerValueInternal>
+                          <literalString Id="9c728eca-eb86-4f12-8bcd-997318d85c33" name="Lower" value="*">
+                            <elementDefinition Id="e7162415-9cbb-46d5-ada6-649eff1197f2" />
+                          </literalString>
+                        </lowerValueInternal>
+                        <upperValueInternal>
+                          <literalString Id="51f2ec67-3210-488f-9584-ee22ada18ad9" name="Upper" value="*">
+                            <elementDefinition Id="6be3aaa9-09ef-4863-8b9a-f9607eb5b986" />
+                          </literalString>
+                        </upperValueInternal>
                         <elementDefinition Id="1ce44478-294e-42c3-a1a9-8b21e5000c14" />
                       </memberEnd>
                     </associationHasOwnedEnds>
