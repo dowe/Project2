@@ -53,6 +53,24 @@ namespace Common.Communication.Tests
             fakeHandler.DidNotReceive().TryHandleCommand(dummyCommand, null);
         }
 
+        [TestMethod]
+        public void InjectInternal_WithDeregisteredMatchingCommandHandler_DoesNotCallCommandHandler()
+        {
+            var testee = CreateTestee(CreateDummmySerializer());
+            var dummyCommand = new DummyCommand();
+            var fakeHandler = Substitute.For<ICommandHandler>();
+            fakeHandler.TryHandleCommand(dummyCommand, null).Returns(true);
+            fakeHandler.AcceptedType.Returns(typeof (DummyCommand));
+            testee.RegisterCommandHandler(fakeHandler);
+            testee.Start();
+            testee.DeregisterCommandHandler(fakeHandler);
+
+            testee.InjectInternal(dummyCommand);
+
+            testee.Stop();
+            fakeHandler.DidNotReceive().TryHandleCommand(dummyCommand, null);
+        }
+
         private class DummyCommand : Command
         {
         }
