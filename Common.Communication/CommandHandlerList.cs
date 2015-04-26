@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Communication
 {
-    public class CommandHandlerList
+    class CommandHandlerList
     {
 
         private ConcurrentDictionary<ICommandHandler, byte> handlers = null;

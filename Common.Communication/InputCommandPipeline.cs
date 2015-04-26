@@ -23,7 +23,7 @@ namespace Common.Communication
         {
         }
 
-        public InputCommandPipeline(ICommandSerializer serializer, CommandHandlerList handlers, CommandHandlerList waitHandlers, ConcurrentDictionary<Type, byte> parsableTypes)
+        InputCommandPipeline(ICommandSerializer serializer, CommandHandlerList handlers, CommandHandlerList waitHandlers, ConcurrentDictionary<Type, byte> parsableTypes)
         {
             this.serializer = serializer;
             this.handlers = handlers;
