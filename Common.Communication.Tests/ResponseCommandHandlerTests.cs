@@ -26,6 +26,17 @@ namespace Common.Communication.Tests
         }
 
         [TestMethod]
+        public void Test_WaitForResponse_WithoutReceivingMessage_ReturnsNull()
+        {
+            var acceptedId = Guid.NewGuid();
+            ResponseCommandHandler<DummyCommand> testee = CreateTestee(acceptedId);
+
+            var receivedCommand = testee.WaitForResponse(0);
+
+            Assert.IsNull(receivedCommand);
+        }
+
+        [TestMethod]
         public void Test_WaitForResponse_AfterReceivingResponseWithNotMatchingId_ReturnsNull()
         {
             var acceptedId = Guid.NewGuid();
