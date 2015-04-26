@@ -38,7 +38,7 @@ namespace Common.Communication.Tests
         }
 
         [TestMethod]
-        public void InjectInternal_WithRegisteredNotMatchingCommandHandler_CallsCommandHandler()
+        public void InjectInternal_WithRegisteredNotMatchingCommandHandlers_CallsCommandHandlers()
         {
             var testee = CreateTestee(CreateDummmySerializer());
             var dummyCommand = new DummyCommand();
@@ -54,20 +54,25 @@ namespace Common.Communication.Tests
         }
 
         [TestMethod]
-        public void InjectInternal_WithDeregisteredMatchingCommandHandler_DoesNotCallCommandHandler()
+        public void InjectInternal_WithDeregisteredMatchingCommandHandlers_DoesNotCallCommandHandlers()
         {
             var testee = CreateTestee(CreateDummmySerializer());
             var dummyCommand = new DummyCommand();
             var fakeHandler = Substitute.For<ICommandHandler>();
             fakeHandler.AcceptedType.Returns(typeof (DummyCommand));
+            var fakeResponseHandler = Substitute.For<ICommandHandler>();
+            fakeResponseHandler.AcceptedType.Returns(typeof (DummyCommand));
             testee.RegisterCommandHandler(fakeHandler);
+            testee.RegisterResponseCommandHandler(fakeResponseHandler);
             testee.Start();
             testee.DeregisterCommandHandler(fakeHandler);
+            testee.DeregisterResponseCommandHandler(fakeResponseHandler);
 
             testee.InjectInternal(dummyCommand);
 
             testee.Stop();
             fakeHandler.DidNotReceive().TryHandleCommand(dummyCommand, null);
+            fakeResponseHandler.DidNotReceive().TryHandleCommand(dummyCommand, null);
         }
 
         [TestMethod]
@@ -80,14 +85,18 @@ namespace Common.Communication.Tests
             fakeSerializer.DeserializeCommand(serializedCommand, Arg.Any <IEnumerable<Type>>()).Returns(deserializedCommand);
             var fakeHandler = Substitute.For<ICommandHandler>();
             fakeHandler.AcceptedType.Returns(typeof (DummyCommand));
+            var fakeResponseHandler = Substitute.For<ICommandHandler>();
+            fakeResponseHandler.AcceptedType.Returns(typeof (DummyCommand));
             var testee = CreateTestee(fakeSerializer);
             testee.RegisterCommandHandler(fakeHandler);
             testee.Start();
+            testee.RegisterResponseCommandHandler(fakeResponseHandler);
 
             testee.AddReceived(serializedCommand, connectionSource);
 
             testee.Stop();
             fakeHandler.Received().TryHandleCommand(deserializedCommand, connectionSource);
+            fakeResponseHandler.Received().TryHandleCommand(deserializedCommand, connectionSource);
         }
 
         private class DummyCommand : Command
@@ -97,5 +106,6 @@ namespace Common.Communication.Tests
         private class OtherDummyCommand : Command
         {
         }
+
     }
 }
