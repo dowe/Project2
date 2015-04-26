@@ -108,13 +108,13 @@ namespace Common.Communication
             handlers.DeregisterCommandHandler(handler);
         }
 
-        public void RegisterResponseCommandHandler<T>(ResponseCommandHandler<T> responseHandler) where T : Command
+        public void RegisterResponseCommandHandler(ICommandHandler responseHandler)
         {
             responseHandlers.RegisterCommandHandler(responseHandler);
             parsableTypes.AddOrUpdate(responseHandler.AcceptedType, 0, (k, v) => 0);
         }
 
-        public void DeregisterResponseCommandHandler<T>(ResponseCommandHandler<T> responseHandler) where T : Command
+        public void DeregisterResponseCommandHandler(ICommandHandler responseHandler)
         {
             responseHandlers.DeregisterCommandHandler(responseHandler);
         }
