@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UML", "UML\UML.modelproj", "{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Communication.Tests", "Common.Communication.Tests\Common.Communication.Tests.csproj", "{F4535560-DD7F-4F79-BF33-B5E5B9CC010D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{FF3DCEBD-8438-436C-81FF-39A5F1F9A78C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementSoftware", "ManagementSoftware\ManagementSoftware.csproj", "{88EF00AD-26FB-4389-8429-3340F40F97C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{FF3DCEBD-8438-436C-81FF-39A5F1F9A78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF3DCEBD-8438-436C-81FF-39A5F1F9A78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF3DCEBD-8438-436C-81FF-39A5F1F9A78C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88EF00AD-26FB-4389-8429-3340F40F97C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88EF00AD-26FB-4389-8429-3340F40F97C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88EF00AD-26FB-4389-8429-3340F40F97C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88EF00AD-26FB-4389-8429-3340F40F97C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
