@@ -21,15 +21,7 @@
     </Window.Resources>
 
     <Grid x:Name="LayoutRoot">
-        
-
-        <TextBlock FontSize="36"
-                   FontWeight="Bold"
-                   Foreground="Purple"
-                   Text="{Binding WelcomeTitle}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   TextWrapping="Wrap" />
+       
         <TabControl>
             <TabItem Header="Kunde Registrieren">
                 <views:RegisterCustomerView/>

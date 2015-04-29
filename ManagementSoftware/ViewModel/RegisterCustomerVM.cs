@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using ManagementSoftware.ViewModel.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return EnumValues(typeof(SMSWanted));
+                return ViewModelUtil.EnumValues(typeof(SMSWanted));
             }
         }
 
@@ -22,32 +23,86 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return EnumValues(typeof(GenderTitle));
+                return ViewModelUtil.EnumValues(typeof(GenderTitle));
             }
         }
 
-        private static Dictionary<object, string> EnumValues(Type enumType)
+        public virtual string LastName
         {
-            Dictionary<object, string> dict = new Dictionary<object, string>();
-            foreach (SMSWanted value in Enum.GetValues(enumType).Cast<SMSWanted>())
-            {
-                dict.Add(value, GetDescription(value, enumType));
-            }
-
-            return dict;
+            get;
+            set;
         }
 
-        private static string GetDescription(object enumValue, Type enumType)
+        public virtual string FirstName
         {
-            var descriptionAttribute = enumType
-              .GetField(enumValue.ToString())
-              .GetCustomAttributes(typeof(DescriptionAttribute), false)
-              .FirstOrDefault() as DescriptionAttribute;
+            get;
+            set;
+        }
 
+        public virtual string Label
+        {
+            get;
+            set;
+        }
 
-            return descriptionAttribute != null
-              ? descriptionAttribute.Description
-              : enumValue.ToString();
+        public virtual string Title
+        {
+            get;
+            set;
+        }
+
+        public virtual string UserName
+        {
+            get;
+            set;
+        }
+
+        public virtual string Password
+        {
+            get;
+            set;
+        }
+
+        public virtual string MobileNumber
+        {
+            get;
+            set;
+        }
+
+        public virtual bool SMSRequested
+        {
+            get;
+            set;
+        }
+
+        public virtual string BankAccountOwner
+        {
+            get;
+            set;
+        }
+
+        public virtual string IBAN
+        {
+            get;
+            set;
+        }
+
+        public virtual string City
+        {
+            get;
+            set;
+        }
+
+        public virtual string PostalCode
+        {
+            get;
+            set;
+        }
+
+        public virtual string Street
+        {
+            get;
+            set;
         }
 
     }

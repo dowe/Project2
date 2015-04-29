@@ -80,10 +80,10 @@
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="ViewModel\RegisterCustomerVM.cs" />
+    <Compile Include="ViewModel\Util\ViewModelUtil.cs" />
     <Compile Include="View\RegisterCustomerView.xaml.cs">
       <DependentUpon>RegisterCustomerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
