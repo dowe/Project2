@@ -13,13 +13,13 @@ namespace Common.DataTransferObjects
 
 	public class BankAccount
 	{
-		public virtual object AccountOwner
+		public virtual string AccountOwner
 		{
 			get;
 			set;
 		}
 
-		public virtual object IBAN
+		public virtual string IBAN
 		{
 			get;
 			set;
