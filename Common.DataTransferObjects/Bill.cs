@@ -25,6 +25,12 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
+        public virtual Customer Customer
+        {
+            get;
+            set;
+        }
+
 	}
 }
 
