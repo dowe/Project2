@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="ManagementSoftware.View.RegisterCustomerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:models="clr-namespace:ManagementSoftware.Model"
+             mc:Ignorable="d" 
+             d:DesignHeight="615" d:DesignWidth="540"
+             DataContext="{Binding RegisterCustomer, Source={StaticResource Locator}}">
+    <Grid>
+        <Label Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Content="Neuer Kunde:"></Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Anrede:" Margin="20,75,0,0" ToolTip="Anrede des Kunden"></Label>
+        <Label Content="Name:" Margin="20,106,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="Name des Kunden"></Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Bezeichnung:" Margin="20,137,0,0" ToolTip="Bezeichnung der Einrichtung"/>
+        <Label Content="PLZ:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,168,0,0" RenderTransformOrigin="0.509,1.989" ToolTip="Postleitzahl der Kundenadresse"></Label>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Benutzername:" Margin="20,221,0,0" ToolTip="Benutzername zum Einloggen (App/Website)"></Label>
+        <Label Content="Kontoinhaber:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,273,0,0" ToolTip="Kontoinhaber"></Label>
+        <Label VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,325,0,0" Content="Handynummer:" ToolTip="Handynummer für Meldungen"></Label>
+        <ComboBox x:Name="cbAnrede" HorizontalAlignment="Left" Margin="130,77,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" SelectedIndex="0">
+            <ComboBoxItem Content="Herr"/>
+            <ComboBoxItem Content="Frau"/>
+        </ComboBox>
+        <TextBox x:Name="tbName" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,110,0,0" Width="120"/>
+        <TextBox x:Name="tbBezeichnung" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,141,0,0"/>
+        <TextBox x:Name="tbPLZ" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,172,0,0"/>
+        <TextBox x:Name="tbBenutzername" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,225,0,0" Width="120"/>
+        <TextBox x:Name="tbKontoinhaber" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="130,277,0,0"/>
+        <TextBox x:Name="tbHandynummer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,329,0,0" Width="120"/>
+        <Label Content="Vorname:" ToolTip="Vorname des Kunden" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,106,0,0"></Label>
+        <Label Content="Straße:" ToolTip="Straße der Kundenadresse" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,137,0,0"/>
+        <Label Content="Ort:" ToolTip="Ort der Kundenadresse" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,168,0,0"/>
+        <Label Content="Passwort:" ToolTip="Passwort zum Einloggen (App/Website)" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,221,0,0"/>
+        <Label Content="IBAN:" ToolTip="IBAN" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,273,0,0"/>
+        <TextBox x:Name="tbVorname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,110,0,0" Width="120"/>
+        <TextBox x:Name="tbStrasse" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,141,0,0"/>
+        <TextBox x:Name="tbOrt" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,172,0,0"/>
+        <TextBox x:Name="tbPasswort" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,225,0,0" Width="120"/>
+        <TextBox x:Name="tbIBAN" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="410,277,0,0"/>
+        <Button Content="Registrieren" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="450,391,0,0" Width="80" Height="25"/>
+        <Label Content="Sms erwünscht:" ToolTip="Benachrichtigung bei abgeschlossenen Tests" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,325,0,0"/>
+        <ComboBox x:Name="cbSmsGewollt" HorizontalAlignment="Left" Margin="410,327,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" ItemsSource="{Binding Path=SMSWantedValues}" DisplayMemberPath="Value" SelectedValuePath="Key" />
+    </Grid>
+</UserControl>

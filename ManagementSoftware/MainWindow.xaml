@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.ignore.com"
+        xmlns:vm="clr-namespace:ManagementSoftware.ViewModel"
+        xmlns:views="clr-namespace:ManagementSoftware.View"
         mc:Ignorable="d ignore"
         Height="300"
         Width="300"
@@ -19,6 +21,7 @@
     </Window.Resources>
 
     <Grid x:Name="LayoutRoot">
+        
 
         <TextBlock FontSize="36"
                    FontWeight="Bold"
@@ -27,6 +30,11 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    TextWrapping="Wrap" />
+        <TabControl>
+            <TabItem Header="Kunde Registrieren">
+                <views:RegisterCustomerView/>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>

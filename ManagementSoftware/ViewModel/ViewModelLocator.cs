@@ -39,6 +39,7 @@ namespace ManagementSoftware.ViewModel
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<RegisterCustomerVM>();
         }
 
         /// <summary>
@@ -54,6 +55,19 @@ namespace ManagementSoftware.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public RegisterCustomerVM RegisterCustomer
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RegisterCustomerVM>();
+            }
+        }
+
+
 
         /// <summary>
         /// Cleans up all the resources.
