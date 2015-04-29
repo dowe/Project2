@@ -4,13 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.ignore.com"
-        xmlns:vm="clr-namespace:ManagementSoftware.ViewModel"
         xmlns:views="clr-namespace:ManagementSoftware.View"
         mc:Ignorable="d ignore"
-        Height="300"
-        Width="300"
-        Title="MVVM Light Application"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        Height="500"
+        Width="580"
+        Title="Verwaltungs Applikation"
+        >
     
     <Window.Resources>
         <ResourceDictionary>

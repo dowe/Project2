@@ -1,11 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using ManagementSoftware.ViewModel.Util;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManagementSoftware.ViewModel
 {
