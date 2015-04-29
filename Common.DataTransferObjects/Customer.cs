@@ -11,7 +11,8 @@ namespace Common.DataTransferObjects
 	using System.Linq;
 	using System.Text;
 
-	public class Customer
+    [Serializable()]	
+    public class Customer
 	{
 		public virtual string LastName
 		{

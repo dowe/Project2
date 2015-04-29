@@ -11,6 +11,7 @@ namespace Common.DataTransferObjects
 	using System.Linq;
 	using System.Text;
 
+    [Serializable()]	
 	public class Address
 	{
 		public virtual string Street 
