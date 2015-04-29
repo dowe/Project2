@@ -134,6 +134,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.DataTransferObjects\Common.DataTransferObjects.csproj">
+      <Project>{3476b14d-b58a-457c-8357-ce9801106aae}</Project>
+      <Name>Common.DataTransferObjects</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

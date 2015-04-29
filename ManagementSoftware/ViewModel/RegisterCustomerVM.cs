@@ -1,108 +1,233 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using ManagementSoftware.ViewModel.Util;
+using System;
 using System.ComponentModel;
+using Common.DataTransferObjects;
+using System.Collections.Generic;
 
 namespace ManagementSoftware.ViewModel
 {
     public class RegisterCustomerVM : ViewModelBase
     {
-        public object SMSWantedValues
+        private static Dictionary<ETitle, string> _ETitleValues = ViewModelUtil.EnumValues<ETitle>();
+        private static Dictionary<ESMSRequested, string> _ESMSRequestedValues = ViewModelUtil.EnumValues<ESMSRequested>();
+
+        private Customer _Customer;
+        private KeyValuePair<ETitle, string> _Title = ViewModelUtil.CreateValuePair<ETitle>(ETitle.Mr);
+        private KeyValuePair<ESMSRequested, string> _SMSRequested = ViewModelUtil.CreateValuePair<ESMSRequested>(ESMSRequested.No);
+
+        public RegisterCustomerVM()
+        {
+            _Customer = new Customer();
+            _Customer.BankAccount = new BankAccount();
+            _Customer.Address = new Address();
+        }
+
+        public RelayCommand CreateAction
         {
             get
             {
-                return ViewModelUtil.EnumValues(typeof(SMSWanted));
+                return new RelayCommand(Create);
             }
         }
 
-        public object GenderTitleValues
+        public object ESMSRequestedValues
         {
             get
             {
-                return ViewModelUtil.EnumValues(typeof(GenderTitle));
+                return _ESMSRequestedValues;
             }
         }
 
-        public virtual string LastName
+        public object ETitleValues
         {
-            get;
-            set;
+            get
+            {
+                return _ETitleValues;
+            }
         }
 
-        public virtual string FirstName
+        public void Create()
         {
-            get;
-            set;
+            //TODO
+            //Customer copy = ViewModelUtil.DeepClone<Customer>(_Customer); ?? [Serializable]
         }
 
-        public virtual string Label
+        public string LastName
         {
-            get;
-            set;
+            get
+            {
+                return _Customer.LastName;
+            }
+            set
+            {
+                _Customer.LastName = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public virtual string Title
+        public string FirstName
         {
-            get;
-            set;
+            get
+            {
+                return _Customer.FirstName;
+            }
+            set
+            {
+                _Customer.FirstName = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public virtual string UserName
+        public string Label
         {
-            get;
-            set;
+            get
+            {
+                return _Customer.Label;
+            }
+            set
+            {
+                _Customer.Label = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public virtual string Password
+        public KeyValuePair<ETitle, string> Title
         {
-            get;
-            set;
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                _Title = value;
+                _Customer.Title = _Title.Value;
+                RaisePropertyChanged();
+            }
         }
 
-        public virtual string MobileNumber
+        public string UserName
         {
-            get;
-            set;
+            get
+            {
+                return _Customer.UserName;
+            }
+            set
+            {
+                _Customer.UserName = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public virtual bool SMSRequested
+        public string Password
         {
-            get;
-            set;
+            get
+            {
+                return _Customer.Password;
+            }
+            set
+            {
+                _Customer.Password = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public virtual string BankAccountOwner
+        public string MobileNumber
         {
-            get;
-            set;
+            get
+            {
+                return _Customer.MobileNumber;
+            }
+            set
+            {
+                _Customer.MobileNumber = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public virtual string IBAN
+        public KeyValuePair<ESMSRequested,string> SMSRequested
         {
-            get;
-            set;
+            get
+            {
+                return _SMSRequested;
+            }
+            set
+            {
+                _SMSRequested = value;
+                _Customer.SMSRequested = (_SMSRequested.Key == ESMSRequested.Yes);
+                RaisePropertyChanged();
+            }
         }
 
-        public virtual string City
+        public string BankAccountOwner
         {
-            get;
-            set;
+            get
+            {
+                return _Customer.BankAccount.AccountOwner;
+            }
+            set
+            {
+                _Customer.BankAccount.AccountOwner = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public virtual string PostalCode
+        public string IBAN
         {
-            get;
-            set;
+            get
+            {
+                return _Customer.BankAccount.IBAN;
+            }
+            set
+            {
+                _Customer.BankAccount.IBAN = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public virtual string Street
+        public string City
         {
-            get;
-            set;
+            get
+            {
+                return _Customer.Address.City;
+            }
+            set
+            {
+                _Customer.Address.City = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string PostalCode
+        {
+            get
+            {
+                return _Customer.Address.PostalCode;
+            }
+            set
+            {
+                _Customer.Address.PostalCode = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string Street
+        {
+            get
+            {
+                return _Customer.Address.Street;
+            }
+            set
+            {
+                _Customer.Address.Street = value;
+                RaisePropertyChanged();
+            }
         }
 
     }
 
-    public enum SMSWanted
+    public enum ESMSRequested
     {
         [Description("Ja")]
         Yes,
@@ -110,7 +235,7 @@ namespace ManagementSoftware.ViewModel
         No
     }
 
-    public enum GenderTitle
+    public enum ETitle
     {
         [Description("Herr")]
         Mr,
