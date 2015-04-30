@@ -11,7 +11,7 @@ namespace Common.DataTransferObjects
 	using System.Linq;
 	using System.Text;
 
-	public enum SampleType
+	public enum SampleType : int
 	{
 		BLOOD,
 		URINE,

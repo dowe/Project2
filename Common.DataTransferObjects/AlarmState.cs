@@ -11,7 +11,7 @@ namespace Common.DataTransferObjects
 	using System.Linq;
 	using System.Text;
 
-	public enum AlarmState
+	public enum AlarmState : int
 	{
 		FIRST_ALARM_TRANSMITTED,
 		NO_ALARM,

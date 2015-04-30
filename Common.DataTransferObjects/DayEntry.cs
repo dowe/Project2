@@ -19,13 +19,13 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual IEnumerable<Employee> AM
+		public virtual List<Employee> AM
 		{
 			get;
 			set;
 		}
 
-		public virtual IEnumerable<Employee> PM
+		public virtual List<Employee> PM
 		{
 			get;
 			set;

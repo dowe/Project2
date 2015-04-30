@@ -61,7 +61,7 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual IEnumerable<Test> Test
+		public virtual List<Test> Test
 		{
 			get;
 			set;

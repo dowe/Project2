@@ -13,7 +13,7 @@ namespace Common.DataTransferObjects
 
 	public class ShiftSchedule
 	{
-		public virtual IEnumerable<DayEntry> DayEntry
+		public virtual List<DayEntry> DayEntry
 		{
 			get;
 			set;

@@ -79,7 +79,7 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual IEnumerable<Bill> Bill
+		public virtual List<Bill> Bill
 		{
 			get;
 			set;

@@ -11,7 +11,7 @@ namespace Common.DataTransferObjects
 	using System.Linq;
 	using System.Text;
 
-	public enum TestState
+	public enum TestState : int
 	{
 		ORDERED,
 		WAITING_FOR_DRIVER,
