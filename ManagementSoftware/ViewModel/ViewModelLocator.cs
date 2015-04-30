@@ -1,0 +1,60 @@
+﻿/*
+  In App.xaml:
+  <Application.Resources>
+      <vm:ViewModelLocatorTemplate xmlns:vm="clr-namespace:ManagementSoftware.ViewModel"
+                                   x:Key="Locator" />
+  </Application.Resources>
+  
+  In the View:
+  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
+*/
+
+using Common.Communication.Client;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
+using ManagementSoftware.Communication;
+using ManagementSoftware.Model;
+using Microsoft.Practices.ServiceLocation;
+
+namespace ManagementSoftware.ViewModel
+{
+    /// <summary>
+    /// This class contains static references to all the view models in the
+    /// application and provides an entry point for the bindings.
+    /// <para>
+    /// See http://www.galasoft.ch/mvvm
+    /// </para>
+    /// </summary>
+    public class ViewModelLocator
+    {
+        static ViewModelLocator()
+        {
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+
+            SimpleIoc.Default.Register<IDataService, DataService>();
+            SimpleIoc.Default.Register<ClientConnection, ClientConnectionCreator>();
+            SimpleIoc.Default.Register<RegisterCustomerVM>();
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public RegisterCustomerVM RegisterCustomer
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RegisterCustomerVM>();
+            }
+        }
+
+
+
+        /// <summary>
+        /// Cleans up all the resources.
+        /// </summary>
+        public static void Cleanup()
+        {
+        }
+    }
+}

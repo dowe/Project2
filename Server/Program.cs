@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Communication.Server;
+using Common.Commands;
+using Server.CmdHandler;
 
 namespace Server
 {
@@ -24,6 +26,8 @@ namespace Server
         {
             // TODO
             // Register all command handler to the connection here.
+           
+            connection.RegisterCommandHandler(new CmdRegisterCustomerHandler());
         }
     }
 }
