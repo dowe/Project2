@@ -34,6 +34,9 @@ namespace Common.Communication.Server
             this.output = new OutputCommandPipeline(serializer);
         }
 
+        /// <summary>
+        /// Binds the server on the given address and makes it listen at {address}/commands.
+        /// </summary>
         public void RunForever()
         {
             input.Start();

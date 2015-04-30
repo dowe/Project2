@@ -7,7 +7,7 @@ namespace ManagementSoftware.Communication
     public class ClientConnectionCreator : ClientConnection
     {
         public ClientConnectionCreator()
-            : base("http://localhost:8080/echo")
+            : base("http://localhost:8080/commands")
         {
             Start();
             Connect();

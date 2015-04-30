@@ -8,7 +8,7 @@ namespace Common.Communication.Server
         public void Configuration(IAppBuilder app)
         {
             app.UseCors(CorsOptions.AllowAll);
-            app.MapSignalR<MyPersistentConnection>("/echo");
+            app.MapSignalR<MyPersistentConnection>("/commands");
         }
     }
 }
