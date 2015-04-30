@@ -61,7 +61,7 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual List<Test> Test
+		public virtual IList<Test> Test
 		{
 			get;
 			set;

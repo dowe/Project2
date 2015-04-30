@@ -13,7 +13,7 @@ namespace Common.DataTransferObjects
 
 	public class CarLogbook
 	{
-		public virtual List<CarLogbookEntry> CarLogbookEntry
+		public virtual IList<CarLogbookEntry> CarLogbookEntry
 		{
 			get;
 			set;
