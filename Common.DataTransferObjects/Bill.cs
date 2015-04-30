@@ -13,7 +13,7 @@ namespace Common.DataTransferObjects
 
 	public class Bill
 	{
-		public virtual byte[] PDF
+		public virtual string PDFPath
 		{
 			get;
 			set;
