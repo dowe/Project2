@@ -12,10 +12,14 @@ namespace Common.Commands
 
         public bool Success { get; private set; }
 
-        public CmdReturnRegisterCustomer(bool success)
+        public string Error { get; private set; }
+
+        public CmdReturnRegisterCustomer(bool success, string error)
         {
             Success = success;
+            Error = error;
         }
+
 
     }
 }

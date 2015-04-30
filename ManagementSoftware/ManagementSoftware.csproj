@@ -79,8 +79,8 @@
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
+    <Compile Include="Helper\ClientConnectionCreator.cs" />
     <Compile Include="ViewModel\RegisterCustomerVM.cs" />
-    <Compile Include="ViewModel\Util\ViewModelUtil.cs" />
     <Compile Include="View\RegisterCustomerView.xaml.cs">
       <DependentUpon>RegisterCustomerView.xaml</DependentUpon>
     </Compile>
@@ -135,9 +135,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Commands\Common.Commands.csproj">
+      <Project>{f74fba9f-fb01-48f6-9ef7-b45eb345e958}</Project>
+      <Name>Common.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Communication.Client\Common.Communication.Client.csproj">
+      <Project>{2b9228e8-bd74-4d56-aa96-551fc8031595}</Project>
+      <Name>Common.Communication.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Communication\Common.Communication.csproj">
+      <Project>{abbc028f-adef-4399-a133-e97f82582bdb}</Project>
+      <Name>Common.Communication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common.DataTransferObjects\Common.DataTransferObjects.csproj">
       <Project>{3476b14d-b58a-457c-8357-ce9801106aae}</Project>
       <Name>Common.DataTransferObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Util\Common.Util.csproj">
+      <Project>{12f1826a-1f92-40f8-bb4c-7ee98c343ba9}</Project>
+      <Name>Common.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

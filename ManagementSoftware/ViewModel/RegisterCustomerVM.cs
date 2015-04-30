@@ -1,34 +1,45 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using ManagementSoftware.ViewModel.Util;
+using Common.Util;
 using System;
 using System.ComponentModel;
 using Common.DataTransferObjects;
 using System.Collections.Generic;
+using Common.Communication.Client;
+using Common.Commands;
+using System.Windows;
 
 namespace ManagementSoftware.ViewModel
 {
     public class RegisterCustomerVM : ViewModelBase
     {
-        private static Dictionary<ETitle, string> _ETitleValues = ViewModelUtil.EnumValues<ETitle>();
-        private static Dictionary<ESMSRequested, string> _ESMSRequestedValues = ViewModelUtil.EnumValues<ESMSRequested>();
+        private static Dictionary<ETitle, string> _ETitleValues = Util.EnumValues<ETitle>();
+        private static Dictionary<ESMSRequested, string> _ESMSRequestedValues = Util.EnumValues<ESMSRequested>();
 
         private Customer _Customer;
-        private KeyValuePair<ETitle, string> _Title = ViewModelUtil.CreateValuePair<ETitle>(ETitle.Mr);
-        private KeyValuePair<ESMSRequested, string> _SMSRequested = ViewModelUtil.CreateValuePair<ESMSRequested>(ESMSRequested.No);
+        private KeyValuePair<ETitle, string> _Title;
+        private KeyValuePair<ESMSRequested, string> _SMSRequested;
+        private RelayCommand _RegisterCustomerAction;
+        private ClientConnection _ClientConnection;
 
-        public RegisterCustomerVM()
+        public RegisterCustomerVM(ClientConnection _ClientConnection)
         {
+            this._ClientConnection = _ClientConnection;
+
             _Customer = new Customer();
             _Customer.BankAccount = new BankAccount();
             _Customer.Address = new Address();
+
+            _RegisterCustomerAction = new RelayCommand(RegisterCustomer);
+            _Title = Util.CreateValuePair<ETitle>(ETitle.Mr);
+            _SMSRequested = Util.CreateValuePair<ESMSRequested>(ESMSRequested.No);
         }
 
-        public RelayCommand CreateAction
+        public RelayCommand RegisterCustomerAction
         {
             get
             {
-                return new RelayCommand(Create);
+                return _RegisterCustomerAction;
             }
         }
 
@@ -48,10 +59,44 @@ namespace ManagementSoftware.ViewModel
             }
         }
 
-        public void Create()
+        public void RegisterCustomer()
         {
-            //TODO
-            //Customer copy = ViewModelUtil.DeepClone<Customer>(_Customer); ?? [Serializable]
+            Customer copyOfCustomer = new Customer();
+            copyOfCustomer.Address = new Address();
+            copyOfCustomer.BankAccount = new BankAccount();
+
+            copyOfCustomer.LastName = _Customer.LastName;
+            copyOfCustomer.FirstName = _Customer.FirstName;
+            copyOfCustomer.Label = _Customer.Label;
+            copyOfCustomer.Title = _Customer.Title;
+            copyOfCustomer.UserName = _Customer.UserName;
+            copyOfCustomer.Password = _Customer.Password;
+            copyOfCustomer.MobileNumber = _Customer.MobileNumber;
+            copyOfCustomer.SMSRequested = _Customer.SMSRequested;
+            copyOfCustomer.Address.Street = _Customer.Address.Street;
+            copyOfCustomer.Address.City = _Customer.Address.City;
+            copyOfCustomer.Address.PostalCode = _Customer.Address.PostalCode;
+            copyOfCustomer.BankAccount.AccountOwner = _Customer.BankAccount.AccountOwner;
+            copyOfCustomer.BankAccount.IBAN = _Customer.BankAccount.IBAN;
+
+            CmdRegisterCustomer request = new CmdRegisterCustomer(copyOfCustomer);
+            CmdReturnRegisterCustomer response = _ClientConnection.SendWait<CmdReturnRegisterCustomer>(request); //TODO IClientConnection
+            if (response == null)
+            {
+                MessageBox.Show("Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");
+            }
+            else if (response.Error != null)
+            {
+                MessageBox.Show(response.Error);
+            }
+            else if (response.Success)
+            {
+                MessageBox.Show("Kunde wurde angelegt");
+            }
+            else
+            {
+                throw new Exception("Success is false and Error null. State");
+            }
         }
 
         public string LastName
@@ -146,7 +191,7 @@ namespace ManagementSoftware.ViewModel
             }
         }
 
-        public KeyValuePair<ESMSRequested,string> SMSRequested
+        public KeyValuePair<ESMSRequested, string> SMSRequested
         {
             get
             {

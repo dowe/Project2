@@ -17,23 +17,23 @@
         <Label Content="Kontoinhaber:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,273,0,0" ToolTip="Kontoinhaber"></Label>
         <Label VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,325,0,0" Content="Handynummer:" ToolTip="Handynummer für Meldungen"></Label>
         <ComboBox x:Name="cbTitle" HorizontalAlignment="Left" Margin="130,77,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" SelectedIndex="0" ItemsSource="{Binding Path=ETitleValues}" DisplayMemberPath="Value" SelectedValue="{Binding Path=Title}" />
-        <TextBox x:Name="tbLastname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,110,0,0" Width="120"/>
-        <TextBox x:Name="tbInstitutionName" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,141,0,0"/>
-        <TextBox x:Name="tbPostalcode" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,172,0,0"/>
-        <TextBox x:Name="tbUsername" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,225,0,0" Width="120"/>
-        <TextBox x:Name="tbBankAccountOwner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="130,277,0,0"/>
-        <TextBox x:Name="tbMobilephoneNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,329,0,0" Width="120"/>
+        <TextBox x:Name="tbLastname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,110,0,0" Width="120" Text="{Binding LastName}"/>
+        <TextBox x:Name="tbInstitutionName" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,141,0,0" Text="{Binding Label}"/>
+        <TextBox x:Name="tbPostalcode" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,172,0,0" Text="{Binding PostalCode}"/>
+        <TextBox x:Name="tbUsername" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,225,0,0" Width="120" Text="{Binding UserName}"/>
+        <TextBox x:Name="tbBankAccountOwner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="130,277,0,0" Text="{Binding BankAccountOwner}"/>
+        <TextBox x:Name="tbMobileNumber" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130,329,0,0" Width="120" Text="{Binding MobileNumber}"/>
         <Label Content="Vorname:" ToolTip="Vorname des Kunden" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,106,0,0"></Label>
         <Label Content="Straße:" ToolTip="Straße der Kundenadresse" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,137,0,0"/>
         <Label Content="Ort:" ToolTip="Ort der Kundenadresse" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,168,0,0"/>
         <Label Content="Passwort:" ToolTip="Passwort zum Einloggen (App/Website)" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,221,0,0"/>
         <Label Content="IBAN:" ToolTip="IBAN" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,273,0,0"/>
-        <TextBox x:Name="tbFirstname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,110,0,0" Width="120"/>
-        <TextBox x:Name="tbStreet" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,141,0,0"/>
-        <TextBox x:Name="tbTown" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,172,0,0"/>
-        <TextBox x:Name="tbPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,225,0,0" Width="120"/>
-        <TextBox x:Name="tbIBAN" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="410,277,0,0"/>
-        <Button Content="Registrieren" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="450,391,0,0" Width="80" Height="25" Command="{Binding CreateAction}"/>
+        <TextBox x:Name="tbFirstname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,110,0,0" Width="120" Text="{Binding FirstName}"/>
+        <TextBox x:Name="tbStreet" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,141,0,0" Text="{Binding Street}"/>
+        <TextBox x:Name="tbCity" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,172,0,0" Text="{Binding City}"/>
+        <TextBox x:Name="tbPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,225,0,0" Width="120" Text="{Binding Password}"/>
+        <TextBox x:Name="tbIBAN" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="410,277,0,0" Text="{Binding IBAN}"/>
+        <Button Content="Registrieren" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="450,391,0,0" Width="80" Height="25" Command="{Binding RegisterCustomerAction, Mode=OneWay}"/>
         <Label Content="Sms erwünscht:" ToolTip="Benachrichtigung bei abgeschlossenen Tests" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,325,0,0"/>
         <ComboBox x:Name="cbSmsRequested" HorizontalAlignment="Left" Margin="410,327,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" ItemsSource="{Binding ESMSRequestedValues}" DisplayMemberPath="Value" SelectedValue="{Binding Path=SMSRequested }"/>
     </Grid>

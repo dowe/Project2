@@ -9,10 +9,12 @@
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
+using Common.Communication.Client;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
+using ManagementSoftware.Communication;
 using ManagementSoftware.Model;
+using Microsoft.Practices.ServiceLocation;
 
 namespace ManagementSoftware.ViewModel
 {
@@ -29,15 +31,9 @@ namespace ManagementSoftware.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
-                SimpleIoc.Default.Register<IDataService, Design.DesignDataService>();
-            }
-            else
-            {
-                SimpleIoc.Default.Register<IDataService, DataService>();
-            }
 
+            SimpleIoc.Default.Register<IDataService, DataService>();
+            SimpleIoc.Default.Register<ClientConnection, ClientConnectionCreator>();
             SimpleIoc.Default.Register<RegisterCustomerVM>();
         }
 
