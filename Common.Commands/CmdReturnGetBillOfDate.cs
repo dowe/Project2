@@ -7,15 +7,15 @@ using Common.Communication;
 
 namespace Common.Commands
 {
-    public class CmdReturnGetBillOfDate : Command
+    public class CmdReturnGetBillOfDate : ResponseCommand
     {
 
         public byte[] PDF { get; private set; }
 
-        public CmdReturnGetBillOfDate(byte[] pdf)
-        {
-            PDF = pdf;
-        }
+        public CmdReturnGetBillOfDate(Guid requestId, byte[] pdf) : base(requestId)
+    {
+        PDF = pdf;
+    }
 
     }
 }

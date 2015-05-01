@@ -8,11 +8,11 @@ using Common.Communication;
 
 namespace Common.Commands
 {
-    public class CmdReturnGetBillDatesOfMonth : Command
+    public class CmdReturnGetBillDatesOfMonth : ResponseCommand
     {
         public ReadOnlyCollection<DateTime> BillDatesOfMonth { get; private set; }
 
-        public CmdReturnGetBillDatesOfMonth(List<DateTime> billDatesOfMonth)
+        public CmdReturnGetBillDatesOfMonth(Guid requestId, List<DateTime> billDatesOfMonth) : base(requestId)
         {
             BillDatesOfMonth = billDatesOfMonth.AsReadOnly();
         }

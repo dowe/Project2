@@ -9,12 +9,12 @@ using Common.DataTransferObjects;
 
 namespace Common.Commands
 {
-    public class CmdReturnGetShiftSchedule : Command
+    public class CmdReturnGetShiftSchedule : ResponseCommand
     {
 
         public ReadOnlyCollection<ShiftSchedule> Schedules { get; private set; }
 
-        public CmdReturnGetShiftSchedule(List<ShiftSchedule> schedules)
+        public CmdReturnGetShiftSchedule(Guid requestId, List<ShiftSchedule> schedules) : base(requestId)
         {
             Schedules = schedules.AsReadOnly();
         }

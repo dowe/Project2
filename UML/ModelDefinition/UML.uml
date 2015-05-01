@@ -295,12 +295,6 @@
         LastKnownLocation="Package3_0017.uml" />
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <packageMoniker
-        Id="f5aa5b96-8617-4d08-8c09-7d34d8e052e9"
-        LastKnownName="Common.Command"
-        LastKnownLocation="Package_0018.uml" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <undefinedType
         Id="32622c6e-3241-4619-8083-692502b60da7"
         name="List&lt;Analysis&gt;" />
@@ -509,6 +503,12 @@
         Id="1e244a52-c698-448a-b7c7-fa0ff8dc5c5d"
         LastKnownName="Smartphone.Driver.ViewModel"
         LastKnownLocation="Package_1047.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="df6cdaf6-4078-44aa-a5d4-65b9472b2bff"
+        LastKnownName="Common.Commands"
+        LastKnownLocation="Package_1051.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

@@ -8,12 +8,12 @@ using Common.DataTransferObjects;
 
 namespace Common.Commands
 {
-    public class CmdReturnGetCustomerAddress : Command
+    public class CmdReturnGetCustomerAddress : ResponseCommand
     {
 
         public Address CustomerAddress { get; private set; }
 
-        public CmdReturnGetCustomerAddress(Address customerAddress)
+        public CmdReturnGetCustomerAddress(Guid requestId, Address customerAddress) : base(requestId)
         {
             CustomerAddress = customerAddress;
         }

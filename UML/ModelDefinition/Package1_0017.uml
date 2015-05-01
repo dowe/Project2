@@ -69,5 +69,73 @@
         </appliedStereotypesInternal>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3a23739b-ea0d-405a-a9be-eee7da9e8e23"
+        name="ResponseCommand"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="42f45a26-ab31-4a9d-9065-9aedd2f265a5"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommon.Communication%2Fbin%2FDebug%2FCommon.Communication.dll&quot; Namespace%3DCommon.Communication Type%3DResponseCommand"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="7ced5191-2018-40ef-aee8-0f3448cf778a"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e6590b7c-7fa0-4c8b-b5d9-24598c795187">
+                <propertyInstance
+                  Id="aaed5421-2e88-443b-be36-2cbbe40b41da"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1139e4fe-f079-4709-a100-e6421b510fb9">
+                <propertyInstance
+                  Id="d6af0004-1ab2-4a27-bdd2-8250a6652b6f"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3bbc234e-f0b0-4bb0-8cfd-51a51938d91a">
+                <propertyInstance
+                  Id="99d94ccc-4f02-4cff-b2c8-fcbcc0cca0b1"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="81943a2f-a6d0-4628-a00a-536093934873">
+                <propertyInstance
+                  Id="8984d27b-878a-47fb-8dc7-6e88a10662fe"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a8c37f2d-1d4a-4a12-8829-af59194ece77">
+                <propertyInstance
+                  Id="354bd33d-d184-49e5-8227-5434cd86a345"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="2296ef6c-ae88-4fd0-9968-6806be5a12dd"
+            isSubstitutable="false">
+            <classMoniker
+              Id="a9b86e83-d4da-4df8-8167-48dfc846e1ef"
+              LastKnownName="Command"
+              LastKnownLocation="Package1_0017.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
 </package>

@@ -7,12 +7,12 @@ using Common.Communication;
 
 namespace Common.Commands
 {
-    public class CmdReturnAddOrder : Command
+    public class CmdReturnAddOrder : ResponseCommand
     {
 
         public long CreatedOrderId { get; private set; }
 
-        public CmdReturnAddOrder(long createdOrderId)
+        public CmdReturnAddOrder(Guid requestId, long createdOrderId) : base(requestId)
         {
             CreatedOrderId = createdOrderId;
         }

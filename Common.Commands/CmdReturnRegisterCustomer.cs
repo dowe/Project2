@@ -7,14 +7,14 @@ using Common.Communication;
 
 namespace Common.Commands
 {
-    public class CmdReturnRegisterCustomer : Command
+    public class CmdReturnRegisterCustomer : ResponseCommand
     {
 
         public bool Success { get; private set; }
 
         public string Error { get; private set; }
 
-        public CmdReturnRegisterCustomer(bool success, string error)
+        public CmdReturnRegisterCustomer(Guid requestId, bool success, string error) : base(requestId)
         {
             Success = success;
             Error = error;

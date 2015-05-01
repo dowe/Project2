@@ -9,12 +9,12 @@ using Common.DataTransferObjects;
 
 namespace Common.Commands
 {
-    public class CmdReturnGetAnalyses : Command
+    public class CmdReturnGetAnalyses : ResponseCommand
     {
 
         public ReadOnlyCollection<Analysis> Analyses { get; private set; }
 
-        public CmdReturnGetAnalyses(List<Analysis> analyses)
+        public CmdReturnGetAnalyses(Guid requestId, List<Analysis> analyses) : base(requestId)
         {
             Analyses = analyses.AsReadOnly();
         }

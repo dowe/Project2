@@ -9,12 +9,12 @@ using Common.DataTransferObjects;
 
 namespace Common.Commands
 {
-    public class CmdReturnGetDriversUnfinishedOrders : Command
+    public class CmdReturnGetDriversUnfinishedOrders : ResponseCommand
     {
 
         public ReadOnlyCollection<Order> UnfinishedOrders { get; private set; }
 
-        public CmdReturnGetDriversUnfinishedOrders(List<Order> unfinishedOrders)
+        public CmdReturnGetDriversUnfinishedOrders(Guid requestId, List<Order> unfinishedOrders) : base(requestId)
         {
             UnfinishedOrders = unfinishedOrders.AsReadOnly();
         }

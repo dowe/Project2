@@ -8,12 +8,12 @@ using Common.DataTransferObjects;
 
 namespace Common.Commands
 {
-    public class CmdReturnGetDailyStatistic : Command
+    public class CmdReturnGetDailyStatistic : ResponseCommand
     {
 
         public DailyStatistic DailyStatistic { get; private set; }
 
-        public CmdReturnGetDailyStatistic(DailyStatistic dailyStatistic)
+        public CmdReturnGetDailyStatistic(Guid requestId, DailyStatistic dailyStatistic) : base(requestId)
         {
             DailyStatistic = dailyStatistic;
         }

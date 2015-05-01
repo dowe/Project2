@@ -7,12 +7,12 @@ using Common.Communication;
 
 namespace Common.Commands
 {
-    public class CmdReturnLoginDriver : Command
+    public class CmdReturnLoginDriver : ResponseCommand
     {
 
         public bool Success { get; private set; }
 
-        public CmdReturnLoginDriver(bool success)
+        public CmdReturnLoginDriver(Guid requestId, bool success) : base(requestId)
         {
             Success = success;
         }

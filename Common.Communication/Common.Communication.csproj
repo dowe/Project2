@@ -61,6 +61,7 @@
     <Compile Include="JsonCommandSerializer.cs" />
     <Compile Include="OutputCommandPipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseCommand.cs" />
     <Compile Include="ResponseCommandHandler.cs" />
     <Compile Include="Sendable.cs" />
   </ItemGroup>

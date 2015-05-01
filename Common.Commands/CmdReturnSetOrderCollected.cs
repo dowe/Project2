@@ -7,12 +7,12 @@ using Common.Communication;
 
 namespace Common.Commands
 {
-    public class CmdReturnSetOrderCollected : Command
+    public class CmdReturnSetOrderCollected : ResponseCommand
     {
 
         public bool Success { get; private set; }
 
-        public CmdReturnSetOrderCollected(bool success)
+        public CmdReturnSetOrderCollected(Guid requestId, bool success) : base(requestId)
         {
             Success = success;
         }

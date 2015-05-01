@@ -7,12 +7,12 @@ using Common.Communication;
 
 namespace Common.Commands
 {
-    public class CmdReturnSelectCar : Command
+    public class CmdReturnSelectCar : ResponseCommand
     {
 
         public bool Success { get; private set; }
 
-        public CmdReturnSelectCar(bool success)
+        public CmdReturnSelectCar(Guid requestId, bool success) : base(requestId)
         {
             Success = success;
         }
