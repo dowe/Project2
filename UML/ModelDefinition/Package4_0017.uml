@@ -61,6 +61,15 @@
             </propertyInstances>
           </stereotypeInstance>
         </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="f4d51ac5-a26f-409e-9e1a-9540a6cf9b1b">
+            <interfaceMoniker
+              Id="afd286da-f9d9-44ea-b741-b3376dce1239"
+              LastKnownName="IList&lt;Car‎&gt;"
+              LastKnownLocation="Package2_1020.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <signatures>
           <templateBinding
             Id="bbf11112-0260-49ed-b143-ea15ae2874ca">
@@ -224,6 +233,15 @@
             </propertyInstances>
           </stereotypeInstance>
         </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="cf45a4b5-cc3a-44dd-ac00-1d2349ad9840">
+            <interfaceMoniker
+              Id="02eeed4f-f35d-4c9e-afc8-d0ecf5b820e2"
+              LastKnownName="IList&lt;Order‎&gt;"
+              LastKnownLocation="Package2_1020.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <signatures>
           <templateBinding
             Id="a70db41a-8a20-4b6b-8ff3-4596ed94c6a0">
@@ -302,6 +320,15 @@
             </propertyInstances>
           </stereotypeInstance>
         </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="ad5d264a-eb3e-4107-bb6a-8738b8042b80">
+            <interfaceMoniker
+              Id="98f22f88-361d-40e5-8a02-578f0357619d"
+              LastKnownName="IList&lt;Analysis‎&gt;"
+              LastKnownLocation="Package2_1020.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <signatures>
           <templateBinding
             Id="5df78989-3a55-4620-894f-c4518b039992">
@@ -380,6 +407,15 @@
             </propertyInstances>
           </stereotypeInstance>
         </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="e39ce927-6a61-4491-ba19-1556203b45ca">
+            <interfaceMoniker
+              Id="dfa98024-a249-4c47-8eba-10cdb5942019"
+              LastKnownName="IList&lt;DateTime‎&gt;"
+              LastKnownLocation="Package2_1020.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <signatures>
           <templateBinding
             Id="cf1214aa-54b8-4c9f-8d90-9b6b4811eaac">
@@ -458,6 +494,15 @@
             </propertyInstances>
           </stereotypeInstance>
         </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="3b9b742f-79ff-449f-b84d-5179890b864c">
+            <interfaceMoniker
+              Id="61b93935-fae2-43d4-90a9-1f37a121c54e"
+              LastKnownName="IList&lt;ShiftSchedule‎&gt;"
+              LastKnownLocation="Package2_1020.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
         <signatures>
           <templateBinding
             Id="667cafa1-42c2-4c83-a63e-abf43b5f4a40">

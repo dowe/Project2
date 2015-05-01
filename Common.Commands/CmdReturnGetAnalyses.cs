@@ -14,9 +14,9 @@ namespace Common.Commands
 
         public ReadOnlyCollection<Analysis> Analyses { get; private set; }
 
-        public CmdReturnGetAnalyses(Guid requestId, List<Analysis> analyses) : base(requestId)
+        public CmdReturnGetAnalyses(Guid requestId, IList<Analysis> analyses) : base(requestId)
         {
-            Analyses = analyses.AsReadOnly();
+            Analyses = new ReadOnlyCollection<Analysis>(analyses);
         }
 
     }

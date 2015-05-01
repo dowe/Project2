@@ -14,9 +14,9 @@ namespace Common.Commands
 
         public ReadOnlyCollection<ShiftSchedule> Schedules { get; private set; }
 
-        public CmdReturnGetShiftSchedule(Guid requestId, List<ShiftSchedule> schedules) : base(requestId)
+        public CmdReturnGetShiftSchedule(Guid requestId, IList<ShiftSchedule> schedules) : base(requestId)
         {
-            Schedules = schedules.AsReadOnly();
+            Schedules = new ReadOnlyCollection<ShiftSchedule>(schedules);
         }
 
     }

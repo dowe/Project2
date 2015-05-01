@@ -506,9 +506,9 @@
     </packageHasNamedElement>
     <packageHasNamedElement>
       <packageMoniker
-        Id="df6cdaf6-4078-44aa-a5d4-65b9472b2bff"
+        Id="8eb33b7e-1a61-4547-9ad0-2a8164f0babd"
         LastKnownName="Common.Commands"
-        LastKnownLocation="Package_1051.uml" />
+        LastKnownLocation="Package_1104.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

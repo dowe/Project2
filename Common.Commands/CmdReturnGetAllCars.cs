@@ -14,9 +14,9 @@ namespace Common.Commands
 
         public ReadOnlyCollection<Car> Cars { get; private set; }
 
-        public CmdReturnGetAllCars(Guid requestId, List<Car> cars) : base(requestId)
+        public CmdReturnGetAllCars(Guid requestId, IList<Car> cars) : base(requestId)
         {
-            Cars = cars.AsReadOnly();
+            Cars = new ReadOnlyCollection<Car>(cars);
         }
 
     }

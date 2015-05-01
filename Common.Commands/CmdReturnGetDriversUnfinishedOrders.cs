@@ -14,9 +14,9 @@ namespace Common.Commands
 
         public ReadOnlyCollection<Order> UnfinishedOrders { get; private set; }
 
-        public CmdReturnGetDriversUnfinishedOrders(Guid requestId, List<Order> unfinishedOrders) : base(requestId)
+        public CmdReturnGetDriversUnfinishedOrders(Guid requestId, IList<Order> unfinishedOrders) : base(requestId)
         {
-            UnfinishedOrders = unfinishedOrders.AsReadOnly();
+            UnfinishedOrders = new ReadOnlyCollection<Order>(unfinishedOrders);
         }
 
     }

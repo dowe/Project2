@@ -12,9 +12,9 @@ namespace Common.Commands
     {
         public ReadOnlyCollection<DateTime> BillDatesOfMonth { get; private set; }
 
-        public CmdReturnGetBillDatesOfMonth(Guid requestId, List<DateTime> billDatesOfMonth) : base(requestId)
+        public CmdReturnGetBillDatesOfMonth(Guid requestId, IList<DateTime> billDatesOfMonth) : base(requestId)
         {
-            BillDatesOfMonth = billDatesOfMonth.AsReadOnly();
+            BillDatesOfMonth = new ReadOnlyCollection<DateTime>(billDatesOfMonth);
         }
     }
 }

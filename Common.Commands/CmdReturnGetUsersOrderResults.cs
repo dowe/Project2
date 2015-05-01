@@ -14,9 +14,9 @@ namespace Common.Commands
 
         public ReadOnlyCollection<Order> Orders { get; private set; }
 
-        public CmdReturnGetUsersOrderResults(Guid requestId, List<Order> orders) : base(requestId)
+        public CmdReturnGetUsersOrderResults(Guid requestId, IList<Order> orders) : base(requestId)
         {
-            Orders = orders.AsReadOnly();
+            Orders = new ReadOnlyCollection<Order>(orders);
         }
 
     }
