@@ -7,7 +7,6 @@ namespace Common.Communication
 
         private ICommandSerializer serializer = null;
 
-        private TransformBlock<Sendable<Command>, Sendable<string>> serializeBlock = null;
         private ActionBlock<Sendable<string>> sendBlock = null;
 
         public OutputCommandPipeline(ICommandSerializer serializer)
@@ -17,30 +16,27 @@ namespace Common.Communication
 
         public void Start()
         {
-            serializeBlock = new TransformBlock<Sendable<Command>, Sendable<string>>(cmd =>
-                {
-                    return new Sendable<string>(serializer.SerializeCommand(cmd.Value), cmd.Send);
-                });
-            sendBlock = new ActionBlock<Sendable<string>>(sendable => 
+            sendBlock = new ActionBlock<Sendable<string>>(sendable =>
                 {
                     sendable.Send(sendable.Value);
                 });
-            serializeBlock.Completion.ContinueWith(t => 
-                {
-                    sendBlock.Complete();
-                });
-
-            serializeBlock.LinkTo(sendBlock);
         }
 
         public void Send(Sendable<Command> command)
         {
-            serializeBlock.Post(command);
+            // Serialization takes place right here because the referenced command might change before being serialized in the pipeline.
+            Sendable<string> serializedCommand = Serialize(command);
+            sendBlock.Post(serializedCommand);
+        }
+
+        private Sendable<string> Serialize(Sendable<Command> command)
+        {
+            return new Sendable<string>(serializer.SerializeCommand(command.Value), command.Send);
         }
 
         public void Stop()
         {
-            serializeBlock.Complete();
+            sendBlock.Complete();
             sendBlock.Completion.Wait();
         }
 
