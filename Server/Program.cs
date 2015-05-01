@@ -13,7 +13,9 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            ServerConnection connection = new ServerConnection("http://localhost:8080");
+            // Listens on all addresses.
+            // Remember to start the app as admin or a 'Access Denied' exception will be thrown.
+            ServerConnection connection = new ServerConnection("http://+:8080");
 
             Console.WriteLine("Registering Handlers...");
             RegisterHandlers(connection);
