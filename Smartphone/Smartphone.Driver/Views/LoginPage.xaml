@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Smartphone.Driver.LoginPage">
+	<ContentPage.Content>
+		<StackLayout Spacing="20">
+			<Label HorizontalOptions="Center" FontSize="40" Text="Driver App" />
+			<Grid HorizontalOptions="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Text="User:" />
+				<Entry Grid.Row="0" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="Username" />
+				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Passwort:" />
+				<Entry Grid.Row="1" Grid.Column="1" IsPassword="true" VerticalOptions="Center" WidthRequest="200" Placeholder="Passwort" />
+			</Grid>
+			<Button Text="Login" VerticalOptions="Fill" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
