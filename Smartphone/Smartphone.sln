@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smartphone.Driver", "Smartphone.Driver\Smartphone.Driver.csproj", "{9B67652B-5487-442A-AD6E-6A855753DAA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smartphone.Driver.Droid", "Droid\Smartphone.Driver.Droid.csproj", "{EFBC5635-2093-475D-B203-08140BF682A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smartphone.Driver.UITests", "UITests\Smartphone.Driver.UITests.csproj", "{8473EACA-6614-4BE1-9A9C-F649BF1C3B4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8473EACA-6614-4BE1-9A9C-F649BF1C3B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8473EACA-6614-4BE1-9A9C-F649BF1C3B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8473EACA-6614-4BE1-9A9C-F649BF1C3B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8473EACA-6614-4BE1-9A9C-F649BF1C3B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B67652B-5487-442A-AD6E-6A855753DAA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B67652B-5487-442A-AD6E-6A855753DAA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B67652B-5487-442A-AD6E-6A855753DAA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B67652B-5487-442A-AD6E-6A855753DAA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFBC5635-2093-475D-B203-08140BF682A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFBC5635-2093-475D-B203-08140BF682A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFBC5635-2093-475D-B203-08140BF682A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFBC5635-2093-475D-B203-08140BF682A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
