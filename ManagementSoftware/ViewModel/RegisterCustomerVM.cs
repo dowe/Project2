@@ -95,7 +95,7 @@ namespace ManagementSoftware.ViewModel
             }
             else
             {
-                throw new Exception("Success is false and Error null. State");
+                throw new Exception("Success is false and Error null. Illegal State");
             }
         }
 
