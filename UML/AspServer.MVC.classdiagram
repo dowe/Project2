@@ -72,32 +72,6 @@
       </propertyInstances>
     </stereotypeInstance>
   </appliedStereotypesInternal>
-  <profileInstances>
-    <packageHasProfileInstances Id="8dcf1ae8-634c-4411-b5fd-4b11862a1d0c">
-      <profileInstance Id="08a24182-2b08-48f2-8174-06160f6ff377" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="2695227c-41e0-4f76-9200-b588bfb3de47">
-      <profileInstance Id="eda888c7-9703-4644-a7bd-91048da6e8ce" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="6f9a9cc7-d65e-4fb3-b636-10ba24b645e9">
-      <profileInstance Id="c259b95e-f32d-4881-b240-89dcb33a8aa6" name="CSharpProfile">
-        <elementDefinition Id="f55e2a50-610e-4ed2-b46c-9894c7bc2247" />
-      </profileInstance>
-      <elementDefinition Id="25270fbd-b104-4bd8-a719-a8127079291c" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="9be40cae-79dc-496a-9a5e-33b573ce0135">
-      <profileInstance Id="bf27a20f-94b4-417d-8f1c-5704c8c1ab1c" name="TextTemplateBindings">
-        <elementDefinition Id="d15280d6-8461-4d67-b16b-5ad638646911" />
-      </profileInstance>
-      <elementDefinition Id="77a2fc9a-4f9a-427b-bad5-c83b6ec8d6db" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <packageHasNamedElement>
       <referencedType Id="6c6fd693-2867-4851-9977-8a39454c1083" name="ActionResult" isAbstract="false" isLeaf="false" cachedFullName="ActionResult">
@@ -137,26 +111,6 @@
     <packageHasNamedElement>
       <referencedType Id="17643fee-189d-4ca1-ba4b-b4f45555693b" name="List&lt;Patient&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;Patient&gt;">
         <elementDefinition Id="2ae80b0a-dc46-4392-be37-58e0606c97f1" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="c5793d21-0939-4e75-b852-851a69c72557" name="List&lt;AnalysisEnum&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;AnalysisEnum&gt;">
-        <elementDefinition Id="7b4ab9da-671b-4ad7-8078-64fcdf77910f" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="6d945832-6f48-4241-8e39-6e40aca13cb2" name="List&lt;SampleEnum&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;SampleEnum&gt;">
-        <elementDefinition Id="940cfa82-0c20-4bbc-9d78-a51801319560" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="f93ceba9-c4fc-428e-a189-1b89b5ca31e7" name="StatusEnum" isAbstract="false" isLeaf="false" cachedFullName="StatusEnum">
-        <elementDefinition Id="a2edd218-dee4-4441-bd41-aa440b9a6f72" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="7c561d4b-3391-4d4c-83c2-9108fcc63f82" name="AnalysisEnum" isAbstract="false" isLeaf="false" cachedFullName="AnalysisEnum">
-        <elementDefinition Id="b97e9fc5-766a-4694-bb6b-c243c7fd9d35" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -259,13 +213,13 @@
                 <property Id="45599832-47dc-446a-825d-fabf340e990f" name="Analysis" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="140e4290-a829-4cb7-a340-0bff1ced4bf3" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="c5793d21-0939-4e75-b852-851a69c72557" LastKnownName="List&lt;AnalysisEnum&gt;" />
+                    <referencedTypeMoniker Id="4aa4c5bd-0e6e-4d2e-bc05-2b5d62946ada" LastKnownName="List&lt;String&gt;" />
                   </type_NamedElement>
                 </property>
                 <property Id="a3fe2547-82c5-44f8-b151-0b29f7606a12" name="Samples" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="af6e1f08-a3e9-442d-b2af-37f346171a16" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="6d945832-6f48-4241-8e39-6e40aca13cb2" LastKnownName="List&lt;SampleEnum&gt;" />
+                    <referencedTypeMoniker Id="a82274c6-51df-4f02-9851-17d45cfe3494" LastKnownName="List&lt;SampleType&gt;" />
                   </type_NamedElement>
                 </property>
               </ownedAttributesInternal>
@@ -278,7 +232,7 @@
                 <property Id="f53525db-fc3f-422e-9359-cc7bda7a9e6a" name="OrderNo" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="4f915b63-5601-44c5-8517-d0a360e91676" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="2ee93c38-81b2-42e7-b0b5-139fb79b7c6b" LastKnownName="String" />
+                    <referencedTypeMoniker Id="abe1b18e-6e63-4c81-bf71-61988c7d24f4" LastKnownName="long" />
                   </type_NamedElement>
                 </property>
                 <property Id="93d20e74-994f-416c-8a3b-d3dc72d2ed7e" name="Patient" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -290,13 +244,13 @@
                 <property Id="8f7c9cb9-2de4-48b3-8f99-debc5ecb2d76" name="Status" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="f0de44ae-97f1-47e1-867d-e06b3902229d" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="f93ceba9-c4fc-428e-a189-1b89b5ca31e7" LastKnownName="StatusEnum" />
+                    <referencedTypeMoniker Id="f6cff3c6-030b-4d8c-8f19-8b41bd928947" LastKnownName="TestState" />
                   </type_NamedElement>
                 </property>
                 <property Id="9a693cb4-fe1c-4de2-aaa1-2d99f1aee07a" name="Analysis" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
                   <elementDefinition Id="2ad368b8-067f-425d-886f-9738b19d3faf" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="7c561d4b-3391-4d4c-83c2-9108fcc63f82" LastKnownName="AnalysisEnum" />
+                    <referencedTypeMoniker Id="a2748f41-c1c4-437e-bd49-073dfde4e1a1" LastKnownName="String" />
                   </type_NamedElement>
                 </property>
                 <property Id="90a1551a-8444-4d3c-8681-303dccb75dd0" name="ResultValue" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -462,8 +416,59 @@
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
+    <packageHasNamedElement>
+      <referencedType Id="a82274c6-51df-4f02-9851-17d45cfe3494" name="List&lt;SampleType&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;SampleType&gt;">
+        <elementDefinition Id="eb5dfe01-e9e0-4708-afad-14df94543371" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="4aa4c5bd-0e6e-4d2e-bc05-2b5d62946ada" name="List&lt;String&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;String&gt;">
+        <elementDefinition Id="ba29467e-05f0-4e3e-b13a-20d297f5e6b5" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="a2748f41-c1c4-437e-bd49-073dfde4e1a1" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
+        <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="abe1b18e-6e63-4c81-bf71-61988c7d24f4" name="long" isAbstract="false" isLeaf="false" cachedFullName="long">
+        <elementDefinition Id="5726851f-c90c-495c-8e8a-95f6136fbaac" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="f6cff3c6-030b-4d8c-8f19-8b41bd928947" name="TestState" isAbstract="false" isLeaf="false" cachedFullName="TestState">
+        <elementDefinition Id="8938c39b-6ed4-4df2-95af-5f7cc438a643" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="2b1eca68-49fd-47d9-a6bd-b6fed50509c6" name="UML">
     <elementDefinition Id="41d044d9-13f8-4e5b-a528-cd3067600a56" />
+    <profileInstances>
+      <packageHasProfileInstances Id="8dcf1ae8-634c-4411-b5fd-4b11862a1d0c">
+        <profileInstance Id="08a24182-2b08-48f2-8174-06160f6ff377" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="2695227c-41e0-4f76-9200-b588bfb3de47">
+        <profileInstance Id="eda888c7-9703-4644-a7bd-91048da6e8ce" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="6f9a9cc7-d65e-4fb3-b636-10ba24b645e9">
+        <profileInstance Id="c259b95e-f32d-4881-b240-89dcb33a8aa6" name="CSharpProfile">
+          <elementDefinition Id="f55e2a50-610e-4ed2-b46c-9894c7bc2247" />
+        </profileInstance>
+        <elementDefinition Id="25270fbd-b104-4bd8-a719-a8127079291c" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="9be40cae-79dc-496a-9a5e-33b573ce0135">
+        <profileInstance Id="bf27a20f-94b4-417d-8f1c-5704c8c1ab1c" name="TextTemplateBindings">
+          <elementDefinition Id="d15280d6-8461-4d67-b16b-5ad638646911" />
+        </profileInstance>
+        <elementDefinition Id="77a2fc9a-4f9a-427b-bad5-c83b6ec8d6db" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>
