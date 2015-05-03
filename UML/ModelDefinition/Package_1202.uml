@@ -214,9 +214,9 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="7b4ab9da-671b-4ad7-8078-64fcdf77910f"
-                LastKnownName="List&lt;AnalysisEnum&gt;"
-                LastKnownLocation="UML.uml" />
+                Id="ba29467e-05f0-4e3e-b13a-20d297f5e6b5"
+                LastKnownName="List&lt;String&gt;"
+                LastKnownLocation="Package_1202.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -232,9 +232,9 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="940cfa82-0c20-4bbc-9d78-a51801319560"
-                LastKnownName="List&lt;SampleEnum&gt;"
-                LastKnownLocation="UML.uml" />
+                Id="eb5dfe01-e9e0-4708-afad-14df94543371"
+                LastKnownName="List&lt;SampleType&gt;"
+                LastKnownLocation="Package_1202.uml" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -260,9 +260,9 @@
             aggregation="None"
             isComposite="false">
             <type_NamedElement>
-              <primitiveTypeMoniker
-                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
-                LastKnownName="String"
+              <undefinedTypeMoniker
+                Id="5726851f-c90c-495c-8e8a-95f6136fbaac"
+                LastKnownName="long"
                 LastKnownLocation="UML.uml" />
             </type_NamedElement>
           </property>
@@ -297,9 +297,9 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="a2edd218-dee4-4441-bd41-aa440b9a6f72"
-                LastKnownName="StatusEnum"
-                LastKnownLocation="UML.uml" />
+                Id="8938c39b-6ed4-4df2-95af-5f7cc438a643"
+                LastKnownName="TestState"
+                LastKnownLocation="Package_1202.uml" />
             </type_NamedElement>
           </property>
           <property
@@ -314,9 +314,9 @@
             aggregation="None"
             isComposite="false">
             <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="b97e9fc5-766a-4694-bb6b-c243c7fd9d35"
-                LastKnownName="AnalysisEnum"
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
                 LastKnownLocation="UML.uml" />
             </type_NamedElement>
           </property>
@@ -648,6 +648,21 @@
           </operation>
         </ownedOperationsInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="eb5dfe01-e9e0-4708-afad-14df94543371"
+        name="List&lt;SampleType&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="ba29467e-05f0-4e3e-b13a-20d297f5e6b5"
+        name="List&lt;String&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="8938c39b-6ed4-4df2-95af-5f7cc438a643"
+        name="TestState" />
     </packageHasNamedElement>
   </packagedElements>
 </package>

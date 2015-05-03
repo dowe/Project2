@@ -13,6 +13,14 @@ namespace Common.DataTransferObjects
 
 	public class GPSPosition
 	{
+	    public float Latitude { get; set; }
+	    public float Longitude { get; set; }
+
+	    public GPSPosition(float latitude, float longitude)
+	    {
+	        Latitude = latitude;
+	        Longitude = longitude;
+	    }
 	}
 }
 

@@ -31,10 +31,9 @@ namespace ManagementSoftware.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-
-            SimpleIoc.Default.Register<IDataService, DataService>();
-            SimpleIoc.Default.Register<ClientConnection, ClientConnectionCreator>();
+            SimpleIoc.Default.Register<IClientConnection, ClientConnectionCreator>();
             SimpleIoc.Default.Register<RegisterCustomerVM>();
+            SimpleIoc.Default.Register<ShiftScheduleVM>();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -45,6 +44,17 @@ namespace ManagementSoftware.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<RegisterCustomerVM>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public ShiftScheduleVM ShiftSchedule
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ShiftScheduleVM>();
             }
         }
 

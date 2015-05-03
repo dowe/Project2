@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdHandler\CmdRegisterCustomerHandler.cs" />
+    <Compile Include="DistanceCalculation\DistanceContainer.cs" />
+    <Compile Include="DistanceCalculation\DistanceCalculation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

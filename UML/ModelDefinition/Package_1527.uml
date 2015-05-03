@@ -4995,7 +4995,7 @@
         <ownedAttributesInternal>
           <property
             Id="cd6e64a9-010f-4e6f-b508-e5f4c518abdc"
-            name="PDF"
+            name="PDFPath"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -5062,10 +5062,10 @@
               </stereotypeInstance>
             </appliedStereotypesInternal>
             <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="dd510ace-6c7a-4cf7-a47b-61ea298ecfed"
-                LastKnownName="byte[]"
-                LastKnownLocation="Package_1527.uml" />
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="UML.uml" />
             </type_NamedElement>
           </property>
           <property

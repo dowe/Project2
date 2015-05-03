@@ -12,11 +12,7 @@
         >
     
     <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Skins/MainSkin.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        
     </Window.Resources>
 
     <Grid x:Name="LayoutRoot">
@@ -24,6 +20,9 @@
         <TabControl>
             <TabItem Header="Kunde Registrieren">
                 <views:RegisterCustomerView/>
+            </TabItem>
+            <TabItem Header="Schichtplan">
+                <views:ShiftScheduleView/>
             </TabItem>
         </TabControl>
 
