@@ -20,9 +20,9 @@ namespace ManagementSoftware.ViewModel
         private KeyValuePair<ETitle, string> _Title;
         private KeyValuePair<ESMSRequested, string> _SMSRequested;
         private RelayCommand _RegisterCustomerAction;
-        private ClientConnection _ClientConnection;
+        private IClientConnection _ClientConnection;
 
-        public RegisterCustomerVM(ClientConnection _ClientConnection)
+        public RegisterCustomerVM(IClientConnection _ClientConnection)
         {
             this._ClientConnection = _ClientConnection;
 
@@ -80,7 +80,7 @@ namespace ManagementSoftware.ViewModel
             copyOfCustomer.BankAccount.IBAN = _Customer.BankAccount.IBAN;
 
             CmdRegisterCustomer request = new CmdRegisterCustomer(copyOfCustomer);
-            CmdReturnRegisterCustomer response = _ClientConnection.SendWait<CmdReturnRegisterCustomer>(request); //TODO IClientConnection
+            CmdReturnRegisterCustomer response = _ClientConnection.SendWait<CmdReturnRegisterCustomer>(request);
             if (response == null)
             {
                 MessageBox.Show("Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");

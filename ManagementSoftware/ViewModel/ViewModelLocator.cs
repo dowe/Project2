@@ -33,7 +33,7 @@ namespace ManagementSoftware.ViewModel
 
 
             SimpleIoc.Default.Register<IDataService, DataService>();
-            SimpleIoc.Default.Register<ClientConnection, ClientConnectionCreator>();
+            SimpleIoc.Default.Register<IClientConnection, ClientConnectionCreator>();
             SimpleIoc.Default.Register<RegisterCustomerVM>();
         }
 
