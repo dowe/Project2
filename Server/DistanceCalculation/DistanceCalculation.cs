@@ -11,12 +11,12 @@ using System.Xml.Linq;
 using Common.DataTransferObjects;
 using Newtonsoft.Json;
 
-namespace Server.DistanceCommunication
+namespace Server.DistanceCalculation
 {
     /// <summary>
     /// Static class, containing functions to calculate the distance between two points, using the Google Distance Matrix API
     /// </summary>
-    public static class DistanceCommunication
+    public static class DistanceCalculation
     {
         /// <summary>
         /// Calculates distance (km) and time (h) between the two given coodinates.
