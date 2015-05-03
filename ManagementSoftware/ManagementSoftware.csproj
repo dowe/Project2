@@ -75,16 +75,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Design\DesignDataService.cs" />
-    <Compile Include="Model\DataItem.cs" />
-    <Compile Include="Model\DataService.cs" />
-    <Compile Include="Model\IDataService.cs" />
     <Compile Include="Helper\ClientConnectionCreator.cs" />
+    <Compile Include="Model\ShiftScheduleRawModel.cs" />
     <Compile Include="ViewModel\RegisterCustomerVM.cs" />
+    <Compile Include="ViewModel\ShiftScheduleDayVM.cs" />
+    <Compile Include="ViewModel\ShiftScheduleMonthVM.cs" />
+    <Compile Include="ViewModel\ShiftScheduleVM.cs" />
     <Compile Include="View\RegisterCustomerView.xaml.cs">
       <DependentUpon>RegisterCustomerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ShiftScheduleDayView.xaml.cs">
+      <DependentUpon>ShiftScheduleDayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShiftScheduleMonthView.xaml.cs">
+      <DependentUpon>ShiftScheduleMonthView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShiftScheduleView.xaml.cs">
+      <DependentUpon>ShiftScheduleView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,9 +110,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Skins\MainSkin.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\ShiftScheduleDayView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShiftScheduleMonthView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShiftScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

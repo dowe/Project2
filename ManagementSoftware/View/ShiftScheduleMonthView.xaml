@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="ManagementSoftware.View.ShiftScheduleMonthView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding ShiftSchedule.ShiftScheduleMonthVM, Mode=OneWay, Source={StaticResource Locator}}"
+            >
+    <Grid>
+        <Button Content="SwitchToDayView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Command="{Binding SwitchToDayCommand, Mode=OneWay}"/>
+        <Label Content="MonthView" HorizontalAlignment="Left" Margin="166,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.195,0.247"/>
+
+    </Grid>
+</UserControl>
