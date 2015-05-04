@@ -3,13 +3,104 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:helper="clr-namespace:ManagementSoftware.Helper"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="600" d:DesignWidth="1400"
              DataContext="{Binding ShiftSchedule.ShiftScheduleMonthVM, Mode=OneWay, Source={StaticResource Locator}}"
             >
+    <UserControl.Resources>
+        <helper:ColumnVisibilityConverter x:Key="VisibilityConverter"/>
+        <helper:GridColorConverter x:Key="bgHoldoffGridColor" />
+        <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <Expander x:Name="exp" IsExpanded="True" Background="CadetBlue" BorderBrush="Gray" BorderThickness="1,1,1,5" Foreground="Black">
+                            <Expander.Header>
+                                <DockPanel>
+                                    <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" Margin="5,0,0,0" Width="100"/>
+                                    <TextBlock FontWeight="Bold" Text="{Binding Path=ItemCount}"/>
+                                </DockPanel>
+                            </Expander.Header>
+                            <ItemsPresenter></ItemsPresenter>
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CellHighlighterStyle">
+            <Setter Property="DataGridCell.Background">
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource bgHoldoffGridColor}" >
+                        <MultiBinding.Bindings>
+                            <Binding RelativeSource="{RelativeSource Self}"/>
+                            <Binding Path="Days" Mode="OneWay"/>
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <Button Content="SwitchToDayView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Command="{Binding SwitchToDayCommand, Mode=OneWay}"/>
-        <Label Content="MonthView" HorizontalAlignment="Left" Margin="166,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.195,0.247"/>
+        
+        <Button x:Name="btSwitchView" Content="Tagesansicht" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Command="{Binding SwitchToDayCommand, Mode=OneWay}" />
+
+        <DataGrid HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="1200" Height="500" ItemsSource="{Binding DataList}" FrozenColumnCount="1" CanUserReorderColumns="False" AutoGenerateColumns="False" CellStyle="{StaticResource CellHighlighterStyle}">
+            <DataGrid.Resources>
+                <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FDD47C"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Green"/>
+            </DataGrid.Resources>
+            <DataGrid.RowStyle >
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="LightBlue" />
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.GroupStyle>
+                <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}">
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate >
+                            <DataGridRowsPresenter ></DataGridRowsPresenter>
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding EmployeeName, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="Mitarbeiter" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Days[0]}" ClipboardContentBinding="{x:Null}" Header="Tag 1" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=0, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[1]}" ClipboardContentBinding="{x:Null}" Header="Tag 2" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=1, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[2]}" ClipboardContentBinding="{x:Null}" Header="Tag 3" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=2, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[3]}" ClipboardContentBinding="{x:Null}" Header="Tag 4" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=3, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[4]}" ClipboardContentBinding="{x:Null}" Header="Tag 5" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=4, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[5]}" ClipboardContentBinding="{x:Null}" Header="Tag 6" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=5, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[6]}" ClipboardContentBinding="{x:Null}" Header="Tag 7" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=6, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[7]}" ClipboardContentBinding="{x:Null}" Header="Tag 8" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=7, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[8]}" ClipboardContentBinding="{x:Null}" Header="Tag 9" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=8, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[9]}" ClipboardContentBinding="{x:Null}" Header="Tag 10" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=9, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[10]}" ClipboardContentBinding="{x:Null}" Header="Tag 11" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=10, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[11]}" ClipboardContentBinding="{x:Null}" Header="Tag 12" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=11, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[12]}" ClipboardContentBinding="{x:Null}" Header="Tag 13" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=12, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[13]}" ClipboardContentBinding="{x:Null}" Header="Tag 14" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=13, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[14]}" ClipboardContentBinding="{x:Null}" Header="Tag 15" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=14, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[15]}" ClipboardContentBinding="{x:Null}" Header="Tag 16" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=15, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[16]}" ClipboardContentBinding="{x:Null}" Header="Tag 17" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=16, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[17]}" ClipboardContentBinding="{x:Null}" Header="Tag 18" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=17, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[18]}" ClipboardContentBinding="{x:Null}" Header="Tag 19" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=18, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[19]}" ClipboardContentBinding="{x:Null}" Header="Tag 20" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=19, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[20]}" ClipboardContentBinding="{x:Null}" Header="Tag 21" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=20, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[21]}" ClipboardContentBinding="{x:Null}" Header="Tag 22" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=21, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[22]}" ClipboardContentBinding="{x:Null}" Header="Tag 23" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=22, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[23]}" ClipboardContentBinding="{x:Null}" Header="Tag 24" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=23, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[24]}" ClipboardContentBinding="{x:Null}" Header="Tag 25" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=24, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[25]}" ClipboardContentBinding="{x:Null}" Header="Tag 26" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=25, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[26]}" ClipboardContentBinding="{x:Null}" Header="Tag 27" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=26, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[27]}" ClipboardContentBinding="{x:Null}" Header="Tag 28" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=27, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[28]}" ClipboardContentBinding="{x:Null}" Header="Tag 29" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=28, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[29]}" ClipboardContentBinding="{x:Null}" Header="Tag 30" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=29, Converter={StaticResource VisibilityConverter}}"/>
+                <DataGridTextColumn Binding="{Binding Days[30]}" ClipboardContentBinding="{x:Null}" Header="Tag 31" IsReadOnly="True"  Visibility="{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter=30, Converter={StaticResource VisibilityConverter}}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
 
     </Grid>
 </UserControl>

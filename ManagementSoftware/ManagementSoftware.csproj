@@ -75,7 +75,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper\BindingProxy.cs" />
     <Compile Include="Helper\ClientConnectionCreator.cs" />
+    <Compile Include="Helper\ColumnVisibilityConverter.cs" />
+    <Compile Include="Helper\EmployeeTypeConverter.cs" />
+    <Compile Include="Helper\GridColorConverter.cs" />
+    <Compile Include="Model\ShiftScheduleMonthEntry.cs" />
     <Compile Include="Model\ShiftScheduleRawModel.cs" />
     <Compile Include="ViewModel\RegisterCustomerVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleDayVM.cs" />
