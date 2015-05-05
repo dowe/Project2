@@ -14,6 +14,7 @@ namespace Common.Communication.Client
         private const int DEFAULT_RESPONSE_TIMEOUT_IN_MS = 2000;
 
         private Connection connection = null;
+        private bool connected = false;
 
         private ReaderWriterLockSlim connectionLock = null;
         private bool pipelineRunning = false;
@@ -84,6 +85,7 @@ namespace Common.Communication.Client
             try
             {
                 connection.Start().Wait();
+                connected = true;
             }
             catch (AggregateException e)
             {
@@ -102,6 +104,15 @@ namespace Common.Communication.Client
 
         void connection_Reconnected()
         {
+            connectionLock.EnterWriteLock();
+            try
+            {
+                connected = true;
+            }
+            finally
+            {
+                connectionLock.ExitWriteLock();
+            }
             if (Reconnected != null)
             {
                 Reconnected();
@@ -110,6 +121,15 @@ namespace Common.Communication.Client
 
         void connection_Reconnecting()
         {
+            connectionLock.EnterWriteLock();
+            try
+            {
+                connected = false;
+            }
+            finally
+            {
+                connectionLock.ExitWriteLock();
+            }
             if (Reconnecting != null)
             {
                 Reconnecting();
@@ -119,6 +139,15 @@ namespace Common.Communication.Client
 
         void connection_Closed()
         {
+            connectionLock.EnterWriteLock();
+            try
+            {
+                connected = false;
+            }
+            finally
+            {
+                connectionLock.ExitWriteLock();
+            }
             if (Closed != null)
             {
                 Closed();
@@ -171,6 +200,22 @@ namespace Common.Communication.Client
             finally
             {
                 connectionLock.ExitWriteLock();
+            }
+        }
+
+        public bool IsConnected
+        {
+            get
+            {
+                connectionLock.EnterReadLock();
+                try
+                {
+                    return connected;
+                }
+                finally
+                {
+                    connectionLock.ExitReadLock();
+                }
             }
         }
 
