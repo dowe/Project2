@@ -22,10 +22,6 @@ namespace ManagementSoftware.Model
 
         private void Notify()
         {
-            if (CurrentData == null)
-            {
-                _CurrentDataIndex = 0;
-            }
             Change(this, null);
         }
 
@@ -67,6 +63,7 @@ namespace ManagementSoftware.Model
         {
             ShiftSchedule obj = new ShiftSchedule();
 
+            obj.Date = refDate;
             obj.DayEntry = new List<DayEntry>();
 
             List<Employee> admins = CreateEmployees<AdministrationAssistant>(10);

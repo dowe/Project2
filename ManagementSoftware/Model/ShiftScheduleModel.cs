@@ -15,13 +15,13 @@ namespace ManagementSoftware.Model
     public class ShiftScheduleModel
     {
         private static readonly CultureInfo GERMAN_CULTURE_INFO = new CultureInfo("de-DE");
-        private IClientConnection this_Connection;
+        private IClientConnection _Connection;
 
         public ShiftScheduleModel(
             ISwitchShiftScheduleView _ISwitchShiftScheduleView,
             IClientConnection _Connection)
         {
-            this_Connection = _Connection;
+            this._Connection = _Connection;
             this.ShiftScheduleRawModel = new ShiftScheduleRawModel(); ;
 
             this.ShiftScheduleMonthVM = new ShiftScheduleMonthVM(ShiftScheduleRawModel, _ISwitchShiftScheduleView);
@@ -42,7 +42,7 @@ namespace ManagementSoftware.Model
                     return "Keine Daten geladen/vorhanden";
                 }
 
-                DateTime date = data.DayEntry[0].Date;
+                DateTime date = data.Date;
                 return date.ToString("y", GERMAN_CULTURE_INFO);
             }
 
@@ -70,7 +70,7 @@ namespace ManagementSoftware.Model
 
         public void LoadRawModel()
         {
-            //TODO _Connection ...
+            //TODO: GET SHIFT_SHEDULES FROM SERVER USE _Connection
 
             DateTime now = DateTime.Now;
             now = new DateTime(now.Year, now.Month, 1); //zum testen ändere Monat und Jahr

@@ -35,11 +35,6 @@
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FDD47C"/>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Green"/>
             </DataGrid.Resources>
-            <DataGrid.RowStyle >
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="LightBlue" />
-                </Style>
-            </DataGrid.RowStyle>
             <DataGrid.GroupStyle>
                 <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}">
                     <GroupStyle.Panel>
@@ -50,9 +45,8 @@
                 </GroupStyle>
             </DataGrid.GroupStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding EmployeeName, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="Frühschicht" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding EmployeeName, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="Spätschicht" IsReadOnly="True"/>
-                
+                <DataGridTextColumn Binding="{Binding EmployeeAMName, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="Frühschicht" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding EmployeePMName, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="Spätschicht" IsReadOnly="True"/>
             </DataGrid.Columns>
 
         </DataGrid>
