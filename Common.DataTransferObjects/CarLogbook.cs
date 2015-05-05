@@ -6,13 +6,20 @@
 //------------------------------------------------------------------------------
 namespace Common.DataTransferObjects
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text;
 
 	public class CarLogbook
 	{
+        [Key]
+        public virtual String CarId
+        {
+            get;
+            set;
+        }
 		public virtual IList<CarLogbookEntry> CarLogbookEntry
 		{
 			get;

@@ -6,13 +6,15 @@
 //------------------------------------------------------------------------------
 namespace Common.DataTransferObjects
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text;
 
 	public class Driver : Employee
 	{
+        [Key]
 		public virtual string UserName
 		{
 			get;
