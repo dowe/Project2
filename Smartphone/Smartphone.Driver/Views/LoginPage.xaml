@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Smartphone.Driver.LoginPage">
 	<ContentPage.Content>
-		<StackLayout BindingContext="App.Locator.Login" Spacing="20">
+		<StackLayout Spacing="20">
 			<Label HorizontalOptions="Center" FontSize="40" Text="Driver App" />
 			<Grid HorizontalOptions="Center">
 				<Grid.RowDefinitions>
@@ -13,11 +13,12 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 				<Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Text="User:" />
-				<Entry Grid.Row="0" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="Username" />
+				<Entry Grid.Row="0" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="Username" Text="{Binding Username}" IsEnabled="{Binding IsNotCommunicating}" />
 				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Passwort:" />
-				<Entry Grid.Row="1" Grid.Column="1" IsPassword="true" VerticalOptions="Center" WidthRequest="200" Placeholder="Passwort" />
+				<Entry Grid.Row="1" Grid.Column="1" IsPassword="true" VerticalOptions="Center" WidthRequest="200" Placeholder="Passwort" Text="{Binding Password}" IsEnabled="{Binding IsNotCommunicating}" />
 			</Grid>
-			<Button Text="Login" VerticalOptions="Fill" />
+			<ActivityIndicator VerticalOptions="Center" IsRunning="{Binding IsCommunicating}" />
+			<Button VerticalOptions="Fill" Text="Login" Command="{Binding LoginCommand}" IsEnabled="{Binding IsNotCommunicating}" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

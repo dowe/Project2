@@ -23,8 +23,6 @@ namespace Smartphone.Driver
 
 		public App ()
 		{
-			
-
 			MainPage = new LoginPage();
 		}
 
@@ -43,10 +41,6 @@ namespace Smartphone.Driver
 			// Handle when your app resumes
 		}
 
-		public static LoginPage GetLoginPage()
-		{
-			return new LoginPage ();
-		}
 	}
 }
 

@@ -2,6 +2,9 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Common.Communication.Client;
+using Common.Communication;
+using System.Threading.Tasks;
+using Common.Commands;
 
 namespace Smartphone.Driver
 {
@@ -10,22 +13,23 @@ namespace Smartphone.Driver
 
 		public const string UsernameProperty = "Username";
 		public const string PasswordProperty = "Password";
-		public const string IsConnectedProperty = "IsConnected";
+		public const string CanConnectProperty = "CanConnect";
 		public const string IsCommunicatingProperty = "IsCommunicating";
+		public const string IsNotCommunicatingProperty = "IsNotCommunicating";
 
 		private IClientConnection connection = null;
 
 		private string username = null;
 		private string password = null;
-		private bool connected = false;
+		private bool canConnect = false;
 		private bool communicating = false;
-		private RelayCommand login = null;
+		private RelayCommand loginCommand = null;
 
 		public LoginViewModel (IClientConnection connection)
 		{
 			this.connection = connection;
 
-			username = string.Empty;
+			username = "User";
 			password = string.Empty;
 			communicating = false;
 		}
@@ -54,14 +58,14 @@ namespace Smartphone.Driver
 			}
 		}
 
-		public bool IsConnected
+		public bool CanConnect
 		{
-			get { return connected; }
+			get { return canConnect; }
 			set {
-				if (connected != value)
+				if (canConnect != value)
 				{
-					connected = value;
-					RaisePropertyChanged (IsConnectedProperty);
+					canConnect = value;
+					RaisePropertyChanged (CanConnectProperty);
 				}
 			}
 		}
@@ -74,19 +78,61 @@ namespace Smartphone.Driver
 				{
 					communicating = value;
 					RaisePropertyChanged (IsCommunicatingProperty);
+					RaisePropertyChanged (IsNotCommunicatingProperty);
 				}
 			}
 		}
 
-		public RelayCommand Login
+		public bool IsNotCommunicating
+		{
+			get { return !IsCommunicating; }
+		}
+
+		public RelayCommand LoginCommand
 		{
 			get {
-				return login ?? (login = new RelayCommand (() =>
-				{
-						// TODO: Send login command and switch page if successfully.
-				}));
+				return loginCommand ?? (loginCommand = new RelayCommand (Login));
 			}
 		}
+
+		private async void Login()
+		{
+			IsCommunicating = true;
+			if (!connection.IsConnected)
+			{
+				CanConnect = await Connect ();
+			}
+			if (CanConnect)
+			{
+				var cmdLogin = new CmdLoginDriver(username, password);
+				var response = connection.SendWait<CmdReturnLoginDriver> (cmdLogin);
+				if (response != null)
+				{
+					Username = response.Success.ToString ();
+				}
+			}
+			IsCommunicating = false;
+		}
+
+		private Task<bool> Connect()
+		{
+			return Task.Run (() =>
+			{
+				bool success = false;
+				try
+				{
+					connection.Connect ();
+					success = true;
+				}
+				catch (ConnectionException)
+				{
+					success = false;
+				}
+
+				return success;
+			});
+		}
+
 	}
 }
 
