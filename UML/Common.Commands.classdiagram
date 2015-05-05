@@ -2315,41 +2315,18 @@
                   <elementDefinition Id="60a02d06-8c0b-4140-9b5f-208e1ebb4f44" />
                   <ownedParameters>
                     <operationHasOwnedParameters>
-                      <parameter Id="43c1cedf-7e15-430b-881d-de07a7302a3b" name="username" direction="In">
-                        <referencesInternal>
-                          <reference Id="b477e1f7-9720-4224-8589-62f1c9ff9d7f" handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommon.Commands%2Fbin%2FDebug%2FCommon.Commands.dll&quot; Namespace%3DCommon.Commands Type%3DCmdLoginDriver Member%3D(Name%3D.ctor OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DSingle)]) ParameterIdentifier%3Dusername" tag="ViewCode">
-                            <elementDefinition Id="fc0e176d-b3bc-4cd2-ad7b-5007c2aafaec" />
-                          </reference>
-                        </referencesInternal>
-                        <elementDefinition Id="193d7a1b-8a2b-47d9-aa77-7d094c7cdcba" />
+                      <parameter Id="804588ce-83e9-4943-aa4e-f1b8b2aebafe" name="username" direction="In" isUnique="false">
+                        <elementDefinition Id="7c9c30e3-2ce4-447c-807c-ccc2c6c282c5" />
                         <type_NamedElement>
                           <referencedTypeMoniker Id="d4b25c45-b2dc-475d-96c9-c4eeb82dadcf" LastKnownName="String" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
                     <operationHasOwnedParameters>
-                      <parameter Id="8709eaf5-4304-4f45-a3b3-5fee320cefb6" name="password" direction="In">
-                        <referencesInternal>
-                          <reference Id="cd495c43-8761-4a39-b98d-d8699d4e460d" handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommon.Commands%2Fbin%2FDebug%2FCommon.Commands.dll&quot; Namespace%3DCommon.Commands Type%3DCmdLoginDriver Member%3D(Name%3D.ctor OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DSingle)]) ParameterIdentifier%3Dpassword" tag="ViewCode">
-                            <elementDefinition Id="b32a0451-454a-4d71-a228-4db6666eb3d1" />
-                          </reference>
-                        </referencesInternal>
-                        <elementDefinition Id="eeffd28f-4a7e-4ffa-9d19-7c62371f80b7" />
+                      <parameter Id="f59b1218-677b-4cca-b6ad-b4182b579ac2" name="password" direction="In" isUnique="false">
+                        <elementDefinition Id="888c175c-091c-4efd-806b-27a8b4421856" />
                         <type_NamedElement>
                           <referencedTypeMoniker Id="d4b25c45-b2dc-475d-96c9-c4eeb82dadcf" LastKnownName="String" />
-                        </type_NamedElement>
-                      </parameter>
-                    </operationHasOwnedParameters>
-                    <operationHasOwnedParameters>
-                      <parameter Id="2714f25f-21af-46f9-9a91-1489b54da1cb" name="startKm" direction="In">
-                        <referencesInternal>
-                          <reference Id="b7a5ba63-7357-47ba-b884-c0476fde53b0" handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FE:%2FVisual Studio%2FProject2%2FCommon.Commands%2Fbin%2FDebug%2FCommon.Commands.dll&quot; Namespace%3DCommon.Commands Type%3DCmdLoginDriver Member%3D(Name%3D.ctor OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DSingle)]) ParameterIdentifier%3DstartKm" tag="ViewCode">
-                            <elementDefinition Id="4f66bf29-3084-4d8d-976c-edfd5857b90f" />
-                          </reference>
-                        </referencesInternal>
-                        <elementDefinition Id="3649112c-930c-435a-a959-83cf57ff1c97" />
-                        <type_NamedElement>
-                          <referencedTypeMoniker Id="28c02435-43cc-4cb4-b77d-28423521fa07" LastKnownName="Single" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
