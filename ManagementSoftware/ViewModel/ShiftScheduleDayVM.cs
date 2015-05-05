@@ -13,7 +13,9 @@ namespace ManagementSoftware.ViewModel
         private ShiftScheduleRawModel _ShiftScheduleRawModel;
         private RelayCommand _SwitchToMonthCommand;
 
-        public ShiftScheduleDayVM(ShiftScheduleRawModel _ShiftScheduleRawModel, RelayCommand _SwitchToMonthCommand)
+        public ShiftScheduleDayVM(
+            ShiftScheduleRawModel _ShiftScheduleRawModel, 
+            RelayCommand _SwitchToMonthCommand)
         {
             this._ShiftScheduleRawModel = _ShiftScheduleRawModel;
             this._SwitchToMonthCommand = _SwitchToMonthCommand;
@@ -21,7 +23,7 @@ namespace ManagementSoftware.ViewModel
             _ShiftScheduleRawModel.Change += RawModelChanged;
         }
 
-        private void RawModelChanged(object sender, ShiftScheduleRawModelChangeEventArgs e)
+        private void RawModelChanged(object sender, EventArgs e)
         {
             //TODO
         }
@@ -33,5 +35,6 @@ namespace ManagementSoftware.ViewModel
                 return _SwitchToMonthCommand;
             }
         }
+
     }
 }

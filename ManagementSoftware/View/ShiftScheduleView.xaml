@@ -5,8 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              DataContext="{Binding ShiftSchedule, Source={StaticResource Locator}}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="400">
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+
+        <Grid Grid.Row="0" Margin="10">
+            <Button Width="75" Content="Button" Margin="80,0,125,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button Width="75" Content="Aktualisiere" Margin="0,0,205,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding LoadRawModelCommand, Mode=OneWay}" />
+            <Label Content="{Binding MonthText}" HorizontalAlignment="Left" Margin="160,-3,-80,0" VerticalAlignment="Top" Width="200"/>
+        </Grid>
+
     </Grid>
 </UserControl>

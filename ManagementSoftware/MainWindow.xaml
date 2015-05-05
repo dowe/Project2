@@ -6,8 +6,8 @@
         xmlns:ignore="http://www.ignore.com"
         xmlns:views="clr-namespace:ManagementSoftware.View"
         mc:Ignorable="d ignore"
-        Height="500"
-        Width="580"
+        Height="650"
+        Width="1280"
         Title="Verwaltungs Applikation"
         >
     

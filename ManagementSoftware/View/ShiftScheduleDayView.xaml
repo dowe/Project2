@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding ShiftSchedule.ShiftScheduleDayVM, Mode=OneWay, Source={StaticResource Locator}}">
     <Grid>
-        <Button Content="SwitchToMonthView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Command="{Binding SwitchToMonthCommand, Mode=OneWay}"/>
+        <Button Content="Monatsansicht" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Command="{Binding SwitchToMonthCommand, Mode=OneWay}"/>
         <Label Content="DayView" HorizontalAlignment="Left" Margin="213,20,0,0" VerticalAlignment="Top"/>
 
     </Grid>
