@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdHandler\CmdLoginDriverHandler.cs" />
     <Compile Include="CmdHandler\CmdRegisterCustomerHandler.cs" />
     <Compile Include="DatabaseCommunication\DatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\IDatabaseCommunicator.cs" />

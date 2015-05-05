@@ -28,7 +28,7 @@ namespace Server
         {
             // TODO
             // Register all command handler to the connection here.
-           
+            connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection));
         }
     }
