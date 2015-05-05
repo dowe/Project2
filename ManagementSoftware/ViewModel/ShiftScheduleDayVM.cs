@@ -5,20 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Data;
 
 namespace ManagementSoftware.ViewModel
 {
     public class ShiftScheduleDayVM : ViewModelBase
     {
-        private ShiftScheduleRawModel _ShiftScheduleRawModel;
-        private RelayCommand _SwitchToMonthCommand;
+        private ListCollectionView _DataList;
 
         public ShiftScheduleDayVM(
-            ShiftScheduleRawModel _ShiftScheduleRawModel, 
-            RelayCommand _SwitchToMonthCommand)
+            ShiftScheduleRawModel _ShiftScheduleRawModel,
+            ISwitchShiftScheduleView _ISwitchShiftScheduleView)
         {
-            this._ShiftScheduleRawModel = _ShiftScheduleRawModel;
-            this._SwitchToMonthCommand = _SwitchToMonthCommand;
+            this.ShiftScheduleRawModel = _ShiftScheduleRawModel;
+            this.SwitchToMonthCommand = new RelayCommand(_ISwitchShiftScheduleView.SwitchToShiftScheduleMonthVM);
 
             _ShiftScheduleRawModel.Change += RawModelChanged;
         }
@@ -28,13 +28,21 @@ namespace ManagementSoftware.ViewModel
             //TODO
         }
 
-        public RelayCommand SwitchToMonthCommand
+        public ListCollectionView DataList
         {
             get
             {
-                return _SwitchToMonthCommand;
+                return _DataList;
+            }
+            set
+            {
+                _DataList = value;
+                RaisePropertyChanged();
             }
         }
 
+        private ShiftScheduleRawModel ShiftScheduleRawModel { get; set; }
+
+        public RelayCommand SwitchToMonthCommand { get; private set; }
     }
 }

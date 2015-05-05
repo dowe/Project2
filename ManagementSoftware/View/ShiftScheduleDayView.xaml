@@ -3,12 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:helper="clr-namespace:ManagementSoftware.Helper"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding ShiftSchedule.ShiftScheduleDayVM, Mode=OneWay, Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <Expander x:Name="exp" IsExpanded="True" Background="CadetBlue" BorderBrush="Gray" BorderThickness="1,1,1,5" Foreground="Black">
+                            <Expander.Header>
+                                <DockPanel>
+                                    <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" Margin="5,0,0,0" Width="100"/>
+                                    <TextBlock FontWeight="Bold" Text="{Binding Path=ItemCount}"/>
+                                </DockPanel>
+                            </Expander.Header>
+                            <ItemsPresenter></ItemsPresenter>
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Button Content="Monatsansicht" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Command="{Binding SwitchToMonthCommand, Mode=OneWay}"/>
-        <Label Content="DayView" HorizontalAlignment="Left" Margin="213,20,0,0" VerticalAlignment="Top"/>
+
+        <DataGrid HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="1200" Height="500" ItemsSource="{Binding DataList}" CanUserReorderColumns="False" AutoGenerateColumns="False">
+            <DataGrid.Resources>
+                <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FDD47C"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Green"/>
+            </DataGrid.Resources>
+            <DataGrid.RowStyle >
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="LightBlue" />
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.GroupStyle>
+                <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}">
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate >
+                            <DataGridRowsPresenter ></DataGridRowsPresenter>
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding EmployeeName, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="Frühschicht" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding EmployeeName, Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="Spätschicht" IsReadOnly="True"/>
+                
+            </DataGrid.Columns>
+
+        </DataGrid>
 
     </Grid>
 </UserControl>

@@ -73,7 +73,7 @@ namespace ManagementSoftware.Model
             List<Employee> driver = CreateEmployees<Driver>(20);
             List<Employee> lab = CreateEmployees<LabAssistant>(10);
 
-            Random rnd = new Random();
+            Random rnd = new Random(DateTime.Now.Millisecond);
 
             List<Employee> empty = new List<Employee>();
 
