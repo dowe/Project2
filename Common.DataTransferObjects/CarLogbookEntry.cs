@@ -6,10 +6,12 @@
 //------------------------------------------------------------------------------
 namespace Common.DataTransferObjects
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+    using System.Text;
 
 	public class CarLogbookEntry
 	{
@@ -24,7 +26,8 @@ namespace Common.DataTransferObjects
 			get;
 			set;
 		}
-
+        
+        [Key, Column(Order = 1)]
 		public virtual DateTime StartDate
 		{
 			get;
@@ -37,6 +40,7 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
+        [Key, Column(Order = 0)]
 		public virtual Driver Driver
 		{
 			get;
