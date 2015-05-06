@@ -34,7 +34,7 @@ namespace ManagementSoftware.ViewModel
 
             
         }
-
+        
         private void RawModelChanged(object sender, EventArgs e)
         {
             ObservableCollection<ShiftScheduleMonthEntry> list = new ObservableCollection<ShiftScheduleMonthEntry>();
@@ -42,6 +42,7 @@ namespace ManagementSoftware.ViewModel
             int numberOfDaysInMonth = 0;
             if (rawData != null)
             {
+                
                 numberOfDaysInMonth = rawData.DayEntry.Count;
                 for (int i = 0; i < numberOfDaysInMonth ; i++)
                 {
@@ -50,6 +51,7 @@ namespace ManagementSoftware.ViewModel
                     AddEntry(entry.AM, ShiftScheduleMonthEntry.AM_SHIFT, list, entry.Date, numberOfDaysInMonth);
                     AddEntry(entry.PM, ShiftScheduleMonthEntry.PM_SHIFT, list, entry.Date, numberOfDaysInMonth);
                 }
+                
             }
             ListCollectionView listView = new ListCollectionView(list);
             listView.GroupDescriptions.Add(new PropertyGroupDescription("Employee", new EmployeeTypeConverter()));
@@ -64,6 +66,11 @@ namespace ManagementSoftware.ViewModel
             {
                 ShiftScheduleMonthEntry entry = GetEntry(emp, list, numberOfDaysInMonth);
                 entry.Days[date.Day - 1] = shift;
+
+                if (emp.FirstName.Equals("FAdministrationAssistant1") && date.Day == 1)
+                {
+                    Console.WriteLine(shift);
+                }
             }
         }
 

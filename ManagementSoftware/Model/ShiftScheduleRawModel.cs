@@ -9,6 +9,8 @@ namespace ManagementSoftware.Model
 {
     public class ShiftScheduleRawModel
     {
+        private static Random rnd = new Random(DateTime.Now.Second);
+
         private ShiftSchedule[] _Data;
         private int _CurrentDataIndex;
 
@@ -70,8 +72,6 @@ namespace ManagementSoftware.Model
             List<Employee> driver = CreateEmployees<Driver>(20);
             List<Employee> lab = CreateEmployees<LabAssistant>(10);
 
-            Random rnd = new Random(DateTime.Now.Millisecond);
-
             List<Employee> empty = new List<Employee>();
 
             for (DateTime date = new DateTime(refDate.Year, refDate.Month, 1);
@@ -96,6 +96,7 @@ namespace ManagementSoftware.Model
 
             return obj;
         }
+       
 
         private static void Add(IList<Employee> to, IList<Employee> from, int p, Random rnd, IList<Employee> not)
         {

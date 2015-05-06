@@ -43,8 +43,8 @@ namespace ManagementSoftware.ViewModel
                 
                 DayEntry    entry = rawData.DayEntry[day];
               
-                AddEntry(entry.AM, list, entry.Date, true);
-                AddEntry(entry.PM, list, entry.Date, false);
+                AddEntry(entry.AM, list, true);
+                AddEntry(entry.PM, list, false);
             }
 
             ListCollectionView listView = new ListCollectionView(list);
@@ -53,7 +53,7 @@ namespace ManagementSoftware.ViewModel
             DataList = listView;
         }
 
-        private void AddEntry(IList<Employee> emps, IList<ShiftScheduleDayEntry> list, DateTime dateTime, bool amShift)
+        private void AddEntry(IList<Employee> emps, IList<ShiftScheduleDayEntry> list, bool amShift)
         {
             foreach (Employee emp in emps)
             {
