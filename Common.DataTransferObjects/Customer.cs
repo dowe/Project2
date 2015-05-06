@@ -6,10 +6,11 @@
 //------------------------------------------------------------------------------
 namespace Common.DataTransferObjects
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text;
 
 	public class Customer
 	{
@@ -37,6 +38,7 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
+        [Key]
 		public virtual string UserName
 		{
 			get;
@@ -74,12 +76,6 @@ namespace Common.DataTransferObjects
 		}
 
 		public virtual BankAccount BankAccount
-		{
-			get;
-			set;
-		}
-
-		public virtual IList<Bill> Bill
 		{
 			get;
 			set;

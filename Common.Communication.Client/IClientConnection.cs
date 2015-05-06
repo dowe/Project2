@@ -14,5 +14,6 @@ namespace Common.Communication.Client
         T SendWait<T>(Command command) where T : Command;
         T SendWait<T>(Command command, int timeout) where T : Command;
         void RegisterCommandHandler(ICommandHandler handler);
+        bool IsConnected { get; }
     }
 }

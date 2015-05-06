@@ -43,77 +43,67 @@ namespace Common.Util
 
         public static string ToString(object elem)
         {
+            if (elem == null)
+            {
+                Console.WriteLine("NULL detected");
+                return "null\n";
+            }
 
             Type type = elem.GetType();
-            PropertyInfo[] list = type.GetProperties();
-            string text = "";
-            Boolean seperate = false;
 
-            for (int i = 0; i < list.Length; i++)
+            if (typeof(IEnumerable<object>).IsAssignableFrom(type))
             {
-                if (list[i].CanRead)
+                Console.WriteLine("LIST detected");
+                List<object> l = new List<object>(elem as IEnumerable<object>);
+                if (l.Count == 0)
                 {
-                    if (seperate)
+                    return "[ ]\n";
+                }
+
+                string text = "[\n";
+                int index = 0;
+                foreach (object item in l)
+                {
+                    text += index + " = " + ToString(item);
+                    index++;
+                }
+
+                return Tab(text) + "]\n";
+            }
+            else if (IsPrimitive(type))
+            {
+                Console.WriteLine("PRIMITIVE detected");
+                return elem.ToString() + "\n";
+            }
+            else
+            {
+                Console.WriteLine("OBJECT detected");
+
+
+                PropertyInfo[] list = type.GetProperties();
+                string text = "{\n";
+
+                for (int i = 0; i < list.Length; i++)
+                {
+                    if (list[i].CanRead)
                     {
-                        text += "\n";
-                    }
-                    seperate = true;
+                        Console.WriteLine("ELEM " + list[i].Name);
 
+                        object child = list[i].GetValue(elem);
+                        text += list[i].Name + "=" + ToString(child);
 
-                    object child = list[i].GetValue(elem);
-                    Type childType = list[i].PropertyType;
-
-                    text += list[i].Name + "=";
-
-                    if (child == null)
-                    {
-                        text += "null";
-                    }
-                    else
-                    {
-
-                        if (typeof(IEnumerable<object>).IsAssignableFrom(childType))
-                        {
-
-                            List<object> l = new List<object>(child as IEnumerable<object>);
-                            if (l.Count == 0)
-                            {
-                                text += "[ ]";
-                            }
-                            else
-                            {
-                                text += "[\n";
-                                int index = 0;
-                                foreach (object item in l)
-                                {
-                                    text += Tab(index + " = {\n" + Tab(ToString(item)) + "\n}") + "\n";
-                                    index++;
-                                }
-                                text += "]";
-                            }
-
-                        }
-                        else if (childType.IsPrimitive
-                            || childType.ToString().Equals("System.String")
-                            || typeof(DateTime).IsAssignableFrom(childType))
-                        {
-                            text += child.ToString();
-                        }
-                        else
-                        {
-                            text += "{\n" + Tab(ToString(child)) + "\n}";
-                        }
                     }
                 }
+
+                return Tab(text) + "}\n";
             }
+        }
 
-            if (list.Length == 0)
-            {
-                return elem.ToString();
-            }
-
-            return text;
-
+        private static bool IsPrimitive(Type type)
+        {
+            return type.IsPrimitive
+                       || type.ToString().Equals("System.String")
+                       || typeof(DateTime).IsAssignableFrom(type);
         }
 
         public static String Tab(String txt)
@@ -121,13 +111,17 @@ namespace Common.Util
             int n = 0;
             do
             {
-                txt = txt.Insert(n, "   ");
+                
                 n = txt.IndexOf('\n', n);
                 if (n < 0)
                 {
                     return txt;
                 }
                 n++;
+                if (txt.IndexOf('\n', n) >= 0)
+                {
+                    txt = txt.Insert(n, "   ");
+                }
             }
             while (true);
         }

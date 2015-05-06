@@ -4,11 +4,22 @@ using Xamarin.Forms;
 using Common.Communication.Client;
 using Common.Commands;
 using Common.DataTransferObjects;
+using Microsoft.Practices.ServiceLocation;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace Smartphone.Driver
 {
 	public class App : Application
 	{
+
+		private static ViewModelLocator locator = null;
+
+		public static ViewModelLocator Locator
+		{
+			get {
+				return locator ?? (locator = new ViewModelLocator ());
+			}
+		}
 
 		public App ()
 		{
@@ -17,7 +28,7 @@ namespace Smartphone.Driver
 
 		protected override void OnStart ()
 		{
-
+			
 		}
 
 		protected override void OnSleep ()
@@ -29,6 +40,7 @@ namespace Smartphone.Driver
 		{
 			// Handle when your app resumes
 		}
+
 	}
 }
 

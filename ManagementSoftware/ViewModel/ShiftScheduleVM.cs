@@ -1,71 +1,105 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Common.Communication.Client;
+using Common.DataTransferObjects;
+using Common.Util;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using ManagementSoftware.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ManagementSoftware.ViewModel
 {
-    public class ShiftScheduleVM : ViewModelBase
+    public class ShiftScheduleVM : ViewModelBase, ISwitchShiftScheduleView
     {
-        private ViewModelBase _CurrentViewModel;
-
-        private ShiftScheduleMonthVM _ShiftScheduleMonthVM;
-        private ShiftScheduleDayVM _ShiftScheduleDayVM;
-
-        public ShiftScheduleVM()
+        private ShiftScheduleModel _ShiftScheduleModel;
+        
+        public ShiftScheduleVM(IClientConnection _Connection)
         {
-            ShiftScheduleRawModel _ShiftScheduleRawModel = new ShiftScheduleRawModel();
+            this._ShiftScheduleModel = new ShiftScheduleModel(this, _Connection);
 
-            RelayCommand _SwitchToMonthCommand = new RelayCommand(() => SwitchToShiftScheduleMonthVM());
-            RelayCommand _SwitchToDayCommand = new RelayCommand(() => SwitchToShiftScheduleDayVM());
+            this.LoadRawModelCommand = new RelayCommand(() => LoadRawModel());
+            this.SwitchMonthDataCommand = new RelayCommand(() => SwitchMonthData());
 
-            _ShiftScheduleMonthVM = new ShiftScheduleMonthVM(_ShiftScheduleRawModel, _SwitchToDayCommand);
-            _ShiftScheduleDayVM = new ShiftScheduleDayVM(_ShiftScheduleRawModel, _SwitchToMonthCommand);
-
-            _CurrentViewModel = _ShiftScheduleMonthVM;
+            this._ShiftScheduleModel.ShiftScheduleRawModel.Change += RawModelChanged;
         }
 
-        public ViewModelBase ShiftScheduleMonthVM
+        private void RawModelChanged(object sender, EventArgs e)
+        {
+            RaisePropertyChanged(() => CurrentMonthText);
+            RaisePropertyChanged(() => SwitchMonthButtonText);
+        }
+
+        public ShiftScheduleMonthVM ShiftScheduleMonthVM
         {
             get
             {
-                return _ShiftScheduleMonthVM;
+                return _ShiftScheduleModel.ShiftScheduleMonthVM;
             }
         }
 
-        public ViewModelBase ShiftScheduleDayVM
+        public ShiftScheduleDayVM ShiftScheduleDayVM
         {
             get
             {
-                return _ShiftScheduleDayVM;
+                return _ShiftScheduleModel.ShiftScheduleDayVM;
             }
         }
 
-        private void SwitchToShiftScheduleMonthVM()
+        public RelayCommand LoadRawModelCommand { get; private set; }
+        public RelayCommand SwitchMonthDataCommand { get; private set; }
+
+        private void LoadRawModel()
         {
-            CurrentViewModel = _ShiftScheduleMonthVM;
+            _ShiftScheduleModel.LoadRawModel();
         }
 
-        private void SwitchToShiftScheduleDayVM()
+        private void SwitchMonthData()
         {
-            CurrentViewModel = _ShiftScheduleDayVM;
+            _ShiftScheduleModel.SwitchMonthData();
+        }
+
+        public string CurrentMonthText
+        {
+            get
+            {
+                return _ShiftScheduleModel.CurrentMonthText;
+            }
         }
 
         public ViewModelBase CurrentViewModel
         {
             get
             {
-                return _CurrentViewModel;
+                return _ShiftScheduleModel.CurrentViewModel;
             }
             set
             {
-                _CurrentViewModel = value;
+                _ShiftScheduleModel.CurrentViewModel = value;
                 RaisePropertyChanged();
             }
+        }
+
+        public string SwitchMonthButtonText
+        {
+            get
+            {
+                return _ShiftScheduleModel.SwitchMonthButtonText;
+            }
+        }
+
+        public void SwitchToShiftScheduleMonthVM()
+        {
+            CurrentViewModel = _ShiftScheduleModel.ShiftScheduleMonthVM;
+        }
+
+        public void SwitchToShiftScheduleDayVM()
+        {
+            CurrentViewModel = _ShiftScheduleModel.ShiftScheduleDayVM;
         }
     }
 }

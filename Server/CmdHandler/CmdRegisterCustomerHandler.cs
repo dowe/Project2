@@ -20,7 +20,7 @@ namespace Server.CmdHandler
         protected override void Handle(CmdRegisterCustomer command, string connectionIdOrNull)
         {
             
-            //TODO
+            //TODO: WRITE HANDLER
 
             CmdReturnRegisterCustomer response = new CmdReturnRegisterCustomer(command.Id, false, command.Customer.FirstName);
             connection.Unicast(response, connectionIdOrNull);

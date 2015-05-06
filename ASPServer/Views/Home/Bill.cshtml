@@ -1,0 +1,40 @@
+﻿@using System.Globalization
+@model List<ASPServer.Models.BillModel>
+
+@{
+    ViewBag.Title = "Bill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Rechnungen</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Datum
+        </th>
+        <th>
+            Download
+        </th>
+        <th></th>
+    </tr>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { target = "_blank" }))
+    {
+        if ( Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Date.ToShortDateString()
+                    </td>
+                    <td>
+                        <input type="submit" name=@item.Date.ToShortDateString() id="test1 " value="Download">
+                    </td>
+                </tr>
+            }
+        }
+    }
+
+</table>
