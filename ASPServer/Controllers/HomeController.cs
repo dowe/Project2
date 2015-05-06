@@ -1,16 +1,29 @@
-﻿using System;
+﻿using ASPServer.Models;
+using Common.Communication.Client;
+using Common.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
-using ASPServer.Models;
-using Common.DataTransferObjects;
-using System.Security.Cryptography;
 
 namespace ASPServer.Controllers
 {
     public class HomeController : Controller
     {
+        IClientConnection _ClientConnection;
+
+        /// <summary>
+        ///     Custom Constructor
+        ///     Injected with SimpleInjector
+        /// </summary>
+        /// <param name="_ClientConnection">The connection Instance (SignalR)</param>
+        public HomeController(IClientConnection _ClientConnection)
+        {
+            this._ClientConnection = _ClientConnection;
+        }
+
         // GET: Home
         public ActionResult Index()
         {

@@ -187,6 +187,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Common.Communication.Client\Common.Communication.Client.csproj">
+      <Project>{2b9228e8-bd74-4d56-aa96-551fc8031595}</Project>
+      <Name>Common.Communication.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Communication\Common.Communication.csproj">
+      <Project>{abbc028f-adef-4399-a133-e97f82582bdb}</Project>
+      <Name>Common.Communication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common.DataTransferObjects\Common.DataTransferObjects.csproj">
       <Project>{3476b14d-b58a-457c-8357-ce9801106aae}</Project>
       <Name>Common.DataTransferObjects</Name>
