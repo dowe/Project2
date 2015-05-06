@@ -18,36 +18,31 @@ namespace ManagementSoftware.ViewModel
 {
     public class ShiftScheduleMonthVM : ViewModelBase
     {
-        private ShiftScheduleRawModel _ShiftScheduleRawModel;
-        private RelayCommand _SwitchToDayCommand;
         private ListCollectionView _DataList;
         private int _NumberOfDaysInMonth;
 
         public ShiftScheduleMonthVM(
             ShiftScheduleRawModel _ShiftScheduleRawModel,
-            RelayCommand _SwitchToDayCommand)
+            ISwitchShiftScheduleView _ISwitchShiftScheduleView)
         {
-            this._ShiftScheduleRawModel = _ShiftScheduleRawModel;
-            this._SwitchToDayCommand = _SwitchToDayCommand;
+            this.ShiftScheduleRawModel = _ShiftScheduleRawModel;
+            this.SwitchToDayCommand = new RelayCommand(_ISwitchShiftScheduleView.SwitchToShiftScheduleDayVM);
+            this._DataList = null;
+            this._NumberOfDaysInMonth = 0;
 
             _ShiftScheduleRawModel.Change += RawModelChanged;
 
-            _DataList = null;
-
-            /*for (int i = 0; i < 31; i++)
-            {
-                Console.WriteLine("<DataGridTextColumn Binding=\"{Binding Days[" + i + "]}\" ClipboardContentBinding=\"{x:Null}\" Header=\"Tag " + (i + 1) + "\" IsReadOnly=\"True\"  Visibility=\"{Binding Data.NumberOfDaysInMonth, Source={StaticResource proxy}, ConverterParameter="+i+", Converter={StaticResource VisibilityConverter}}\"/>");
-            }
-            */
+            
         }
-
+        
         private void RawModelChanged(object sender, EventArgs e)
         {
             ObservableCollection<ShiftScheduleMonthEntry> list = new ObservableCollection<ShiftScheduleMonthEntry>();
-            ShiftSchedule rawData = _ShiftScheduleRawModel.CurrentData;
+            ShiftSchedule rawData = ShiftScheduleRawModel.CurrentData;
             int numberOfDaysInMonth = 0;
             if (rawData != null)
             {
+                
                 numberOfDaysInMonth = rawData.DayEntry.Count;
                 for (int i = 0; i < numberOfDaysInMonth ; i++)
                 {
@@ -56,9 +51,11 @@ namespace ManagementSoftware.ViewModel
                     AddEntry(entry.AM, ShiftScheduleMonthEntry.AM_SHIFT, list, entry.Date, numberOfDaysInMonth);
                     AddEntry(entry.PM, ShiftScheduleMonthEntry.PM_SHIFT, list, entry.Date, numberOfDaysInMonth);
                 }
+                
             }
             ListCollectionView listView = new ListCollectionView(list);
             listView.GroupDescriptions.Add(new PropertyGroupDescription("Employee", new EmployeeTypeConverter()));
+            DataList = null;
             DataList = listView;
             NumberOfDaysInMonth = numberOfDaysInMonth;
         }
@@ -69,6 +66,11 @@ namespace ManagementSoftware.ViewModel
             {
                 ShiftScheduleMonthEntry entry = GetEntry(emp, list, numberOfDaysInMonth);
                 entry.Days[date.Day - 1] = shift;
+
+                if (emp.FirstName.Equals("FAdministrationAssistant1") && date.Day == 1)
+                {
+                    Console.WriteLine(shift);
+                }
             }
         }
 
@@ -102,14 +104,6 @@ namespace ManagementSoftware.ViewModel
             }
         }
 
-        public RelayCommand SwitchToDayCommand
-        {
-            get
-            {
-                return _SwitchToDayCommand;
-            }
-        }
-
         public ListCollectionView DataList
         {
             get
@@ -122,6 +116,9 @@ namespace ManagementSoftware.ViewModel
                 RaisePropertyChanged();
             }
         }
+
+        public RelayCommand SwitchToDayCommand { get; private set; }
+        private ShiftScheduleRawModel ShiftScheduleRawModel { get; set; }
 
     }
 }

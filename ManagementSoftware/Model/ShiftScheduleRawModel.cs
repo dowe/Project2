@@ -9,6 +9,8 @@ namespace ManagementSoftware.Model
 {
     public class ShiftScheduleRawModel
     {
+        private static Random rnd = new Random(DateTime.Now.Second);
+
         private ShiftSchedule[] _Data;
         private int _CurrentDataIndex;
 
@@ -22,10 +24,6 @@ namespace ManagementSoftware.Model
 
         private void Notify()
         {
-            if (CurrentData == null)
-            {
-                _CurrentDataIndex = 0;
-            }
             Change(this, null);
         }
 
@@ -67,13 +65,12 @@ namespace ManagementSoftware.Model
         {
             ShiftSchedule obj = new ShiftSchedule();
 
+            obj.Date = refDate;
             obj.DayEntry = new List<DayEntry>();
 
             List<Employee> admins = CreateEmployees<AdministrationAssistant>(10);
             List<Employee> driver = CreateEmployees<Driver>(20);
             List<Employee> lab = CreateEmployees<LabAssistant>(10);
-
-            Random rnd = new Random();
 
             List<Employee> empty = new List<Employee>();
 
@@ -99,6 +96,7 @@ namespace ManagementSoftware.Model
 
             return obj;
         }
+       
 
         private static void Add(IList<Employee> to, IList<Employee> from, int p, Random rnd, IList<Employee> not)
         {
