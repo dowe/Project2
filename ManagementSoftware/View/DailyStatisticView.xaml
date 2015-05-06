@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="615" d:DesignWidth="540"
-             DataContext="{Binding DailyStatistic, Source={StaticResource Locator}}">
+             d:DesignHeight="615"
+             DataContext="{Binding DailyStatistic, Source={StaticResource Locator}}" Width="1034.03">
     <Grid Margin="10,10,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -17,10 +17,10 @@
         <Grid.ColumnDefinitions>
 
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0"  Content="Tagesstatistik vom:" Margin="0,22,304,0" VerticalAlignment="Top" Height="49" FontSize="24" HorizontalAlignment="Right" Width="216"/>
-        <Label Grid.Row="0" Content="Label" HorizontalAlignment="Left" Margin="231,22,0,0" VerticalAlignment="Top" Width="289" Height="49" FontSize="24"/>
-        <GroupBox Grid.Row="1" Header="Bestellungen" FontSize="20" Margin="0,0,10,0">
-            <Grid Height="261" Margin="0,0,16,-35" VerticalAlignment="Top">
+        <Label Grid.Row="0"  Content="Tagesstatistik vom:" Margin="0,22,304,0" VerticalAlignment="Top" Height="49" FontSize="24" HorizontalAlignment="Center" Width="216"/>
+        <Label Grid.Row="0" Content="TODO Timespan" HorizontalAlignment="Center" Margin="231,22,0,0" VerticalAlignment="Top" Width="289" Height="49" FontSize="24"/>
+        <GroupBox  Height="250" Grid.Row="1" Header="Bestellungen" FontSize="20"  Width="400" HorizontalAlignment="Center">
+            <Grid Height="250" VerticalAlignment="Top" HorizontalAlignment="Center" Width="400" Margin="-10,-10,-2,-24">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80"/>
                     <RowDefinition Height="80"/>
@@ -45,8 +45,8 @@
 
         </GroupBox>
 
-        <GroupBox Grid.Row="3" Header="Tests" FontSize="20" Margin="0,0,10,45">
-            <Grid Height="180" VerticalAlignment="Top" Margin="0,0,16,0">
+        <GroupBox Grid.Row="3" Height="180" Header="Tests" FontSize="20" Width="400" Margin="312,10,312,70" >
+            <Grid Width="400" Margin="0,0,-12,-34">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80"/>
                     <RowDefinition Height="80"/>
