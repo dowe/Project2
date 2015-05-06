@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ASPServer.Models;
 using Common.DataTransferObjects;
+using System.Security.Cryptography;
 
 namespace ASPServer.Controllers
 {
@@ -73,6 +74,88 @@ namespace ASPServer.Controllers
                 }
             }
             return View();
+        }
+
+        // GET: Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Login
+        [HttpPost]
+        public ActionResult Login(UserModel userModel)
+        {
+            // Test "DB"
+            List<UserModel> registeredUsers = new List<UserModel>();
+            registeredUsers.Add(new UserModel { ID = "ich", Password = "asdf" });
+            registeredUsers.Add(new UserModel { ID = "du", Password = "1234" });
+
+            // Check if the user exists and if the password is correct
+            if (registeredUsers.FirstOrDefault(user => (user.ID == userModel.ID) && user.Password == userModel.Password) != null)
+            {
+                // Make a crypto key to authenticate the user (much better than a GUID ;-))
+                RNGCryptoServiceProvider rngProvider = new RNGCryptoServiceProvider();
+                byte[] myKey = new byte[48];
+                rngProvider.GetBytes(myKey);
+                string authId = null;
+                myKey.ToList().ForEach(b => authId += b.ToString("x2"));
+
+                // Save the auth key in the session and in the cookie
+                Session["authID"] = authId;
+                var cookie = new HttpCookie("authId");
+                cookie.Value = authId;
+                Response.Cookies.Add(cookie);
+
+                // Also save the "real" userID -> important to know for showing user specific data
+                Session["userID"] = userModel.ID;
+                //UserDB.loginMapping.Add(authId, userModel);
+
+                return RedirectToAction("LoginSuccessful");
+            }
+            else
+            {
+                return RedirectToAction("LoginFailed");
+            }
+
+        }
+
+        // GET: LoginFailed
+        public ActionResult LoginFailed()
+        {
+            return View();
+        }
+
+        // GET: LoginSuccessful
+        public ActionResult LoginSuccessful()
+        {
+            if (this.IsUserAuthenticated())
+            {
+                return View(new UserModel { ID = Session["userID"].ToString() });
+            }
+            else
+            {
+                return RedirectToAction("LoginFailed");
+            }
+        }
+
+        private bool IsUserAuthenticated()
+        {
+            try
+            {
+                if (Request.Cookies["authId"].Value == Session["authId"].ToString())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
         }
     }
 }
