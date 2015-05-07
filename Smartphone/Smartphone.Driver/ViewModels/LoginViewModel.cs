@@ -5,6 +5,8 @@ using Common.Communication.Client;
 using Common.Communication;
 using System.Threading.Tasks;
 using Common.Commands;
+using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Smartphone.Driver
 {
@@ -106,9 +108,9 @@ namespace Smartphone.Driver
 			{
 				var cmdLogin = new CmdLoginDriver(username, password);
 				var response = connection.SendWait<CmdReturnLoginDriver> (cmdLogin);
-				if (response != null)
+				if (response != null && response.Success)
 				{
-					Username = response.Success.ToString ();
+					OnSuccessfullLogin ();
 				}
 			}
 			IsCommunicating = false;
@@ -131,6 +133,12 @@ namespace Smartphone.Driver
 
 				return success;
 			});
+		}
+
+		private void OnSuccessfullLogin()
+		{
+			// Switch Page.
+			Messenger.Default.Send<SwitchPageMsg> (new SwitchPageMsg (Page.Orders));
 		}
 
 	}

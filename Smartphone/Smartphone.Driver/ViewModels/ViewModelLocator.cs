@@ -11,7 +11,7 @@ namespace Smartphone.Driver
 		static ViewModelLocator()
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-			IClientConnection clientConnection = new ClientConnection ("http://192.168.178.93:8080/commands");
+			IClientConnection clientConnection = new ClientConnection ("http://192.168.43.45:8080/commands");
 			clientConnection.Start ();
 			SimpleIoc.Default.Register<IClientConnection> (() => clientConnection);
 			SimpleIoc.Default.Register<LoginViewModel>();
