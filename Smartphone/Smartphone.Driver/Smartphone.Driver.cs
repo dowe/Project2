@@ -1,11 +1,5 @@
-﻿using System;
-
-using Xamarin.Forms;
-using Common.Communication.Client;
-using Common.Commands;
-using Common.DataTransferObjects;
-using Microsoft.Practices.ServiceLocation;
-using GalaSoft.MvvmLight.Ioc;
+﻿using Xamarin.Forms;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Smartphone.Driver
 {
@@ -23,7 +17,13 @@ namespace Smartphone.Driver
 
 		public App ()
 		{
-			MainPage = new LoginPage();
+			RegisterMessengerHandlers ();
+			MainPage = new LoginPage ();
+		}
+
+		private void RegisterMessengerHandlers()
+		{
+			Messenger.Default.Register<SwitchPageMsg> (this, SwitchPage);
 		}
 
 		protected override void OnStart ()
@@ -39,6 +39,11 @@ namespace Smartphone.Driver
 		protected override void OnResume ()
 		{
 			// Handle when your app resumes
+		}
+
+		private void SwitchPage(SwitchPageMsg message)
+		{
+			MainPage = new OrdersPage ();
 		}
 
 	}
