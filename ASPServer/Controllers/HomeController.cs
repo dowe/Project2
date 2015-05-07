@@ -12,16 +12,16 @@ namespace ASPServer.Controllers
 {
     public class HomeController : Controller
     {
-        IClientConnection _ClientConnection;
+        IClientConnection _clientConnection;
 
         /// <summary>
         ///     Custom Constructor
         ///     Injected with SimpleInjector
         /// </summary>
-        /// <param name="_ClientConnection">The connection Instance (SignalR)</param>
-        public HomeController(IClientConnection _ClientConnection)
+        /// <param name="clientConnection">The connection Instance (SignalR)</param>
+        public HomeController(IClientConnection clientConnection)
         {
-            this._ClientConnection = _ClientConnection;
+            this._clientConnection = clientConnection;
         }
 
         // GET: Home

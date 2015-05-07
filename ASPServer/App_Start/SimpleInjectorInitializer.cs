@@ -29,7 +29,7 @@ namespace ASPServer.App_Start
         private static void InitializeContainer(Container container)
         {
             // Register the CommunicationInstance
-            container.Register<IClientConnection>(() => new ClientConnection("localhost"), Lifestyle.Singleton);
+            container.RegisterSingle<IClientConnection>(() => new ClientConnection("localhost"));
         }
     }
 }
