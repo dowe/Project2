@@ -18,9 +18,9 @@ namespace ManagementSoftware.View
     /// <summary>
     /// Interaktionslogik für Tests.xaml
     /// </summary>
-    public partial class Tests : UserControl
+    public partial class TestsView : UserControl
     {
-        public Tests()
+        public TestsView()
         {
             InitializeComponent();
         }
