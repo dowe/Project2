@@ -2,7 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Smartphone.Driver.OrdersPage">
 	<ContentPage.Content>
 		<StackLayout>
-			<ListView HorizontalOptions="Fill" />
+			<ListView HorizontalOptions="Fill"
+			Header="Open Orders">
+				<ListView.ItemTemplate>
+					<TextCell Text="Hello" />
+				</ListView.ItemTemplate>
+			</ListView>
 			<Button Text="Send Order" HorizontalOptions="End" />
 		</StackLayout>
 	</ContentPage.Content>
