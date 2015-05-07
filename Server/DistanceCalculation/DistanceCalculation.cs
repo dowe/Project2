@@ -23,7 +23,7 @@ namespace Server.DistanceCalculation
         /// </summary>
         /// <param name="positionA"></param>
         /// <param name="positionB"></param>
-        /// <returns>distance in km between the two points and time in hours to travel</returns>
+        /// <returns>distance in km between the two points and time in hours to travel. 0km, 0h if it failed</returns>
         public static DistanceContainer CalculateDistanceInKm(GPSPosition positionA, GPSPosition positionB)
         {
             string url = string.Format(@"http://maps.googleapis.com/maps/api/distancematrix/xml?origins={0},{1}&destinations={2},{3}&mode=driving&sensor=false&language=en-EN", Regex.Replace(positionA.Latitude.ToString(), ",", "."), Regex.Replace(positionA.Longitude.ToString(), ",", "."), Regex.Replace(positionB.Latitude.ToString(), ",", "."), Regex.Replace(positionB.Longitude.ToString(), ",", "."));
@@ -53,14 +53,48 @@ namespace Server.DistanceCalculation
         }
 
         /// <summary>
-        /// Calculates distance (km) and time (h) between the two given coodinates.
+        /// Calculates distance (km) and time (h) between the a coordiate and an address.
         /// </summary>
         /// <param name="position"></param>
         /// <param name="address"></param>
-        /// <returns>distance in km between the two points and time in hours to travel</returns>
+        /// <returns>distance in km between the two points and time in hours to travel. 0km, 0h if it failed</returns>
         public static DistanceContainer CalculateDistanceInKm(GPSPosition position, Address address)
         {
             string url = string.Format(@"http://maps.googleapis.com/maps/api/distancematrix/xml?origins={0},{1}&destinations={2}+{3}+{4}&mode=driving&sensor=false&language=en-EN", Regex.Replace(position.Latitude.ToString(), ",", "."), Regex.Replace(position.Longitude.ToString(), ",", "."), address.Street, address.PostalCode, address.City);
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+
+                if (!string.IsNullOrEmpty(result))
+                {
+                    var xmlResponse = XDocument.Parse(result);
+
+                    if (xmlResponse.Descendants("status").FirstOrDefault().Value == "OK")
+                    {
+                        var container = new DistanceContainer();
+                        container.Distance = (float)xmlResponse.Descendants("distance").Descendants("value").FirstOrDefault() / 1000;
+                        container.Time = (float)xmlResponse.Descendants("duration").Descendants("value").FirstOrDefault() / 3600;
+                        return container;
+                    }
+
+                }
+            }
+
+            return new DistanceContainer();
+        }
+
+        /// <summary>
+        /// Calculates distance (km) and time (h) between the two given addresses.
+        /// </summary>
+        /// <param name="address1"></param>
+        /// <param name="address2"></param>
+        /// <returns>distance in km between the two points and time in hours to travel. 0km, 0h if it failed</returns>
+        public static DistanceContainer CalculateDistanceInKm(Address address1, Address address2)
+        {
+            string url = string.Format(@"http://maps.googleapis.com/maps/api/distancematrix/xml?origins={0}+{1}+{2}&destinations={3}+{4}+{5}&mode=driving&sensor=false&language=en-EN", address1.Street, address1.PostalCode, address1.City, address2.Street, address2.PostalCode, address2.City);
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
