@@ -1,0 +1,13 @@
+﻿@model ASPServer.Models.UserModel
+
+@{
+    ViewBag.Title = "LoginSuccessful";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Erfolgreich eingeloggt</h2>
+
+<div>
+    <hr />
+    <h4>Willkommen @Html.DisplayFor(model => model.ID)!</h4>
+</div>
