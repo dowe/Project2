@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ManagementSoftware.ViewModel
 {
-    class TestsVM
+    public class TestsVM
     {
+
     }
 }
