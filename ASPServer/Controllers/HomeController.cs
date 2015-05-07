@@ -13,6 +13,9 @@ namespace ASPServer.Controllers
 {
     public class HomeController : Controller
     {
+        private const string SessionBills = "billsData";
+        private const string AuthID = "authId";
+        private const string UserID = "userID";
         IClientConnection _clientConnection;
 
         /// <summary>
@@ -34,24 +37,23 @@ namespace ASPServer.Controllers
 
         public ActionResult Bill()
         {
-            //TODO: CHECK FOR LOGIN
+            if (!this.IsUserAuthenticated())
+            {
+                return RedirectToAction("Login");
+            }
+
             var billsRaw = new List<Bill>();
-            if (Session["bills"] == null)
+            if (Session[SessionBills] == null)
             {
-                //TODO:EXCHANGE WITH COMM
-                billsRaw = new List<Bill>()
-            {
-                new Bill(){Customer = null, Date = new DateTime(123,1,1), PDFPath = "/App_Data/Erste_Schritte.pdf"},
-                new Bill(){Customer = null, Date = new DateTime(133,1,1), PDFPath = "/App_Data/Erste_Schritte.pdf"},
-                new Bill(){Customer = null, Date = new DateTime(144,1,1), PDFPath = "/App_Data/Erste_Schritte.pdf"},
-                new Bill(){Customer = null, Date = new DateTime(155,1,1), PDFPath = "/App_Data/Erste_Schritte.pdf"},
+                var cmd =
+                    _clientConnection.SendWait<CmdReturnGetBillsOfMonth>(
+                        new CmdGetBillsOfMonth((string)Session[UserID]));
+                billsRaw = cmd.BillsOfMonth.ToList();
 
-            };
-
-                if (billsRaw == null || !billsRaw.Any())
+                if (!billsRaw.Any())
                     return View();
 
-                Session["bills"] = billsRaw;
+                Session[SessionBills] = billsRaw;
             }
 
 
@@ -73,9 +75,13 @@ namespace ASPServer.Controllers
         [HttpPost]
         public ActionResult Bill(string submitBtn)
         {
-            //TODO: CHECK FOR LOGIN
+            if (!this.IsUserAuthenticated())
+            {
+                return RedirectToAction("LoginFailed");
+            }
 
-            var bills = (List<Bill>)Session["bills"];
+
+            var bills = (List<Bill>)Session[SessionBills];
             if (bills == null)
                 return View();
 
@@ -118,13 +124,13 @@ namespace ASPServer.Controllers
                 myKey.ToList().ForEach(b => authId += b.ToString("x2"));
 
                 // Save the auth key in the session and in the cookie
-                Session["authID"] = authId;
-                var cookie = new HttpCookie("authId");
+                Session[AuthID] = authId;
+                var cookie = new HttpCookie(AuthID);
                 cookie.Value = authId;
                 Response.Cookies.Add(cookie);
 
                 // Also save the "real" userID -> important to know for showing user specific data
-                Session["userID"] = userModel.ID;
+                Session[UserID] = userModel.ID;
                 //UserDB.loginMapping.Add(authId, userModel);
 
                 return RedirectToAction("LoginSuccessful");
@@ -147,7 +153,7 @@ namespace ASPServer.Controllers
         {
             if (this.IsUserAuthenticated())
             {
-                return View(new UserModel { ID = Session["userID"].ToString() });
+                return View(new UserModel { ID = Session[UserID].ToString() });
             }
             else
             {
@@ -170,7 +176,7 @@ namespace ASPServer.Controllers
         {
             try
             {
-                if (Request.Cookies["authId"].Value == Session["authId"].ToString())
+                if (Request.Cookies[AuthID].Value == Session[AuthID].ToString())
                 {
                     return true;
                 }

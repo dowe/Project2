@@ -49,7 +49,7 @@
     <Compile Include="CmdGetAllOrders.cs" />
     <Compile Include="CmdGetAnalyses.cs" />
     <Compile Include="CmdGetAvailableCars.cs" />
-    <Compile Include="CmdGetBillDatesOfMonth.cs" />
+    <Compile Include="CmdGetBillsOfMonth.cs" />
     <Compile Include="CmdGetBillOfDate.cs" />
     <Compile Include="CmdGetCustomerAddress.cs" />
     <Compile Include="CmdGetDailyStatistic.cs" />
@@ -68,7 +68,7 @@
     <Compile Include="CmdReturnGetAllCars.cs" />
     <Compile Include="CmdReturnAnnounceEmergency.cs" />
     <Compile Include="CmdReturnGetAvailableCars.cs" />
-    <Compile Include="CmdReturnGetBillDatesOfMonth.cs" />
+    <Compile Include="CmdReturnGetBillsOfMonth.cs" />
     <Compile Include="CmdReturnGetBillOfDate.cs" />
     <Compile Include="CmdReturnGetCustomerAddress.cs" />
     <Compile Include="CmdReturnGetDailyStatistic.cs" />
