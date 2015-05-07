@@ -187,6 +187,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Common.Commands\Common.Commands.csproj">
+      <Project>{f74fba9f-fb01-48f6-9ef7-b45eb345e958}</Project>
+      <Name>Common.Commands</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common.Communication.Client\Common.Communication.Client.csproj">
       <Project>{2b9228e8-bd74-4d56-aa96-551fc8031595}</Project>
       <Name>Common.Communication.Client</Name>
