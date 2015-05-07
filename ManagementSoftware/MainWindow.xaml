@@ -24,6 +24,12 @@
             <TabItem Header="Schichtplan">
                 <views:ShiftScheduleView/>
             </TabItem>
+            <TabItem Header="Tagesstatistik">
+                <views:DailyStatisticView/>
+            </TabItem>
+            <TabItem Header="Probenübersicht">
+                <views:TestsView/>
+            </TabItem>
         </TabControl>
 
     </Grid>
