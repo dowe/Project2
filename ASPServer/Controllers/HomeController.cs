@@ -1,4 +1,5 @@
 ﻿using ASPServer.Models;
+using Common.Commands;
 using Common.Communication.Client;
 using Common.DataTransferObjects;
 using System;
@@ -99,13 +100,15 @@ namespace ASPServer.Controllers
         [HttpPost]
         public ActionResult Login(UserModel userModel)
         {
+            CmdReturnLoginDriver cmd = this._clientConnection.SendWait<CmdReturnLoginDriver>(new CmdLoginDriver(userModel.ID, userModel.Password));
+
             // Test "DB"
             List<UserModel> registeredUsers = new List<UserModel>();
             registeredUsers.Add(new UserModel { ID = "ich", Password = "asdf" });
             registeredUsers.Add(new UserModel { ID = "du", Password = "1234" });
 
             // Check if the user exists and if the password is correct
-            if (registeredUsers.FirstOrDefault(user => (user.ID == userModel.ID) && user.Password == userModel.Password) != null)
+            if (cmd.Success)
             {
                 // Make a crypto key to authenticate the user (much better than a GUID ;-))
                 RNGCryptoServiceProvider rngProvider = new RNGCryptoServiceProvider();
