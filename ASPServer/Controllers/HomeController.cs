@@ -152,6 +152,17 @@ namespace ASPServer.Controllers
             }
         }
 
+        // GET: Logout
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        ///     Checks if the user is logged in
+        /// </summary>
+        /// <returns>True if the user is authenticated, otherwise false</returns>
         private bool IsUserAuthenticated()
         {
             try
