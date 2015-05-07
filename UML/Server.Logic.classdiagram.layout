@@ -35,7 +35,7 @@
         </interfaceShape>
       </nestedChildShapes>
     </packageShape>
-    <realizationConnector edgePoints="[(4.625 : 5.08789056291183); (4.875 : 5.08789056291183)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" showAsLollipop="false">
+    <realizationConnector edgePoints="[(4.625 : 5.08789056291183); (4.875 : 5.08789056291183)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" showAsLollipop="false">
       <interfaceRealizationMoniker Id="592d4fb5-c94c-45b5-b8f4-9e3c9acbe46b" />
       <relativeChildShapes />
       <nodes>
@@ -124,7 +124,7 @@
         <interfaceShapeMoniker Id="b3a7cb59-312b-41ed-b2e0-b2184f195eeb" />
       </nodes>
     </realizationConnector>
-    <associationConnector edgePoints="[(13 : 5.67382811258237); (15.25 : 5.67382811258237)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+    <associationConnector edgePoints="[(13 : 5.67382811258237); (15.25 : 5.67382811258237)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
       <associationMoniker Id="149db4cc-32db-433f-a7cd-9851b8f1b44e" />
       <relativeChildShapes />
       <nodes>
@@ -132,14 +132,14 @@
         <interfaceShapeMoniker Id="b3a7cb59-312b-41ed-b2e0-b2184f195eeb" />
       </nodes>
     </associationConnector>
-    <packageShape Id="51042bfb-74fe-4534-a21d-846cf759f019" absoluteBounds="0.75, 12.75, 2.5, 3.125" customColor="255, 249, 230" hideQualifiedName="false">
+    <packageShape Id="51042bfb-74fe-4534-a21d-846cf759f019" absoluteBounds="0.75, 12.75, 2.625, 3.125" customColor="255, 249, 230" hideQualifiedName="false">
       <packageMoniker Id="b3fb2c1f-2c47-4943-b01c-8cdf7ae35526" LastKnownName="BillCalculation" />
       <nestedChildShapes>
-        <interfaceShape Id="9e5f12ed-6af3-4a0b-b22d-0df52f24dad7" absoluteBounds="1, 13.25, 2, 1.0624999801317845" hideQualifiedName="false" increaseHeight="0" customColor="207, 223, 191">
+        <interfaceShape Id="9e5f12ed-6af3-4a0b-b22d-0df52f24dad7" absoluteBounds="1, 13.25, 2.25, 1.0624999801317845" hideQualifiedName="false" increaseHeight="0" customColor="207, 223, 191">
           <interfaceMoniker Id="5ee58ffb-5c7d-4241-95c6-3c0e819c0891" LastKnownName="IBillCalculator" />
           <nestedChildShapes>
-            <AttributeElementListCompartment Id="45bfff60-c75e-47c3-8a1c-927bf79cf02c" absoluteBounds="1.015, 13.64, 1.9700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
-            <OperationElementListCompartment Id="3d229968-40fb-4e47-bff8-5c174b55792e" absoluteBounds="1.015, 13.85117186754942, 1.9700000000000002, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <AttributeElementListCompartment Id="45bfff60-c75e-47c3-8a1c-927bf79cf02c" absoluteBounds="1.015, 13.64, 2.2199999999999998, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="3d229968-40fb-4e47-bff8-5c174b55792e" absoluteBounds="1.015, 13.85117186754942, 2.2199999999999998, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
           </nestedChildShapes>
         </interfaceShape>
         <classShape Id="29a7bd72-6f14-48cb-80ed-91f1677a1dd0" absoluteBounds="1, 14.625, 2, 1.0624999801317845" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
@@ -151,7 +151,7 @@
         </classShape>
       </nestedChildShapes>
     </packageShape>
-    <realizationConnector edgePoints="[(2 : 14.625); (2 : 14.3124999801318)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" showAsLollipop="false">
+    <realizationConnector edgePoints="[(2 : 14.625); (2 : 14.4660999801318); (2.125 : 14.4660999801318); (2.125 : 14.3124999801318)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" showAsLollipop="false">
       <interfaceRealizationMoniker Id="51037e1f-d3c2-4be9-8f3e-1dd594d5b70e" />
       <relativeChildShapes />
       <nodes>

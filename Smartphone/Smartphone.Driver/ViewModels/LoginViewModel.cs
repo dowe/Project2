@@ -1,11 +1,9 @@
-﻿using System;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using Common.Communication.Client;
-using Common.Communication;
 using System.Threading.Tasks;
 using Common.Commands;
-using GalaSoft.MvvmLight.Messaging;
+using Common.Communication;
+using Common.Communication.Client;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Smartphone.Driver
@@ -143,4 +141,3 @@ namespace Smartphone.Driver
 
 	}
 }
-
