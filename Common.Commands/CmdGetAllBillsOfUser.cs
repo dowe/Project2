@@ -7,12 +7,12 @@ using Common.Communication;
 
 namespace Common.Commands
 {
-    public class CmdGetBillsOfMonth : Command
+    public class CmdGetAllBillsOfUser : Command
     {
 
         public string Username { get; private set; }
 
-        public CmdGetBillsOfMonth(string username)
+        public CmdGetAllBillsOfUser(string username)
         {
             Username = username;
         }

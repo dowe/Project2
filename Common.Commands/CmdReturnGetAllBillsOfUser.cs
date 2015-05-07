@@ -9,14 +9,14 @@ using Common.DataTransferObjects;
 
 namespace Common.Commands
 {
-    public class CmdReturnGetBillsOfMonth : ResponseCommand
+    public class CmdReturnGetAllBillsOfUser : ResponseCommand
     {
-        public ReadOnlyCollection<Bill> BillsOfMonth { get; private set; }
+        public ReadOnlyCollection<Bill> Bills { get; private set; }
 
-        public CmdReturnGetBillsOfMonth(Guid requestId, IList<Bill> billsOfMonth)
+        public CmdReturnGetAllBillsOfUser(Guid requestId, IList<Bill> bills)
             : base(requestId)
         {
-            BillsOfMonth = new ReadOnlyCollection<Bill>(billsOfMonth);
+            Bills = new ReadOnlyCollection<Bill>(bills);
         }
     }
 }

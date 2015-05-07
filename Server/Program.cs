@@ -30,7 +30,7 @@ namespace Server
             // Register all command handler to the connection here.
             connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection));
-            connection.RegisterCommandHandler(new CmdGetBillsOfMonthHandler(connection));
+            connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection));
         }
     }
 }

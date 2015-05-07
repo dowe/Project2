@@ -46,9 +46,9 @@ namespace ASPServer.Controllers
             if (Session[SessionBills] == null)
             {
                 var cmd =
-                    _clientConnection.SendWait<CmdReturnGetBillsOfMonth>(
-                        new CmdGetBillsOfMonth((string)Session[UserID]));
-                billsRaw = cmd.BillsOfMonth.ToList();
+                    _clientConnection.SendWait<CmdReturnGetAllBillsOfUser>(
+                        new CmdGetAllBillsOfUser((string)Session[UserID]));
+                billsRaw = cmd.Bills.ToList();
 
                 if (!billsRaw.Any())
                     return View();

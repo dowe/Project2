@@ -10,16 +10,16 @@ using Common.DataTransferObjects;
 
 namespace Server.CmdHandler
 {
-    public class CmdGetBillsOfMonthHandler : CommandHandler<CmdGetBillsOfMonth>
+    public class CmdGetAllBillsOfUserHandler : CommandHandler<CmdGetAllBillsOfUser>
     {
         private IServerConnection connection = null;
 
-        public CmdGetBillsOfMonthHandler(IServerConnection connection)
+        public CmdGetAllBillsOfUserHandler(IServerConnection connection)
         {
             this.connection = connection;
         }
 
-        protected override void Handle(CmdGetBillsOfMonth command, string connectionIdOrNull)
+        protected override void Handle(CmdGetAllBillsOfUser command, string connectionIdOrNull)
         {
             List<Bill> billsRaw = new List<Bill>();
             if ("Ole".Equals(command.Username))
@@ -34,7 +34,7 @@ namespace Server.CmdHandler
             };
             }
 
-            var response = new CmdReturnGetBillsOfMonth(command.Id, billsRaw);
+            var response = new CmdReturnGetAllBillsOfUser(command.Id, billsRaw);
             connection.Unicast(response, connectionIdOrNull);
         }
     }

@@ -91,7 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CmdHandler\CmdGetBillsOfMonthHandler.cs" />
+    <Compile Include="CmdHandler\CmdGetAllBillsOfUserHandler.cs" />
     <Compile Include="CmdHandler\CmdLoginDriverHandler.cs" />
     <Compile Include="CmdHandler\CmdRegisterCustomerHandler.cs" />
     <Compile Include="DatabaseCommunication\DatabaseCommunicator.cs" />
