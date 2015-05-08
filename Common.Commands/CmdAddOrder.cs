@@ -11,12 +11,12 @@ namespace Common.Commands
     public class CmdAddOrder : Command
     {
 
-        public Order Order { get; private set; }
+        public Dictionary<String, List<Analysis>> PatientTests; //Key = Patientid
         public string CustomerUsername { get; private set; }
 
-        public CmdAddOrder(Order order, string customerUsername)
+        public CmdAddOrder(Dictionary<String, List<Analysis>> tests, string customerUsername)
         {
-            Order = order;
+            PatientTests = tests;
             CustomerUsername = customerUsername;
         }
 
