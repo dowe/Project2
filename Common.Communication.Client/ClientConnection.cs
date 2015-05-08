@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR.Client.Transports;
 
 namespace Common.Communication.Client
 {
     public class ClientConnection : IClientConnection
     {
 
-        private const int CONNECT_TIMEOUT_IN_MS = 10000;
+        private const int CONNECT_TIMEOUT_IN_MS = 100;
         private const int DEFAULT_RESPONSE_TIMEOUT_IN_MS = 2000;
 
         private Connection connection = null;
@@ -35,6 +36,7 @@ namespace Common.Communication.Client
             connectionLock = new ReaderWriterLockSlim();
 
             connection = new Connection(serverAddress);
+            connection.TransportConnectTimeout = TimeSpan.FromMilliseconds(CONNECT_TIMEOUT_IN_MS);
             connection.Received += connection_Received;
             connection.Reconnecting += connection_Reconnecting;
             connection.Reconnected += connection_Reconnected;
@@ -84,11 +86,12 @@ namespace Common.Communication.Client
             connectionLock.EnterWriteLock();
             try
             {
-                if (connection.Start().Wait(CONNECT_TIMEOUT_IN_MS) == false)
+                IClientTransport transport = new ServerSentEventsTransport
                 {
-                    connection.Stop();
-                    throw new ConnectionException("Could not connect before timeout.", null);
-                }
+                    ReconnectDelay = TimeSpan.FromMilliseconds(CONNECT_TIMEOUT_IN_MS)
+                };
+                connection.Start(transport).Wait();
+                Console.WriteLine("Connected");
             }
             catch (AggregateException e)
             {
