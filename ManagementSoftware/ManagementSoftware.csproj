@@ -52,8 +52,15 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\packages\PdfSharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting">
+      <HintPath>..\packages\PdfSharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -80,12 +87,22 @@
     <Compile Include="Helper\ColumnVisibilityConverter.cs" />
     <Compile Include="Helper\EmployeeTypeConverter.cs" />
     <Compile Include="Helper\GridColorConverter.cs" />
+    <Compile Include="Model\ISwitchShiftScheduleView.cs" />
+    <Compile Include="Model\ShiftScheduleDayEntry.cs" />
+    <Compile Include="Model\ShiftScheduleModel.cs" />
     <Compile Include="Model\ShiftScheduleMonthEntry.cs" />
     <Compile Include="Model\ShiftScheduleRawModel.cs" />
+    <Compile Include="ViewModel\DailyStatisticVM.cs" />
     <Compile Include="ViewModel\RegisterCustomerVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleDayVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleMonthVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleVM.cs" />
+    <Compile Include="ViewModel\TableTestsVM.cs" />
+    <Compile Include="ViewModel\TestDetailVM.cs" />
+    <Compile Include="ViewModel\TestsVM.cs" />
+    <Compile Include="View\DailyStatisticView.xaml.cs">
+      <DependentUpon>DailyStatisticView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RegisterCustomerView.xaml.cs">
       <DependentUpon>RegisterCustomerView.xaml</DependentUpon>
     </Compile>
@@ -99,6 +116,15 @@
     <Compile Include="View\ShiftScheduleView.xaml.cs">
       <DependentUpon>ShiftScheduleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TestDetailView.xaml.cs">
+      <DependentUpon>TestDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TestsView.xaml.cs">
+      <DependentUpon>TestsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TestTableView.xaml.cs">
+      <DependentUpon>TestTableView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,6 +137,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\DailyStatisticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\RegisterCustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +154,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ShiftScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

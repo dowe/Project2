@@ -1,23 +1,34 @@
-﻿using System;
-
-using Xamarin.Forms;
-using Common.Communication.Client;
-using Common.Commands;
-using Common.DataTransferObjects;
+﻿using Xamarin.Forms;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Smartphone.Driver
 {
 	public class App : Application
 	{
 
+		private static ViewModelLocator locator = null;
+
+		public static ViewModelLocator Locator
+		{
+			get {
+				return locator ?? (locator = new ViewModelLocator ());
+			}
+		}
+
 		public App ()
 		{
-			MainPage = new LoginPage();
+			RegisterMessengerHandlers ();
+			MainPage = new LoginPage ();
+		}
+
+		private void RegisterMessengerHandlers()
+		{
+			Messenger.Default.Register<SwitchPageMsg> (this, SwitchPage);
 		}
 
 		protected override void OnStart ()
 		{
-
+			
 		}
 
 		protected override void OnSleep ()
@@ -29,6 +40,12 @@ namespace Smartphone.Driver
 		{
 			// Handle when your app resumes
 		}
+
+		private void SwitchPage(SwitchPageMsg message)
+		{
+			MainPage = new OrdersPage ();
+		}
+
 	}
 }
 

@@ -26,10 +26,11 @@ namespace Server
 
         private static void RegisterHandlers(ServerConnection connection)
         {
-            // TODO
+            // TODO: REGISTER SERVER HANDLER HERE
             // Register all command handler to the connection here.
-           
+            connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection));
+            connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection));
         }
     }
 }

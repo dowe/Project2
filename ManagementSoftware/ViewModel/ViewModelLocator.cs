@@ -34,6 +34,9 @@ namespace ManagementSoftware.ViewModel
             SimpleIoc.Default.Register<IClientConnection, ClientConnectionCreator>();
             SimpleIoc.Default.Register<RegisterCustomerVM>();
             SimpleIoc.Default.Register<ShiftScheduleVM>();
+            SimpleIoc.Default.Register<DailyStatisticVM>();
+            SimpleIoc.Default.Register<TestsVM>();
+
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -57,9 +60,27 @@ namespace ManagementSoftware.ViewModel
                 return ServiceLocator.Current.GetInstance<ShiftScheduleVM>();
             }
         }
+          [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public DailyStatisticVM DailyStatistic
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DailyStatisticVM>();
+            }
+        }
 
-
-
+          [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+          public TestsVM Tests
+          {
+              get
+              {
+                  return ServiceLocator.Current.GetInstance<TestsVM>();
+              }
+          }
         /// <summary>
         /// Cleans up all the resources.
         /// </summary>

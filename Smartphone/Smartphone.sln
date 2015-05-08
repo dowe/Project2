@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smartphone.Driver.Droid", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smartphone.Driver.UITests", "UITests\Smartphone.Driver.UITests.csproj", "{8473EACA-6614-4BE1-9A9C-F649BF1C3B4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smartphone.Driver.UnitTests", "Smartphone.Driver.UnitTests\Smartphone.Driver.UnitTests.csproj", "{EF73CFA6-E1D0-4074-87AF-98E1ABDFDC83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9B67652B-5487-442A-AD6E-6A855753DAA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B67652B-5487-442A-AD6E-6A855753DAA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B67652B-5487-442A-AD6E-6A855753DAA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF73CFA6-E1D0-4074-87AF-98E1ABDFDC83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF73CFA6-E1D0-4074-87AF-98E1ABDFDC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF73CFA6-E1D0-4074-87AF-98E1ABDFDC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF73CFA6-E1D0-4074-87AF-98E1ABDFDC83}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EFBC5635-2093-475D-B203-08140BF682A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EFBC5635-2093-475D-B203-08140BF682A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFBC5635-2093-475D-B203-08140BF682A9}.Release|Any CPU.ActiveCfg = Release|Any CPU

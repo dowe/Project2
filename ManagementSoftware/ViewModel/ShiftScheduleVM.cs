@@ -14,62 +14,31 @@ using System.Windows;
 
 namespace ManagementSoftware.ViewModel
 {
-    public class ShiftScheduleVM : ViewModelBase
+    public class ShiftScheduleVM : ViewModelBase, ISwitchShiftScheduleView
     {
-
-        private static readonly CultureInfo GERMAN_CULTURE_INFO = new CultureInfo("de-DE");
-        private static readonly string NO_DATA_AVAILABLE = "Keine Daten geladen/vorhanden";
-
-        private ViewModelBase _CurrentViewModel;
-        private string _MonthText;
-
-        private ShiftScheduleMonthVM _ShiftScheduleMonthVM;
-        private ShiftScheduleDayVM _ShiftScheduleDayVM;
-
-        private IClientConnection _Connection;
-        private ShiftScheduleRawModel _ShiftScheduleRawModel;
-        private RelayCommand _LoadDataCommand;
-
+        private ShiftScheduleModel _ShiftScheduleModel;
+        
         public ShiftScheduleVM(IClientConnection _Connection)
         {
-            this._Connection = _Connection;
+            this._ShiftScheduleModel = new ShiftScheduleModel(this, _Connection);
 
-            this._ShiftScheduleRawModel = new ShiftScheduleRawModel();
+            this.LoadRawModelCommand = new RelayCommand(() => LoadRawModel());
+            this.SwitchMonthDataCommand = new RelayCommand(() => SwitchMonthData());
 
-            RelayCommand _SwitchToMonthCommand = new RelayCommand(() => SwitchToShiftScheduleMonthVM());
-            RelayCommand _SwitchToDayCommand = new RelayCommand(() => SwitchToShiftScheduleDayVM());
-            
-            this._LoadDataCommand = new RelayCommand(() => LoadRawModel());
-
-            this._ShiftScheduleMonthVM = new ShiftScheduleMonthVM(_ShiftScheduleRawModel, _SwitchToDayCommand);
-            this._ShiftScheduleDayVM = new ShiftScheduleDayVM(_ShiftScheduleRawModel, _SwitchToMonthCommand);
-
-
-            this._ShiftScheduleRawModel.Change += RawModelChanged;
-            this._CurrentViewModel = _ShiftScheduleMonthVM;
-            this._MonthText = NO_DATA_AVAILABLE;
+            this._ShiftScheduleModel.ShiftScheduleRawModel.Change += RawModelChanged;
         }
 
         private void RawModelChanged(object sender, EventArgs e)
         {
-            
-            ShiftSchedule data = _ShiftScheduleRawModel.CurrentData;
-            if (data == null)
-            {
-                MonthText = NO_DATA_AVAILABLE;
-            }
-            else
-            {
-                DateTime date = data.DayEntry[0].Date;
-                MonthText = date.ToString("y", GERMAN_CULTURE_INFO);
-            }
+            RaisePropertyChanged(() => CurrentMonthText);
+            RaisePropertyChanged(() => SwitchMonthButtonText);
         }
 
         public ShiftScheduleMonthVM ShiftScheduleMonthVM
         {
             get
             {
-                return _ShiftScheduleMonthVM;
+                return _ShiftScheduleModel.ShiftScheduleMonthVM;
             }
         }
 
@@ -77,62 +46,28 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _ShiftScheduleDayVM;
+                return _ShiftScheduleModel.ShiftScheduleDayVM;
             }
         }
 
-        private void SwitchToShiftScheduleMonthVM()
-        {
-            CurrentViewModel = _ShiftScheduleMonthVM;
-        }
-
-        private void SwitchToShiftScheduleDayVM()
-        {
-            CurrentViewModel = _ShiftScheduleDayVM;
-        }
-
-        public RelayCommand LoadRawModelCommand
-        {
-            get
-            {
-                return _LoadDataCommand;
-            }
-        }
+        public RelayCommand LoadRawModelCommand { get; private set; }
+        public RelayCommand SwitchMonthDataCommand { get; private set; }
 
         private void LoadRawModel()
         {
-            //TODO _Connection ...
-
-            DateTime now = DateTime.Now;
-            int month = now.Month + 1;
-            int year = now.Year;
-            if (month > 12)
-            {
-                month = 1;
-                year++;
-            }
-            DateTime next = new DateTime(year, month, 1);
-
-            ShiftSchedule[] _Data = new ShiftSchedule[2];
-
-            _Data[0] = ShiftScheduleRawModel.Create(now);
-            _Data[1] = ShiftScheduleRawModel.Create(next);            
-
-            _ShiftScheduleRawModel.Data = _Data;
-
-            MessageBox.Show("Daten abgerufen");
+            _ShiftScheduleModel.LoadRawModel();
         }
 
-        public string MonthText
+        private void SwitchMonthData()
+        {
+            _ShiftScheduleModel.SwitchMonthData();
+        }
+
+        public string CurrentMonthText
         {
             get
             {
-                return _MonthText;
-            }
-            set
-            {
-                _MonthText = value;
-                RaisePropertyChanged();
+                return _ShiftScheduleModel.CurrentMonthText;
             }
         }
 
@@ -140,13 +75,31 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _CurrentViewModel;
+                return _ShiftScheduleModel.CurrentViewModel;
             }
             set
             {
-                _CurrentViewModel = value;
+                _ShiftScheduleModel.CurrentViewModel = value;
                 RaisePropertyChanged();
             }
+        }
+
+        public string SwitchMonthButtonText
+        {
+            get
+            {
+                return _ShiftScheduleModel.SwitchMonthButtonText;
+            }
+        }
+
+        public void SwitchToShiftScheduleMonthVM()
+        {
+            CurrentViewModel = _ShiftScheduleModel.ShiftScheduleMonthVM;
+        }
+
+        public void SwitchToShiftScheduleDayVM()
+        {
+            CurrentViewModel = _ShiftScheduleModel.ShiftScheduleDayVM;
         }
     }
 }

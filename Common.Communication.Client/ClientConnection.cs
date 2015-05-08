@@ -11,6 +11,7 @@ namespace Common.Communication.Client
     public class ClientConnection : IClientConnection
     {
 
+        private const int CONNECT_TIMEOUT_IN_MS = 10000;
         private const int DEFAULT_RESPONSE_TIMEOUT_IN_MS = 2000;
 
         private Connection connection = null;
@@ -83,7 +84,11 @@ namespace Common.Communication.Client
             connectionLock.EnterWriteLock();
             try
             {
-                connection.Start().Wait();
+                if (connection.Start().Wait(CONNECT_TIMEOUT_IN_MS) == false)
+                {
+                    connection.Stop();
+                    throw new ConnectionException("Could not connect before timeout.", null);
+                }
             }
             catch (AggregateException e)
             {
@@ -171,6 +176,22 @@ namespace Common.Communication.Client
             finally
             {
                 connectionLock.ExitWriteLock();
+            }
+        }
+
+        public ConnectionState ConnectionState
+        {
+            get
+            {
+                connectionLock.EnterReadLock();
+                try
+                {
+                    return connection.State;
+                }
+                finally
+                {
+                    connectionLock.ExitReadLock();
+                }
             }
         }
 

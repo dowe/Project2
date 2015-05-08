@@ -13,7 +13,7 @@ namespace Common.Commands
         public string Username { get; private set; }
         public string Password { get; private set; }
 
-        public CmdLoginDriver(string username, string password, float startKm)
+        public CmdLoginDriver(string username, string password)
         {
             Username = username;
             Password = password;

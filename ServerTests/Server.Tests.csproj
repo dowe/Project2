@@ -60,7 +60,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DatabaseCommunication\DatabaseCommunicatorTests.cs" />
-    <Compile Include="DistanceCalculation\DistanceCommunicationTests.cs" />
+    <Compile Include="DistanceCalculation\DistanceCalculationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

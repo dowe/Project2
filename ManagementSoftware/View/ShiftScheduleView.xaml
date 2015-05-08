@@ -15,9 +15,9 @@
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
 
         <Grid Grid.Row="0" Margin="10">
-            <Button Width="75" Content="Button" Margin="80,0,125,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button Width="150" Content="{Binding SwitchMonthButtonText, Mode=OneWay}" Margin="80,0,125,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding SwitchMonthDataCommand, Mode=OneWay}"/>
             <Button Width="75" Content="Aktualisiere" Margin="0,0,205,0" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding LoadRawModelCommand, Mode=OneWay}" />
-            <Label Content="{Binding MonthText}" HorizontalAlignment="Left" Margin="160,-3,-80,0" VerticalAlignment="Top" Width="200"/>
+            <Label Content="{Binding CurrentMonthText, Mode=OneWay}" HorizontalAlignment="Left" Margin="235,-3,-55,0" VerticalAlignment="Top" Width="200"/>
         </Grid>
 
     </Grid>

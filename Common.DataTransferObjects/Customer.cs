@@ -81,12 +81,6 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual IList<Bill> Bill
-		{
-			get;
-			set;
-		}
-
 	}
 }
 
