@@ -17,29 +17,38 @@ namespace Server.DatabaseCommunication
 
         private LaborContext Context;
 
-        public List<Analysis> GetAllAnalysis(Func<Analysis, bool> lambda)
+        public List<Analysis> GetAllAnalysis(Func<Analysis, bool> lambda = null)
         {
-            throw new NotImplementedException();
+            if(lambda != null)
+            {
+                return Context.Analysis.Where(lambda).ToList();
+            }
+            return Context.Analysis.ToList();
+
         }
 
         public List<ShiftSchedule> GetShiftSchedules()
         {
-            throw new NotImplementedException();
+            return Context.ShiftSchedule.ToList();
         }
 
         public List<Order> GetAllOrders(Func<Order, bool> lambda)
         {
-            throw new NotImplementedException();
+            if (lambda != null)
+            {
+                return Context.Order.Where(lambda).ToList();
+            }
+            return Context.Order.ToList();
         }
 
         public Order GetOrder(long orderID)
         {
-            throw new NotImplementedException();
+            return Context.Order.Find(orderID);
         }
 
         public Test GetTest(Guid testID)
         {
-            throw new NotImplementedException();
+            return Context.Test.Find(testID);
         }
 
         public void EndTransaction(TransactionEndOperation operation)
@@ -77,6 +86,10 @@ namespace Server.DatabaseCommunication
 
         public void StartTransaction()
         {
+            if(Context != null)
+            {
+                throw new Exception("Transaction is already started");
+            }
             Context = new LaborContext();
         }
 
@@ -87,37 +100,53 @@ namespace Server.DatabaseCommunication
 
         public List<Test> GetAllTests(Func<Test, bool> lambda)
         {
-            throw new NotImplementedException();
+            if (lambda != null)
+            {
+                return Context.Test.Where(lambda).ToList();
+            }
+            return Context.Test.ToList();
         }
 
         public List<Car> GetAllCars(Func<Car, bool> lambda)
         {
-            throw new NotImplementedException();
+            if (lambda != null)
+            {
+                return Context.Car.Where(lambda).ToList();
+            }
+            return Context.Car.ToList();
         }
 
         public List<Customer> GetAllCustomer(Func<Customer, bool> lambda)
         {
-            throw new NotImplementedException();
+            if (lambda != null)
+            {
+                return Context.Customer.Where(lambda).ToList();
+            }
+            return Context.Customer.ToList();
         }
 
         public Customer GetCustomer(string userName)
         {
-            throw new NotImplementedException();
+            return Context.Customer.Find(userName);
         }
 
         public Address GetCustomerAddress(string userName)
         {
-            throw new NotImplementedException();
+            return Context.Customer.Find(userName).Address;
         }
 
         public void CreateOrder(Order order)
         {
-            throw new NotImplementedException();
+            Context.Order.Add(order);
         }
 
         public List<Bill> GetAllBills(Func<Bill, bool> lambda)
         {
-            throw new NotImplementedException();
+            if (lambda != null)
+            {
+                return Context.Bill.Where(lambda).ToList();
+            }
+            return Context.Bill.ToList();
         }
 
         public List<DateTime> GetBillDatesOfMonth(DateTime month)
@@ -125,39 +154,49 @@ namespace Server.DatabaseCommunication
             throw new NotImplementedException();
         }
 
-        public Bill GetBill(DateTime date)
+        public Bill GetBill(Customer customer, DateTime date)
         {
-            throw new NotImplementedException();
+            return Context.Bill.Find(customer, date);
         }
 
         public List<Driver> GetAllDriver(Func<Driver, bool> lambda)
         {
-            throw new NotImplementedException();
+            if (lambda != null)
+            {
+                return Context.Driver.Where(lambda).ToList();
+            }
+            return Context.Driver.ToList();
         }
 
         public Driver GetDriver(string userName)
         {
-            throw new NotImplementedException();
+            return Context.Driver.Find(userName);
         }
 
-        public Car GetCar(string driverUserName)
+        public Car GetCar(string CarID)
         {
-            throw new NotImplementedException();
+            return Context.Car.Find(CarID);
         }
 
-        public Car GetCarbyId(string driverUserName)
+        public Car GetCarbyDriver(string driverUserName)
         {
-            throw new NotImplementedException();
+            return Context.Car.Where(c => c.CurrentDriver.UserName == driverUserName).FirstOrDefault();
         }
 
         public CarLogbookEntry GetLastCarLogbookEntry(string carID)
         {
-            throw new NotImplementedException();
+            return Context.Car.Find(carID).CarLogbook.CarLogbookEntry.FirstOrDefault();
         }
 
+        //ist die nötig?
         public void CreateCarLogbookEnry(CarLogbookEntry entry)
         {
             throw new NotImplementedException();
+        }
+
+        public void CreateShiftSchedule(ShiftSchedule shift)
+        {
+            Context.ShiftSchedule.Add(shift);
         }
     }
 }
