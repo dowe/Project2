@@ -9,7 +9,10 @@
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
-			<Button Text="Send Order" VerticalOptions="End" />
+			<StackLayout Orientation="Horizontal" VerticalOptions="End" >
+				<Button Text="Logout" HorizontalOptions="StartAndExpand" />
+				<Button Text="Emergency" HorizontalOptions="EndAndExpand" />
+			</StackLayout>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>
