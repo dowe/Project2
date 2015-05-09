@@ -129,7 +129,7 @@ namespace Smartphone.Driver
 					CmdReturnSelectCar response = connection.SendWait<CmdReturnSelectCar>(selectCar);
 					if (response.Success)
 					{
-						OnSuccessfulCarSelection ();
+						OnCarSelectionSuccessful ();
 					}
 					else
 					{
@@ -145,7 +145,7 @@ namespace Smartphone.Driver
 			}
 		}
 
-		private void OnSuccessfulCarSelection()
+		private void OnCarSelectionSuccessful()
 		{
 			// TODO update Session
 			// Request all unfinished Orders of this driver.
