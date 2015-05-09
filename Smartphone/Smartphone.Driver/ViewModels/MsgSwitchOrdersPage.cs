@@ -2,26 +2,9 @@
 
 namespace Smartphone.Driver
 {
-	public class SwitchPageMsg
+	public class MsgSwitchOrdersPage
 	{
 
-		public Page NextPage
-		{
-			get;
-			private set;
-		}
-
-		public SwitchPageMsg (Page nextPage)
-		{
-			NextPage = nextPage;
-		}
-			
-	}
-
-	public enum Page
-	{
-		Login,
-		Orders
 	}
 }
 
