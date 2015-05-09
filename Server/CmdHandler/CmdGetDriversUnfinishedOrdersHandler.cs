@@ -24,8 +24,9 @@ namespace Server.CmdHandler
         {
             List<Order> driversUnfinishedOrders = new List<Order>()
             {
-                new Order() {OrderID = 0, OrderDate = DateTime.Now},
-                new Order() {OrderID = 1, OrderDate = DateTime.Now}
+                new Order() {OrderID = 0, OrderDate = DateTime.Now, Customer = new Customer() {Label = "Ultraklinik"}},
+                new Order() {OrderID = 1, OrderDate = DateTime.Now, Customer = new Customer() {Label = "Lazerklink"}},
+                new Order() {OrderID = 42, OrderDate = DateTime.Now, Customer = new Customer() {Label = "Dr. Awesome"}}
             };
             CmdReturnGetDriversUnfinishedOrders response = new CmdReturnGetDriversUnfinishedOrders(command.Id,
                 driversUnfinishedOrders);

@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Smartphone.Driver.OrdersPage">
 	<ContentPage.Content>
 		<StackLayout>
-			<ListView VerticalOptions="Fill" ItemsSource="{Binding WrappedOrders.Orders}">
+			<ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding WrappedOrders.Orders}">
 				<ListView.ItemTemplate>
 					<DataTemplate>
-						<TextCell Text="{Binding OrderID, StringFormat='Order {0}'}" />
+						<TextCell Text="{Binding OrderID, StringFormat='Order #{0}'}" Detail="{Binding Customer.Label, StringFormat='Kunde: {0}'}" />
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
