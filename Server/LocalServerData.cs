@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.DataTransferObjects;
+using Server.Timer;
 
 namespace Server
 {
@@ -18,9 +19,11 @@ namespace Server
             ZmsAddress.Street = "Badstraße 24";
 
             RoadCostInEuroPerKm = 0.80F;
+
         }
 
         public Address ZmsAddress { get; private set; }
         public float RoadCostInEuroPerKm { get; private set; }
+        public ScheduledTimer TimerCreateShiftSchedule { get; set; }
     }
 }
