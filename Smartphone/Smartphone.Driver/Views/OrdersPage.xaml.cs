@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Smartphone.Driver
 {
@@ -11,7 +12,29 @@ namespace Smartphone.Driver
 		{
 			InitializeComponent ();
 			BindingContext = App.Locator.Orders;
+			Messenger.Default.Register<MsgShowEmergencyDialog>(this, ShowEmergencyDialog);
 		}
+
+		private async void ShowEmergencyDialog(MsgShowEmergencyDialog message)
+		{
+			var answer = await DisplayAlert ("Emergency?", "Are you sure that you want to report an emergency? All unfinished orders will be forwarded to other drivers.", "Yes", "No");
+
+			if (answer)
+			{
+				if (message.EmergencyConfirmed != null)
+				{
+					message.EmergencyConfirmed ();
+				}
+			}
+			else
+			{
+				if (message.EmergencyCanceled != null)
+				{
+					message.EmergencyCanceled ();
+				}
+			}
+		}
+
 	}
 }
 

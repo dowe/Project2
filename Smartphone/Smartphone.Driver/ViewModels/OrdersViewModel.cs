@@ -18,6 +18,7 @@ namespace Smartphone.Driver
 
 		private WrappedOrders wrappedOrders = null;
 		private RelayCommand logoutCommand = null;
+		private RelayCommand emergencyCommand = null;
 
 		public OrdersViewModel(IClientConnection connection, WrappedOrders wrappedOrders)
 		{
@@ -47,9 +48,44 @@ namespace Smartphone.Driver
 			}
 		}
 
+		public RelayCommand EmergencyCommand
+		{
+			get {
+				if (emergencyCommand == null)
+				{
+					emergencyCommand = new RelayCommand (Emergency);
+				}
+				return emergencyCommand;
+			}
+		}
+
 		private void Logout()
 		{
 			Messenger.Default.Send<MsgSwitchLogoutPage> (new MsgSwitchLogoutPage ());
+		}
+
+		private void Emergency()
+		{
+			Messenger.Default.Send<MsgShowEmergencyDialog> (new MsgShowEmergencyDialog (OnConfirmedEmergency, OnCanceledEmergency));
+		}
+
+		public void OnConfirmedEmergency()
+		{
+			CmdAnnounceEmergency announceEmergency = new CmdAnnounceEmergency ("Ole", new GPSPosition (0, 0));
+			CmdReturnAnnounceEmergency response = connection.SendWait<CmdReturnAnnounceEmergency> (announceEmergency);
+			if (response != null)
+			{
+				if (response.Success)
+				{
+					// Switch to login page.
+					Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage());		
+				}
+			}
+		}
+
+		public void OnCanceledEmergency()
+		{
+			// Nothing.
 		}
 
 	}
