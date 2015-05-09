@@ -2,7 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Smartphone.Driver.LogoutPage">
 	<ContentPage.Content>
 		<StackLayout>
-			
+			<Grid HorizontalOptions="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="End km:" />
+				<Entry Grid.Row="1" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="End km" Text="{Binding EndKm}" Keyboard="Numeric" IsEnabled="{Binding IsNotCommunicating}" />
+			</Grid>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>
