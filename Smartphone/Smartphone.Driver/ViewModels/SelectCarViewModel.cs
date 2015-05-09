@@ -23,7 +23,7 @@ namespace Smartphone.Driver
 
 		private WrappedCars availableCars = null;
 		private int selectedCarIndex = -1;
-		private float startKm = 0;
+		private float startKm = 2;
 		private bool isCommunicating = false;
 		private RelayCommand selectCarCommand = null;
 
