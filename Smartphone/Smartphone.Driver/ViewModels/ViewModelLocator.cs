@@ -17,12 +17,17 @@ namespace Smartphone.Driver
 			WrappedOrders orders = new WrappedOrders ();
 			SimpleIoc.Default.Register<WrappedOrders> (() => orders);
 
+			WrappedCars cars = new WrappedCars ();
+			SimpleIoc.Default.Register<WrappedCars> (() => cars);
+
 			IClientConnection clientConnection = new ClientConnection ("http://192.168.56.1:8080/commands");
+			clientConnection.RegisterCommandHandler (new CmdReturnGetAvailableCarsHandler (cars));
 			clientConnection.RegisterCommandHandler (new CmdReturnGetDriversUnfinishedOrdersHandler (orders));
 			clientConnection.Start ();
 			SimpleIoc.Default.Register<IClientConnection> (() => clientConnection);
 			
 			SimpleIoc.Default.Register<LoginViewModel> ();
+			SimpleIoc.Default.Register<SelectCarViewModel> ();
 			SimpleIoc.Default.Register<OrdersViewModel> ();
 		}
 			
@@ -34,6 +39,17 @@ namespace Smartphone.Driver
 			get
 			{
 				return ServiceLocator.Current.GetInstance<LoginViewModel>();
+			}
+		}
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+			"CA1822:MarkMembersAsStatic",
+			Justification = "This non-static member is needed for data binding purposes.")]
+		public SelectCarViewModel SelectCar
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<SelectCarViewModel>();
 			}
 		}
 

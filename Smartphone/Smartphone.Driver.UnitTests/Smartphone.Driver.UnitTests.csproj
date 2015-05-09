@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LoginViewModelTests.cs" />
-    <Compile Include="WrappedOrdersTests.cs" />
+    <Compile Include="WrappedUpdatableListTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

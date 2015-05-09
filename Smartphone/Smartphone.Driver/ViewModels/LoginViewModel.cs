@@ -136,12 +136,13 @@ namespace Smartphone.Driver
 
 		private void OnSuccessfullLogin()
 		{
-			// Request all unfinished Orders of this driver.
 			// TODO Update session model.
-			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders(username);
-			connection.Send (getUnfinishedOrders);
+			// Get all available cars.
+			CmdGetAvailableCars getAvailableCars = new CmdGetAvailableCars();
+			connection.Send (getAvailableCars);
+
 			// Switch Page.
-			Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
+			Messenger.Default.Send<MsgSwitchSelectCarPage> (new MsgSwitchSelectCarPage ());
 		}
 
 	}

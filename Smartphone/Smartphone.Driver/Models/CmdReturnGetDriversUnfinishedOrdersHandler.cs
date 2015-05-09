@@ -16,6 +16,7 @@ namespace Smartphone.Driver
 
 		protected override void Handle (CmdReturnGetDriversUnfinishedOrders command, string connectionIdOrNull)
 		{
+			// Update Orders model.
 			Xamarin.Forms.Device.BeginInvokeOnMainThread (new Action (() => orders.UpdateAll (command.UnfinishedOrders)));
 		}
 

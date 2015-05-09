@@ -23,6 +23,7 @@ namespace Smartphone.Driver
 
 		private void RegisterMessengerHandlers()
 		{
+			Messenger.Default.Register<MsgSwitchSelectCarPage> (this, SwitchSelectCarPage);
 			Messenger.Default.Register<MsgSwitchOrdersPage> (this, SwitchOrdersPage);
 		}
 
@@ -39,6 +40,11 @@ namespace Smartphone.Driver
 		protected override void OnResume ()
 		{
 			// Handle when your app resumes
+		}
+
+		private void SwitchSelectCarPage(MsgSwitchSelectCarPage message)
+		{
+			MainPage = new SelectCarPage ();
 		}
 
 		private void SwitchOrdersPage(MsgSwitchOrdersPage message)
