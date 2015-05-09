@@ -46,15 +46,15 @@ namespace Server.DatabaseCommunication
 
 		List<DateTime> GetBillDatesOfMonth(DateTime month);
 
-		Bill GetBill(DateTime date);
+		Bill GetBill(Customer  customer, DateTime date);
 
         List<Driver> GetAllDriver(Func<Driver, bool> lambda);
 
 		Driver GetDriver(string userName);
 
-		Car GetCar(string driverUserName);
+		Car GetCarbyDriver(string driverUserName);
 
-		Car GetCarbyId(string carId);
+		Car GetCar(string carId);
 
 		CarLogbookEntry GetLastCarLogbookEntry(string carID);
 
