@@ -10,11 +10,13 @@ namespace Common.Commands
     public class CmdSelectCar : Command
     {
 
+        public string Username { get; private set; }
         public string SelectedCarId { get; private set; }
         public float StartKm { get; private set; }
 
-        public CmdSelectCar(string selectedCarId, float startKm)
+        public CmdSelectCar(string username, string selectedCarId, float startKm)
         {
+            Username = username;
             SelectedCarId = selectedCarId;
             StartKm = startKm;
         }
