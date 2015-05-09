@@ -13,23 +13,21 @@ namespace Common.DataTransferObjects
     using System.Linq;
     using System.Text;
 
+    [ComplexType]
 	public class Address
 	{
-        [Key, Column(Order=0)]
 		public virtual string Street
 		{
 			get;
 			set;
 		}
 
-        [Key, Column(Order = 1)]
 		public virtual string PostalCode
 		{
 			get;
 			set;
 		}
 
-        [Key, Column(Order = 2)]
 		public virtual string City
 		{
 			get;

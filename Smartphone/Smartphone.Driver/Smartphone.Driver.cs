@@ -23,7 +23,7 @@ namespace Smartphone.Driver
 
 		private void RegisterMessengerHandlers()
 		{
-			Messenger.Default.Register<SwitchPageMsg> (this, SwitchPage);
+			Messenger.Default.Register<MsgSwitchOrdersPage> (this, SwitchOrdersPage);
 		}
 
 		protected override void OnStart ()
@@ -41,7 +41,7 @@ namespace Smartphone.Driver
 			// Handle when your app resumes
 		}
 
-		private void SwitchPage(SwitchPageMsg message)
+		private void SwitchOrdersPage(MsgSwitchOrdersPage message)
 		{
 			MainPage = new OrdersPage ();
 		}
