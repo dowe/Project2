@@ -51,6 +51,16 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
+        public Analysis(String name, float extremeMinValue, float extremeMaxValue, string unitOfMeasure, float price, SampleType type)
+        {
+            Name = name;
+            ExtremeMaxValue = extremeMaxValue;
+            ExtremeMinValue = extremeMinValue;
+            UnitOfMeasure = unitOfMeasure;
+            PriceInEuro = price;
+            SampleType = type;
+        }
+
 	}
 }
 
