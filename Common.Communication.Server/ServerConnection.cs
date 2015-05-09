@@ -84,6 +84,11 @@ namespace Common.Communication.Server
             output.Send(sendable);
         }
 
+        public void InjectInternal(Command command)
+        {
+            input.InjectInternal(command);
+        }
+
         public void RegisterCommandHandler(ICommandHandler handler)
         {
             input.RegisterCommandHandler(handler);

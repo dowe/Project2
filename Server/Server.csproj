@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="CmdHandler\CmdGenerateShiftScheduleHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAllBillsOfUserHandler.cs" />
+    <Compile Include="CmdHandler\CmdGetAvailableCarsHandler.cs" />
     <Compile Include="CmdHandler\CmdGetDriversUnfinishedOrdersHandler.cs" />
     <Compile Include="CmdHandler\CmdLoginDriverHandler.cs" />
     <Compile Include="CmdHandler\CmdRegisterCustomerHandler.cs" />
