@@ -36,6 +36,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection));
+            connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
         }
     }
 }
