@@ -16,6 +16,8 @@ namespace Common.Communication.Server
         private InputCommandPipeline input = null;
         private OutputCommandPipeline output = null;
 
+        public event EventHandler ServerStarted;
+
         public ServerConnection()
             : this("http://localhost:8080")
         {
@@ -48,6 +50,7 @@ namespace Common.Communication.Server
                 using (WebApp.Start(bindAddress))
                 {
                     Console.WriteLine("Server running on {0}", bindAddress);
+                    OnServerStarted();
                     while (true) ;
                 }
             }
@@ -55,6 +58,14 @@ namespace Common.Communication.Server
             {
                 output.Stop();
                 input.Stop();
+            }
+        }
+
+        private void OnServerStarted()
+        {
+            if (ServerStarted != null)
+            {
+                ServerStarted(this, null);
             }
         }
 

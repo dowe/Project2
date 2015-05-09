@@ -17,6 +17,7 @@ namespace Server
             // Listens on all addresses.
             // Remember to start the app as admin or a 'Access Denied' exception will be thrown.
             ServerConnection connection = new ServerConnection("http://+:8080");
+            connection.ServerStarted += OnServerStarted;
 
             Console.WriteLine("Registering Handlers...");
             RegisterHandlers(connection);
@@ -38,6 +39,11 @@ namespace Server
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection));
             connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
+        }
+
+        private static void OnServerStarted(object sender, EventArgs e)
+        {
+            
         }
     }
 }
