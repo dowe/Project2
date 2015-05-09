@@ -30,8 +30,8 @@ namespace Smartphone.Driver
 		{
 			this.connection = connection;
 
-			username = "User";
-			password = string.Empty;
+			username = "Ole";
+			password = "o";
 			communicating = false;
 		}
 
