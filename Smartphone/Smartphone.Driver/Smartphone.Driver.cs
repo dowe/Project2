@@ -25,6 +25,7 @@ namespace Smartphone.Driver
 		{
 			Messenger.Default.Register<MsgSwitchSelectCarPage> (this, SwitchSelectCarPage);
 			Messenger.Default.Register<MsgSwitchOrdersPage> (this, SwitchOrdersPage);
+			Messenger.Default.Register<MsgSwitchLogoutPage> (this, SwitchLogoutPage);
 		}
 
 		protected override void OnStart ()
@@ -50,6 +51,11 @@ namespace Smartphone.Driver
 		private void SwitchOrdersPage(MsgSwitchOrdersPage message)
 		{
 			MainPage = new OrdersPage ();
+		}
+
+		private void SwitchLogoutPage(MsgSwitchLogoutPage message)
+		{
+			MainPage = new LogoutPage ();
 		}
 
 	}

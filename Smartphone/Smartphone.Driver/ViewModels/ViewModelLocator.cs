@@ -25,10 +25,11 @@ namespace Smartphone.Driver
 			clientConnection.RegisterCommandHandler (new CmdReturnGetDriversUnfinishedOrdersHandler (orders));
 			clientConnection.Start ();
 			SimpleIoc.Default.Register<IClientConnection> (() => clientConnection);
-			
+
 			SimpleIoc.Default.Register<LoginViewModel> ();
 			SimpleIoc.Default.Register<SelectCarViewModel> ();
 			SimpleIoc.Default.Register<OrdersViewModel> ();
+			SimpleIoc.Default.Register<LogoutViewModel> ();
 		}
 			
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -60,6 +61,16 @@ namespace Smartphone.Driver
 		{
 			get {
 				return ServiceLocator.Current.GetInstance<OrdersViewModel> ();
+			}
+		}
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+			"CA1822:MarkMembersAsStatic",
+			Justification = "This non-static member is needed for data binding purposes.")]
+		public LogoutViewModel Logout
+		{
+			get {
+				return ServiceLocator.Current.GetInstance<LogoutViewModel> ();
 			}
 		}
 
