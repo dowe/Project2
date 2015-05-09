@@ -12,12 +12,13 @@ namespace Common.Commands
 
         public bool Success { get; private set; }
 
-        public string Error { get; private set; }
+        public string Message { get; private set; }
 
-        public CmdReturnRegisterCustomer(Guid requestId, bool success, string error) : base(requestId)
+        public CmdReturnRegisterCustomer(Guid requestId, bool success, string message)
+            : base(requestId)
         {
             Success = success;
-            Error = error;
+            Message = message;
         }
 
 

@@ -31,8 +31,8 @@ namespace ManagementSoftware.ViewModel
             _Customer.Address = new Address();
 
             _RegisterCustomerAction = new RelayCommand(RegisterCustomer);
-            _Title = Util.CreateValuePair<ETitle>(ETitle.Mr);
-            _SMSRequested = Util.CreateValuePair<ESMSRequested>(ESMSRequested.No);
+            Title = Util.CreateValuePair<ETitle>(ETitle.Mr);
+            SMSRequested = Util.CreateValuePair<ESMSRequested>(ESMSRequested.No);
         }
 
         public RelayCommand RegisterCustomerAction
@@ -85,18 +85,19 @@ namespace ManagementSoftware.ViewModel
             {
                 MessageBox.Show("Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");
             }
-            else if (response.Error != null)
+            else if ( response.Success )
             {
-                MessageBox.Show(response.Error);
+                MessageBox.Show(response.Message != null ? response.Message : "Kunde wurde angelegt");
             }
-            else if (response.Success)
-            {
-                MessageBox.Show("Kunde wurde angelegt");
-            }
-            else
+            else if (!response.Success && response.Message == null)
             {
                 throw new Exception("Success is false and Error null. Illegal State");
             }
+            else
+            {
+                MessageBox.Show(response.Message);
+            }
+
         }
 
         public string LastName
