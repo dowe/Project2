@@ -15,9 +15,6 @@ namespace Smartphone.Driver
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
 			WrappedOrders orders = new WrappedOrders ();
-			// TODO Remove this dummy data.
-			Order order = new Order();
-			orders.UpdateAll (new List<Order> () { order });
 			SimpleIoc.Default.Register<WrappedOrders> (() => orders);
 
 			IClientConnection clientConnection = new ClientConnection ("http://192.168.56.1:8080/commands");

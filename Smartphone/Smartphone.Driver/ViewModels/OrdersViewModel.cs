@@ -8,22 +8,22 @@ namespace Smartphone.Driver
 	public class OrdersViewModel : ViewModelBase
 	{
 
-		private const string OrdersProperty = "Orders";
+		private const string OrdersProperty = "WrappedOrders";
 
-		private WrappedOrders orders = null;
+		private WrappedOrders wrappedOrders = null;
 
-		public OrdersViewModel()
+		public OrdersViewModel(WrappedOrders wrappedOrders)
 		{
-			orders = new WrappedOrders ();
+			this.wrappedOrders = wrappedOrders;
 		}
 
-		public WrappedOrders Orders
+		public WrappedOrders WrappedOrders
 		{
 			get {
-				return orders;
+				return wrappedOrders;
 			}
 			set {
-				orders = value;
+				wrappedOrders = value;
 				RaisePropertyChanged (OrdersProperty);
 			}
 		}
