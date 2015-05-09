@@ -10,6 +10,7 @@ namespace Smartphone.Driver
 		public LoginPage ()
 		{
 			InitializeComponent ();
+			BindingContext = App.Locator.Login;
 		}
 
 	}

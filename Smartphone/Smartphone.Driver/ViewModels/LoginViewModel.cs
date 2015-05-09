@@ -5,6 +5,7 @@ using Common.Communication.Client;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.AspNet.SignalR.Client;
 
 namespace Smartphone.Driver
 {
@@ -29,8 +30,8 @@ namespace Smartphone.Driver
 		{
 			this.connection = connection;
 
-			username = "User";
-			password = string.Empty;
+			username = "Ole";
+			password = "o";
 			communicating = false;
 		}
 
@@ -98,7 +99,7 @@ namespace Smartphone.Driver
 		private async void Login()
 		{
 			IsCommunicating = true;
-			if (!connection.IsConnected)
+			if (!connection.ConnectionState.Equals(ConnectionState.Connected))
 			{
 				CanConnect = await Connect ();
 			}
@@ -135,8 +136,12 @@ namespace Smartphone.Driver
 
 		private void OnSuccessfullLogin()
 		{
+			// Request all unfinished Orders of this driver.
+			// TODO Update session model.
+			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders(username);
+			connection.Send (getUnfinishedOrders);
 			// Switch Page.
-			Messenger.Default.Send<SwitchPageMsg> (new SwitchPageMsg (Page.Orders));
+			Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
 		}
 
 	}
