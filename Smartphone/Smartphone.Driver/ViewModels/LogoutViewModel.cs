@@ -1,6 +1,9 @@
 ﻿using System;
 using GalaSoft.MvvmLight;
 using Common.Communication.Client;
+using GalaSoft.MvvmLight.Command;
+using Common.Commands;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Smartphone.Driver
 {
@@ -14,6 +17,7 @@ namespace Smartphone.Driver
 		private IClientConnection connection = null;
 		private float endKm = 3;
 		private bool isCommunicating = false;
+		private RelayCommand logoutCommand = null;
 
 		public LogoutViewModel (IClientConnection connection)
 		{
@@ -54,6 +58,35 @@ namespace Smartphone.Driver
 			get {
 				return !IsCommunicating;
 			}
+		}
+
+		public RelayCommand LogoutCommand
+		{
+			get {
+				if (logoutCommand == null)
+				{
+					logoutCommand = new RelayCommand (Logout);
+				}
+				return logoutCommand;
+			}
+		}
+			
+		private void Logout()
+		{
+			CmdLogoutDriver logoutDriver = new CmdLogoutDriver ("Ole", "OG-KP-417", endKm); // TODO get username and car id from session. Is car id really necessary? The car could also be determined from the db.
+			CmdReturnLogoutDriver response = connection.SendWait<CmdReturnLogoutDriver> (logoutDriver);
+			if (response != null)
+			{
+				if (response.Success)
+				{
+					OnLogoutSuccessful ();
+				}
+			}
+		}
+
+		private void OnLogoutSuccessful()
+		{
+			Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage ());
 		}
 
 	}

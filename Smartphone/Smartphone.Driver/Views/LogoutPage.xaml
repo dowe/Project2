@@ -13,6 +13,8 @@
 				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="End km:" />
 				<Entry Grid.Row="1" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="End km" Text="{Binding EndKm}" Keyboard="Numeric" IsEnabled="{Binding IsNotCommunicating}" />
 			</Grid>
+			<ActivityIndicator VerticalOptions="CenterAndExpand" IsRunning="{Binding IsCommunicating}" />
+			<Button Text="Logout" Command="{Binding LogoutCommand}" IsEnabled="{Binding IsNotCommunicating}" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>
