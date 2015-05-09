@@ -6,5 +6,6 @@ namespace Common.Communication.Server
         void Broadcast(Command command);
         void Multicast(Command command, string groupId);
         void Unicast(Command command, string connectionId);
+        void InjectInternal(Command command);
     }
 }
