@@ -16,7 +16,8 @@
 				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Start km:" />
 				<Entry Grid.Row="1" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="Start km" Text="{Binding StartKm}" Keyboard="Numeric" IsEnabled="{Binding IsNotCommunicating}" />
 			</Grid>
-			<Button VerticalOptions="Fill" Text="Select Car" Command="{Binding SelectCarCommand}" IsEnabled="{Binding IsNotCommunicating}" />
+			<ActivityIndicator VerticalOptions="CenterAndExpand" IsRunning="{Binding IsCommunicating}" />
+			<Button VerticalOptions="End" Text="Select Car" Command="{Binding SelectCarCommand}" IsEnabled="{Binding IsNotCommunicating}" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>
