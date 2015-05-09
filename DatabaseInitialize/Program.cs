@@ -53,11 +53,11 @@ namespace DatabaseInitialize
         {
             LaborContext con = new LaborContext();
             List<Employee> el = new List<Employee>();
-            for(int i = 0; i<10; i++)
+            for(int i = 0; i<20; i++)
             {
                 el.Add(new LabAssistant() { FirstName = "Lab" + i, LastName = "Assistant" });
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 el.Add(new AdministrationAssistant() { FirstName = "Admin" + i, LastName = "Assistant" });
             }
