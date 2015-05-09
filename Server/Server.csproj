@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdHandler\CmdAnnounceEmergencyHandler.cs" />
     <Compile Include="CmdHandler\CmdGenerateShiftScheduleHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAllBillsOfUserHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAvailableCarsHandler.cs" />
