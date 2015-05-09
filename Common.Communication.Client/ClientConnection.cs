@@ -12,8 +12,8 @@ namespace Common.Communication.Client
     public class ClientConnection : IClientConnection
     {
 
-        private const int CONNECT_TIMEOUT_IN_MS = 100;
-        private const int DEFAULT_RESPONSE_TIMEOUT_IN_MS = 2000;
+        private const int CONNECT_TIMEOUT_IN_MS = 10000;
+        private const int DEFAULT_RESPONSE_TIMEOUT_IN_MS = 5000;
 
         private Connection connection = null;
 

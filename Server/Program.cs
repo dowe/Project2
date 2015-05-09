@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Common.Communication.Server;
 using Common.Commands;
 using Server.CmdHandler;
+using Server.DatabaseCommunication;
 
 namespace Server
 {
@@ -26,11 +27,14 @@ namespace Server
 
         private static void RegisterHandlers(ServerConnection connection)
         {
+            IDatabaseCommunicator db = new DatabaseCommunicator();
+            LocalServerData data = new LocalServerData();
+
             // TODO: REGISTER SERVER HANDLER HERE
             // Register all command handler to the connection here.
             connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection));
             connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection));
-            connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection));
+            connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection));
         }
     }
