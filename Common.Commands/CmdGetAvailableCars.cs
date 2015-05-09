@@ -10,11 +10,8 @@ namespace Common.Commands
     public class CmdGetAvailableCars : Command
     {
 
-        public string Username { get; private set; }
-
-        public CmdGetAvailableCars(string username)
+        public CmdGetAvailableCars()
         {
-            Username = username;
         }
 
     }
