@@ -96,6 +96,7 @@
     <Compile Include="CmdHandler\CmdGetAvailableCarsHandler.cs" />
     <Compile Include="CmdHandler\CmdGetDriversUnfinishedOrdersHandler.cs" />
     <Compile Include="CmdHandler\CmdLoginDriverHandler.cs" />
+    <Compile Include="CmdHandler\CmdLogoutDriverHandler.cs" />
     <Compile Include="CmdHandler\CmdRegisterCustomerHandler.cs" />
     <Compile Include="CmdHandler\CmdSelectCarHandler.cs" />
     <Compile Include="DatabaseCommunication\DatabaseCommunicator.cs" />
