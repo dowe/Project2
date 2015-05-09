@@ -10,7 +10,6 @@ namespace Server.DatabaseCommunication
 {
     public class LaborContext : DbContext
     {
-        public DbSet<Address> Address { get; set; }
         public DbSet<AdministrationAssistant> AdministrationAssistant { get; set; }
         public DbSet<Analysis> Analysis { get; set; }
         public DbSet<Bill> Bill { get; set; }
