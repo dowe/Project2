@@ -21,5 +21,6 @@ namespace Server.DatabaseCommunication
         public DbSet<Order> Order { get; set; }
         public DbSet<ShiftSchedule> ShiftSchedule { get; set; }
         public DbSet<Test> Test { get; set; }
+        public DbSet<Driver> Driver { get; set; }
     }
 }
