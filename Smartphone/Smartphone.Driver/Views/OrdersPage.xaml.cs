@@ -35,6 +35,13 @@ namespace Smartphone.Driver
 			}
 		}
 
+		protected override bool OnBackButtonPressed ()
+		{
+			Messenger.Default.Send<MsgSwitchLogoutPage> (new MsgSwitchLogoutPage ());
+
+			return true;
+		}
+
 	}
 }
 

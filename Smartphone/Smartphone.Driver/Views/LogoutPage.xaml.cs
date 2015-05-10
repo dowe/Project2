@@ -12,6 +12,11 @@ namespace Smartphone.Driver
 			InitializeComponent ();
 			BindingContext = App.Locator.Logout;
 		}
+
+		protected override bool OnBackButtonPressed ()
+		{
+			return true;
+		}
 	}
 }
 

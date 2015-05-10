@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Smartphone.Driver
 {
@@ -11,6 +12,14 @@ namespace Smartphone.Driver
 		{
 			InitializeComponent ();
 			BindingContext = App.Locator.OrderDetails;
+		}
+
+
+		protected override bool OnBackButtonPressed ()
+		{
+			Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
+
+			return true;
 		}
 	}
 }
