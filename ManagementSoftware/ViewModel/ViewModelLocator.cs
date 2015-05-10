@@ -36,6 +36,7 @@ namespace ManagementSoftware.ViewModel
             SimpleIoc.Default.Register<ShiftScheduleVM>();
             SimpleIoc.Default.Register<DailyStatisticVM>();
             SimpleIoc.Default.Register<TestsVM>();
+            SimpleIoc.Default.Register<CustomerListVM>();
 
         }
 
@@ -60,9 +61,9 @@ namespace ManagementSoftware.ViewModel
                 return ServiceLocator.Current.GetInstance<ShiftScheduleVM>();
             }
         }
-          [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-           "CA1822:MarkMembersAsStatic",
-           Justification = "This non-static member is needed for data binding purposes.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+         "CA1822:MarkMembersAsStatic",
+         Justification = "This non-static member is needed for data binding purposes.")]
         public DailyStatisticVM DailyStatistic
         {
             get
@@ -71,16 +72,27 @@ namespace ManagementSoftware.ViewModel
             }
         }
 
-          [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+         "CA1822:MarkMembersAsStatic",
+         Justification = "This non-static member is needed for data binding purposes.")]
+        public TestsVM Tests
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<TestsVM>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
            "CA1822:MarkMembersAsStatic",
            Justification = "This non-static member is needed for data binding purposes.")]
-          public TestsVM Tests
-          {
-              get
-              {
-                  return ServiceLocator.Current.GetInstance<TestsVM>();
-              }
-          }
+        public CustomerListVM CustomerList
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CustomerListVM>();
+            }
+        }
         /// <summary>
         /// Cleans up all the resources.
         /// </summary>

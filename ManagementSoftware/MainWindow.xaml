@@ -21,6 +21,9 @@
             <TabItem Header="Kunde Registrieren">
                 <views:RegisterCustomerView/>
             </TabItem>
+            <TabItem Header="Kundenliste">
+                <views:CustomerListView />
+            </TabItem>
             <TabItem Header="Schichtplan">
                 <views:ShiftScheduleView/>
             </TabItem>

@@ -1,5 +1,6 @@
 ﻿using Common.Communication.Client;
 using Common.DataTransferObjects;
+using Common.Util;
 using GalaSoft.MvvmLight;
 using ManagementSoftware.ViewModel;
 using System;
@@ -74,19 +75,12 @@ namespace ManagementSoftware.Model
 
             DateTime now = DateTime.Now;
             now = new DateTime(now.Year, now.Month, 1); //zum testen ändere Monat und Jahr
-            int month = now.Month + 1;
-            int year = now.Year;
-            if (month > 12)
-            {
-                month = 1;
-                year++;
-            }
-            DateTime next = new DateTime(year, month, 1);
+            DateTime next = now.AddMonths(1);
 
             ShiftSchedule[] _Data = new ShiftSchedule[2];
 
-            _Data[0] = ShiftScheduleRawModel.Create(now);
-            _Data[1] = ShiftScheduleRawModel.Create(next);
+            _Data[0] = Util.CreateTestData(now);
+            _Data[1] = Util.CreateTestData(next);
 
             ShiftScheduleRawModel.Data = _Data;
 

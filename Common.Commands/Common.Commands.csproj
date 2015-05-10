@@ -46,6 +46,7 @@
     <Compile Include="CmdGenerateDailyStatistic.cs" />
     <Compile Include="CmdGenerateShiftSchedule.cs" />
     <Compile Include="CmdGetAllCars.cs" />
+    <Compile Include="CmdGetAllCustomers.cs" />
     <Compile Include="CmdGetAllOrders.cs" />
     <Compile Include="CmdGetAnalyses.cs" />
     <Compile Include="CmdGetAvailableCars.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="CmdRegisterCustomer.cs" />
     <Compile Include="CmdRemindDriverOfOrder.cs" />
     <Compile Include="CmdReturnAddOrder.cs" />
+    <Compile Include="CmdReturnGetAllCustomers.cs" />
     <Compile Include="CmdReturnGetAllOrders.cs" />
     <Compile Include="CmdReturnGetAnalyses.cs" />
     <Compile Include="CmdReturnGetAllCars.cs" />

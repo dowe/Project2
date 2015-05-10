@@ -13,12 +13,12 @@ namespace Server.Timer
         private Action _DoActionScheduled;
         private CancellationTokenSource _ctSource;
 
-        public ScheduledTimer(Func<TimeSpan> _GetSpan, Action _DoActionScheduled)
+        protected void Start(Func<TimeSpan> _GetSpan, Action _DoActionScheduled)
         {
             this._GetSpan = _GetSpan;
             this._DoActionScheduled = _DoActionScheduled;
             RunCode();
-        }
+        } 
 
         private void RunCode()
         {

@@ -60,6 +60,8 @@ namespace Server.DatabaseCommunication
 
 		void CreateCarLogbookEnry(CarLogbookEntry entry);
 
+        void CreateShiftSchedule(ShiftSchedule shift);
+
 	}
 }
 
