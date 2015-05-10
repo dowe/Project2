@@ -204,7 +204,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Commands\Common.Commands.csproj">
@@ -227,6 +229,11 @@
       <Project>{12f1826a-1f92-40f8-bb4c-7ee98c343ba9}</Project>
       <Name>Common.Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\arrow.png" />
+    <Resource Include="Resources\arrowReverse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
