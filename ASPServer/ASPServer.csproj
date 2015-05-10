@@ -178,6 +178,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\LoginFailed.cshtml" />
     <Content Include="Views\Home\LoginSuccessful.cshtml" />
+    <Content Include="Views\Home\Order.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

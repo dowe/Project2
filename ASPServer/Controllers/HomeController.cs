@@ -16,6 +16,11 @@ namespace ASPServer.Controllers
         private const string SessionBills = "billsData";
         private const string AuthID = "authId";
         private const string UserID = "userID";
+        private const string SessionAnalysisData = "analysisData";
+        private const string SessionAnalysesList = "analysesList";
+        private const String SessionOrdered = "orderedAnalysisList";
+        private const string SessionPatientsList = "patientsList";
+
         IClientConnection _clientConnection;
 
         /// <summary>
@@ -34,6 +39,94 @@ namespace ASPServer.Controllers
             return View();
         }
 
+        public ActionResult Order()
+        {
+            //User logged in?
+            if (!this.IsUserAuthenticated())
+            {
+                return RedirectToAction("Login");
+            }
+
+            var orderModel = new OrderModel();
+
+            //Get Analysis-List
+            if (Session[SessionAnalysisData] == null)
+            {
+                Session[SessionAnalysisData] = _clientConnection.SendWait<CmdReturnGetAnalyses>(new CmdGetAnalyses()).Analyses.ToList();
+                //populate analysis listbox
+                foreach (var analysis in (List<Analysis>)Session[SessionAnalysisData])
+                {
+                    orderModel.AnalysisList.Add(new SelectListItem() { Text = analysis.Name, Value = analysis.Name });
+                }
+                Session[SessionAnalysesList] = orderModel.AnalysisList;
+            }
+
+            //incase site was used before
+            orderModel.PatientsList = (List<SelectListItem>)Session[SessionPatientsList];
+            orderModel.AnalysisList = (List<SelectListItem>)Session[SessionAnalysesList];
+            orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
+
+            return View(orderModel);
+        }
+
+        [HttpPost]
+        public ActionResult Order(OrderModel orderModel)
+        {
+            if (!this.IsUserAuthenticated())
+            {
+                return RedirectToAction("Login");
+            }
+
+            orderModel.PatientsList = (List<SelectListItem>)Session[SessionPatientsList];
+            orderModel.AnalysisList = (List<SelectListItem>)Session[SessionAnalysesList];
+            orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
+            
+            //add patient button
+            if (Request.Form["NewPatientButton"] != null)
+            {
+                var pats = new List<SelectListItem>();
+                if (Session[SessionPatientsList] != null)
+                {
+                    pats = Session[SessionPatientsList] as List<SelectListItem>;
+                }
+                pats.Add(new SelectListItem() { Text = orderModel.NewPatient, Value = orderModel.NewPatient });
+                Session[SessionPatientsList] = pats;
+                orderModel.PatientsList = (List<SelectListItem>) Session[SessionPatientsList];
+            }
+            else if (Request.Form["OrderButton"] != null)
+            {
+                //Order everything
+            }
+            else if (Request.Form["DeleteButtonXXX"] != null)
+            {
+                //delete from orderList
+            }
+            else
+            {
+                //add Test button
+                var orderItems = new Dictionary<string, List<Analysis>>();
+                if (Session[SessionOrdered] != null)
+                    orderItems = (Dictionary<string, List<Analysis>>) Session[SessionOrdered];
+
+                foreach (var pat in orderModel.SelectedPatient)
+                {
+                    if (!orderItems.ContainsKey(pat))
+                    {
+                        orderItems.Add(pat, new List<Analysis>());
+                    }
+
+                    foreach (var analysisName in orderModel.SelectedAnalysis)
+                    {
+                        var analysesData = Session[SessionAnalysisData] as List<Analysis>;
+                        orderItems[pat].Add(analysesData.Where(a=>a.Name == analysisName).FirstOrDefault());
+                    }
+                }
+                Session[SessionOrdered] = orderItems;
+                orderModel.OrderedItems = (Dictionary<string, List<Analysis>>) Session[SessionOrdered];
+            }
+            
+            return View(orderModel);
+        }
 
         public ActionResult Bill()
         {

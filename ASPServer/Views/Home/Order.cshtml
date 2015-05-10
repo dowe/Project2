@@ -1,0 +1,58 @@
+﻿@using Common.DataTransferObjects
+@model ASPServer.Models.OrderModel
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bestellung</h2>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { name = "form", id = "frm" }))
+{
+    <table class="table">
+        <colgroup width="250"></colgroup>
+        <tr>
+            <th>Patienten</th>
+            <th>Analyse</th>
+        </tr>
+        <tr>
+            <td>
+                @Html.EditorFor(m => m.NewPatient, Model.NewPatient)
+                <input type="submit" class="btn btn-default" name="NewPatientButton" id="NewPatientButton" value="+"/>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.ListBoxFor(m => m.SelectedPatient, new SelectList(Model.PatientsList, "Value", "Text"), new {Multiple = "multiple", size = 10})</td>
+            <td>@Html.ListBoxFor(m => m.SelectedAnalysis, new SelectList(Model.AnalysisList, "Value", "Text"), new {Multiple = "multiple", size = 10})</td>
+        </tr>
+        <tr><td></td><td align="right"><input type="submit" value="Test hinzufügen" class="btn btn-default"/></td></tr>
+    </table>
+    if (Model.OrderedItems != null && Model.OrderedItems.Any())
+     {
+         <table>
+             <colgroup >
+                 <col span="1" width="50">
+                 <col span="3" width="250" >
+             </colgroup>
+             <tr>
+                 <th></th>
+                 <th>Patient</th>
+                 <th>Analyse</th>
+                 <th>Benötigte Probe</th>
+             </tr>
+             @foreach (var patOrder in Model.OrderedItems)
+             {
+                 foreach (var analysis in patOrder.Value as List<Analysis>)
+                 {
+                     <tr>
+                         <td><input type="submit" name="DeleteButton" id="DeleteButton" value="X" class="btn btn-default" /></td>
+                         <td>@patOrder.Key</td>
+                         <td>@analysis.Name</td>
+                         <td>@analysis.Name.ToString().Split('_').FirstOrDefault()</td>
+                     </tr>
+                 }
+             }
+             <tr><td></td><td></td><td></td><td><input type="submit" name="OrderButton" id="OrderButton" value="Bestellung abschicken" class="btn btn-default"/></td></tr>
+         </table>
+     }
+}

@@ -95,6 +95,7 @@
     <Compile Include="CmdHandler\CmdGenerateShiftScheduleHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAllBillsOfUserHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAllCustomersHandler.cs" />
+    <Compile Include="CmdHandler\CmdGetAnalysesHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAvailableCarsHandler.cs" />
     <Compile Include="CmdHandler\CmdGetDriversUnfinishedOrdersHandler.cs" />
     <Compile Include="CmdHandler\CmdLoginDriverHandler.cs" />

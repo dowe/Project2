@@ -45,9 +45,10 @@ namespace Server
             connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection));
             connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
-            connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection));
+            connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllCustomersHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGetAnalysesHandler(connection, db));
         }
 
         private static void OnServerStarted(

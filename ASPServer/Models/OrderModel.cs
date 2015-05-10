@@ -7,41 +7,72 @@
 
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Common.DataTransferObjects;
 
 namespace ASPServer.Models
 {
     public class OrderModel
 	{
+        /// <summary>
+        /// for textbox value, to add new patients to the list
+        /// </summary>
 		public virtual string NewPatient
 		{
 			get;
 			set;
 		}
 
+        /// <summary>
+        /// available Patients
+        /// </summary>
 		public virtual List<SelectListItem> PatientsList
 		{
 			get;
 			set;
 		}
 
-		public virtual string SelectedPatient
+        /// <summary>
+        /// Selected Patient to add an analysis
+        /// </summary>
+		public virtual List<string> SelectedPatient
 		{
 			get;
 			set;
 		}
 
-		public virtual List<Patient> PatientsTable
+        /// <summary>
+        /// List of Analysis to select from
+        /// </summary>
+        public virtual List<SelectListItem> AnalysisList
+        {
+            get; 
+            set;
+        } 
+
+        /// <summary>
+        /// Selected Analysis to add to the Patient
+        /// </summary>
+        public virtual List<string> SelectedAnalysis
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// contains all Analysis to order
+        /// </summary>
+		public virtual Dictionary<string, List<Analysis>> OrderedItems
 		{
 			get;
 			set;
 		}
 
-		public virtual Patient Patient
-		{
-			get;
-			set;
-		}
-
+        public OrderModel()
+        {
+            PatientsList = new List<SelectListItem>();
+            OrderedItems = new Dictionary<string, List<Analysis>>();
+            AnalysisList = new List<SelectListItem>();
+        }
 	}
 }
 

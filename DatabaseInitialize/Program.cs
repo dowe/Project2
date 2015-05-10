@@ -73,14 +73,35 @@ namespace DatabaseInitialize
         {
             LaborContext con = new LaborContext();
             List<Car> cars = new List<Car>();
-            cars.Add(new Car() { CarID = "OG-LA-001", CarLogbook = new CarLogbook(), Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-002", CarLogbook = new CarLogbook(), Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-003", CarLogbook = new CarLogbook(), Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-004", CarLogbook = new CarLogbook(), Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-005", CarLogbook = new CarLogbook(), Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-006", CarLogbook = new CarLogbook(), Roadworthy = true });
+            cars.Add(new Car() { CarID = "OG-LA-001", CarLogbook = new CarLogbook() { CarId = "OG-LA-001" }, Roadworthy = true });
+            cars.Add(new Car() { CarID = "OG-LA-002", CarLogbook = new CarLogbook() { CarId = "OG-LA-002" }, Roadworthy = true });
+            cars.Add(new Car() { CarID = "OG-LA-003", CarLogbook = new CarLogbook() { CarId = "OG-LA-003" }, Roadworthy = true });
+            cars.Add(new Car() { CarID = "OG-LA-004", CarLogbook = new CarLogbook() { CarId = "OG-LA-004" }, Roadworthy = true });
+            cars.Add(new Car() { CarID = "OG-LA-005", CarLogbook = new CarLogbook() { CarId = "OG-LA-005" }, Roadworthy = true });
+            cars.Add(new Car() { CarID = "OG-LA-006", CarLogbook = new CarLogbook() { CarId = "OG-LA-006" }, Roadworthy = true });
             con.Car.AddRange(cars);
-            con.SaveChanges();
+
+            try
+            {
+                con.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
         }
     }
 }

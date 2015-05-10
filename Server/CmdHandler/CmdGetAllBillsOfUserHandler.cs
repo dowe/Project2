@@ -7,16 +7,19 @@ using Common.Commands;
 using Common.Communication;
 using Common.Communication.Server;
 using Common.DataTransferObjects;
+using Server.DatabaseCommunication;
 
 namespace Server.CmdHandler
 {
     public class CmdGetAllBillsOfUserHandler : CommandHandler<CmdGetAllBillsOfUser>
     {
         private IServerConnection connection = null;
+        private IDatabaseCommunicator db;
 
-        public CmdGetAllBillsOfUserHandler(IServerConnection connection)
+        public CmdGetAllBillsOfUserHandler(IServerConnection connection, IDatabaseCommunicator db)
         {
             this.connection = connection;
+            this.db = db;
         }
 
         protected override void Handle(CmdGetAllBillsOfUser command, string connectionIdOrNull)
