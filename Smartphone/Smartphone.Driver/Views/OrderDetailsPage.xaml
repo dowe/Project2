@@ -1,6 +1,21 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Smartphone.Driver.OrderDetailsPage">
 	<ContentPage.Content>
-		<StackLayout></StackLayout>
+		<StackLayout>
+			<Grid HorizontalOptions="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Text="Bestellungs ID:" />
+				<Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="{Binding OrderID}" />
+				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Addresse:" />
+				<Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Text="{Binding CustomerAddress}" />
+			</Grid>
+		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

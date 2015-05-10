@@ -29,6 +29,7 @@ namespace Smartphone.Driver
 			SimpleIoc.Default.Register<LoginViewModel> ();
 			SimpleIoc.Default.Register<SelectCarViewModel> ();
 			SimpleIoc.Default.Register<OrdersViewModel> ();
+			SimpleIoc.Default.Register<OrderDetailsViewModel> ();
 			SimpleIoc.Default.Register<LogoutViewModel> ();
 		}
 			
@@ -61,6 +62,16 @@ namespace Smartphone.Driver
 		{
 			get {
 				return ServiceLocator.Current.GetInstance<OrdersViewModel> ();
+			}
+		}
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+			"CA1822:MarkMembersAsStatic",
+			Justification = "This non-static member is needed for data binding purposes.")]
+		public OrderDetailsViewModel OrderDetails
+		{
+			get {
+				return ServiceLocator.Current.GetInstance<OrderDetailsViewModel> ();
 			}
 		}
 

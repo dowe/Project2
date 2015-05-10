@@ -25,6 +25,7 @@ namespace Smartphone.Driver
 		{
 			Messenger.Default.Register<MsgSwitchSelectCarPage> (this, SwitchSelectCarPage);
 			Messenger.Default.Register<MsgSwitchOrdersPage> (this, SwitchOrdersPage);
+			Messenger.Default.Register<MsgSwitchOrderDetailsPage> (this, SwitchOrderDetailsPage);
 			Messenger.Default.Register<MsgSwitchLogoutPage> (this, SwitchLogoutPage);
 			Messenger.Default.Register<MsgSwitchLoginPage> (this, SwitchLoginPage);
 		}
@@ -52,6 +53,13 @@ namespace Smartphone.Driver
 		private void SwitchOrdersPage(MsgSwitchOrdersPage message)
 		{
 			MainPage = new OrdersPage ();
+		}
+
+		private void SwitchOrderDetailsPage(MsgSwitchOrderDetailsPage message)
+		{
+			MainPage = new OrderDetailsPage ();
+			// Set the model to display.
+			Messenger.Default.Send(new MsgSetOrderDetailsModel(message.Order));
 		}
 
 		private void SwitchLogoutPage(MsgSwitchLogoutPage message)

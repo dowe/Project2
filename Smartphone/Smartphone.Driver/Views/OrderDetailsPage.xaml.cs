@@ -10,6 +10,7 @@ namespace Smartphone.Driver
 		public OrderDetailsPage ()
 		{
 			InitializeComponent ();
+			BindingContext = App.Locator.OrderDetails;
 		}
 	}
 }
