@@ -109,7 +109,7 @@ namespace Smartphone.Driver
 				var response = connection.SendWait<CmdReturnLoginDriver> (cmdLogin);
 				if (response != null && response.Success)
 				{
-					OnSuccessfullLogin ();
+					OnLoginSuccessful ();
 				}
 			}
 			IsCommunicating = false;
@@ -134,7 +134,7 @@ namespace Smartphone.Driver
 			});
 		}
 
-		private void OnSuccessfullLogin()
+		private void OnLoginSuccessful()
 		{
 			// TODO Update session model.
 			// Get all available cars.

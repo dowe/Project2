@@ -40,7 +40,10 @@ namespace Server
             // Register all command handler to the connection here.
             connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection));
             connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection));
+            connection.RegisterCommandHandler(new CmdSelectCarHandler(connection));
             connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection));
+            connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection));
+            connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection));
             connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));

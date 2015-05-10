@@ -22,7 +22,11 @@ namespace Server.CmdHandler
 
         protected override void Handle(CmdGetAvailableCars command, string connectionIdOrNull)
         {
-            List<Car> availableCars = new List<Car>() { new Car() { CarID = "OG-KP-417", Roadworthy = true } };
+            List<Car> availableCars = new List<Car>()
+            {
+                new Car() { CarID = "OG-KP-417", Roadworthy = true },
+                new Car() { CarID = "OG-MB-1510", Roadworthy = true }
+            };
             CmdReturnGetAvailableCars response = new CmdReturnGetAvailableCars(command.Id, availableCars);
 
             connection.Unicast(response, connectionIdOrNull);

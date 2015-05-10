@@ -17,8 +17,8 @@
 				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Passwort:" />
 				<Entry Grid.Row="1" Grid.Column="1" IsPassword="true" VerticalOptions="Center" WidthRequest="200" Placeholder="Passwort" Text="{Binding Password}" IsEnabled="{Binding IsNotCommunicating}" />
 			</Grid>
-			<ActivityIndicator VerticalOptions="Center" IsRunning="{Binding IsCommunicating}" />
-			<Button VerticalOptions="Fill" Text="Login" Command="{Binding LoginCommand}" IsEnabled="{Binding IsNotCommunicating}" />
+			<ActivityIndicator VerticalOptions="CenterAndExpand" IsRunning="{Binding IsCommunicating}" />
+			<Button Text="Login" Command="{Binding LoginCommand}" IsEnabled="{Binding IsNotCommunicating}" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

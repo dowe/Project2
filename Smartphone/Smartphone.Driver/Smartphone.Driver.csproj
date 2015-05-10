@@ -41,18 +41,31 @@
       <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\OrdersViewModel.cs" />
-    <Compile Include="ViewModels\MsgSwitchOrdersPage.cs" />
     <Compile Include="Models\WrappedOrders.cs" />
     <Compile Include="Models\CmdReturnGetDriversUnfinishedOrdersHandler.cs" />
     <Compile Include="Views\SelectCarPage.xaml.cs">
       <DependentUpon>SelectCarPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\SelectCarViewModel.cs" />
-    <Compile Include="ViewModels\MsgSwitchSelectCarPage.cs" />
-    <Compile Include="ViewModels\MsgUpdateCarIDsPicker.cs" />
     <Compile Include="Models\CmdReturnGetAvailableCarsHandler.cs" />
     <Compile Include="Models\WrappedCars.cs" />
     <Compile Include="Models\WrappedUpdatableList.cs" />
+    <Compile Include="Views\LogoutPage.xaml.cs">
+      <DependentUpon>LogoutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LogoutViewModel.cs" />
+    <Compile Include="Views\OrderDetailsPage.xaml.cs">
+      <DependentUpon>OrderDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\OrderDetailsViewModel.cs" />
+    <Compile Include="Messages\MsgSetOrderDetailsModel.cs" />
+    <Compile Include="Messages\MsgShowEmergencyDialog.cs" />
+    <Compile Include="Messages\MsgSwitchLoginPage.cs" />
+    <Compile Include="Messages\MsgSwitchLogoutPage.cs" />
+    <Compile Include="Messages\MsgSwitchOrdersPage.cs" />
+    <Compile Include="Messages\MsgSwitchSelectCarPage.cs" />
+    <Compile Include="Messages\MsgUpdateCarIDsPicker.cs" />
+    <Compile Include="Messages\MsgSwitchOrderDetailsPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.3.3.6323\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.3.3.6323\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -113,10 +126,17 @@
     <EmbeddedResource Include="Views\SelectCarPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\LogoutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OrderDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Models\" />
+    <Folder Include="Messages\" />
   </ItemGroup>
 </Project>
