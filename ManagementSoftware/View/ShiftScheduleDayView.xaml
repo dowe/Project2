@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:helper="clr-namespace:ManagementSoftware.Helper"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="600" d:DesignWidth="1250"
              DataContext="{Binding ShiftSchedule.ShiftScheduleDayVM, Mode=OneWay, Source={StaticResource Locator}}">
     <UserControl.Resources>
         <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
@@ -50,6 +50,9 @@
             </DataGrid.Columns>
 
         </DataGrid>
+        <Image HorizontalAlignment="Left" Height="25" Margin="145,7,0,0" VerticalAlignment="Top" Width="30" Source="/ManagementSoftware;component/Resources/arrowReverse.png" PreviewMouseLeftButtonUp="PreviousDay" Opacity="{Binding PreviousDayButtonOpacity, Mode=OneWay}"/>
+        <Image HorizontalAlignment="Left" Height="25" Margin="260,7,0,0" VerticalAlignment="Top" Width="30" Source="/ManagementSoftware;component/Resources/arrow.png" PreviewMouseLeftButtonUp="NextDay" Opacity="{Binding NextDayButtonOpacity, Mode=OneWay}"/>
+        <Label Content="{Binding DayText, Mode=OneWay}" HorizontalAlignment="Left" Margin="175,7,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="80"/>
 
     </Grid>
 </UserControl>

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" DataContext="{Binding CustomerList, Mode=OneWay, Source={StaticResource Locator}}">
     <Grid>
-        <Button Content="Aktualisiere" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Command="{Binding LoadCommand, Mode=OneWay}"/>
-        <DataGrid HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="1200" Height="500" ItemsSource="{Binding DataList}" CanUserReorderColumns="False" IsReadOnly="True" />
+        <Button Content="Aktualisiere" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding LoadCommand, Mode=OneWay}"/>
+        <DataGrid HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="1200" Height="543" ItemsSource="{Binding DataList}" CanUserReorderColumns="False" IsReadOnly="True" />
     </Grid>
 </UserControl>

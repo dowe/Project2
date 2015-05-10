@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManagementSoftware.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,18 @@ namespace ManagementSoftware.View
         public ShiftScheduleDayView()
         {
             InitializeComponent();
+        }
+
+        private void NextDay(object sender, MouseButtonEventArgs e)
+        {
+            ShiftScheduleDayVM vm = (ShiftScheduleDayVM) DataContext;
+            vm.NextDay();
+        }
+
+        private void PreviousDay(object sender, MouseButtonEventArgs e)
+        {
+            ShiftScheduleDayVM vm = (ShiftScheduleDayVM)DataContext;
+            vm.PreviousDay();
         }
     }
 }

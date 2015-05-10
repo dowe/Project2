@@ -7,8 +7,8 @@
         xmlns:views="clr-namespace:ManagementSoftware.View"
         mc:Ignorable="d ignore"
         Height="650"
-        Width="1280"
-        Title="Verwaltungs Applikation"
+        Width="1250"
+        Title="Verwaltungs Applikation" ResizeMode="CanMinimize"
         >
     
     <Window.Resources>

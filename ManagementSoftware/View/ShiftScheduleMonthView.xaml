@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:helper="clr-namespace:ManagementSoftware.Helper"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1400"
+             d:DesignHeight="600" d:DesignWidth="1250"
              DataContext="{Binding ShiftSchedule.ShiftScheduleMonthVM, Mode=OneWay, Source={StaticResource Locator}}"
             >
     <UserControl.Resources>
