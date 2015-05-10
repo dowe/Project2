@@ -44,7 +44,7 @@ namespace Smartphone.Driver
 					{
 						orderID = string.Empty;
 					}
-					if (value != null && value.Customer != null)
+					if (value != null && value.Customer != null && value.Customer.Address != null)
 					{
 						CustomerAddress = value.Customer.Address.Street + "\n" + value.Customer.Address.PostalCode + value.Customer.Address.City;
 					}

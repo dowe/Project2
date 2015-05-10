@@ -13,10 +13,12 @@ namespace Smartphone.Driver
 	{
 
 		private const string OrdersProperty = "WrappedOrders";
+		private const string SelectedOrderProperty = "SelectedOrder";
 
 		private IClientConnection connection = null;
 
 		private WrappedOrders wrappedOrders = null;
+		private Order selectedOrder = null;
 		private RelayCommand logoutCommand = null;
 		private RelayCommand emergencyCommand = null;
 
@@ -34,6 +36,22 @@ namespace Smartphone.Driver
 			set {
 				wrappedOrders = value;
 				RaisePropertyChanged (OrdersProperty);
+			}
+		}
+
+		public Order SelectedIndex
+		{
+			get {
+				return selectedOrder;
+			}
+			set {
+				selectedOrder = value;
+				if (value != null)
+				{
+					// Show order details.
+					Messenger.Default.Send (new MsgSwitchOrderDetailsPage (selectedOrder));
+				}
+				RaisePropertyChanged (SelectedOrderProperty);
 			}
 		}
 
