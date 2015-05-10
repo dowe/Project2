@@ -66,11 +66,6 @@ namespace ManagementSoftware.ViewModel
             {
                 ShiftScheduleMonthEntry entry = GetEntry(emp, list, numberOfDaysInMonth);
                 entry.Days[date.Day - 1] = shift;
-
-                if (emp.FirstName.Equals("FAdministrationAssistant1") && date.Day == 1)
-                {
-                    Console.WriteLine(shift);
-                }
             }
         }
 
