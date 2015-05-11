@@ -1,6 +1,7 @@
 ﻿using Common.Commands;
 using Common.Communication;
 using Common.Communication.Server;
+using Common.DataTransferObjects;
 using Server.DatabaseCommunication;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,39 @@ namespace Server.CmdHandler
             this.db = db;
         }
 
-        protected override void Handle(CmdGetShiftSchedules command, string connectionIdOrNull)
+        protected override void Handle(CmdGetShiftSchedules request, string connectionIdOrNull)
         {
-            //TODO
+       
+            IList<ShiftSchedule> list;
+
+            db.StartTransaction();
+            list = db.GetShiftSchedules();
+            db.EndTransaction(TransactionEndOperation.READONLY);
+
+            ShiftSchedule currentMonth = null;
+            ShiftSchedule nextMonth = null;
+            DateTime current = DateTime.Now;
+            DateTime next = current.AddMonths(1);
+
+            foreach (ShiftSchedule obj in list)
+            {
+                if ( currentMonth == null 
+                    && obj.Date.Month == current.Month 
+                    && obj.Date.Year == current.Year) {
+                        currentMonth = obj;
+                }
+                if (nextMonth == null
+                    && obj.Date.Month == next.Month
+                    && obj.Date.Year == next.Year)
+                {
+                    nextMonth = obj;
+                }
+            }
+
+            ShiftSchedule[] array = {currentMonth, nextMonth};
+
+            ResponseCommand response = new CmdReturnGetShiftSchedule(request.Id, array);
+            connection.Unicast(response, connectionIdOrNull);
         }
     }
 }

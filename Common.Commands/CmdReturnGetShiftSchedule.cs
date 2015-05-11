@@ -12,11 +12,11 @@ namespace Common.Commands
     public class CmdReturnGetShiftSchedule : ResponseCommand
     {
 
-        public ReadOnlyCollection<ShiftSchedule> Schedules { get; private set; }
+        public ShiftSchedule[] Schedules { get; private set; }
 
-        public CmdReturnGetShiftSchedule(Guid requestId, IList<ShiftSchedule> schedules) : base(requestId)
+        public CmdReturnGetShiftSchedule(Guid requestId, ShiftSchedule[] schedules) : base(requestId)
         {
-            Schedules = new ReadOnlyCollection<ShiftSchedule>(schedules);
+            Schedules = schedules;
         }
 
     }
