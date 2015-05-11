@@ -39,6 +39,7 @@ namespace Server
             // TODO: REGISTER SERVER HANDLER HERE
             // Register all command handler to the connection here.
             connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection));
+            connection.RegisterCommandHandler(new CmdGetShiftSchedulesHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection));
             connection.RegisterCommandHandler(new CmdSelectCarHandler(connection));
             connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection));
