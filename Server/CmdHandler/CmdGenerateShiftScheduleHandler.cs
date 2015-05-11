@@ -97,7 +97,7 @@ namespace Server.CmdHandler
 
             //store ShiftSchedule in db
             db.StartTransaction();
-            //TODO: db.CreateShiftSchedule(newShiftSchedule);
+            db.CreateShiftSchedule(newShiftSchedule);
             db.EndTransaction(TransactionEndOperation.SAVE);
 
             Console.WriteLine("SHIFT_SCHEDULE CREATED FOR <{0}>", refDate);
