@@ -1,4 +1,5 @@
 ﻿using Common.Communication.Client;
+using Common.Commands;
 using Common.DataTransferObjects;
 using Common.Util;
 using GalaSoft.MvvmLight;
@@ -71,20 +72,24 @@ namespace ManagementSoftware.Model
 
         public void LoadRawModel()
         {
-            //TODO: GET SHIFT_SHEDULES FROM SERVER USE _Connection
+            CmdGetShiftSchedules request = new CmdGetShiftSchedules();
+            CmdReturnGetShiftSchedule response = _Connection.SendWait<CmdReturnGetShiftSchedule>(request);
 
-            DateTime now = DateTime.Now;
-            now = new DateTime(now.Year, now.Month, 1); //zum testen ändere Monat und Jahr
-            DateTime next = now.AddMonths(1);
+            if (response == null)
+            {
+                MessageBox.Show("Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");
+            }
+            else
+            {
+                ShiftSchedule[] _Data = new ShiftSchedule[2];
 
-            ShiftSchedule[] _Data = new ShiftSchedule[2];
+                _Data[0] = response.Schedules[0];
+                _Data[1] = response.Schedules[1];
 
-            _Data[0] = Util.CreateTestData(now);
-            _Data[1] = Util.CreateTestData(next);
+                ShiftScheduleRawModel.Data = _Data;
 
-            ShiftScheduleRawModel.Data = _Data;
-
-            MessageBox.Show("Daten abgerufen");
+                MessageBox.Show("Daten abgerufen");
+            }
         }
 
         public void SwitchMonthData()
