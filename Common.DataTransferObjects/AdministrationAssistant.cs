@@ -6,13 +6,17 @@
 //------------------------------------------------------------------------------
 namespace Common.DataTransferObjects
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
 
-	public class AdministrationAssistant : Employee
-	{
-	}
+    public class AdministrationAssistant : Employee
+    {
+        public AdministrationAssistant()
+        {
+            EmployeeType = EEmployeeType.TypeAdministrationAssistant;
+        }
+    }
 }
 

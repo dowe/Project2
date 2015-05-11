@@ -72,7 +72,7 @@ namespace Common.Util
                 int index = 0;
                 foreach (object item in l)
                 {
-                    text += index + " = " + ToString(item);
+                    text += index + " = " + ToString(item, debug);
                     index++;
                 }
 
@@ -97,7 +97,7 @@ namespace Common.Util
                         Info(debug, "ELEM " + list[i].Name);
 
                         object child = list[i].GetValue(elem);
-                        text += list[i].Name + "=" + ToString(child);
+                        text += list[i].Name + "=" + ToString(child, debug);
 
                     }
                 }
@@ -118,7 +118,8 @@ namespace Common.Util
         {
             return type.IsPrimitive
                        || type.ToString().Equals("System.String")
-                       || typeof(DateTime).IsAssignableFrom(type);
+                       || typeof(DateTime).IsAssignableFrom(type)
+                       || type.IsEnum;
         }
 
         public static String Tab(String txt)

@@ -15,6 +15,7 @@ namespace Common.DataTransferObjects
 
 	public class Employee
 	{
+
         [Key, Column(Order = 0)]
 		public virtual string LastName
 		{
@@ -29,6 +30,31 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
+        public virtual string UserName
+        {
+            get;
+            set;
+        }
+
+        public virtual string Password
+        {
+            get;
+            set;
+        }
+
+        public virtual EEmployeeType EmployeeType 
+        {
+            get; 
+            set;
+        }
+
 	}
+
+    public enum EEmployeeType
+    {
+       TypeDriver = 0,
+       TypeAdministrationAssistant = 1,
+       TypeLabAssistant = 2
+    }
 }
 
