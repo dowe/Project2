@@ -19,6 +19,8 @@ namespace Common.Communication
         private ActionBlock<Received<Command>> handleBlock = null;
         private ActionBlock<Received<Command>> waitHandleBlock = null;
 
+        public event Action<Command> BeforeHandlingCommand = null;
+
         public InputCommandPipeline(ICommandSerializer serializer) : this(serializer, new CommandHandlerList(), new CommandHandlerList(), new ConcurrentDictionary<Type, byte>())
         {
         }
@@ -47,6 +49,7 @@ namespace Common.Communication
                 });
             handleBlock = new ActionBlock<Received<Command>>(receivedCommand =>
                 {
+                    OnBeforeHandlingComand(receivedCommand.Value);
                     handlers.TryHandleCommand(receivedCommand.Value, receivedCommand.ConnectionIdOrNull);
                 });
             waitHandleBlock = new ActionBlock<Received<Command>>(receivedCommand =>
@@ -65,6 +68,14 @@ namespace Common.Communication
                     handleBlock.Complete();
                     waitHandleBlock.Complete();
                 });
+        }
+
+        private void OnBeforeHandlingComand(Command command)
+        {
+            if (BeforeHandlingCommand != null)
+            {
+                BeforeHandlingCommand(command);
+            }
         }
 
         /// <summary>

@@ -22,12 +22,18 @@ namespace Server
             IDatabaseCommunicator db = new DatabaseCommunicator();
             LocalServerData data = new LocalServerData();
             connection.ServerStarted += (object sender, EventArgs e) => OnServerStarted(connection, db, data);
+            connection.BeforeHandlingCommand += connection_BeforeHandlingCommand;
 
             Console.WriteLine("Registering Handlers...");
             RegisterHandlers(connection, db, data);
 
             Console.WriteLine("Starting server...");
             connection.RunForever();
+        }
+
+        static void connection_BeforeHandlingCommand(Common.Communication.Command obj)
+        {
+            Console.WriteLine("Handling {0}.", obj.GetType());
         }
 
         private static void RegisterHandlers(
