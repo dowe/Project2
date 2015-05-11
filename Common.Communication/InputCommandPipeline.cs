@@ -49,7 +49,7 @@ namespace Common.Communication
                 });
             handleBlock = new ActionBlock<Received<Command>>(receivedCommand =>
                 {
-                    
+                    OnBeforeHandlingComand(receivedCommand.Value);
                     handlers.TryHandleCommand(receivedCommand.Value, receivedCommand.ConnectionIdOrNull);
                 });
             waitHandleBlock = new ActionBlock<Received<Command>>(receivedCommand =>
