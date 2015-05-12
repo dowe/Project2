@@ -101,7 +101,14 @@ namespace Smartphone.Driver
 		{
 			if (order.Customer.Address != null)
 			{
-				new NativeMapAppLauncher ().LaunchMapApp (order.Customer.Address);
+				try
+				{
+					new NativeMapAppLauncher ().LaunchMapApp (order.Customer.Address);
+				}
+				catch (Exception e)
+				{
+					// TODO show toast or something that no map app could be launched.
+				}
 			}
 		}
 
