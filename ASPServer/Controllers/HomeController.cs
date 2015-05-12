@@ -18,8 +18,10 @@ namespace ASPServer.Controllers
         private const string UserID = "userID";
         private const string SessionAnalysisData = "analysisData";
         private const string SessionAnalysesList = "analysesList";
-        private const String SessionOrdered = "orderedAnalysisList";
+        private const string SessionOrdered = "orderedAnalysisList";
         private const string SessionPatientsList = "patientsList";
+        private const string LastActionTime = "lastActionTime";
+        private const int LogoutIdleTimeInSec = 300;
 
         IClientConnection _clientConnection;
 
@@ -80,7 +82,7 @@ namespace ASPServer.Controllers
             orderModel.PatientsList = (List<SelectListItem>)Session[SessionPatientsList];
             orderModel.AnalysisList = (List<SelectListItem>)Session[SessionAnalysesList];
             orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
-            
+
             //add patient button
             if (Request.Form["NewPatientButton"] != null)
             {
@@ -91,7 +93,7 @@ namespace ASPServer.Controllers
                 }
                 pats.Add(new SelectListItem() { Text = orderModel.NewPatient, Value = orderModel.NewPatient });
                 Session[SessionPatientsList] = pats;
-                orderModel.PatientsList = (List<SelectListItem>) Session[SessionPatientsList];
+                orderModel.PatientsList = (List<SelectListItem>)Session[SessionPatientsList];
             }
             else if (Request.Form["OrderButton"] != null)
             {
@@ -106,7 +108,7 @@ namespace ASPServer.Controllers
                 //add Test button
                 var orderItems = new Dictionary<string, List<Analysis>>();
                 if (Session[SessionOrdered] != null)
-                    orderItems = (Dictionary<string, List<Analysis>>) Session[SessionOrdered];
+                    orderItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
 
                 foreach (var pat in orderModel.SelectedPatient)
                 {
@@ -118,13 +120,13 @@ namespace ASPServer.Controllers
                     foreach (var analysisName in orderModel.SelectedAnalysis)
                     {
                         var analysesData = Session[SessionAnalysisData] as List<Analysis>;
-                        orderItems[pat].Add(analysesData.Where(a=>a.Name == analysisName).FirstOrDefault());
+                        orderItems[pat].Add(analysesData.Where(a => a.Name == analysisName).FirstOrDefault());
                     }
                 }
                 Session[SessionOrdered] = orderItems;
-                orderModel.OrderedItems = (Dictionary<string, List<Analysis>>) Session[SessionOrdered];
+                orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
             }
-            
+
             return View(orderModel);
         }
 
@@ -201,11 +203,6 @@ namespace ASPServer.Controllers
         {
             CmdReturnLoginDriver cmd = this._clientConnection.SendWait<CmdReturnLoginDriver>(new CmdLoginDriver(userModel.ID, userModel.Password));
 
-            // Test "DB"
-            List<UserModel> registeredUsers = new List<UserModel>();
-            registeredUsers.Add(new UserModel { ID = "ich", Password = "asdf" });
-            registeredUsers.Add(new UserModel { ID = "du", Password = "1234" });
-
             // Check if the user exists and if the password is correct
             if (cmd.Success)
             {
@@ -222,9 +219,12 @@ namespace ASPServer.Controllers
                 cookie.Value = authId;
                 Response.Cookies.Add(cookie);
 
+                // Save the login timestamp
+                long now = DateTime.UtcNow.Ticks;
+                Session[LastActionTime] = now;
+
                 // Also save the "real" userID -> important to know for showing user specific data
                 Session[UserID] = userModel.ID;
-                //UserDB.loginMapping.Add(authId, userModel);
 
                 return RedirectToAction("LoginSuccessful");
             }
@@ -271,12 +271,17 @@ namespace ASPServer.Controllers
             {
                 if (Request.Cookies[AuthID].Value == Session[AuthID].ToString())
                 {
-                    return true;
+                    // Check how long since the last user action in a authenticated context
+                    TimeSpan span = new TimeSpan(DateTime.UtcNow.Ticks - ((long)Session[LastActionTime]));
+                    if (span.Seconds < LogoutIdleTimeInSec)
+                    {
+                        // If the user was within the time we set the new time
+                        Session[LastActionTime] = DateTime.UtcNow.Ticks;
+                        return true;
+                    }
                 }
-                else
-                {
-                    return false;
-                }
+
+                return false;
             }
             catch (NullReferenceException)
             {
