@@ -17,7 +17,10 @@
 				<Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Text="{Binding CustomerAddress}" />
 			</Grid>
 			<ActivityIndicator VerticalOptions="CenterAndExpand" IsRunning="false" />
-			<Button Text="Launch Map" Command="{Binding LaunchMapCommand}" />
+			<StackLayout Orientation="Horizontal" VerticalOptions="End" >
+				<Button Text="Launch Map" HorizontalOptions="StartAndExpand" Command="{Binding LaunchMapCommand}" />
+				<Button Text="Collected" HorizontalOptions="EndAndExpand" Command="{Binding CollectedCommand}" />
+			</StackLayout>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

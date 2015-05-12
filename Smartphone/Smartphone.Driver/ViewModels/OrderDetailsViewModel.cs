@@ -4,6 +4,7 @@ using Common.Communication.Client;
 using Common.DataTransferObjects;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Command;
+using Common.Commands;
 
 namespace Smartphone.Driver
 {
@@ -20,6 +21,7 @@ namespace Smartphone.Driver
 		private string orderID = null;
 		private string customerAddress = null;
 		private RelayCommand launchMapCommand = null;
+		private RelayCommand collectedCommand = null;
 
 		public OrderDetailsViewModel (IClientConnection connection)
 		{
@@ -109,6 +111,32 @@ namespace Smartphone.Driver
 				{
 					// TODO show toast or something that no map app could be launched.
 				}
+			}
+		}
+
+		public RelayCommand CollectedCommand
+		{
+			get {
+				if (collectedCommand == null)
+				{
+					collectedCommand = new RelayCommand (SetCollected);
+				}
+				return collectedCommand;
+			}
+		}
+
+		private void SetCollected()
+		{
+			CmdSetOrderCollected setOrderCollected = new CmdSetOrderCollected ("Ole", order.OrderID); // TODO get username from session.
+			CmdReturnSetOrderCollected response = connection.SendWait<CmdReturnSetOrderCollected>(setOrderCollected);
+			if (response.Success)
+			{
+				// Switch back to order list.
+				Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
+			}
+			else 
+			{
+				// TODO show toast or something.
 			}
 		}
 
