@@ -104,6 +104,7 @@
     <Compile Include="CmdHandler\CmdLogoutDriverHandler.cs" />
     <Compile Include="CmdHandler\CmdRegisterCustomerHandler.cs" />
     <Compile Include="CmdHandler\CmdSelectCarHandler.cs" />
+    <Compile Include="CmdHandler\CmdSetOrderCollectedHandler.cs" />
     <Compile Include="DatabaseCommunication\DatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\IDatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\LaborContext.cs" />
