@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms;
+using Common.DataTransferObjects;
+using System.Text;
 
 namespace Smartphone.Driver
 {
@@ -12,6 +14,19 @@ namespace Smartphone.Driver
 			public string Vicinity { get; set; }
 			public Position Location { get; set; }
 			public Uri Icon { get; set; }
+		}
+
+		public void LaunchMapApp(Address address)
+		{
+			StringBuilder name = new StringBuilder ();
+			name.Append (address.Street);
+			name.Append (" ");
+			name.Append (address.PostalCode);
+			name.Append (" ");
+			name.Append (address.City);
+			Place place = new Place () { Name = sb.ToString () };
+
+			LaunchMapApp(place);
 		}
 
 		public void LaunchMapApp(Place place)
