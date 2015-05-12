@@ -201,7 +201,7 @@ namespace ASPServer.Controllers
         [HttpPost]
         public ActionResult Login(UserModel userModel)
         {
-            CmdReturnLoginDriver cmd = this._clientConnection.SendWait<CmdReturnLoginDriver>(new CmdLoginDriver(userModel.ID, userModel.Password));
+            CmdReturnLoginCustomer cmd = this._clientConnection.SendWait<CmdReturnLoginCustomer>(new CmdLoginCustomer(userModel.ID, userModel.Password));
 
             // Check if the user exists and if the password is correct
             if (cmd.Success)
