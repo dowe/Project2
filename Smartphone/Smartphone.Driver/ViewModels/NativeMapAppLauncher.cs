@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Smartphone.Driver
 {
-	public class NativeMap
+	public class NativeMapAppLauncher
 	{
 		
 		public class Place {
