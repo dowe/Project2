@@ -16,6 +16,8 @@
 				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Addresse:" />
 				<Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Text="{Binding CustomerAddress}" />
 			</Grid>
+			<ActivityIndicator VerticalOptions="CenterAndExpand" IsRunning="false" />
+			<Button Text="Launch Map" Command="{Binding LaunchMapCommand}" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

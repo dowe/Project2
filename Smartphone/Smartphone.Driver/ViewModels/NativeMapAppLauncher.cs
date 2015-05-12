@@ -24,7 +24,7 @@ namespace Smartphone.Driver
 			name.Append (address.PostalCode);
 			name.Append (" ");
 			name.Append (address.City);
-			Place place = new Place () { Name = sb.ToString () };
+			Place place = new Place () { Name = name.ToString () };
 
 			LaunchMapApp(place);
 		}

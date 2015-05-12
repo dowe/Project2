@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight;
 using Common.Communication.Client;
 using Common.DataTransferObjects;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Command;
 
 namespace Smartphone.Driver
 {
@@ -18,6 +19,7 @@ namespace Smartphone.Driver
 
 		private string orderID = null;
 		private string customerAddress = null;
+		private RelayCommand launchMapCommand = null;
 
 		public OrderDetailsViewModel (IClientConnection connection)
 		{
@@ -81,6 +83,25 @@ namespace Smartphone.Driver
 					customerAddress = value;
 					RaisePropertyChanged (CustomerAddressProperty);
 				}
+			}
+		}
+
+		public RelayCommand LaunchMapCommand
+		{
+			get {
+				if (launchMapCommand == null)
+				{
+					launchMapCommand = new RelayCommand (LaunchMap);
+				}
+				return launchMapCommand;
+			}
+		}
+
+		private void LaunchMap()
+		{
+			if (order.Customer.Address != null)
+			{
+				new NativeMapAppLauncher ().LaunchMapApp (order.Customer.Address);
 			}
 		}
 
