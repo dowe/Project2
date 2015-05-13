@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdHandler\CmdGetShiftSchedulesHandler.cs" />
     <Compile Include="CmdHandler\CmdAnnounceEmergencyHandler.cs" />
     <Compile Include="CmdHandler\CmdGenerateShiftScheduleHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAllBillsOfUserHandler.cs" />
@@ -99,9 +100,11 @@
     <Compile Include="CmdHandler\CmdGetAvailableCarsHandler.cs" />
     <Compile Include="CmdHandler\CmdGetDriversUnfinishedOrdersHandler.cs" />
     <Compile Include="CmdHandler\CmdLoginDriverHandler.cs" />
+    <Compile Include="CmdHandler\CmdLoginCustomerHandler.cs" />
     <Compile Include="CmdHandler\CmdLogoutDriverHandler.cs" />
     <Compile Include="CmdHandler\CmdRegisterCustomerHandler.cs" />
     <Compile Include="CmdHandler\CmdSelectCarHandler.cs" />
+    <Compile Include="CmdHandler\CmdSetOrderCollectedHandler.cs" />
     <Compile Include="DatabaseCommunication\DatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\IDatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\LaborContext.cs" />

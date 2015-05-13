@@ -14,18 +14,10 @@ namespace Common.DataTransferObjects
 
 	public class Driver : Employee
 	{
-        [Key]
-		public virtual string UserName
-		{
-			get;
-			set;
-		}
-
-		public virtual string Password
-		{
-			get;
-			set;
-		}
+        public Driver()
+        {
+            EmployeeType = EEmployeeType.TypeDriver;
+        }
 
 	}
 }

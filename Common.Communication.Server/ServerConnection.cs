@@ -17,6 +17,7 @@ namespace Common.Communication.Server
         private OutputCommandPipeline output = null;
 
         public event EventHandler ServerStarted;
+        public event Action<Command> BeforeHandlingCommand;
 
         public ServerConnection()
             : this("http://localhost:8080")
@@ -33,7 +34,16 @@ namespace Common.Communication.Server
             this.bindAddress = bindAddress;
 
             this.input = new InputCommandPipeline(serializer);
+            input.BeforeHandlingCommand += input_BeforeHandlingCommand;
             this.output = new OutputCommandPipeline(serializer);
+        }
+
+        void input_BeforeHandlingCommand(Command obj)
+        {
+            if (BeforeHandlingCommand != null)
+            {
+                BeforeHandlingCommand(obj);
+            }
         }
 
         /// <summary>

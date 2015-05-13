@@ -13,7 +13,7 @@ namespace Server
 {
     class Program
     {
-        
+
         static void Main(string[] args)
         {
             // Listens on all addresses.
@@ -22,12 +22,18 @@ namespace Server
             IDatabaseCommunicator db = new DatabaseCommunicator();
             LocalServerData data = new LocalServerData();
             connection.ServerStarted += (object sender, EventArgs e) => OnServerStarted(connection, db, data);
+            connection.BeforeHandlingCommand += connection_BeforeHandlingCommand;
 
             Console.WriteLine("Registering Handlers...");
             RegisterHandlers(connection, db, data);
 
             Console.WriteLine("Starting server...");
             connection.RunForever();
+        }
+
+        static void connection_BeforeHandlingCommand(Common.Communication.Command obj)
+        {
+            Console.WriteLine("Handling {0}.", obj.GetType());
         }
 
         private static void RegisterHandlers(
@@ -39,9 +45,12 @@ namespace Server
             // TODO: REGISTER SERVER HANDLER HERE
             // Register all command handler to the connection here.
             connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection));
+            connection.RegisterCommandHandler(new CmdLoginCustomerHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGetShiftSchedulesHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection));
             connection.RegisterCommandHandler(new CmdSelectCarHandler(connection));
             connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection));
+            connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection));
             connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection));
             connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));

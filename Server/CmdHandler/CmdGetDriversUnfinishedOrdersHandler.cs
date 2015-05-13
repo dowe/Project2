@@ -24,7 +24,7 @@ namespace Server.CmdHandler
         {
             List<Order> driversUnfinishedOrders = new List<Order>()
             {
-                new Order() {OrderID = 0, OrderDate = DateTime.Now, Customer = new Customer() {Label = "Ultraklinik"}},
+                new Order() {OrderID = 0, OrderDate = DateTime.Now, Customer = new Customer() {Label = "Ultraklinik", Address= new Address(){ City = "Offenburg", PostalCode = "77652", Street = "Badstrasse 21" }}},
                 new Order() {OrderID = 1, OrderDate = DateTime.Now, Customer = new Customer() {Label = "Lazerklink"}},
                 new Order() {OrderID = 42, OrderDate = DateTime.Now, Customer = new Customer() {Label = "Dr. Awesome"}}
             };

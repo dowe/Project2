@@ -12,20 +12,25 @@ namespace ManagementSoftware.Helper
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if ( value == null ) {
+            if (value == null)
+            {
                 return "NULL";
             }
-            if (IsType<Driver>(value))
+            if (IsType<Employee>(value))
             {
-                return "Fahrer";
-            }
-            if (IsType<LabAssistant>(value))
-            {
-                return "Labor";
-            }
-            if (IsType<AdministrationAssistant>(value))
-            {
-                return "Verwaltung";
+                Employee emp = (Employee)(value);
+
+                switch (emp.EmployeeType)
+                {
+                    case EEmployeeType.TypeAdministrationAssistant:
+                        return "Verwaltung";
+                    case EEmployeeType.TypeDriver:
+                        return "Fahrer";
+                    case EEmployeeType.TypeLabAssistant:
+                        return "Labor";
+                    default:
+                        throw new Exception("Unknonw EmployeeType <" + emp.EmployeeType + ">");
+                }
             }
 
             return value.GetType().Name;
