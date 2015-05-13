@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 
 namespace ASPServer.Controllers
 {
@@ -62,9 +63,9 @@ namespace ASPServer.Controllers
             }
 
             //incase site was used before
-            orderModel.PatientsList = (List<SelectListItem>)Session[SessionPatientsList];
-            orderModel.AnalysisList = (List<SelectListItem>)Session[SessionAnalysesList];
-            orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
+            orderModel.PatientsList = (List<SelectListItem>)Session[SessionPatientsList] ?? new List<SelectListItem>();
+            orderModel.AnalysisList = (List<SelectListItem>)Session[SessionAnalysesList] ?? new List<SelectListItem>();
+            orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered] ?? new Dictionary<string, List<Analysis>>();
 
             return View(orderModel);
         }
@@ -89,7 +90,8 @@ namespace ASPServer.Controllers
                 {
                     pats = Session[SessionPatientsList] as List<SelectListItem>;
                 }
-                pats.Add(new SelectListItem() { Text = orderModel.NewPatient, Value = orderModel.NewPatient });
+                if(!orderModel.NewPatient.IsNullOrWhiteSpace())
+                    pats.Add(new SelectListItem() { Text = orderModel.NewPatient, Value = orderModel.NewPatient });
                 Session[SessionPatientsList] = pats;
                 orderModel.PatientsList = (List<SelectListItem>) Session[SessionPatientsList];
             }
@@ -97,32 +99,57 @@ namespace ASPServer.Controllers
             {
                 //Order everything
             }
-            else if (Request.Form["DeleteButtonXXX"] != null)
-            {
-                //delete from orderList
-            }
-            else
+            else if (Request.Form["AddAnalysisButton"] != null)
             {
                 //add Test button
                 var orderItems = new Dictionary<string, List<Analysis>>();
                 if (Session[SessionOrdered] != null)
-                    orderItems = (Dictionary<string, List<Analysis>>) Session[SessionOrdered];
+                    orderItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
 
-                foreach (var pat in orderModel.SelectedPatient)
+                if (orderModel.SelectedPatient != null && orderModel.SelectedAnalysis != null)
                 {
-                    if (!orderItems.ContainsKey(pat))
+                    foreach (var pat in orderModel.SelectedPatient)
                     {
-                        orderItems.Add(pat, new List<Analysis>());
-                    }
+                        if (!orderItems.ContainsKey(pat))
+                        {
+                            orderItems.Add(pat, new List<Analysis>());
+                        }
 
-                    foreach (var analysisName in orderModel.SelectedAnalysis)
-                    {
-                        var analysesData = Session[SessionAnalysisData] as List<Analysis>;
-                        orderItems[pat].Add(analysesData.Where(a=>a.Name == analysisName).FirstOrDefault());
+                        foreach (var analysisName in orderModel.SelectedAnalysis)
+                        {
+                            var analysesData = Session[SessionAnalysisData] as List<Analysis>;
+                            orderItems[pat].Add(analysesData.Where(a => a.Name == analysisName).FirstOrDefault());
+                        }
                     }
                 }
                 Session[SessionOrdered] = orderItems;
-                orderModel.OrderedItems = (Dictionary<string, List<Analysis>>) Session[SessionOrdered];
+                orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
+               
+            }
+            else
+            {
+                bool empty = false;
+                //Delete
+                foreach (var orderItem in (Dictionary<string, List<Analysis>>)Session[SessionOrdered])
+                {
+                    foreach (var analysis in (List<Analysis>)orderItem.Value)
+                    {
+                        string str = "Delete#" + orderItem.Key + "#" + analysis.Name;
+                        if (Request.Form[str] != null)
+                        {
+                            orderItem.Value.Remove(analysis);
+                            if (orderItem.Value.Count == 0)
+                            {
+                                ((Dictionary<string, List<Analysis>>)Session[SessionOrdered]).Remove(orderItem.Key);
+                                empty = true;
+                            }
+                            break;
+                        }
+                    }
+                    if (empty)
+                        break;
+                }
+                orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
             }
             
             return View(orderModel);
@@ -140,13 +167,17 @@ namespace ASPServer.Controllers
             {
                 var cmd =
                     _clientConnection.SendWait<CmdReturnGetAllBillsOfUser>(
-                        new CmdGetAllBillsOfUser((string)Session[UserID]));
+                        new CmdGetAllBillsOfUser((string) Session[UserID]));
                 billsRaw = cmd.Bills.ToList();
 
                 if (!billsRaw.Any())
                     return View();
 
                 Session[SessionBills] = billsRaw;
+            }
+            else
+            {
+                billsRaw = (List<Bill>) Session[SessionBills];
             }
 
 

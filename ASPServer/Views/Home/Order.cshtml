@@ -1,6 +1,10 @@
 ﻿@using Common.DataTransferObjects
 @model ASPServer.Models.OrderModel
 
+@functions {
+    public String str { get; set; }
+}
+
 @{
     ViewBag.Title = "Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,33 +26,35 @@
             </td>
         </tr>
         <tr>
-            <td>@Html.ListBoxFor(m => m.SelectedPatient, new SelectList(Model.PatientsList, "Value", "Text"), new {Multiple = "multiple", size = 10})</td>
-            <td>@Html.ListBoxFor(m => m.SelectedAnalysis, new SelectList(Model.AnalysisList, "Value", "Text"), new {Multiple = "multiple", size = 10})</td>
+            <td>@Html.ListBoxFor(m => m.SelectedPatient, new SelectList(Model.PatientsList ?? new List<SelectListItem>(), "Value", "Text"), new {Multiple = "multiple", size = 10})</td>
+            <td>@Html.ListBoxFor(m => m.SelectedAnalysis, new SelectList(Model.AnalysisList?? new List<SelectListItem>(), "Value", "Text"), new {Multiple = "multiple", size = 10})</td>
         </tr>
-        <tr><td></td><td align="right"><input type="submit" value="Test hinzufügen" class="btn btn-default"/></td></tr>
+        <tr><td></td><td align="right"><input type="submit" name="AddAnalysisButton" id="AddAnalysisButton" value="Test hinzufügen" class="btn btn-default" /></td></tr>
     </table>
     if (Model.OrderedItems != null && Model.OrderedItems.Any())
      {
          <table>
              <colgroup >
+
+                 <col span="3" width="250">
                  <col span="1" width="50">
-                 <col span="3" width="250" >
              </colgroup>
              <tr>
-                 <th></th>
                  <th>Patient</th>
                  <th>Analyse</th>
                  <th>Benötigte Probe</th>
+                 <th></th>
              </tr>
              @foreach (var patOrder in Model.OrderedItems)
              {
                  foreach (var analysis in patOrder.Value as List<Analysis>)
                  {
                      <tr>
-                         <td><input type="submit" name="DeleteButton" id="DeleteButton" value="X" class="btn btn-default" /></td>
                          <td>@patOrder.Key</td>
-                         <td>@analysis.Name</td>
                          <td>@analysis.Name.ToString().Split('_').FirstOrDefault()</td>
+                         <td>@analysis.Name</td>
+                         @{ str = "Delete#" + @patOrder.Key + "#" + @analysis.Name; }
+                         <td><input type="submit" name=@str id=@str value="X" class="btn btn-default" /></td>
                      </tr>
                  }
              }
