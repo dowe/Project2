@@ -37,6 +37,7 @@ namespace ManagementSoftware.ViewModel
             SimpleIoc.Default.Register<DailyStatisticVM>();
             SimpleIoc.Default.Register<TestsVM>();
             SimpleIoc.Default.Register<CustomerListVM>();
+            SimpleIoc.Default.Register<MapVM>();
 
         }
 
@@ -93,6 +94,18 @@ namespace ManagementSoftware.ViewModel
                 return ServiceLocator.Current.GetInstance<CustomerListVM>();
             }
         }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+          "CA1822:MarkMembersAsStatic",
+          Justification = "This non-static member is needed for data binding purposes.")]
+        public MapVM Map
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MapVM>();
+            }
+        }
+
         /// <summary>
         /// Cleans up all the resources.
         /// </summary>

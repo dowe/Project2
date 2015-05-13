@@ -10,13 +10,13 @@
         Width="1250"
         Title="Verwaltungs Applikation" ResizeMode="CanMinimize"
         >
-    
+
     <Window.Resources>
-        
+
     </Window.Resources>
 
     <Grid x:Name="LayoutRoot">
-       
+
         <TabControl>
             <TabItem Header="Kunde Registrieren">
                 <views:RegisterCustomerView/>
@@ -32,6 +32,9 @@
             </TabItem>
             <TabItem Header="Probenübersicht">
                 <views:TestsView/>
+            </TabItem>
+            <TabItem Header="Map">
+                <views:MapView/>
             </TabItem>
         </TabControl>
 

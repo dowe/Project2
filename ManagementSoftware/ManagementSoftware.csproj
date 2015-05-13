@@ -94,6 +94,7 @@
     <Compile Include="Model\ShiftScheduleRawModel.cs" />
     <Compile Include="ViewModel\CustomerListVM.cs" />
     <Compile Include="ViewModel\DailyStatisticVM.cs" />
+    <Compile Include="ViewModel\MapVM.cs" />
     <Compile Include="ViewModel\RegisterCustomerVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleDayVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleMonthVM.cs" />
@@ -106,6 +107,9 @@
     </Compile>
     <Compile Include="View\DailyStatisticView.xaml.cs">
       <DependentUpon>DailyStatisticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RegisterCustomerView.xaml.cs">
       <DependentUpon>RegisterCustomerView.xaml</DependentUpon>
@@ -146,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DailyStatisticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
