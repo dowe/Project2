@@ -15,17 +15,17 @@ namespace DatabaseInitialize
             Initialize();
         }
 
-        static void Initialize()
+        private static void Initialize()
         {
             LaborContext context = new LaborContext();
             context.Database.Delete();
             InitializeAnalysis();
             InitializeEmployees();
             InitializeCars();
-
+            InitializeCustomer();
         }
 
-        static void InitializeAnalysis()
+        private static void InitializeAnalysis()
         {
             LaborContext con = new LaborContext();
             List<Analysis> Analysis = new List<Analysis>();
@@ -49,11 +49,11 @@ namespace DatabaseInitialize
             con.SaveChanges();
         }
 
-        static void InitializeEmployees()
+        private static void InitializeEmployees()
         {
             LaborContext con = new LaborContext();
             List<Employee> el = new List<Employee>();
-            for(int i = 0; i<20; i++)
+            for (int i = 0; i < 20; i++)
             {
                 el.Add(new LabAssistant() { FirstName = "Lab" + i, LastName = "Assistant" });
             }
@@ -63,13 +63,13 @@ namespace DatabaseInitialize
             }
             for (int i = 0; i < 10; i++)
             {
-                el.Add(new Driver() { FirstName = "Driver" + i, LastName = "Assistant",UserName="Driv"+ i, Password="Driv"+i });
+                el.Add(new Driver() { FirstName = "Driver" + i, LastName = "Assistant", UserName = "Driv" + i, Password = "Driv" + i });
             }
             con.Employee.AddRange(el);
             con.SaveChanges();
         }
 
-        static void InitializeCars()
+        private static void InitializeCars()
         {
             LaborContext con = new LaborContext();
             List<Car> cars = new List<Car>();
@@ -102,6 +102,15 @@ namespace DatabaseInitialize
                 }
                 throw raise;
             }
+        }
+
+        private static void InitializeCustomer()
+        {
+            LaborContext con = new LaborContext();
+            List<Customer> customers = new List<Customer>();
+            customers.Add(new Customer() { UserName = "house", Password = "asdf", Address = new Address() { Street = "Am Arsch der Welt", PostalCode = "12345", City = "Springfield" } });
+            con.Customer.AddRange(customers);
+            con.SaveChanges();
         }
     }
 }
