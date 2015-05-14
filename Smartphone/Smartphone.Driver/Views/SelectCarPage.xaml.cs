@@ -19,6 +19,10 @@ namespace Smartphone.Driver
 		private void UpdateCarIDsPicker(MsgUpdateCarIDsPicker msgUpdateCarIDPicker)
 		{
 			carPicker.Items.Clear ();
+			while (carPicker.Items.Count != 0)
+			{
+				carPicker.Items.RemoveAt (0);
+			}
 			foreach (Car car in msgUpdateCarIDPicker.Cars)
 			{
 				carPicker.Items.Add (car.CarID);

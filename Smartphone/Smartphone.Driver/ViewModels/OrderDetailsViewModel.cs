@@ -15,6 +15,7 @@ namespace Smartphone.Driver
 		private const string CustomerAddressProperty = "CustomerAddress";
 
 		private IClientConnection connection = null;
+		private Session session = null;
 
 		private Order order = null;
 
@@ -23,9 +24,10 @@ namespace Smartphone.Driver
 		private RelayCommand launchMapCommand = null;
 		private RelayCommand collectedCommand = null;
 
-		public OrderDetailsViewModel (IClientConnection connection)
+		public OrderDetailsViewModel (IClientConnection connection, Session session)
 		{
 			this.connection = connection;
+			this.session = session;
 
 			Messenger.Default.Register<MsgSetOrderDetailsModel> (this, SetOrder);
 		}
@@ -107,7 +109,7 @@ namespace Smartphone.Driver
 				{
 					new NativeMapAppLauncher ().LaunchMapApp (order.Customer.Address);
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					// TODO show toast or something that no map app could be launched.
 				}
@@ -127,7 +129,7 @@ namespace Smartphone.Driver
 
 		private void SetCollected()
 		{
-			CmdSetOrderCollected setOrderCollected = new CmdSetOrderCollected ("Ole", order.OrderID); // TODO get username from session.
+			CmdSetOrderCollected setOrderCollected = new CmdSetOrderCollected (session.Username, order.OrderID);
 			CmdReturnSetOrderCollected response = connection.SendWait<CmdReturnSetOrderCollected>(setOrderCollected);
 			if (response.Success)
 			{

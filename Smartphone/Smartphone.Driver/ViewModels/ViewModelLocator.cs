@@ -14,6 +14,9 @@ namespace Smartphone.Driver
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+			Session session = new Session ();
+			SimpleIoc.Default.Register<Session> (() => session);
+
 			WrappedOrders orders = new WrappedOrders ();
 			SimpleIoc.Default.Register<WrappedOrders> (() => orders);
 

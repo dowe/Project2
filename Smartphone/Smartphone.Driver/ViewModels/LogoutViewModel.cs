@@ -15,13 +15,16 @@ namespace Smartphone.Driver
 		private const string IsNotCommunicatingProperty = "IsNotCommunicating";
 
 		private IClientConnection connection = null;
+		private Session session = null;
+
 		private float endKm = 3;
 		private bool isCommunicating = false;
 		private RelayCommand logoutCommand = null;
 
-		public LogoutViewModel (IClientConnection connection)
+		public LogoutViewModel (IClientConnection connection, Session session)
 		{
 			this.connection = connection;
+			this.session = session;
 		}
 
 		public float EndKm
@@ -73,7 +76,7 @@ namespace Smartphone.Driver
 			
 		private void Logout()
 		{
-			CmdLogoutDriver logoutDriver = new CmdLogoutDriver ("Ole", "OG-KP-417", endKm); // TODO get username and car id from session. Is car id really necessary? The car could also be determined from the db.
+			CmdLogoutDriver logoutDriver = new CmdLogoutDriver (session.Username, session.CarID, endKm);
 			CmdReturnLogoutDriver response = connection.SendWait<CmdReturnLogoutDriver> (logoutDriver);
 			if (response != null)
 			{
@@ -86,6 +89,7 @@ namespace Smartphone.Driver
 
 		private void OnLogoutSuccessful()
 		{
+			session.Reset ();
 			Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage ());
 		}
 
