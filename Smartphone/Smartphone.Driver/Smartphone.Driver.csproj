@@ -42,12 +42,10 @@
     </Compile>
     <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="Models\WrappedOrders.cs" />
-    <Compile Include="Models\CmdReturnGetDriversUnfinishedOrdersHandler.cs" />
     <Compile Include="Views\SelectCarPage.xaml.cs">
       <DependentUpon>SelectCarPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\SelectCarViewModel.cs" />
-    <Compile Include="Models\CmdReturnGetAvailableCarsHandler.cs" />
     <Compile Include="Models\WrappedCars.cs" />
     <Compile Include="Models\WrappedUpdatableList.cs" />
     <Compile Include="Views\LogoutPage.xaml.cs">
@@ -68,6 +66,8 @@
     <Compile Include="Messages\MsgSwitchOrderDetailsPage.cs" />
     <Compile Include="ViewModels\NativeMapAppLauncher.cs" />
     <Compile Include="Models\Session.cs" />
+    <Compile Include="Handlers\CmdReturnGetAvailableCarsHandler.cs" />
+    <Compile Include="Handlers\CmdReturnGetDriversUnfinishedOrdersHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -146,5 +146,6 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Models\" />
     <Folder Include="Messages\" />
+    <Folder Include="Handlers\" />
   </ItemGroup>
 </Project>
