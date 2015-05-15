@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.Models
 {
 	public class WrappedUpdatableList<T>
 	{

@@ -6,8 +6,10 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.AspNet.SignalR.Client;
+using Smartphone.Driver.Models;
+using Smartphone.Driver.Messages;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class LoginViewModel : ViewModelBase
 	{

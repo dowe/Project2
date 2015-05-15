@@ -7,8 +7,10 @@ using Common.Communication.Client;
 using Common.DataTransferObjects;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Smartphone.Driver.Models;
+using Smartphone.Driver.Messages;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class SelectCarViewModel : ViewModelBase
 	{

@@ -4,8 +4,10 @@ using Common.Communication.Client;
 using GalaSoft.MvvmLight.Command;
 using Common.Commands;
 using GalaSoft.MvvmLight.Messaging;
+using Smartphone.Driver.Models;
+using Smartphone.Driver.Messages;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class LogoutViewModel : ViewModelBase
 	{

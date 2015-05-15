@@ -1,8 +1,9 @@
 ﻿using System;
 using Common.Commands;
 using Common.Communication;
+using Smartphone.Driver.Models;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.Handlers
 {
 	public class CmdReturnGetDriversUnfinishedOrdersHandler : CommandHandler<CmdReturnGetDriversUnfinishedOrders>
 	{

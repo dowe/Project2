@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using Common.DataTransferObjects;
 using System.Text;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class NativeMapAppLauncher
 	{

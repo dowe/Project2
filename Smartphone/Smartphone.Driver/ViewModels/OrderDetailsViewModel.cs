@@ -5,8 +5,10 @@ using Common.DataTransferObjects;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Command;
 using Common.Commands;
+using Smartphone.Driver.Messages;
+using Smartphone.Driver.Models;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class OrderDetailsViewModel : ViewModelBase
 	{

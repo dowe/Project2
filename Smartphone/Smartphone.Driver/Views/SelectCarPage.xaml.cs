@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using GalaSoft.MvvmLight.Messaging;
 using Common.DataTransferObjects;
+using Smartphone.Driver.Messages;
 
 namespace Smartphone.Driver
 {

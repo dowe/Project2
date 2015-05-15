@@ -2,6 +2,7 @@
 using Common.DataTransferObjects;
 using NUnit.Framework;
 using System.Collections.Generic;
+using Smartphone.Driver.Models;
 
 namespace Smartphone.Driver.UnitTests
 {

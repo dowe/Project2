@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 using GalaSoft.MvvmLight.Messaging;
+using Smartphone.Driver.Messages;
 
 namespace Smartphone.Driver
 {

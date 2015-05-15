@@ -4,8 +4,10 @@ using GalaSoft.MvvmLight.Ioc;
 using Common.Communication.Client;
 using Common.DataTransferObjects;
 using System.Collections.Generic;
+using Smartphone.Driver.Models;
+using Smartphone.Driver.Handlers;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class ViewModelLocator
 	{
