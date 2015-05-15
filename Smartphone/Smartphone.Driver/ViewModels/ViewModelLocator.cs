@@ -14,13 +14,16 @@ namespace Smartphone.Driver
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+			Session session = new Session ();
+			SimpleIoc.Default.Register<Session> (() => session);
+
 			WrappedOrders orders = new WrappedOrders ();
 			SimpleIoc.Default.Register<WrappedOrders> (() => orders);
 
 			WrappedCars cars = new WrappedCars ();
 			SimpleIoc.Default.Register<WrappedCars> (() => cars);
 
-			IClientConnection clientConnection = new ClientConnection ("http://192.168.178.94:8080/commands");
+			IClientConnection clientConnection = new ClientConnection ("http://192.168.56.1:8080/commands");
 			clientConnection.RegisterCommandHandler (new CmdReturnGetAvailableCarsHandler (cars));
 			clientConnection.RegisterCommandHandler (new CmdReturnGetDriversUnfinishedOrdersHandler (orders));
 			clientConnection.Start ();

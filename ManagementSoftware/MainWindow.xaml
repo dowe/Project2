@@ -36,6 +36,9 @@
             <TabItem Header="Map">
                 <views:MapView/>
             </TabItem>
+            <TabItem Header="Bestellung">
+                <views:CreateOrderView/>
+            </TabItem>
         </TabControl>
 
     </Grid>

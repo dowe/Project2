@@ -16,13 +16,14 @@ namespace Smartphone.Driver
 		private const string SelectedOrderProperty = "SelectedOrder";
 
 		private IClientConnection connection = null;
+		private Session session = null;
 
 		private WrappedOrders wrappedOrders = null;
 		private Order selectedOrder = null;
 		private RelayCommand logoutCommand = null;
 		private RelayCommand emergencyCommand = null;
 
-		public OrdersViewModel(IClientConnection connection, WrappedOrders wrappedOrders)
+		public OrdersViewModel(IClientConnection connection, Session session, WrappedOrders wrappedOrders)
 		{
 			this.connection = connection;
 			this.wrappedOrders = wrappedOrders;
@@ -89,13 +90,15 @@ namespace Smartphone.Driver
 
 		public void OnConfirmedEmergency()
 		{
-			CmdAnnounceEmergency announceEmergency = new CmdAnnounceEmergency ("Ole", new GPSPosition (0, 0));
+			// TODO Get GPS position.
+			CmdAnnounceEmergency announceEmergency = new CmdAnnounceEmergency (session.Username, new GPSPosition (0, 0));
 			CmdReturnAnnounceEmergency response = connection.SendWait<CmdReturnAnnounceEmergency> (announceEmergency);
 			if (response != null)
 			{
 				if (response.Success)
 				{
-					// Switch to login page.
+					session.Reset ();
+
 					Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage());		
 				}
 			}

@@ -19,6 +19,7 @@ namespace Smartphone.Driver
 		public const string IsNotCommunicatingProperty = "IsNotCommunicating";
 
 		private IClientConnection connection = null;
+		private Session session = null;
 
 		private string username = null;
 		private string password = null;
@@ -26,9 +27,10 @@ namespace Smartphone.Driver
 		private bool communicating = false;
 		private RelayCommand loginCommand = null;
 
-		public LoginViewModel (IClientConnection connection)
+		public LoginViewModel (IClientConnection connection, Session session)
 		{
 			this.connection = connection;
+			this.session = session;
 
 			username = "Ole";
 			password = "o";
@@ -136,12 +138,11 @@ namespace Smartphone.Driver
 
 		private void OnLoginSuccessful()
 		{
-			// TODO Update session model.
-			// Get all available cars.
+			session.Username = username;
+
 			CmdGetAvailableCars getAvailableCars = new CmdGetAvailableCars();
 			connection.Send (getAvailableCars);
 
-			// Switch Page.
 			Messenger.Default.Send<MsgSwitchSelectCarPage> (new MsgSwitchSelectCarPage ());
 		}
 

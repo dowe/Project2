@@ -20,6 +20,7 @@ namespace Smartphone.Driver
 		private const string IsNotCommunicatingProperty = "IsNotCommunicating";
 
 		private IClientConnection connection = null;
+		private Session session = null;
 
 		private WrappedCars availableCars = null;
 		private int selectedCarIndex = -1;
@@ -27,9 +28,10 @@ namespace Smartphone.Driver
 		private bool isCommunicating = false;
 		private RelayCommand selectCarCommand = null;
 
-		public SelectCarViewModel (IClientConnection connection, WrappedCars availableCars)
+		public SelectCarViewModel (IClientConnection connection, Session session, WrappedCars availableCars)
 		{
 			this.connection = connection;
+			this.session = session;
 			AvailableCars = availableCars;
 		}
 
@@ -125,7 +127,7 @@ namespace Smartphone.Driver
 				if (selectedCarIndex >= 0 && availableCars.Collection.Count > 0 && startKm > 0)
 				{
 					Car car = availableCars.Collection [selectedCarIndex];
-					CmdSelectCar selectCar = new CmdSelectCar ("Ole", car.CarID, startKm); // TODO get username from session.
+					CmdSelectCar selectCar = new CmdSelectCar (session.Username, car.CarID, startKm);
 					CmdReturnSelectCar response = connection.SendWait<CmdReturnSelectCar>(selectCar);
 					if (response.Success)
 					{
@@ -147,12 +149,11 @@ namespace Smartphone.Driver
 
 		private void OnCarSelectionSuccessful()
 		{
-			// TODO update Session
-			// Request all unfinished Orders of this driver.
-			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders ("Ole"); // TODO get username from session.
+			session.CarID = availableCars.Collection [selectedCarIndex].CarID;
+
+			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders (session.Username); // TODO get username from session.
 			connection.Send (getUnfinishedOrders);
 
-			// Switch page.
 			Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
 		}
 
