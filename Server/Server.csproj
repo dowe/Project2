@@ -111,6 +111,8 @@
     <Compile Include="DatabaseCommunication\TransactionEndOperation.cs" />
     <Compile Include="DistanceCalculation\DistanceContainer.cs" />
     <Compile Include="DistanceCalculation\DistanceCalculation.cs" />
+    <Compile Include="ExtremeValueCheck\ExtremeValueChecker.cs" />
+    <Compile Include="ExtremeValueCheck\IExtremeValueChecker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LocalServerData.cs" />
