@@ -83,7 +83,7 @@ namespace ASPServer.Controllers
             orderModel.PatientsList = (List<SelectListItem>)Session[SessionPatientsList];
             orderModel.AnalysisList = (List<SelectListItem>)Session[SessionAnalysesList];
             orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
-            
+
             //add patient button
             if (Request.Form["NewPatientButton"] != null)
             {
@@ -92,14 +92,25 @@ namespace ASPServer.Controllers
                 {
                     pats = Session[SessionPatientsList] as List<SelectListItem>;
                 }
-                if(!orderModel.NewPatient.IsNullOrWhiteSpace())
-                pats.Add(new SelectListItem() { Text = orderModel.NewPatient, Value = orderModel.NewPatient });
+                if (!orderModel.NewPatient.IsNullOrWhiteSpace() && pats.FirstOrDefault(s => s.Text == orderModel.NewPatient) == null)
+                {
+                    pats.Add(new SelectListItem() { Text = orderModel.NewPatient, Value = orderModel.NewPatient });
+                }
+
+
+                //prepare model for return
                 Session[SessionPatientsList] = pats;
                 orderModel.PatientsList = (List<SelectListItem>)Session[SessionPatientsList];
             }
             else if (Request.Form["OrderButton"] != null)
             {
                 //Order everything
+                var orderItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
+                _clientConnection.Send(new CmdAddOrder(orderItems, (string)Session[UserID]));
+
+                //remove ordered items from model and session
+                Session[SessionOrdered] = null;
+                orderModel.OrderedItems = null;
             }
             else if (Request.Form["AddAnalysisButton"] != null)
             {
@@ -110,23 +121,25 @@ namespace ASPServer.Controllers
 
                 if (orderModel.SelectedPatient != null && orderModel.SelectedAnalysis != null)
                 {
-                foreach (var pat in orderModel.SelectedPatient)
-                {
-                    if (!orderItems.ContainsKey(pat))
+                    foreach (var pat in orderModel.SelectedPatient)
                     {
-                        orderItems.Add(pat, new List<Analysis>());
-                    }
+                        if (!orderItems.ContainsKey(pat))
+                        {
+                            orderItems.Add(pat, new List<Analysis>());
+                        }
 
-                    foreach (var analysisName in orderModel.SelectedAnalysis)
-                    {
-                        var analysesData = Session[SessionAnalysisData] as List<Analysis>;
-                        orderItems[pat].Add(analysesData.Where(a => a.Name == analysisName).FirstOrDefault());
+                        foreach (var analysisName in orderModel.SelectedAnalysis)
+                        {
+                            var analysesData = Session[SessionAnalysisData] as List<Analysis>;
+                            orderItems[pat].Add(analysesData.Where(a => a.Name == analysisName).FirstOrDefault());
+                        }
                     }
                 }
-                }
+
+                //preapre model for return
                 Session[SessionOrdered] = orderItems;
                 orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
-               
+
             }
             else
             {
@@ -153,7 +166,7 @@ namespace ASPServer.Controllers
                 }
                 orderModel.OrderedItems = (Dictionary<string, List<Analysis>>)Session[SessionOrdered];
             }
-            
+
             return View(orderModel);
         }
 
@@ -169,7 +182,7 @@ namespace ASPServer.Controllers
             {
                 var cmd =
                     _clientConnection.SendWait<CmdReturnGetAllBillsOfUser>(
-                        new CmdGetAllBillsOfUser((string) Session[UserID]));
+                        new CmdGetAllBillsOfUser((string)Session[UserID]));
                 billsRaw = cmd.Bills.ToList();
 
                 if (!billsRaw.Any())
@@ -179,7 +192,7 @@ namespace ASPServer.Controllers
             }
             else
             {
-                billsRaw = (List<Bill>) Session[SessionBills];
+                billsRaw = (List<Bill>)Session[SessionBills];
             }
 
 
@@ -308,12 +321,12 @@ namespace ASPServer.Controllers
                     {
                         // If the user was within the time we set the new time
                         Session[LastActionTime] = DateTime.UtcNow.Ticks;
-                    return true;
-                }
+                        return true;
+                    }
                 }
 
-                    return false;
-                }
+                return false;
+            }
             catch (NullReferenceException)
             {
                 return false;

@@ -3,6 +3,7 @@
 
 @functions {
     public String str { get; set; }
+    public int color { get; set; }
 }
 
 @{
@@ -14,51 +15,101 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { name = "form", id = "frm" }))
 {
     <table class="table">
-        <colgroup width="250"></colgroup>
+        <colgroup>
+            <col span="2" width="250">
+        </colgroup>
         <tr>
             <th>Patienten</th>
-            <th>Analyse</th>
+            <th>Analysen</th>
         </tr>
         <tr>
-            <td>
-                @Html.EditorFor(m => m.NewPatient, Model.NewPatient)
+            <td>@Html.EditorFor(m => m.NewPatient, Model.NewPatient)
                 <input type="submit" class="btn btn-default" name="NewPatientButton" id="NewPatientButton" value="+"/>
             </td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-            <td>@Html.ListBoxFor(m => m.SelectedPatient, new SelectList(Model.PatientsList ?? new List<SelectListItem>(), "Value", "Text"), new {Multiple = "multiple", size = 10})</td>
-            <td>@Html.ListBoxFor(m => m.SelectedAnalysis, new SelectList(Model.AnalysisList?? new List<SelectListItem>(), "Value", "Text"), new {Multiple = "multiple", size = 10})</td>
+            <td>@Html.ListBoxFor(m => m.SelectedPatient, new SelectList(Model.PatientsList ?? new List<SelectListItem>(), "Value", "Text"), new { Multiple = "multiple", size = 10, @style = "width: 100%;" })</td>
+            <td>@Html.ListBoxFor(m => m.SelectedAnalysis, new SelectList(Model.AnalysisList ?? new List<SelectListItem>(), "Value", "Text"), new {Multiple = "multiple", size = 10, @style = "width: 100%;"})</td>
+            <td></td>
         </tr>
-        <tr><td></td><td align="right"><input type="submit" name="AddAnalysisButton" id="AddAnalysisButton" value="Test hinzufügen" class="btn btn-default" /></td></tr>
+        <tr>
+            <td></td>
+            <td align="right"><input type="submit" name="AddAnalysisButton" id="AddAnalysisButton" value="Analyse hinzufügen" class="btn btn-default" /></td>
+            <td></td>
+        </tr>
     </table>
     if (Model.OrderedItems != null && Model.OrderedItems.Any())
-     {
-         <table>
-             <colgroup >
+    {
+        <table>
+            <colgroup>
 
-                 <col span="3" width="250">
-                 <col span="1" width="50">
-             </colgroup>
-             <tr>
-                 <th>Patient</th>
-                 <th>Analyse</th>
-                 <th>Benötigte Probe</th>
-                 <th></th>
-             </tr>
-             @foreach (var patOrder in Model.OrderedItems)
-             {
-                 foreach (var analysis in patOrder.Value as List<Analysis>)
-                 {
-                     <tr>
-                         <td>@patOrder.Key</td>
-                         <td>@analysis.Name.ToString().Split('_').FirstOrDefault()</td>
-                         <td>@analysis.Name</td>
-                         @{ str = "Delete#" + @patOrder.Key + "#" + @analysis.Name; }
-                         <td><input type="submit" name=@str id=@str value="X" class="btn btn-default" /></td>
-                     </tr>
-                 }
-             }
-             <tr><td></td><td></td><td></td><td><input type="submit" name="OrderButton" id="OrderButton" value="Bestellung abschicken" class="btn btn-default"/></td></tr>
-         </table>
-     }
+                <col span="3" width="250">
+                <col span="1" width="35">
+            </colgroup>
+            <tr class="border_bottom">
+                <th>Patient</th>
+                <th>Benötigte Probe</th>
+                <th>Analyse</th>
+                <th></th>
+            </tr>
+            @{ color = 0; }
+            @foreach (var patOrder in Model.OrderedItems)
+            {
+                string s;
+                List<string> samples = new List<string>();
+                foreach (var analysis in patOrder.Value as List<Analysis>)
+                {
+                    if (!samples.Contains(analysis.Name.ToString().Split('_').FirstOrDefault()))
+                    {
+                        samples.Add(analysis.Name.ToString().Split('_').FirstOrDefault());
+                    }
+                }
+
+                for (int j = 0; j < patOrder.Value.Count; j++)
+                {
+                    if (color % 2 == 0)
+                    {
+                        str = "#d3d3d3";
+                    }
+                    else
+                    {
+                        str = "#ffffff";
+                    }
+                    color++;
+                    <tr bgcolor=@str>
+                        @if (j == 0)
+                        {
+                            <td>@patOrder.Key</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+
+                        @if (j < samples.Count)
+                        {
+                            <td>@samples[j]</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+
+                        <td>@patOrder.Value[j].Name</td>
+                        @{ str = "Delete#" + @patOrder.Key + "#" + @patOrder.Value[j].Name; }
+                        <td><input type="submit" name=@str id=@str value="X" class="btn btn-default" /></td>
+                    </tr>
+                }
+
+            }
+        </table>
+        <table>
+            <colgroup>
+                <col span="3" width="250">
+            </colgroup>
+            <tr><td></td><td></td><td></td><td><input type="submit" name="OrderButton" id="OrderButton" value="Bestellung abschicken" class="btn btn-default" /></td></tr>
+        </table>
+    }
 }

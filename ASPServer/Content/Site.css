@@ -22,3 +22,7 @@ select,
 textarea {
     max-width: 280px;
 }
+/*order table*/
+tr.border_bottom td {
+  border-bottom:1pt solid black;
+}
