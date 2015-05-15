@@ -38,6 +38,7 @@ namespace ManagementSoftware.ViewModel
             SimpleIoc.Default.Register<TestsVM>();
             SimpleIoc.Default.Register<CustomerListVM>();
             SimpleIoc.Default.Register<MapVM>();
+            SimpleIoc.Default.Register<CreateOrderVM>();
 
         }
 
@@ -103,6 +104,17 @@ namespace ManagementSoftware.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MapVM>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+          "CA1822:MarkMembersAsStatic",
+          Justification = "This non-static member is needed for data binding purposes.")]
+        public CreateOrderVM CreateOrder
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CreateOrderVM>();
             }
         }
 
