@@ -16,11 +16,11 @@ namespace Smartphone.Driver.GPS
 		private TimeSpan updateInterval = TimeSpan.FromSeconds(5);
 		private IGPSLocator locator = null;
 
-		public GPSPositionSender (IClientConnection connection, Session session)
+		public GPSPositionSender (IClientConnection connection, Session session, IGPSLocator locator)
 		{
 			this.connection = connection;
 			this.session = session;
-			locator = DependencyService.Get<IGPSLocator> ();
+			this.locator = locator;
 			locator.LocationUpdated += OnLocationUpdate;
 		}
 
