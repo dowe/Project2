@@ -30,6 +30,7 @@ namespace Smartphone.Driver.ViewModels
 		public OrdersViewModel(IClientConnection connection, Session session, WrappedOrders wrappedOrders, GPSPositionSender gpsSender)
 		{
 			this.connection = connection;
+			this.session = session;
 			this.wrappedOrders = wrappedOrders;
 			this.gpsSender = gpsSender;
 		}
