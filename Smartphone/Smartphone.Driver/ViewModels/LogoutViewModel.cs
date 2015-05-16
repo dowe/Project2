@@ -6,6 +6,7 @@ using Common.Commands;
 using GalaSoft.MvvmLight.Messaging;
 using Smartphone.Driver.Models;
 using Smartphone.Driver.Messages;
+using Smartphone.Driver.GPS;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -18,15 +19,17 @@ namespace Smartphone.Driver.ViewModels
 
 		private IClientConnection connection = null;
 		private Session session = null;
+		private GPSPositionSender gpsSender = null;
 
 		private float endKm = 3;
 		private bool isCommunicating = false;
 		private RelayCommand logoutCommand = null;
 
-		public LogoutViewModel (IClientConnection connection, Session session)
+		public LogoutViewModel (IClientConnection connection, Session session, GPSPositionSender gpsSender)
 		{
 			this.connection = connection;
 			this.session = session;
+			this.gpsSender = gpsSender;
 		}
 
 		public float EndKm
@@ -92,6 +95,9 @@ namespace Smartphone.Driver.ViewModels
 		private void OnLogoutSuccessful()
 		{
 			session.Reset ();
+
+			gpsSender.Stop ();
+
 			Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage ());
 		}
 

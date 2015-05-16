@@ -44,6 +44,7 @@ namespace Smartphone.Driver.Droid.NativeServices
 		public void StopLocationUpdates ()
 		{
 			subscribedToUpdates = false;
+			RemoveUpdates ();
 		}
 
 		private void RemoveUpdates()
