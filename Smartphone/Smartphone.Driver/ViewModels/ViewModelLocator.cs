@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.Practices.ServiceLocation;
+﻿using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight.Ioc;
 using Common.Communication.Client;
-using Common.DataTransferObjects;
-using System.Collections.Generic;
 using Smartphone.Driver.Models;
 using Smartphone.Driver.Handlers;
+using Smartphone.Driver.ViewModels;
+using Smartphone.Driver.GPS;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -30,6 +29,8 @@ namespace Smartphone.Driver.ViewModels
 			clientConnection.RegisterCommandHandler (new CmdReturnGetDriversUnfinishedOrdersHandler (orders));
 			clientConnection.Start ();
 			SimpleIoc.Default.Register<IClientConnection> (() => clientConnection);
+
+			SimpleIoc.Default.Register<GPSPositionSender> ();
 
 			SimpleIoc.Default.Register<LoginViewModel> ();
 			SimpleIoc.Default.Register<SelectCarViewModel> ();
