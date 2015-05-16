@@ -8,6 +8,7 @@ using Common.Communication.Client;
 using GalaSoft.MvvmLight.Messaging;
 using Smartphone.Driver.Models;
 using Smartphone.Driver.Messages;
+using Smartphone.Driver.GPS;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -19,16 +20,18 @@ namespace Smartphone.Driver.ViewModels
 
 		private IClientConnection connection = null;
 		private Session session = null;
+		private GPSPositionSender gpsSender = null;
 
 		private WrappedOrders wrappedOrders = null;
 		private Order selectedOrder = null;
 		private RelayCommand logoutCommand = null;
 		private RelayCommand emergencyCommand = null;
 
-		public OrdersViewModel(IClientConnection connection, Session session, WrappedOrders wrappedOrders)
+		public OrdersViewModel(IClientConnection connection, Session session, WrappedOrders wrappedOrders, GPSPositionSender gpsSender)
 		{
 			this.connection = connection;
 			this.wrappedOrders = wrappedOrders;
+			this.gpsSender = gpsSender;
 		}
 
 		public WrappedOrders WrappedOrders
@@ -100,6 +103,8 @@ namespace Smartphone.Driver.ViewModels
 				if (response.Success)
 				{
 					session.Reset ();
+
+					gpsSender.Stop ();
 
 					Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage());		
 				}

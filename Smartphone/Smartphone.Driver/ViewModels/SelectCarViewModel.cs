@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Smartphone.Driver.Models;
 using Smartphone.Driver.Messages;
+using Smartphone.Driver.GPS;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -23,6 +24,7 @@ namespace Smartphone.Driver.ViewModels
 
 		private IClientConnection connection = null;
 		private Session session = null;
+		private GPSPositionSender gpsSender = null;
 
 		private WrappedCars availableCars = null;
 		private int selectedCarIndex = -1;
@@ -30,10 +32,11 @@ namespace Smartphone.Driver.ViewModels
 		private bool isCommunicating = false;
 		private RelayCommand selectCarCommand = null;
 
-		public SelectCarViewModel (IClientConnection connection, Session session, WrappedCars availableCars)
+		public SelectCarViewModel (IClientConnection connection, Session session, WrappedCars availableCars, GPSPositionSender gpsSender)
 		{
 			this.connection = connection;
 			this.session = session;
+			this.gpsSender = gpsSender;
 			AvailableCars = availableCars;
 		}
 
@@ -155,6 +158,8 @@ namespace Smartphone.Driver.ViewModels
 
 			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders (session.Username); // TODO get username from session.
 			connection.Send (getUnfinishedOrders);
+
+			gpsSender.Start ();
 
 			Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
 		}
