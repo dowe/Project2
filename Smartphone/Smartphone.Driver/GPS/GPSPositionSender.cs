@@ -13,7 +13,7 @@ namespace Smartphone.Driver.GPS
 		private IClientConnection connection = null;
 		private Session session = null;
 
-		private TimeSpan updateInterval = TimeSpan.FromSeconds(30);
+		private TimeSpan updateInterval = TimeSpan.FromSeconds(5);
 		private IGPSLocator locator = null;
 
 		public GPSPositionSender (IClientConnection connection, Session session)

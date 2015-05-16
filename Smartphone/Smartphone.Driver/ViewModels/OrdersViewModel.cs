@@ -102,11 +102,7 @@ namespace Smartphone.Driver.ViewModels
 			{
 				if (response.Success)
 				{
-					session.Reset ();
-
-					gpsSender.Stop ();
-
-					Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage());		
+					OnEmergencySuccessful ();
 				}
 			}
 		}
@@ -114,6 +110,15 @@ namespace Smartphone.Driver.ViewModels
 		public void OnCanceledEmergency()
 		{
 			// Nothing.
+		}
+
+		private void OnEmergencySuccessful()
+		{
+			gpsSender.Stop ();
+
+			session.Reset ();
+
+			Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage ());	
 		}
 
 	}

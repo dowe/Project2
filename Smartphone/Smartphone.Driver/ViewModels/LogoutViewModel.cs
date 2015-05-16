@@ -94,9 +94,9 @@ namespace Smartphone.Driver.ViewModels
 
 		private void OnLogoutSuccessful()
 		{
-			session.Reset ();
-
 			gpsSender.Stop ();
+
+			session.Reset ();
 
 			Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage ());
 		}
