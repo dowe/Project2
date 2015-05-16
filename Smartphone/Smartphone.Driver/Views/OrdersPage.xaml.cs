@@ -13,7 +13,18 @@ namespace Smartphone.Driver
 		{
 			InitializeComponent ();
 			BindingContext = App.Locator.Orders;
+		}
+
+		protected override void OnAppearing ()
+		{
+			base.OnAppearing ();
 			Messenger.Default.Register<MsgShowEmergencyDialog>(this, ShowEmergencyDialog);
+		}
+
+		protected override void OnDisappearing ()
+		{
+			base.OnDisappearing ();
+			Messenger.Default.Unregister<MsgShowEmergencyDialog>(this, ShowEmergencyDialog);
 		}
 
 		private async void ShowEmergencyDialog(MsgShowEmergencyDialog message)

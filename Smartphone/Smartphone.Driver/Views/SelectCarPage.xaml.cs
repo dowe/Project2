@@ -14,7 +14,18 @@ namespace Smartphone.Driver
 		{
 			InitializeComponent ();
 			BindingContext = App.Locator.SelectCar;
+		}
+
+		protected override void OnAppearing ()
+		{
+			base.OnAppearing ();
 			Messenger.Default.Register<MsgUpdateCarIDsPicker> (this, UpdateCarIDsPicker);
+		}
+
+		protected override void OnDisappearing ()
+		{
+			base.OnDisappearing ();
+			Messenger.Default.Unregister<MsgUpdateCarIDsPicker> (this, UpdateCarIDsPicker);
 		}
 
 		private void UpdateCarIDsPicker(MsgUpdateCarIDsPicker msgUpdateCarIDPicker)
