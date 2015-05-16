@@ -156,7 +156,7 @@ namespace Smartphone.Driver.ViewModels
 		{
 			session.CarID = availableCars.Collection [selectedCarIndex].CarID;
 
-			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders (session.Username); // TODO get username from session.
+			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders (session.Username);
 			connection.Send (getUnfinishedOrders);
 
 			gpsSender.Start ();
