@@ -11,12 +11,12 @@ namespace Common.Commands
     public class CmdStoreDriverGPSPosition : Command
     {
 
-        public string Username { get; private set; }
+        public string CarID { get; private set; }
         public GPSPosition DriverGPSPosition { get; private set; }
 
-        public CmdStoreDriverGPSPosition(string username, GPSPosition driverGPSPosition)
+        public CmdStoreDriverGPSPosition(string carID, GPSPosition driverGPSPosition)
         {
-            Username = username;
+            CarID = carID;
             DriverGPSPosition = driverGPSPosition;
         }
 
