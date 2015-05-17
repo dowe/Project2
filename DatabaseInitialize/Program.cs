@@ -22,6 +22,7 @@ namespace DatabaseInitialize
             InitializeAnalysis();
             InitializeEmployees();
             InitializeCars();
+            InitializeDrivers();
             InitializeCustomer();
         }
 
@@ -110,6 +111,22 @@ namespace DatabaseInitialize
             List<Customer> customers = new List<Customer>();
             customers.Add(new Customer() { UserName = "house", Password = "asdf", Address = new Address() { Street = "Am Arsch der Welt", PostalCode = "12345", City = "Springfield" } });
             con.Customer.AddRange(customers);
+            con.SaveChanges();
+        }
+
+        private static void InitializeDrivers()
+        {
+            LaborContext con = new LaborContext();
+            List<Driver> drivers = new List<Driver>();
+            drivers.Add(new Driver
+            {
+                EmployeeType = EEmployeeType.TypeDriver,
+                FirstName = "Ole",
+                LastName = "Berger",
+                Password = "o",
+                UserName = "Ole"
+            });
+            con.Driver.AddRange(drivers);
             con.SaveChanges();
         }
     }
