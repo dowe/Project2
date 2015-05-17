@@ -10,12 +10,12 @@ namespace Smartphone.Driver.Droid.NativeServices
 	public class NotificationController_Android : INotificationController
 	{
 
-		private const int NotificationId = 1000;
-
+		private IncIntGenerator notificationIDGenerator = null;
 		private NotificationManager notificationManager = null;
 
 		public NotificationController_Android ()
 		{
+			notificationIDGenerator = new IncIntGenerator (1000);
 			notificationManager = Xamarin.Forms.Forms.Context.GetSystemService (Context.NotificationService) as NotificationManager;
 		}
 
@@ -29,7 +29,7 @@ namespace Smartphone.Driver.Droid.NativeServices
 				.SetAutoCancel(true);
 			Notification notification = builder.Build ();
 
-			notificationManager.Notify (NotificationId, notification);
+			notificationManager.Notify (notificationIDGenerator.IncrementAndGet(), notification);
 		}
 
 		private PendingIntent CreateAppLaunchPendingIntent()
