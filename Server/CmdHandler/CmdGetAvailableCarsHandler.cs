@@ -27,11 +27,12 @@ namespace Server.CmdHandler
         {
             db.StartTransaction();
             List<Car> cars = db.GetAllCars(c => c.Roadworthy && c.CurrentDriver == null);
-            db.EndTransaction(TransactionEndOperation.READONLY);
 
             CmdReturnGetAvailableCars response = new CmdReturnGetAvailableCars(command.Id, cars);
 
             connection.Unicast(response, connectionIdOrNull);
+
+            db.EndTransaction(TransactionEndOperation.READONLY);
         }
     }
 }
