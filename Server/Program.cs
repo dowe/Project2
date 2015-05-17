@@ -48,7 +48,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdLoginCustomerHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetShiftSchedulesHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdSelectCarHandler(connection));
+            connection.RegisterCommandHandler(new CmdSelectCarHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection));
             connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection));
             connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler());
