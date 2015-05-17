@@ -171,7 +171,7 @@ namespace Server.DatabaseCommunication
 
         public Driver GetDriver(string userName)
         {
-            return Context.Driver.Find(userName);
+            return Context.Driver.Where(d => d.UserName.Equals(userName)).FirstOrDefault();
         }
 
         public Car GetCar(string CarID)

@@ -92,6 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CmdHandler\CmdAddOrderHandler.cs" />
+    <Compile Include="BillCalculation\BillCalculator.cs" />
+    <Compile Include="BillCalculation\IBillCalculator.cs" />
+    <Compile Include="CmdHandler\CmdGetAllOrdersHandler.cs" />
     <Compile Include="CmdHandler\CmdGetShiftSchedulesHandler.cs" />
     <Compile Include="CmdHandler\CmdAnnounceEmergencyHandler.cs" />
     <Compile Include="CmdHandler\CmdGenerateShiftScheduleHandler.cs" />
