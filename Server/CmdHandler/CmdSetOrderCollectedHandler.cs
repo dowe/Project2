@@ -22,7 +22,7 @@ namespace Server.CmdHandler
         protected override void Handle(CmdSetOrderCollected command, string connectionIdOrNull)
         {
             bool success = true;
-            CmdReturnSetOrderCollected response = new CmdReturnSetOrderCollected(command.Id, true);
+            CmdReturnSetOrderCollected response = new CmdReturnSetOrderCollected(command.Id, success);
             
             connection.Unicast(response, connectionIdOrNull);
         }
