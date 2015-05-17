@@ -10,6 +10,8 @@ namespace Smartphone.Driver.Droid.NativeServices
 	public class NotificationController_Android : INotificationController
 	{
 
+		private const int NotificationId = 1000;
+
 		private NotificationManager notificationManager = null;
 
 		public NotificationController_Android ()
@@ -21,10 +23,11 @@ namespace Smartphone.Driver.Droid.NativeServices
 		{
 			Notification.Builder builder = new Notification.Builder (Xamarin.Forms.Forms.Context)
 				.SetContentTitle (title)
-				.SetContentText (message);
+				.SetContentText (message)
+				.SetSmallIcon (Resource.Drawable.notification);
 			Notification notification = builder.Build ();
 
-			notificationManager.Notify (0, notification);
+			notificationManager.Notify (NotificationId, notification);
 		}
 			
 	}

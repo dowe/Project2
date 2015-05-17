@@ -20,7 +20,7 @@ namespace Smartphone.Driver.Handlers
 		protected override void Handle (CmdRemindDriverOfOrder command, string connectionIdOrNull)
 		{
 			string title = "Order " + command.OrderId;
-			string message = "Only one hour left to collect!";
+			string message = "Only one hour left to collect the samples. Hurry up!";
 
 			notificationController.PutNotification (title, message);
 		}
