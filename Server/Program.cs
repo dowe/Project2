@@ -53,7 +53,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection));
             connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler());
             connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection));
-            connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection));
+            connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection, db));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
