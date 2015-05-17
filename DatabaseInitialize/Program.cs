@@ -74,12 +74,12 @@ namespace DatabaseInitialize
         {
             LaborContext con = new LaborContext();
             List<Car> cars = new List<Car>();
-            cars.Add(new Car() { CarID = "OG-LA-001", CarLogbook = new CarLogbook() { CarId = "OG-LA-001" }, Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-002", CarLogbook = new CarLogbook() { CarId = "OG-LA-002" }, Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-003", CarLogbook = new CarLogbook() { CarId = "OG-LA-003" }, Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-004", CarLogbook = new CarLogbook() { CarId = "OG-LA-004" }, Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-005", CarLogbook = new CarLogbook() { CarId = "OG-LA-005" }, Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-006", CarLogbook = new CarLogbook() { CarId = "OG-LA-006" }, Roadworthy = true });
+            cars.Add(new Car() { CarID = "OG-LA-001", CarLogbook = new CarLogbook() { CarId = "OG-LA-001" }, Roadworthy = true, LastPosition = new GPSPosition(0, 0)});
+            cars.Add(new Car() { CarID = "OG-LA-002", CarLogbook = new CarLogbook() { CarId = "OG-LA-002" }, Roadworthy = true, LastPosition = new GPSPosition(0, 0)});
+            cars.Add(new Car() { CarID = "OG-LA-003", CarLogbook = new CarLogbook() { CarId = "OG-LA-003" }, Roadworthy = true, LastPosition = new GPSPosition(0, 0)});
+            cars.Add(new Car() { CarID = "OG-LA-004", CarLogbook = new CarLogbook() { CarId = "OG-LA-004" }, Roadworthy = true, LastPosition = new GPSPosition(0, 0)});
+            cars.Add(new Car() { CarID = "OG-LA-005", CarLogbook = new CarLogbook() { CarId = "OG-LA-005" }, Roadworthy = true, LastPosition = new GPSPosition(0, 0)});
+            cars.Add(new Car() { CarID = "OG-LA-006", CarLogbook = new CarLogbook() { CarId = "OG-LA-006" }, Roadworthy = true, LastPosition = new GPSPosition(0, 0)});
             con.Car.AddRange(cars);
 
             try
