@@ -49,7 +49,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGetShiftSchedulesHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSelectCarHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection));
+            connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection));
             connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler());
             connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection));
