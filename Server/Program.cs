@@ -50,7 +50,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSelectCarHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection));
+            connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection, db));
             connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler());
             connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection));
             connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection, db));
