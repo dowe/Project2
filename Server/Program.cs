@@ -59,6 +59,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllCustomersHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAnalysesHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdAddOrderHandler(connection, db));
         }
 
         private static void OnServerStarted(
