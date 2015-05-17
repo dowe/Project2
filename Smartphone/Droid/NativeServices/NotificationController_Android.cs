@@ -24,10 +24,22 @@ namespace Smartphone.Driver.Droid.NativeServices
 			Notification.Builder builder = new Notification.Builder (Xamarin.Forms.Forms.Context)
 				.SetContentTitle (title)
 				.SetContentText (message)
-				.SetSmallIcon (Resource.Drawable.notification);
+				.SetSmallIcon (Resource.Drawable.notification)
+				.SetContentIntent (CreateAppLaunchPendingIntent())
+				.SetAutoCancel(true);
 			Notification notification = builder.Build ();
 
 			notificationManager.Notify (NotificationId, notification);
+		}
+
+		private PendingIntent CreateAppLaunchPendingIntent()
+		{
+			Intent intent = new Intent (Xamarin.Forms.Forms.Context, typeof(MainActivity));
+			const int pendingIntentId = 0;
+			PendingIntent pendingIntent = 
+				PendingIntent.GetActivity (Xamarin.Forms.Forms.Context, pendingIntentId, intent, PendingIntentFlags.OneShot);
+
+			return pendingIntent;
 		}
 			
 	}
