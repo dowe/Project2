@@ -81,6 +81,7 @@ namespace Server.DatabaseCommunication
                     throw raise;
                 }
             }
+            Context.Dispose();
             Context = null;
         }
 
@@ -197,6 +198,15 @@ namespace Server.DatabaseCommunication
         public void CreateShiftSchedule(ShiftSchedule shift)
         {
             Context.ShiftSchedule.Add(shift);
+        }
+
+
+        public void AttachAnalysises(List<Analysis> analysises)
+        {
+            foreach (Analysis an in analysises)
+            {
+                Context.Analysis.Attach(an);    
+            }
         }
     }
 }
