@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Kundenapp.AddDialog">
+	<ContentPage.Content>
+		<StackLayout>
+			<Label Text="Name eingeben"/>
+			<Entry Text="{Binding id}"/>
+			<Button Text="Hinzufügen" Command="{Binding AddPatientCMD}"/>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
