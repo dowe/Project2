@@ -21,7 +21,7 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual float EndKM
+		public virtual float? EndKM
 		{
 			get;
 			set;
@@ -34,7 +34,7 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual DateTime EndDate
+		public virtual DateTime? EndDate
 		{
 			get;
 			set;
