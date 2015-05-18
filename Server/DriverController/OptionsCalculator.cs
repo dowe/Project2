@@ -21,16 +21,10 @@ namespace Server.DriverController
         public IList<DriverSendOption> CalculateOptions(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders,
             IDistanceMatrixPlace destination)
         {
-            var driverToAssignedUnfinishedOrders = new Dictionary<Driver, IEnumerable<Order>>();
+            var calcDistanceTasks = new List<Task<DriverSendOption>>();
             foreach (Driver driver in allDrivers)
             {
-                driverToAssignedUnfinishedOrders.Add(driver, allUnfinishedOrders.Where(o => o.Driver.UserName.Equals(driver.UserName)));
-            }
-
-            var calcDistanceTasks = new List<Task<DriverSendOption>>();
-            foreach (KeyValuePair<Driver, IEnumerable<Order>> orders in driverToAssignedUnfinishedOrders)
-            {
-                calcDistanceTasks.Add(CalculateDistance(orders.Key, orders.Value, destination));
+                calcDistanceTasks.Add(CalculateDistance(driver, allUnfinishedOrders.Where(o => o.Driver.UserName.Equals(driver.UserName)), destination));
             }
 
             var options = new List<DriverSendOption>();
