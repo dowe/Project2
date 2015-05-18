@@ -8,7 +8,7 @@ using Server.DistanceCalculation;
 
 namespace Server.DriverController
 {
-    internal class OptionsCalculator
+    public class OptionsCalculator
     {
 
         private IRouteDistanceCalculator distanceCalculator = null;

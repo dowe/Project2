@@ -14,6 +14,12 @@ namespace Common.DataTransferObjects
 
 	public class Test
 	{
+
+        public Test()
+        {
+
+        }
+
         public Test(string PatientID, Analysis anal)
         {
             this.PatientID = PatientID;
