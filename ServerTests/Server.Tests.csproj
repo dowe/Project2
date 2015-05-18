@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="DatabaseCommunication\DatabaseCommunicatorTests.cs" />
     <Compile Include="DistanceCalculation\DistanceCalculationTests.cs" />
+    <Compile Include="DistanceCalculation\DirectionsRouteDistanceCalculatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,19 +11,11 @@ namespace Server.DriverController
     public class DriverController : IDriverController
     {
 
-        private Func<GPSPosition, GPSPosition, DistanceContainer> calculateDistanceToPositionInKm = null;
-        private Func<GPSPosition, Address, DistanceContainer> calculateDistanceToAddressInKm = null;
+        private IRouteDistanceCalculator calculator = null;
 
-        public DriverController()
-            : this(DistanceCalculation.DistanceCalculation.CalculateDistanceInKm, DistanceCalculation.DistanceCalculation.CalculateDistanceInKm)
+        public DriverController(IRouteDistanceCalculator routeCalculator)
         {
-        }
-
-        public DriverController(Func<GPSPosition, GPSPosition, DistanceContainer> calculateDistanceToPositionInKm,
-            Func<GPSPosition, Address, DistanceContainer> calculateDistanceToAddressInKm)
-        {
-            this.calculateDistanceToPositionInKm = calculateDistanceToPositionInKm;
-            this.calculateDistanceToAddressInKm = calculateDistanceToAddressInKm;
+            calculator = routeCalculator;
         }
 
         public Driver DetermineDriverOrNull(IList<Driver> allDrivers, Address destination)
