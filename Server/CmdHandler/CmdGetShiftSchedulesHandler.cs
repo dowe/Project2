@@ -29,9 +29,9 @@ namespace Server.CmdHandler
             IList<ShiftSchedule> list;
 
             db.StartTransaction();
-            list = db.GetShiftSchedules();
-            db.EndTransaction(TransactionEndOperation.READONLY);
-
+            list = db.GetShiftSchedules().ToList<ShiftSchedule>();
+            
+            
             ShiftSchedule currentMonth = null;
             ShiftSchedule nextMonth = null;
             DateTime current = DateTime.Now;
@@ -56,6 +56,7 @@ namespace Server.CmdHandler
 
             ResponseCommand response = new CmdReturnGetShiftSchedule(request.Id, array);
             connection.Unicast(response, connectionIdOrNull);
+            db.EndTransaction(TransactionEndOperation.READONLY);
         }
     }
 }

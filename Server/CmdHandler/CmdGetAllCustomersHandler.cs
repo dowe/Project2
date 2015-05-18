@@ -31,10 +31,9 @@ namespace Server.CmdHandler
 
             db.StartTransaction();
             list = db.GetAllCustomer(null);
-            db.EndTransaction(TransactionEndOperation.READONLY);
-
             ResponseCommand response = new CmdReturnGetAllCustomers(command.Id, list);
             connection.Unicast(response, connectionIdOrNull);
+            db.EndTransaction(TransactionEndOperation.READONLY);
         }
     }
 }
