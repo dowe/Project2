@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.DataTransferObjects;
 
 namespace Server.DriverController
 {
@@ -30,7 +31,26 @@ namespace Server.DriverController
 
         public virtual DriverSendOption ChooseBestOptionOrNull(IList<DriverSendOption> options)
         {
-            return null;
+            var leftRelevantOptions = new List<DriverSendOption>(options);
+            leftRelevantOptions = leftRelevantOptions.FindAll(o =>
+            {
+                bool passes = true;
+
+                foreach (Func<DriverSendOption, bool> hardConstraint in hardConstraints)
+                {
+                    passes &= hardConstraint.Invoke(o);
+                }
+
+                return passes;
+            });
+
+            DriverSendOption bestOption = null;
+            if (leftRelevantOptions.Count > 0)
+            {
+                bestOption = leftRelevantOptions[0];
+            }
+
+            return bestOption;
         }
     }
 }
