@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Common.DataTransferObjects;
 using Server.DistanceCalculation;
 
@@ -44,7 +46,20 @@ namespace Server.DriverController
         public Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders,
             IDistanceMatrixPlace destination)
         {
-            IList<DriverSendOption> options = routeCalculator.CalculateOptions(allDrivers, allUnfinishedOrders, destination);
+            var calcDistanceTasks = new List<Task<DriverSendOption>>();
+            foreach (Driver driver in allDrivers)
+            {
+                var driversOrders = allUnfinishedOrders.Where(o => o.Driver.UserName.Equals(driver.UserName));
+                calcDistanceTasks.Add(routeCalculator.CalculateDistance(driver, driversOrders, destination));
+            }
+
+            // Route calculation is done parallel.
+            var options = new List<DriverSendOption>();
+            foreach (Task<DriverSendOption> calcTask in calcDistanceTasks)
+            {
+                calcTask.Wait();
+                options.Add(calcTask.Result);
+            }
 
             var bestOptionOrNull = evaluator.ChooseBestOptionOrNull(options);
             Driver optimalDriver = null;

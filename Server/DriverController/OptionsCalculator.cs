@@ -18,26 +18,7 @@ namespace Server.DriverController
             this.distanceCalculator = distanceCalculator;
         }
 
-        public IList<DriverSendOption> CalculateOptions(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders,
-            IDistanceMatrixPlace destination)
-        {
-            var calcDistanceTasks = new List<Task<DriverSendOption>>();
-            foreach (Driver driver in allDrivers)
-            {
-                calcDistanceTasks.Add(CalculateDistance(driver, allUnfinishedOrders.Where(o => o.Driver.UserName.Equals(driver.UserName)), destination));
-            }
-
-            var options = new List<DriverSendOption>();
-            foreach (Task<DriverSendOption> calcTask in calcDistanceTasks)
-            {
-                calcTask.Wait();
-                options.Add(calcTask.Result);
-            }
-
-            return options;
-        }
-
-        private async Task<DriverSendOption> CalculateDistance(Driver driver, IEnumerable<Order> hisOrders, IDistanceMatrixPlace destination)
+        public async Task<DriverSendOption> CalculateDistance(Driver driver, IEnumerable<Order> hisOrders, IDistanceMatrixPlace destination)
         {
             var waypoints = new List<IDistanceMatrixPlace>();
             foreach (Order o in hisOrders)
