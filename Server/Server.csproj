@@ -107,6 +107,7 @@
     <Compile Include="CmdHandler\CmdGetAnalysesHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAvailableCarsHandler.cs" />
     <Compile Include="CmdHandler\CmdGetDriversUnfinishedOrdersHandler.cs" />
+    <Compile Include="CmdHandler\CmdGetUsersOrderResultsHandler.cs" />
     <Compile Include="CmdHandler\CmdLoginDriverHandler.cs" />
     <Compile Include="CmdHandler\CmdLoginCustomerHandler.cs" />
     <Compile Include="CmdHandler\CmdLogoutDriverHandler.cs" />
