@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Label Content="Kunden ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Margin="2,0,0,0"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="73,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Text="{Binding CustomerUsername}"/>
-        <Label Content="Kundennummer nicht gefunden." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="248,0,0,0" Height="48" Width="181"/>
+        <Label Content="{Binding CustomerAddressText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="248,0,0,0" Height="48" Width="181"/>
         <Label Content="Patienten ID:" HorizontalAlignment="Left" Margin="0,8,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="77"/>
         <ListBox Name="PatientListBox" HorizontalAlignment="Left" Height="201" Margin="0,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="181" SelectionMode="Single" ItemsSource="{Binding PatientIDs}" SelectedItem="{Binding SelectedPatient}"/>
         <Label Content="Alle Untersuchungen:" HorizontalAlignment="Left" Margin="248,8,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="123"/>

@@ -9,5 +9,14 @@ namespace Common.Commands
 {
     public class CmdGetCustomerAddress : Command
     {
+        public CmdGetCustomerAddress(string customerUsername)
+        {
+            CustomerUsername = customerUsername;
+        }
+        public string CustomerUsername
+        {
+            get;
+            set;
+        }
     }
 }

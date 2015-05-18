@@ -63,6 +63,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGetDailyStatisticHandler(connection, db,data));
             connection.RegisterCommandHandler(new CmdGetAnalysesHandler(connection, db));
             connection.RegisterCommandHandler(new CmdAddOrderHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGetCustomerAddressHandler(connection, db));
         }
 
         private static void OnServerStarted(
