@@ -22,6 +22,7 @@ namespace DatabaseInitialize
             InitializeAnalysis();
             InitializeEmployees();
             InitializeCars();
+            InitializeDrivers();
             InitializeCustomer();
         }
 
@@ -72,14 +73,13 @@ namespace DatabaseInitialize
         private static void InitializeCars()
         {
             LaborContext con = new LaborContext();
-            List<Car> cars = new List<Car>();
-            cars.Add(new Car() { CarID = "OG-LA-001", CarLogbook = new CarLogbook() { CarId = "OG-LA-001" }, Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-002", CarLogbook = new CarLogbook() { CarId = "OG-LA-002" }, Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-003", CarLogbook = new CarLogbook() { CarId = "OG-LA-003" }, Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-004", CarLogbook = new CarLogbook() { CarId = "OG-LA-004" }, Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-005", CarLogbook = new CarLogbook() { CarId = "OG-LA-005" }, Roadworthy = true });
-            cars.Add(new Car() { CarID = "OG-LA-006", CarLogbook = new CarLogbook() { CarId = "OG-LA-006" }, Roadworthy = true });
-            con.Car.AddRange(cars);
+            
+            AddCar(con, "OG-LA-001");
+            AddCar(con, "OG-LA-002");
+            AddCar(con, "OG-LA-003");
+            AddCar(con, "OG-LA-004");
+            AddCar(con, "OG-LA-005");
+            AddCar(con, "OG-LA-006");
 
             try
             {
@@ -104,12 +104,36 @@ namespace DatabaseInitialize
             }
         }
 
+        private static void AddCar(LaborContext context, string carID)
+        {
+            GPSPosition position = new GPSPosition{CarID = carID, Latitude = 0, Longitude = 0};
+            context.GpsPosition.Add(position);
+            Car car = new Car() { CarID = carID, CarLogbook = new CarLogbook() { CarId = carID}, Roadworthy = true, LastPosition = position };
+            context.Car.Add(car);
+        }
+
         private static void InitializeCustomer()
         {
             LaborContext con = new LaborContext();
             List<Customer> customers = new List<Customer>();
             customers.Add(new Customer() { UserName = "house", Password = "asdf", Address = new Address() { Street = "Am Arsch der Welt", PostalCode = "12345", City = "Springfield" } });
             con.Customer.AddRange(customers);
+            con.SaveChanges();
+        }
+
+        private static void InitializeDrivers()
+        {
+            LaborContext con = new LaborContext();
+            List<Driver> drivers = new List<Driver>();
+            drivers.Add(new Driver
+            {
+                EmployeeType = EEmployeeType.TypeDriver,
+                FirstName = "Ole",
+                LastName = "Berger",
+                Password = "o",
+                UserName = "Ole"
+            });
+            con.Driver.AddRange(drivers);
             con.SaveChanges();
         }
     }

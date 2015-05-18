@@ -134,7 +134,7 @@ namespace Smartphone.Driver.ViewModels
 					Car car = availableCars.Collection [selectedCarIndex];
 					CmdSelectCar selectCar = new CmdSelectCar (session.Username, car.CarID, startKm);
 					CmdReturnSelectCar response = connection.SendWait<CmdReturnSelectCar>(selectCar);
-					if (response.Success)
+					if (response != null && response.Success)
 					{
 						OnCarSelectionSuccessful ();
 					}
@@ -156,7 +156,7 @@ namespace Smartphone.Driver.ViewModels
 		{
 			session.CarID = availableCars.Collection [selectedCarIndex].CarID;
 
-			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders (session.Username); // TODO get username from session.
+			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders (session.Username);
 			connection.Send (getUnfinishedOrders);
 
 			gpsSender.Start ();

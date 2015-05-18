@@ -16,11 +16,11 @@ namespace Smartphone.Driver.GPS
 		private TimeSpan updateInterval = TimeSpan.FromSeconds(5);
 		private IGPSLocator locator = null;
 
-		public GPSPositionSender (IClientConnection connection, Session session)
+		public GPSPositionSender (IClientConnection connection, Session session, IGPSLocator locator)
 		{
 			this.connection = connection;
 			this.session = session;
-			locator = DependencyService.Get<IGPSLocator> ();
+			this.locator = locator;
 			locator.LocationUpdated += OnLocationUpdate;
 		}
 
@@ -36,7 +36,7 @@ namespace Smartphone.Driver.GPS
 
 		private void OnLocationUpdate(GPSPosition position)
 		{
-			Common.DataTransferObjects.GPSPosition dtoPosition = new Common.DataTransferObjects.GPSPosition ((float)position.Latitude, (float)position.Longitude);
+			Common.DataTransferObjects.GPSPosition dtoPosition = new Common.DataTransferObjects.GPSPosition {Latitude = (float)position.Latitude, Longitude = (float)position.Longitude};
 			CmdStoreDriverGPSPosition cmdStorePosition = new CmdStoreDriverGPSPosition (session.CarID, dtoPosition);
 
 			connection.Send (cmdStorePosition);

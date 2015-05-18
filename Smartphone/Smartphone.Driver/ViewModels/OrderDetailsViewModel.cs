@@ -133,7 +133,7 @@ namespace Smartphone.Driver.ViewModels
 		{
 			CmdSetOrderCollected setOrderCollected = new CmdSetOrderCollected (session.Username, order.OrderID);
 			CmdReturnSetOrderCollected response = connection.SendWait<CmdReturnSetOrderCollected>(setOrderCollected);
-			if (response.Success)
+			if (response != null && response.Success)
 			{
 				// Switch back to order list.
 				Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Common.Commands;
 using Common.Communication;
 using Common.Communication.Server;
+using Common.DataTransferObjects;
+using Server.DatabaseCommunication;
 
 namespace Server.CmdHandler
 {
@@ -13,16 +15,23 @@ namespace Server.CmdHandler
     {
 
         private IServerConnection connection = null;
+        private IDatabaseCommunicator db = null;
 
-        public CmdLoginDriverHandler(IServerConnection connection)
+        public CmdLoginDriverHandler(IServerConnection connection, IDatabaseCommunicator db)
         {
             this.connection = connection;
+            this.db = db;
         }
 
         protected override void Handle(CmdLoginDriver command, string connectionIdOrNull)
         {
             bool success = false;
-            if ("Ole".Equals(command.Username) && "o".Equals(command.Password))
+
+            db.StartTransaction();
+            Driver driver = db.GetDriver(command.Username);
+            db.EndTransaction(TransactionEndOperation.READONLY);
+
+            if (driver != null && driver.Password.Equals(command.Password))
             {
                 success = true;
             }

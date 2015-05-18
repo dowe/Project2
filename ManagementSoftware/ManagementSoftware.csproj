@@ -94,6 +94,7 @@
     <Compile Include="Model\ShiftScheduleModel.cs" />
     <Compile Include="Model\ShiftScheduleMonthEntry.cs" />
     <Compile Include="Model\ShiftScheduleRawModel.cs" />
+    <Compile Include="Model\TestEntryModel.cs" />
     <Compile Include="ViewModel\CreateOrderVM.cs" />
     <Compile Include="ViewModel\CustomerListVM.cs" />
     <Compile Include="ViewModel\DailyStatisticVM.cs" />
@@ -102,8 +103,6 @@
     <Compile Include="ViewModel\ShiftScheduleDayVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleMonthVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleVM.cs" />
-    <Compile Include="ViewModel\TableTestsVM.cs" />
-    <Compile Include="ViewModel\TestDetailVM.cs" />
     <Compile Include="ViewModel\TestsVM.cs" />
     <Compile Include="View\CreateOrderView.xaml.cs">
       <DependentUpon>CreateOrderView.xaml</DependentUpon>
