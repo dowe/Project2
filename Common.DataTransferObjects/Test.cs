@@ -14,6 +14,16 @@ namespace Common.DataTransferObjects
 
 	public class Test
 	{
+        public Test(string PatientID, Analysis anal)
+        {
+            this.PatientID = PatientID;
+            this.Analysis = anal;
+            this.TestID = Guid.NewGuid();
+            this.TestState = TestState.ORDERED;
+            this.AlarmState = AlarmState.NO_ALARM;
+            this.StartDate = null;
+            this.EndDate = null;
+        }
         [Key]
 		public virtual Guid TestID
 		{
@@ -33,13 +43,13 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual DateTime StartDate
+		public virtual DateTime? StartDate
 		{
 			get;
 			set;
 		}
 
-		public virtual DateTime EndDate
+		public virtual DateTime? EndDate
 		{
 			get;
 			set;

@@ -47,8 +47,8 @@ namespace Server
             connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection, db));
             connection.RegisterCommandHandler(new CmdLoginCustomerHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetShiftSchedulesHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection));
-            connection.RegisterCommandHandler(new CmdSelectCarHandler(connection));
+            connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdSelectCarHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection));
             connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection));
             connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler());
@@ -62,6 +62,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateDailyStatisticHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetDailyStatisticHandler(connection, db,data));
             connection.RegisterCommandHandler(new CmdGetAnalysesHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdAddOrderHandler(connection, db));
         }
 
         private static void OnServerStarted(

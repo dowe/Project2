@@ -14,6 +14,28 @@ namespace Common.DataTransferObjects
 
 	public class Order
 	{
+        public Order()
+        {
+
+        }
+        public Order(Dictionary<string, List<Analysis>> Analysises, Customer Customer)
+        {
+            this.Customer = Customer;
+            this.OrderDate = DateTime.Now;
+            this.BringDate = null;
+            this.CollectDate = null;
+            this.CompleteDate = null;
+            this.Test = new List<Test>();
+            foreach(KeyValuePair<string, List<Analysis>> kVAnalysises in Analysises)
+            {
+                foreach(Analysis anal in kVAnalysises.Value)
+                {
+                    this.Test.Add(new Test(kVAnalysises.Key,anal));
+                }
+                
+            }
+            
+        }
         [Key]
 		public virtual long OrderID
 		{
@@ -21,25 +43,25 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual DateTime OrderDate
+		public virtual DateTime? OrderDate
 		{
 			get;
 			set;
 		}
 
-		public virtual DateTime CollectDate
+		public virtual DateTime? CollectDate
 		{
 			get;
 			set;
 		}
 
-		public virtual DateTime BringDate
+		public virtual DateTime? BringDate
 		{
 			get;
 			set;
 		}
 
-		public virtual DateTime CompleteDate
+		public virtual DateTime? CompleteDate
 		{
 			get;
 			set;

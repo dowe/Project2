@@ -7,6 +7,7 @@ using Common.Commands;
 using Common.Communication;
 using Common.Communication.Server;
 using Common.DataTransferObjects;
+using Server.DatabaseCommunication;
 
 namespace Server.CmdHandler
 {
@@ -14,22 +15,24 @@ namespace Server.CmdHandler
     {
 
         private IServerConnection connection = null;
+        private IDatabaseCommunicator db = null;
 
-        public CmdGetAvailableCarsHandler(IServerConnection connection)
+        public CmdGetAvailableCarsHandler(IServerConnection connection, IDatabaseCommunicator db)
         {
             this.connection = connection;
+            this.db = db;
         }
 
         protected override void Handle(CmdGetAvailableCars command, string connectionIdOrNull)
         {
-            List<Car> availableCars = new List<Car>()
-            {
-                new Car() { CarID = "OG-KP-417", Roadworthy = true },
-                new Car() { CarID = "OG-MB-1510", Roadworthy = true }
-            };
-            CmdReturnGetAvailableCars response = new CmdReturnGetAvailableCars(command.Id, availableCars);
+            db.StartTransaction();
+            List<Car> cars = db.GetAllCars(c => c.Roadworthy && c.CurrentDriver == null);
+
+            CmdReturnGetAvailableCars response = new CmdReturnGetAvailableCars(command.Id, cars);
 
             connection.Unicast(response, connectionIdOrNull);
+
+            db.EndTransaction(TransactionEndOperation.READONLY);
         }
     }
 }

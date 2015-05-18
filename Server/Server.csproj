@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdHandler\CmdAddOrderHandler.cs" />
     <Compile Include="BillCalculation\BillCalculator.cs" />
     <Compile Include="BillCalculation\IBillCalculator.cs" />
     <Compile Include="CmdHandler\CmdGenerateDailyStatisticHandler.cs" />
