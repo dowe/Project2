@@ -10,6 +10,8 @@ namespace Server.DriverController
         private OptionsCalculator routeCalculator = null;
         private OptionsEvaluator evaluator = null;
 
+        private IDistanceMatrixPlace home = null;
+
         /// <summary>
         /// This ctor is used for testing purpose (dependency injection).
         /// </summary>
@@ -44,7 +46,14 @@ namespace Server.DriverController
         {
             IList<DriverSendOption> options = routeCalculator.CalculateOptions(allDrivers, allUnfinishedOrders, destination);
 
-            return null;
+            var bestOptionOrNull = evaluator.ChooseBestOptionOrNull(options);
+            Driver optimalDriver = null;
+            if (bestOptionOrNull != null)
+            {
+                optimalDriver = bestOptionOrNull.Driver;
+            }
+
+            return optimalDriver;
         }
 
     }
