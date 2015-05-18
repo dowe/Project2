@@ -12,11 +12,13 @@ namespace Common.Commands
     {
 
         public string Username { get; private set; }
+        public string CarID { get; private set; }
         public GPSPosition DriverGPSPosition { get; private set; }
 
-        public CmdAnnounceEmergency(string username, GPSPosition driverGPSPosition)
+        public CmdAnnounceEmergency(string username, string carID, GPSPosition driverGPSPosition)
         {
             Username = username;
+            CarID = carID;
             DriverGPSPosition = driverGPSPosition;
         }
 

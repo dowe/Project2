@@ -83,12 +83,9 @@ namespace Smartphone.Driver.ViewModels
 		{
 			CmdLogoutDriver logoutDriver = new CmdLogoutDriver (session.Username, session.CarID, endKm);
 			CmdReturnLogoutDriver response = connection.SendWait<CmdReturnLogoutDriver> (logoutDriver);
-			if (response != null)
+			if (response != null && response.Success)
 			{
-				if (response.Success)
-				{
-					OnLogoutSuccessful ();
-				}
+				OnLogoutSuccessful ();
 			}
 		}
 

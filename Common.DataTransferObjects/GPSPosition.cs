@@ -15,16 +15,15 @@ namespace Common.DataTransferObjects
 
 	public class GPSPosition
 	{
-        [Key, Column(Order = 0)]
+        [Key]
+        public string CarID { get; set; }
 	    public float Latitude { get; set; }
-        [Key, Column(Order = 1)]
 	    public float Longitude { get; set; }
 
-	    public GPSPosition(float latitude, float longitude)
+	    public GPSPosition()
 	    {
-	        Latitude = latitude;
-	        Longitude = longitude;
 	    }
+
 	}
 }
 

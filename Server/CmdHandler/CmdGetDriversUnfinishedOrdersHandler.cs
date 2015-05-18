@@ -7,6 +7,7 @@ using Common.Commands;
 using Common.Communication;
 using Common.Communication.Server;
 using Common.DataTransferObjects;
+using Server.DatabaseCommunication;
 
 namespace Server.CmdHandler
 {
@@ -14,24 +15,25 @@ namespace Server.CmdHandler
     {
 
         private IServerConnection connection;
+        private IDatabaseCommunicator db;
 
-        public CmdGetDriversUnfinishedOrdersHandler(IServerConnection connection)
+        public CmdGetDriversUnfinishedOrdersHandler(IServerConnection connection, IDatabaseCommunicator db)
         {
             this.connection = connection;
+            this.db = db;
         }
 
         protected override void Handle(CmdGetDriversUnfinishedOrders command, string connectionIdOrNull)
         {
-            List<Order> driversUnfinishedOrders = new List<Order>()
-            {
-                new Order() {OrderID = 0, OrderDate = DateTime.Now, Customer = new Customer() {Label = "Ultraklinik", Address= new Address(){ City = "Offenburg", PostalCode = "77652", Street = "Badstrasse 21" }}},
-                new Order() {OrderID = 1, OrderDate = DateTime.Now, Customer = new Customer() {Label = "Lazerklink"}},
-                new Order() {OrderID = 42, OrderDate = DateTime.Now, Customer = new Customer() {Label = "Dr. Awesome"}}
-            };
+            db.StartTransaction();
+            List<Order> driversUnfinishedOrders =
+                db.GetAllOrders(o => o.Driver.UserName.Equals(command.Username) && o.CollectDate == null);
             CmdReturnGetDriversUnfinishedOrders response = new CmdReturnGetDriversUnfinishedOrders(command.Id,
                 driversUnfinishedOrders);
 
             connection.Unicast(response, connectionIdOrNull);
+
+            db.EndTransaction(TransactionEndOperation.READONLY);
         }
     }
 }
