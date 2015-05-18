@@ -41,8 +41,8 @@ namespace Server.DistanceCalculation
                     if (xmlResponse.Descendants("status").FirstOrDefault().Value == "OK")
                     {
                         var container = new DistanceContainer();
-                        container.Distance = xmlResponse.Descendants("distance").Descendants("value").Sum(x => (float)x / 1000);
-                        container.Time = xmlResponse.Descendants("duration").Descendants("value").Sum(x => (float) x / 3600);
+                        container.Distance = (float)xmlResponse.Descendants("distance").Descendants("value").FirstOrDefault() / 1000;
+                        container.Time = (float)xmlResponse.Descendants("duration").Descendants("value").FirstOrDefault() / 3600;
                         return container;
                     }
 
