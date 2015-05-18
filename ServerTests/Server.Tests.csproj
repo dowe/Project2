@@ -62,6 +62,7 @@
     <Compile Include="DatabaseCommunication\DatabaseCommunicatorTests.cs" />
     <Compile Include="DistanceCalculation\DistanceCalculationTests.cs" />
     <Compile Include="DistanceCalculation\DirectionsRouteDistanceCalculatorTests.cs" />
+    <Compile Include="DriverController\OptionsEvaluatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,9 +79,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DriverController\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

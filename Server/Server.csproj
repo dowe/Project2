@@ -130,6 +130,7 @@
     <Compile Include="DriverController\DriverSendOption.cs" />
     <Compile Include="DriverController\IDriverController.cs" />
     <Compile Include="DriverController\OptionsCalculator.cs" />
+    <Compile Include="DriverController\OptionsEvaluator.cs" />
     <Compile Include="ExtremeValueCheck\ExtremeValueChecker.cs" />
     <Compile Include="ExtremeValueCheck\IExtremeValueChecker.cs" />
     <Compile Include="Program.cs" />

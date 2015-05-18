@@ -7,11 +7,13 @@ namespace Server.DriverController
     public class DriverController : IDriverController
     {
 
-        private OptionsCalculator calculator = null;
+        private OptionsCalculator routeCalculator = null;
+        private OptionsEvaluator evaluator = null;
 
-        public DriverController(OptionsCalculator routeCalculator)
+        public DriverController(OptionsCalculator routeCalculator, OptionsEvaluator evaluator)
         {
-            calculator = routeCalculator;
+            this.routeCalculator = routeCalculator;
+            this.evaluator = evaluator;
         }
 
         public Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders, Address destination)
@@ -27,7 +29,7 @@ namespace Server.DriverController
         public Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders,
             IDistanceMatrixPlace destination)
         {
-            IList<DriverSendOption> options = calculator.CalculateOptions(allDrivers, allUnfinishedOrders, destination);
+            IList<DriverSendOption> options = routeCalculator.CalculateOptions(allDrivers, allUnfinishedOrders, destination);
 
             return null;
         }
