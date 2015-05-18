@@ -127,14 +127,8 @@
     <Compile Include="View\ShiftScheduleView.xaml.cs">
       <DependentUpon>ShiftScheduleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TestDetailView.xaml.cs">
-      <DependentUpon>TestDetailView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\TestsView.xaml.cs">
       <DependentUpon>TestsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestTableView.xaml.cs">
-      <DependentUpon>TestTableView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -180,15 +174,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TestDetailView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\TestsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TestTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

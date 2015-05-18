@@ -63,6 +63,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGetDailyStatisticHandler(connection, db,data));
             connection.RegisterCommandHandler(new CmdGetAnalysesHandler(connection, db));
             connection.RegisterCommandHandler(new CmdAddOrderHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
         }
 
         private static void OnServerStarted(
@@ -73,6 +74,7 @@ namespace Server
             data.GenerateShiftScheduleTimer = new GenerateShiftScheduleTimer(connection);
             connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
             connection.InjectInternal(new CmdGenerateDailyStatistic());
+            connection.InjectInternal(new CmdGenerateBills());
         }
     }
 }

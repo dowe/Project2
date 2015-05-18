@@ -42,7 +42,11 @@ namespace Common.DataTransferObjects
 			get;
 			set;
 		}
-
+        public virtual bool Invoiced
+        {
+            get;
+            set;
+        }
 		public virtual DateTime? OrderDate
 		{
 			get;

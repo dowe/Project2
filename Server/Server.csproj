@@ -94,6 +94,7 @@
     <Compile Include="CmdHandler\CmdAddOrderHandler.cs" />
     <Compile Include="BillCalculation\BillCalculator.cs" />
     <Compile Include="BillCalculation\IBillCalculator.cs" />
+    <Compile Include="CmdHandler\CmdGenerateBillsHandler.cs" />
     <Compile Include="CmdHandler\CmdGenerateDailyStatisticHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAllOrdersHandler.cs" />
     <Compile Include="CmdHandler\CmdGetDailyStatisticHandler.cs" />

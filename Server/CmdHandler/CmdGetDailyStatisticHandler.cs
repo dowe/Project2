@@ -16,6 +16,7 @@ namespace Server.CmdHandler
        private ServerConnection connection;
         private IDatabaseCommunicator db;
         private LocalServerData data;
+        DailyStatistic ds;
         public CmdGetDailyStatisticHandler(
             ServerConnection connection, 
             IDatabaseCommunicator db,
@@ -28,8 +29,9 @@ namespace Server.CmdHandler
 
         protected override void Handle(CmdGetDailyStatistic command, string connectionIdOrNull)
         {
-            DailyStatistic ds = data.DailyStatistic;
-          
+            ds = data.DailyStatistic;
+        
+            ds.NumberOfNewOrders = 22;
             ResponseCommand response = new CmdReturnGetDailyStatistic(command.Id, ds);
             connection.Unicast(response, connectionIdOrNull);
         }

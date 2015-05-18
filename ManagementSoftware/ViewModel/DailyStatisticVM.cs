@@ -25,6 +25,7 @@ namespace ManagementSoftware.ViewModel
 
 
             this.LoadCommand = new RelayCommand(LoadData);
+            LoadData();
         }
 
          private void LoadData()
@@ -38,8 +39,8 @@ namespace ManagementSoftware.ViewModel
              else
              {
                  _DailyStatistic = response.DailyStatistic;
-                 RaisePropertyChanged();
-                 MessageBox.Show("Daten abgerufen");
+                 
+                
              }
          }
 
@@ -51,6 +52,12 @@ namespace ManagementSoftware.ViewModel
              get
              {
                  return _DailyStatistic.Date.AddDays(-1).ToString("dd-MM-yyyy") + " bis " + _DailyStatistic.Date.ToString("dd-MM-yyyy") ;
+             }
+             set
+             {
+                 TimeSpan = _DailyStatistic.Date.AddDays(1).ToString("dd-MM-yyyy") + " bis " + _DailyStatistic.Date.ToString("dd-MM-yyyy");
+                 RaisePropertyChanged();
+
              }
             
          }
