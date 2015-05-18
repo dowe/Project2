@@ -116,8 +116,11 @@
     <Compile Include="DatabaseCommunication\IDatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\LaborContext.cs" />
     <Compile Include="DatabaseCommunication\TransactionEndOperation.cs" />
+    <Compile Include="DistanceCalculation\DistanceMatrixAddress.cs" />
     <Compile Include="DistanceCalculation\DistanceContainer.cs" />
     <Compile Include="DistanceCalculation\DistanceCalculation.cs" />
+    <Compile Include="DistanceCalculation\DistanceMatrixGPSPosition.cs" />
+    <Compile Include="DistanceCalculation\IDistanceMatrixPlace.cs" />
     <Compile Include="DriverController\DriverController.cs" />
     <Compile Include="DriverController\IDriverController.cs" />
     <Compile Include="ExtremeValueCheck\ExtremeValueChecker.cs" />
