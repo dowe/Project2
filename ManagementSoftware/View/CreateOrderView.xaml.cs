@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Common.DataTransferObjects;
+using ManagementSoftware.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,18 @@ namespace ManagementSoftware.View
         public CreateOrderView()
         {
             InitializeComponent();
+
+            CreateOrderVM vm = (CreateOrderVM) DataContext;
+
+            vm.SetBox(AllSamplesListBox);
         }
+
+        private void AllSamplesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CreateOrderVM vm = (CreateOrderVM)DataContext;
+            vm.SelectedAnalysisChanged();
+        }
+
+        
     }
 }
