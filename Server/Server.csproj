@@ -118,6 +118,8 @@
     <Compile Include="DatabaseCommunication\TransactionEndOperation.cs" />
     <Compile Include="DistanceCalculation\DistanceContainer.cs" />
     <Compile Include="DistanceCalculation\DistanceCalculation.cs" />
+    <Compile Include="DriverController\DriverController.cs" />
+    <Compile Include="DriverController\IDriverController.cs" />
     <Compile Include="ExtremeValueCheck\ExtremeValueChecker.cs" />
     <Compile Include="ExtremeValueCheck\IExtremeValueChecker.cs" />
     <Compile Include="Program.cs" />
