@@ -323,6 +323,11 @@ namespace ASPServer.Controllers
                         Session[LastActionTime] = DateTime.UtcNow.Ticks;
                         return true;
                     }
+                    else
+                    {
+                        // if the user timed out we clear the whole session
+                        Session.Clear(); ;
+                    }
                 }
 
                 return false;
