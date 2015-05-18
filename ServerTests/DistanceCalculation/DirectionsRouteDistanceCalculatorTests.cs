@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Common.DataTransferObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Server.DistanceCalculation;
@@ -39,9 +40,11 @@ namespace ServerTests.DistanceCalculation
                 })
             };
 
-            DistanceContainer distance = testee.CalculateRouteDistance(places);
-            Assert.AreEqual(0.23f, distance.Time, 0.1f);
-            Assert.AreEqual(5.8f, distance.Distance, 1f);
+            Task<DistanceContainer> distance = testee.CalculateRouteDistance(places);
+            distance.Wait();
+
+            Assert.AreEqual(0.23f, distance.Result.Time, 0.1f);
+            Assert.AreEqual(5.8f, distance.Result.Distance, 1f);
         }
     }
 }

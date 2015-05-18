@@ -24,7 +24,7 @@ namespace Server.DistanceCalculation
             this.optimizeOrder = optimizeOrder;
         }
 
-        public DistanceContainer CalculateRouteDistance(IList<IDistanceMatrixPlace> waypoints)
+        public async Task<DistanceContainer> CalculateRouteDistance(IList<IDistanceMatrixPlace> waypoints)
         {
             DistanceContainer result = new DistanceContainer();
             if (waypoints.Count > 1)
@@ -54,7 +54,7 @@ namespace Server.DistanceCalculation
                 string url = urlBuilder.ToString();
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
                 using (var streamReader = new StreamReader(response.GetResponseStream()))
                 {
                     var responseString = streamReader.ReadToEnd();

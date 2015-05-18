@@ -8,6 +8,6 @@ namespace Server.DistanceCalculation
 {
     public interface IRouteDistanceCalculator
     {
-        DistanceContainer CalculateRouteDistance(IList<IDistanceMatrixPlace> waypoints);
+        Task<DistanceContainer> CalculateRouteDistance(IList<IDistanceMatrixPlace> waypoints);
     }
 }

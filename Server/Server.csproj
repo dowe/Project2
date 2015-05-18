@@ -127,7 +127,9 @@
     <Compile Include="DistanceCalculation\IDistanceMatrixPlace.cs" />
     <Compile Include="DistanceCalculation\IRouteDistanceCalculator.cs" />
     <Compile Include="DriverController\DriverController.cs" />
+    <Compile Include="DriverController\DriverSendOption.cs" />
     <Compile Include="DriverController\IDriverController.cs" />
+    <Compile Include="DriverController\OptionsCalculator.cs" />
     <Compile Include="ExtremeValueCheck\ExtremeValueChecker.cs" />
     <Compile Include="ExtremeValueCheck\IExtremeValueChecker.cs" />
     <Compile Include="Program.cs" />

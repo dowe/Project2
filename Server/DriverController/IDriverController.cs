@@ -16,7 +16,7 @@ namespace Server.DriverController
         /// <param name="allDrivers"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
-        Driver DetermineDriverOrNull(IList<Driver> allDrivers, Address destination);
+        Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders, Address destination);
 
         /// <summary>
         /// Returns the closest driver that can reach the destination until the end of his shift.
@@ -24,6 +24,6 @@ namespace Server.DriverController
         /// <param name="allDrivers"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
-        Driver DetermineDriverOrNull(IList<Driver> allDrivers, GPSPosition destination);
+        Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders, GPSPosition destination);
     }
 }

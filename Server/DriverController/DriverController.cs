@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Common.DataTransferObjects;
 using Server.DistanceCalculation;
 
@@ -11,21 +7,30 @@ namespace Server.DriverController
     public class DriverController : IDriverController
     {
 
-        private IRouteDistanceCalculator calculator = null;
+        private OptionsCalculator calculator = null;
 
-        public DriverController(IRouteDistanceCalculator routeCalculator)
+        public DriverController(OptionsCalculator routeCalculator)
         {
             calculator = routeCalculator;
         }
 
-        public Driver DetermineDriverOrNull(IList<Driver> allDrivers, Address destination)
+        public Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders, Address destination)
         {
-            throw new NotImplementedException();
+            return DetermineDriverOrNull(allDrivers, allUnfinishedOrders, new DistanceMatrixAddress(destination));
         }
 
-        public Driver DetermineDriverOrNull(IList<Driver> allDrivers, GPSPosition destination)
+        public Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders, GPSPosition destination)
         {
-            throw new NotImplementedException();
+            return DetermineDriverOrNull(allDrivers, allUnfinishedOrders, new DistanceMatrixGPSPosition(destination));
         }
+
+        public Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders,
+            IDistanceMatrixPlace destination)
+        {
+            IList<DriverSendOption> options = calculator.CalculateOptions(allDrivers, allUnfinishedOrders, destination);
+
+            return null;
+        }
+
     }
 }
