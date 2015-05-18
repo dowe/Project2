@@ -65,5 +65,23 @@ namespace ServerTests.DriverController
 
             Assert.AreEqual("o1", result.Driver.UserName);
         }
+
+        [TestMethod]
+        public void ChooseBestOptionOrNull_WithMultiplePossibleOptions_ReturnsBestAccordingToSoftConstraint()
+        {
+            var testee = CreateTestee();
+            testee.AddHardConstraint(o => o.TotalLeftDistance.Time < 6);
+            testee.SetSoftConstraint(o => -(o.TotalLeftDistance.Time));
+            var options = new List<DriverSendOption>()
+            {
+                CreateDummyOption("o1", 5f, 50000f),
+                CreateDummyOption("o2", 3f, 30000f),
+                CreateDummyOption("o3", 7f, 60000f)
+            };
+
+            var result = testee.ChooseBestOptionOrNull(options);
+
+            Assert.AreEqual("o2", result.Driver.UserName);
+        }
     }
 }

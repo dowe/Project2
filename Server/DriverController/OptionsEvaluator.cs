@@ -11,12 +11,11 @@ namespace Server.DriverController
     {
 
         private IList<Func<DriverSendOption, bool>> hardConstraints = null;
-        private IList<Func<DriverSendOption, float>> softConstraints = null;
+        private Func<DriverSendOption, float> softConstraint = null;
 
         public OptionsEvaluator()
         {
             hardConstraints = new List<Func<DriverSendOption, bool>>();
-            softConstraints = new List<Func<DriverSendOption, float>>();
         }
 
         public void AddHardConstraint(Func<DriverSendOption, bool> hardConstraint)
@@ -24,14 +23,15 @@ namespace Server.DriverController
             hardConstraints.Add(hardConstraint);
         }
 
-        public void AddSoftConstraint(Func<DriverSendOption, float> softConstraint)
+        public void SetSoftConstraint(Func<DriverSendOption, float> softConstraint)
         {
-            softConstraints.Add(softConstraint);
+            this.softConstraint = softConstraint;
         }
 
         public virtual DriverSendOption ChooseBestOptionOrNull(IList<DriverSendOption> options)
         {
             var leftRelevantOptions = new List<DriverSendOption>(options);
+            // Remove all options that do not pass the hard constraints.
             leftRelevantOptions = leftRelevantOptions.FindAll(o =>
             {
                 bool passes = true;
@@ -43,6 +43,16 @@ namespace Server.DriverController
 
                 return passes;
             });
+
+            // Order according to soft constraint evaluation.
+            if (softConstraint != null)
+            {
+                var optionComparer = Comparer<DriverSendOption>.Create((l, r) =>
+                {
+                    return Math.Sign(softConstraint(r) - softConstraint(l));
+                });
+                leftRelevantOptions.Sort(optionComparer);
+            }
 
             DriverSendOption bestOption = null;
             if (leftRelevantOptions.Count > 0)
