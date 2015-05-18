@@ -137,26 +137,14 @@ namespace ManagementSoftware.ViewModel
                 return;
             }
 
-            
-
             if (_SelectedPatient == null
-                    || !_PatientTests.ContainsKey(_SelectedPatient) )
+                    || !_PatientTests.ContainsKey(_SelectedPatient))
             {
                 AvaibleAnalysisBox.UnselectAll();
                 return;
             }
 
-            List<object> list = new List<object>();
-            foreach (Analysis a in _PatientTests[_SelectedPatient])
-            {
-                list.Add(a);
-            }
-            
-            if (list.Count > 0)
-            {
-                AvaibleAnalysisBox.SelectedItem = list[0];
-            }
-            AvaibleAnalysisBox.Select(list);
+            AvaibleAnalysisBox.Select(_PatientTests[_SelectedPatient]);
         }
 
         public string CustomerUsername

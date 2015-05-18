@@ -73,14 +73,15 @@ namespace Server.CmdHandler
             //GET ALL ShiftSchedules
             db.StartTransaction();
             IList<ShiftSchedule> list = db.GetShiftSchedules();
-            
+            bool existShiftSchedule = false;
             foreach (ShiftSchedule obj in list)
             {
                 //test ShiftSchedule for Month not created
                 if (obj.Date.Month == refDate.Month
                     && obj.Date.Year == refDate.Year)
                 {
-                    return;
+                    existShiftSchedule = true;
+                    break;
                 }
 
                 //search previousShiftSchedule
@@ -92,6 +93,10 @@ namespace Server.CmdHandler
             }
             db.EndTransaction(TransactionEndOperation.READONLY);
 
+            if (existShiftSchedule)
+            {
+                return;
+            }
 
             //TODO: create real ShiftSchedule use (refDate, previousMonth) and dedicated Unit
             ShiftSchedule newShiftSchedule = Util.CreateTestData(refDate);
