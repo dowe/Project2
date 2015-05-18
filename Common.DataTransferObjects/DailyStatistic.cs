@@ -26,6 +26,12 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
+        public virtual int NumberOfCompletedOrders
+        {
+            get;
+            set;
+        }
+
 		public virtual int NumberOfOrdersInProgress
 		{
 			get;
