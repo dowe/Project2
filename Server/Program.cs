@@ -59,10 +59,12 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllCustomersHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOrdersHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGetUsersOrderResultsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGenerateDailyStatisticHandler(connection, db, data));
-            connection.RegisterCommandHandler(new CmdGetDailyStatisticHandler(connection, db,data));
+            connection.RegisterCommandHandler(new CmdGetDailyStatisticHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAnalysesHandler(connection, db));
             connection.RegisterCommandHandler(new CmdAddOrderHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGetCustomerAddressHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
         }
 

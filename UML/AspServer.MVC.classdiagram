@@ -277,6 +277,12 @@
                     <referencedTypeMoniker Id="0b30df82-4728-4b2f-aa4a-b58e7fb175cb" LastKnownName="bool" />
                   </type_NamedElement>
                 </property>
+                <property Id="7f40c163-49fa-4820-bf89-9e77375d5afe" name="UnitOfMeasure" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="96ca34b6-6ca1-4ae1-8b00-87fba38e483a" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="2ee93c38-81b2-42e7-b0b5-139fb79b7c6b" LastKnownName="String" />
+                  </type_NamedElement>
+                </property>
               </ownedAttributesInternal>
             </class>
           </packageHasNamedElement>

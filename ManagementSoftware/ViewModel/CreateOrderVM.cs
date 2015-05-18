@@ -14,32 +14,34 @@ using System.Windows.Documents;
 using ManagementSoftware.Helper;
 using System.Globalization;
 using Common.Util;
+using System.Windows;
+using ManagementSoftware.Model;
+using GalaSoft.MvvmLight.Command;
 
 namespace ManagementSoftware.ViewModel
 {
     public class CreateOrderVM : ViewModelBase
     {
-        private IClientConnection _Connection;
-        private List<Analysis> _AvaibleAnalysis;
-        private Dictionary<String, List<Analysis>> _PatientTests; //Key = Patientid
-        private string _CustomerUsername;
-        private Address _CustomerAddress;
-        private String _SelectedPatient;
 
+        private CreateOrderM model;
         private MyListBox AvaibleAnalysisBox;
+
 
         public CreateOrderVM(IClientConnection _Connection)
         {
-            this._Connection = _Connection;
-            _AvaibleAnalysis = new List<Analysis>();
-            _PatientTests = new Dictionary<String, List<Analysis>>();
-            _CustomerUsername = "";
-
-            _PatientTests.Add("Daniel1", new List<Analysis>());
-            _PatientTests.Add("Daniel2", new List<Analysis>());
-            _SelectedPatient = "Daniel1";
+            model = new CreateOrderM(_Connection);
 
             new Thread(LoadAnalysis).Start();
+
+            AddPatientAction = new RelayCommand(AddPatient);
+            RemovePatientAction = new RelayCommand(RemovePatient, CanRemovePatient);
+            CancelOrderAction = new RelayCommand(CancelOrder);
+            CreateOrderAction = new RelayCommand(CreateOrder);//TODO canExecute
+        }
+
+        private bool CanRemovePatient()
+        {
+            return SelectedPatient != null;
         }
 
         public void SetBox(MyListBox box)
@@ -49,85 +51,8 @@ namespace ManagementSoftware.ViewModel
 
         private void LoadAnalysis()
         {
-            Command request = new CmdGetAnalyses();
-            CmdReturnGetAnalyses response;
-            response = _Connection.SendWait<CmdReturnGetAnalyses>(request);
-            if (response != null)
-            {
-                AvaibleAnalysis = new List<Analysis>(response.Analyses);
-            }
-
-        }
-
-        public List<Analysis> AvaibleAnalysis
-        {
-            get
-            {
-                return _AvaibleAnalysis;
-            }
-            set
-            {
-                _AvaibleAnalysis = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public void SelectedAnalysisChanged()
-        {
-            if (_SelectedPatient == null
-                   || !_PatientTests.ContainsKey(_SelectedPatient)
-                   || AvaibleAnalysisBox == null)
-            {
-                return;
-            }
-
-            List<Analysis> list = new List<Analysis>();
-
-            foreach (Analysis item in AvaibleAnalysisBox.SelectedItems)
-            {
-                list.Add(item);
-            }
-
-            _PatientTests[_SelectedPatient] = list;
-            RaisePropertyChanged(() => SelectedAnalysis);
-        }
-
-        public List<Analysis> SelectedAnalysis
-        {
-            get
-            {
-                if (_SelectedPatient == null
-                    || !_PatientTests.ContainsKey(_SelectedPatient)
-                    )
-                {
-                    return new List<Analysis>();
-                }
-
-                return _PatientTests[_SelectedPatient];
-            }
-        }
-
-        public List<String> PatientIDs
-        {
-            get
-            {
-                return new List<String>(_PatientTests.Keys);
-            }
-        }
-
-        public String SelectedPatient
-        {
-            get
-            {
-                return _SelectedPatient;
-            }
-            set
-            {
-                _SelectedPatient = value;
-                RaisePropertyChanged();
-                SelectAnalysis();
-                RaisePropertyChanged(() => SelectedAnalysis);
-            }
+            model.LoadAnalysis();
+            RaisePropertyChanged(() => AvaibleAnalysis);
         }
 
         private void SelectAnalysis()
@@ -137,27 +62,170 @@ namespace ManagementSoftware.ViewModel
                 return;
             }
 
-            if (_SelectedPatient == null
-                    || !_PatientTests.ContainsKey(_SelectedPatient))
+            AvaibleAnalysisBox.Select(model.SelectedAnalysis);
+        }
+
+        private void LoadCustomerAddress()
+        {
+            model.LoadCustomerAddress();
+            RaisePropertyChanged(() => CustomerAddressText);
+        }
+
+        private void RemovePatient()
+        {
+            model.RemovePatient();
+            SelectedPatient = null;
+            RaisePropertyChanged(() => PatientIDs);
+        }
+
+        private void AddPatient()
+        {
+            SelectedPatient = model.AddPatient();
+            RaisePropertyChanged(() => PatientIDs);
+            RaisePropertyChanged(() => NewPatientID);
+        }
+
+        private void CancelOrder()
+        {
+            model.CancelOrder();
+            RemovePatientAction.RaiseCanExecuteChanged();
+            RaisePropertyChanged(() => SelectedAnalysis);
+            RaisePropertyChanged(() => PatientIDs);
+            RaisePropertyChanged(() => SelectedPatient);
+            RaisePropertyChanged(() => CustomerUsername);
+            RaisePropertyChanged(() => CustomerAddressText);
+            RaisePropertyChanged(() => NewPatientID);
+            RaisePropertyChanged(() => PatientIDText);
+        }
+
+        private void CreateOrder()
+        {
+            model.CreateOrder();
+        }
+
+        public List<Analysis> AvaibleAnalysis
+        {
+            get
             {
-                AvaibleAnalysisBox.UnselectAll();
+                return model.AvaibleAnalysis;
+            }
+        }
+
+        public void SelectedAnalysisChanged()
+        {
+            if (AvaibleAnalysisBox == null)
+            {
                 return;
             }
 
-            AvaibleAnalysisBox.Select(_PatientTests[_SelectedPatient]);
+            List<Analysis> list = new List<Analysis>();
+            foreach (Analysis item in AvaibleAnalysisBox.SelectedItems)
+            {
+                list.Add(item);
+            }
+
+            model.SelectedAnalysis = list;
+            RaisePropertyChanged(() => SelectedAnalysis);
+        }
+
+        public List<Analysis> SelectedAnalysis
+        {
+            get
+            {
+                SelectAnalysis();
+                return model.SelectedAnalysis;
+            }
+        }
+
+        public List<String> PatientIDs
+        {
+            get
+            {
+                return model.PatientIDs();
+            }
+        }
+
+        public String SelectedPatient
+        {
+            get
+            {
+                return model.SelectedPatient;
+            }
+            set
+            {
+                model.SelectedPatient = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged(() => SelectedAnalysis);
+                RaisePropertyChanged(() => PatientIDText);
+                RemovePatientAction.RaiseCanExecuteChanged();
+            }
         }
 
         public string CustomerUsername
         {
             get
             {
-                return _CustomerUsername;
+                return model.CustomerUsername;
             }
             set
             {
-                _CustomerUsername = value;
+                model.CustomerUsername = value;
+                new Thread(LoadCustomerAddress).Start();
                 RaisePropertyChanged();
             }
+        }
+
+        public string CustomerAddressText
+        {
+            get
+            {
+                return model.CustomerAddressText;
+            }
+        }
+
+        public string NewPatientID
+        {
+            get
+            {
+                return model.NewPatientID;
+            }
+            set
+            {
+                model.NewPatientID = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string PatientIDText
+        {
+            get
+            {
+                return model.PatientIDText;
+            }
+        }
+
+        public RelayCommand AddPatientAction
+        {
+            get;
+            set;
+        }
+
+        public RelayCommand RemovePatientAction
+        {
+            get;
+            set;
+        }
+
+        public RelayCommand CancelOrderAction
+        {
+            get;
+            set;
+        }
+
+        public RelayCommand CreateOrderAction
+        {
+            get;
+            set;
         }
     }
 }

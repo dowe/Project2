@@ -97,6 +97,7 @@
     <Compile Include="CmdHandler\CmdGenerateBillsHandler.cs" />
     <Compile Include="CmdHandler\CmdGenerateDailyStatisticHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAllOrdersHandler.cs" />
+    <Compile Include="CmdHandler\CmdGetCustomerAddressHandler.cs" />
     <Compile Include="CmdHandler\CmdGetDailyStatisticHandler.cs" />
     <Compile Include="CmdHandler\CmdGetShiftSchedulesHandler.cs" />
     <Compile Include="CmdHandler\CmdAnnounceEmergencyHandler.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="CmdHandler\CmdGetAnalysesHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAvailableCarsHandler.cs" />
     <Compile Include="CmdHandler\CmdGetDriversUnfinishedOrdersHandler.cs" />
+    <Compile Include="CmdHandler\CmdGetUsersOrderResultsHandler.cs" />
     <Compile Include="CmdHandler\CmdLoginDriverHandler.cs" />
     <Compile Include="CmdHandler\CmdLoginCustomerHandler.cs" />
     <Compile Include="CmdHandler\CmdLogoutDriverHandler.cs" />
@@ -117,8 +119,18 @@
     <Compile Include="DatabaseCommunication\IDatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\LaborContext.cs" />
     <Compile Include="DatabaseCommunication\TransactionEndOperation.cs" />
+    <Compile Include="DistanceCalculation\DirectionsRouteDistanceCalculator.cs" />
+    <Compile Include="DistanceCalculation\DistanceMatrixAddress.cs" />
     <Compile Include="DistanceCalculation\DistanceContainer.cs" />
     <Compile Include="DistanceCalculation\DistanceCalculation.cs" />
+    <Compile Include="DistanceCalculation\DistanceMatrixGPSPosition.cs" />
+    <Compile Include="DistanceCalculation\IDistanceMatrixPlace.cs" />
+    <Compile Include="DistanceCalculation\IRouteDistanceCalculator.cs" />
+    <Compile Include="DriverController\DriverController.cs" />
+    <Compile Include="DriverController\DriverSendOption.cs" />
+    <Compile Include="DriverController\IDriverController.cs" />
+    <Compile Include="DriverController\OptionsCalculator.cs" />
+    <Compile Include="DriverController\OptionsEvaluator.cs" />
     <Compile Include="ExtremeValueCheck\ExtremeValueChecker.cs" />
     <Compile Include="ExtremeValueCheck\IExtremeValueChecker.cs" />
     <Compile Include="Program.cs" />
