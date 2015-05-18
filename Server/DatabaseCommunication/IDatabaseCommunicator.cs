@@ -56,6 +56,8 @@ namespace Server.DatabaseCommunication
 
 		Car GetCar(string carId);
 
+	    GPSPosition GetGPSPosition(string carID);
+
 		CarLogbookEntry GetLastCarLogbookEntry(string carID);
 
 		void CreateCarLogbookEnry(CarLogbookEntry entry);

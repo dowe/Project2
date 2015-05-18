@@ -36,29 +36,28 @@ namespace Server.CmdHandler
             db.StartTransaction();
             _OrderList = db.GetAllOrders(null);
             db.EndTransaction(TransactionEndOperation.READONLY);
-            DateTime now = DateTime.Now;
+
             foreach (Order o in _OrderList)
             {
-                
                 //Alles für Orders
                 //falls in den letzten 24h bestellt wurde
-                if (o.OrderDate != null && (o.OrderDate> now.AddHours(-24) && o.OrderDate <=now ))
+                if (o.OrderDate != null && (o.OrderDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
                     ds.NumberOfOrderedOrders++;
                 //falls in den letzten 24h beendet wurde
-                if (o.CompleteDate != null && (o.CompleteDate> now.AddHours(-24) && o.CompleteDate <=now ))
+                if (o.CompleteDate != null && (o.CompleteDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
                     ds.NumberOfCompletedOrders++;
                 //sonst falls in progress
-                else if (o.BringDate != null && (o.BringDate> now.AddHours(-24) && o.BringDate <=now ))
+                else if (o.BringDate != null && (o.BringDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
                     ds.NumberOfOrdersInProgress++;
 
                 //Alles für tests
                 foreach (Test t in o.Test)
                 {
                     //in letzten 24h gestartet aber noch nicht zu ende
-                    if (t.StartDate != null && (t.StartDate> now.AddHours(-24) && t.StartDate <= now ) && t.EndDate == null)
+                    if (t.StartDate != null && (t.StartDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24 && t.EndDate == null)
                         ds.NumberOfTestsInProgress++;
                     //in letzten 24h beendet
-                    else if (t.EndDate != null && (t.EndDate> now.AddHours(-24) && t.EndDate <= now))
+                    else if (t.EndDate != null && (t.EndDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
                         ds.NumberOfCompletedTests++;
                 }
 

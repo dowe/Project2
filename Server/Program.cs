@@ -49,11 +49,11 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGetShiftSchedulesHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSelectCarHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection));
-            connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection));
-            connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler());
-            connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection));
-            connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection));
+            connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler(db));
+            connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection, db));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
