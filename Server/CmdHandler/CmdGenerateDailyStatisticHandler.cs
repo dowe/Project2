@@ -39,23 +39,23 @@ namespace Server.CmdHandler
             {
                 //Alles für Orders
                 //falls in den letzten 24h bestellt wurde
-                if (o.OrderDate != null && (o.OrderDate - DateTime.Now).TotalHours < 24)
+                if (o.OrderDate != null && (o.OrderDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
                     ds.NumberOfOrderedOrders++;
                 //falls in den letzten 24h beendet wurde
-                if (o.CompleteDate != null && (o.CompleteDate - DateTime.Now).TotalHours < 24)
+                if (o.CompleteDate != null && (o.CompleteDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
                     ds.NumberOfCompletedOrders++;
                 //sonst falls in progress
-                else if (o.BringDate != null && (o.BringDate - DateTime.Now).TotalHours < 24)
+                else if (o.BringDate != null && (o.BringDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
                     ds.NumberOfOrdersInProgress++;
 
                 //Alles für tests
                 foreach (Test t in o.Test)
                 {
                     //in letzten 24h gestartet aber noch nicht zu ende
-                    if (t.StartDate != null && (t.StartDate - DateTime.Now).TotalHours < 24 && t.EndDate == null)
+                    if (t.StartDate != null && (t.StartDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24 && t.EndDate == null)
                         ds.NumberOfTestsInProgress++;
                     //in letzten 24h beendet
-                    else if (t.EndDate != null && (t.EndDate - DateTime.Now).TotalHours < 24)
+                    else if (t.EndDate != null && (t.EndDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
                         ds.NumberOfCompletedTests++;
                 }
 
