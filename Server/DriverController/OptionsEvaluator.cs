@@ -44,7 +44,7 @@ namespace Server.DriverController
                 return passes;
             });
 
-            // Order according to soft constraint evaluation.
+            // Order according to soft constraint evaluation. Highest score first.
             if (softConstraint != null)
             {
                 var optionComparer = Comparer<DriverSendOption>.Create((l, r) =>
