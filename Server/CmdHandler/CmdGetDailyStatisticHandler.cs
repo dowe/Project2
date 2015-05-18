@@ -31,7 +31,7 @@ namespace Server.CmdHandler
         {
             ds = data.DailyStatistic;
         
-            ds.NumberOfNewOrders = 22;
+            ds.NumberOfNewOrders = 42;
             ResponseCommand response = new CmdReturnGetDailyStatistic(command.Id, ds);
             connection.Unicast(response, connectionIdOrNull);
         }

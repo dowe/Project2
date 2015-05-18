@@ -28,11 +28,25 @@ namespace Server.CmdHandler
 
         protected override void Handle(CmdGetAllOrders command, string connectionIdOrNull)
         {
-            IList<Order> list;
+           
             db.StartTransaction();
-            list = db.GetAllOrders(null);
-            
+            IList<Order> list = db.GetAllOrders(null);
             db.EndTransaction(TransactionEndOperation.READONLY);
+
+            //Start Creating a Mockorder for testing
+            Order MockOrder = new Order();
+            MockOrder.CollectDate = DateTime.Now;
+            Customer MockCustomer = new Customer();
+            MockCustomer.UserName = "myUsername";
+            MockCustomer.LastName = "Müller";
+            MockCustomer.FirstName = "hans";
+            MockOrder.Customer = MockCustomer;
+            MockOrder.OrderID = 1111;
+            List<Test> MockTest = new List<Test>();
+            MockTest.Add(new Test("Patientenid123", new Analysis("Blutzeug", 1.0f, 11.0f, "Kilo", 22.2f, SampleType.BLOOD)));
+            MockOrder.Test = MockTest;
+            list.Add(MockOrder);
+            //finish Mockorder
 
             ResponseCommand response = new CmdReturnGetAllOrders(command.Id, list);
             connection.Unicast(response, connectionIdOrNull);

@@ -42,7 +42,7 @@ namespace ManagementSoftware.ViewModel
 
          private void LoadData()
          {
-             
+             IList<TestEntryModel> _TestList = new List<TestEntryModel>();
              Command request = new CmdGetAllOrders();
              CmdReturnGetAllOrders response = _ClientConnection.SendWait<CmdReturnGetAllOrders>(request);
              if (response == null)
@@ -91,12 +91,13 @@ namespace ManagementSoftware.ViewModel
                                  temp.AlarmState = "Fehler in Alarmstatus";
                                  break;
                          }
-                        _DataList.Add(temp);
+                        _TestList.Add(temp);
                      }
                  }
 
-
-
+                 DataList = _TestList;
+                 Console.WriteLine(DataList[0].TestID.ToString());
+                 Console.WriteLine(DataList[0].OrderID.ToString());
                  MessageBox.Show("Daten abgerufen");
              }
          }
