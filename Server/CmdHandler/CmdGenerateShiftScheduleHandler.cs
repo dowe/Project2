@@ -60,7 +60,7 @@ namespace Server.CmdHandler
                 default:
                     throw new Exception("Unknonw GenerateMonthMode <" + command.Mode + ">");
             }
-            
+
             CreateForMonth(refDate);
         }
 

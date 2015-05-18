@@ -59,8 +59,8 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllCustomersHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOrdersHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdGenerateDailyStatisticHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdGetDailyStatisticHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGenerateDailyStatisticHandler(connection, db, data));
+            connection.RegisterCommandHandler(new CmdGetDailyStatisticHandler(connection, db,data));
             connection.RegisterCommandHandler(new CmdGetAnalysesHandler(connection, db));
         }
 
@@ -70,7 +70,8 @@ namespace Server
             LocalServerData data)
         {
             data.GenerateShiftScheduleTimer = new GenerateShiftScheduleTimer(connection);
-            connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
+           // connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
+            //connection.InjectInternal(new CmdGenerateDailyStatistic());
         }
     }
 }

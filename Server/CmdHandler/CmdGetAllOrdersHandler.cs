@@ -11,26 +11,30 @@ using System.Threading.Tasks;
 
 namespace Server.CmdHandler
 {
-    public class CmdGetDailyStatisticHandler : CommandHandler<CmdGetDailyStatistic>
+    public class CmdGetAllOrdersHandler : CommandHandler<CmdGetAllOrders>
     {
-       private ServerConnection connection;
+
+          private ServerConnection connection;
         private IDatabaseCommunicator db;
-        private LocalServerData data;
-        public CmdGetDailyStatisticHandler(
+
+        public CmdGetAllOrdersHandler(
             ServerConnection connection, 
-            IDatabaseCommunicator db,
-            LocalServerData data)
+            IDatabaseCommunicator db)
         {
             this.connection = connection;
             this.db = db;
-            this.data = data;
         }
+        
 
-        protected override void Handle(CmdGetDailyStatistic command, string connectionIdOrNull)
+        protected override void Handle(CmdGetAllOrders command, string connectionIdOrNull)
         {
-            DailyStatistic ds = data.DailyStatistic;
-          
-            ResponseCommand response = new CmdReturnGetDailyStatistic(command.Id, ds);
+            IList<Order> list;
+            db.StartTransaction();
+            list = db.GetAllOrders(null);
+            
+            db.EndTransaction(TransactionEndOperation.READONLY);
+
+            ResponseCommand response = new CmdReturnGetAllOrders(command.Id, list);
             connection.Unicast(response, connectionIdOrNull);
         }
     }

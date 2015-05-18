@@ -22,6 +22,7 @@ namespace Server
 
         }
 
+        public DailyStatistic DailyStatistic { get; set; }
         public Address ZmsAddress { get; private set; }
         public float RoadCostInEuroPerKm { get; private set; }
         public ScheduledTimer GenerateShiftScheduleTimer { get; set; }

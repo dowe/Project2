@@ -17,14 +17,16 @@ namespace Server.CmdHandler
         private IServerConnection connection;
         private IDatabaseCommunicator db;
         private DailyStatistic ds;
+        LocalServerData data;
         private IList<Order> _OrderList;
         public CmdGenerateDailyStatisticHandler(
             IServerConnection connection,
-            IDatabaseCommunicator db)
+            IDatabaseCommunicator db,
+            LocalServerData data)
         {
             this.connection = connection;
             this.db = db;
-          
+            this.data = data;
         }
 
         protected override void Handle(CmdGenerateDailyStatistic command, string connectionIdOrNull)
@@ -58,9 +60,7 @@ namespace Server.CmdHandler
                 }
 
             }
-            db.StartTransaction();
-            
-            db.EndTransaction(TransactionEndOperation.READONLY);
+            data.DailyStatistic = ds;
 
 
         }
