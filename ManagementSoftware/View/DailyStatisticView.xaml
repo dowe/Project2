@@ -18,7 +18,7 @@
 
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0"  Content="Tagesstatistik vom:" Margin="312,21,496,0" VerticalAlignment="Top" Height="49" FontSize="20" HorizontalAlignment="Center" Width="216"/>
-        <Label Grid.Row="0" Content="TODO" HorizontalAlignment="Center" Margin="484,21,251,0" VerticalAlignment="Top" Width="289" Height="49" FontSize="20"/>
+        <Label Grid.Row="0" Content="{Binding  TimeSpan}" HorizontalAlignment="Center" Margin="484,21,251,0" VerticalAlignment="Top" Width="289" Height="49" FontSize="20"/>
         <GroupBox Grid.Row="1" Header="Bestellungen" FontSize="16"  Width="400" HorizontalAlignment="Center" Margin="312,5">
             <Grid Height="250" VerticalAlignment="Top" HorizontalAlignment="Center" Width="400" Margin="-10,-10,-2,-24">
                 <Grid.RowDefinitions>
