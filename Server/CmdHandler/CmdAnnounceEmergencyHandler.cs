@@ -47,6 +47,14 @@ namespace Server.CmdHandler
                 success = false;
             }
             db.EndTransaction(TransactionEndOperation.SAVE);
+            db.StartTransaction();
+            GPSPosition position = db.GetGPSPosition(command.CarID);
+            if (position != null)
+            {
+                position.Latitude = command.DriverGPSPosition.Latitude;
+                position.Longitude = command.DriverGPSPosition.Longitude;
+            }
+            db.EndTransaction(TransactionEndOperation.SAVE);
             // TODO Find driver that continues collecting the unfinished orders.
 
             CmdReturnAnnounceEmergency response = new CmdReturnAnnounceEmergency(command.Id, success);
