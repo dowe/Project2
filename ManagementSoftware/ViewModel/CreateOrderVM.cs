@@ -14,11 +14,13 @@ using System.Windows.Documents;
 using ManagementSoftware.Helper;
 using System.Globalization;
 using Common.Util;
+using System.Windows;
 
 namespace ManagementSoftware.ViewModel
 {
     public class CreateOrderVM : ViewModelBase
     {
+        private static readonly string ADDRESS_NOT_FOUND = "Kundennummer nicht gefunden.";
         private IClientConnection _Connection;
         private List<Analysis> _AvaibleAnalysis;
         private Dictionary<String, List<Analysis>> _PatientTests; //Key = Patientid
@@ -27,6 +29,7 @@ namespace ManagementSoftware.ViewModel
         private String _SelectedPatient;
 
         private MyListBox AvaibleAnalysisBox;
+        private string _CustomerAddressText;
 
         public CreateOrderVM(IClientConnection _Connection)
         {
@@ -34,6 +37,8 @@ namespace ManagementSoftware.ViewModel
             _AvaibleAnalysis = new List<Analysis>();
             _PatientTests = new Dictionary<String, List<Analysis>>();
             _CustomerUsername = "";
+            _CustomerAddress = null;
+            _CustomerAddressText = ADDRESS_NOT_FOUND;
 
             _PatientTests.Add("Daniel1", new List<Analysis>());
             _PatientTests.Add("Daniel2", new List<Analysis>());
@@ -137,26 +142,14 @@ namespace ManagementSoftware.ViewModel
                 return;
             }
 
-            
-
             if (_SelectedPatient == null
-                    || !_PatientTests.ContainsKey(_SelectedPatient) )
+                    || !_PatientTests.ContainsKey(_SelectedPatient))
             {
                 AvaibleAnalysisBox.UnselectAll();
                 return;
             }
 
-            List<object> list = new List<object>();
-            foreach (Analysis a in _PatientTests[_SelectedPatient])
-            {
-                list.Add(a);
-            }
-            
-            if (list.Count > 0)
-            {
-                AvaibleAnalysisBox.SelectedItem = list[0];
-            }
-            AvaibleAnalysisBox.Select(list);
+            AvaibleAnalysisBox.Select(_PatientTests[_SelectedPatient]);
         }
 
         public string CustomerUsername
@@ -168,7 +161,47 @@ namespace ManagementSoftware.ViewModel
             set
             {
                 _CustomerUsername = value;
+                new Thread(LoadCustomerAddress).Start();
                 RaisePropertyChanged();
+            }
+        }
+
+        public string CustomerAddressText
+        {
+            get
+            {
+                return _CustomerAddressText;
+            }
+
+            set
+            {
+                _CustomerAddressText = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private void LoadCustomerAddress()
+        {
+            Command request = new CmdGetCustomerAddress(CustomerUsername);
+            CmdReturnGetCustomerAddress response;
+            response = _Connection.SendWait<CmdReturnGetCustomerAddress>(request);
+            if (response != null)
+            {
+
+                _CustomerAddress = response.CustomerAddress;
+                if (_CustomerAddress != null)
+                {
+                    CustomerAddressText = _CustomerAddress.Street + "\n"
+                                          + _CustomerAddress.PostalCode + " " + _CustomerAddress.City;
+                }
+                else
+                {
+                    CustomerAddressText = ADDRESS_NOT_FOUND;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");
             }
         }
     }
