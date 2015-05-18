@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ASPServer.Models.ResultModel>
+
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Resultate</h2>
+
+<p>
+    Übersicht aller Bestellungen und Tests
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Bestell-Nr.
+        </th>
+        <th>
+            Patienten-ID
+        </th>
+        <th>
+            Test
+        </th>
+        <th>
+            Ergebniswert
+        </th>
+        <th>
+            Grenzwerte
+        </th>
+        <th></th>
+    </tr>
+    @{String critical;}
+    @foreach (var resultModel in Model)
+    {
+        if (resultModel.Critical)
+        {
+            critical = "danger";
+        }
+        else
+        {
+            critical = "success";
+        }
+        <tr class=@critical>
+            <td>
+                @Html.DisplayFor(resultMode => resultModel.OrderNo)
+            </td>
+            <td>
+                @Html.DisplayFor(resultMode => resultModel.Patient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => resultModel.Analysis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => resultModel.ResultValue) @Html.DisplayFor(modelItem => resultModel.UnitOfMeasure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => resultModel.MinCritValue) @Html.DisplayFor(modelItem => resultModel.UnitOfMeasure) - @Html.DisplayFor(modelItem => resultModel.MaxCritValue) @Html.DisplayFor(modelItem => resultModel.UnitOfMeasure)
+            </td>
+        </tr>
+    }
+</table>

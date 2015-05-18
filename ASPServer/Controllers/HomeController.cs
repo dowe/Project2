@@ -235,6 +235,47 @@ namespace ASPServer.Controllers
             return View();
         }
 
+        // GET: Result
+        public ActionResult Result()
+        {
+            if (!this.IsUserAuthenticated())
+            {
+                return RedirectToAction("Login");
+            }
+
+            // get all User orders
+            CmdReturnGetUsersOrderResults cmd = this._clientConnection.SendWait<CmdReturnGetUsersOrderResults>(new CmdGetUsersOrderResults(Session[UserID].ToString()));
+            IReadOnlyCollection<Order> rawResults = cmd.Orders;
+
+            // Copy the data into the ResultModel
+            List<ResultModel> results = new List<ResultModel>();
+            ResultModel resultModel;
+            foreach (Order order in rawResults)
+            {
+                foreach (Test test in order.Test)
+                {
+                    resultModel = new ResultModel();
+                    resultModel.OrderNo = order.OrderID;
+                    resultModel.Patient = test.PatientID;
+                    resultModel.Analysis = test.Analysis.Name;
+                    resultModel.Status = test.TestState;
+                    resultModel.ResultValue = test.ResultValue;
+                    resultModel.MinCritValue = test.Analysis.ExtremeMinValue;
+                    resultModel.MaxCritValue = test.Analysis.ExtremeMaxValue;
+                    resultModel.UnitOfMeasure = test.Analysis.UnitOfMeasure;
+                    resultModel.Critical = test.Critical;
+                    results.Add(resultModel);
+                }
+            }
+
+            // Add some example Data
+            results.Add(new ResultModel() { Patient = "3756", Analysis = "Blut", UnitOfMeasure = "mg" });
+            results.Add(new ResultModel() { Analysis = "Speichel", UnitOfMeasure = "mg" });
+            results.Add(new ResultModel() { Analysis = "Urin", Critical = true, UnitOfMeasure = "ml" });
+
+            return View(results);
+        }
+
         // GET: Login
         public ActionResult Login()
         {
