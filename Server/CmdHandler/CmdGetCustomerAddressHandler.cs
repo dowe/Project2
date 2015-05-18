@@ -11,27 +11,26 @@ using System.Threading.Tasks;
 
 namespace Server.CmdHandler
 {
-    public class CmdGetAllCustomersHandler : CommandHandler<CmdGetAllCustomers>
+    public class CmdGetCustomerAddressHandler : CommandHandler<CmdGetCustomerAddress>
     {
-        private ServerConnection connection;
+        private IServerConnection connection = null;
         private IDatabaseCommunicator db;
 
-        public CmdGetAllCustomersHandler(
-            ServerConnection connection, 
-            IDatabaseCommunicator db)
+        public CmdGetCustomerAddressHandler(IServerConnection connection, IDatabaseCommunicator db)
         {
             this.connection = connection;
             this.db = db;
         }
-        
 
-        protected override void Handle(CmdGetAllCustomers command, string connectionIdOrNull)
+        protected override void Handle(CmdGetCustomerAddress request, string connectionIdOrNull)
         {
-            IList<Customer> list;
-
+            Address address = null;
             db.StartTransaction();
-            list = db.GetAllCustomer(null);
-            ResponseCommand response = new CmdReturnGetAllCustomers(command.Id, list);
+            Customer c = db.GetCustomer(request.CustomerUsername);
+            if ( c != null ) {
+                address = c.Address;
+            }
+            ResponseCommand response = new CmdReturnGetCustomerAddress(request.Id, address);
             connection.Unicast(response, connectionIdOrNull);
             db.EndTransaction(TransactionEndOperation.READONLY);
         }

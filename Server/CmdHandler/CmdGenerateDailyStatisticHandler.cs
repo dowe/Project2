@@ -27,14 +27,15 @@ namespace Server.CmdHandler
             this.connection = connection;
             this.db = db;
             this.data = data;
+            ds = new DailyStatistic();
         }
 
         protected override void Handle(CmdGenerateDailyStatistic command, string connectionIdOrNull)
         {
+          
             db.StartTransaction();
             _OrderList = db.GetAllOrders(null);
             db.EndTransaction(TransactionEndOperation.READONLY);
-
             foreach (Order o in _OrderList)
             {
                 //Alles für Orders
@@ -60,6 +61,7 @@ namespace Server.CmdHandler
                 }
 
             }
+            ds.Date = DateTime.Now;
             data.DailyStatistic = ds;
 
 

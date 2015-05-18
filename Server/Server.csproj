@@ -94,8 +94,10 @@
     <Compile Include="CmdHandler\CmdAddOrderHandler.cs" />
     <Compile Include="BillCalculation\BillCalculator.cs" />
     <Compile Include="BillCalculation\IBillCalculator.cs" />
+    <Compile Include="CmdHandler\CmdGenerateBillsHandler.cs" />
     <Compile Include="CmdHandler\CmdGenerateDailyStatisticHandler.cs" />
     <Compile Include="CmdHandler\CmdGetAllOrdersHandler.cs" />
+    <Compile Include="CmdHandler\CmdGetCustomerAddressHandler.cs" />
     <Compile Include="CmdHandler\CmdGetDailyStatisticHandler.cs" />
     <Compile Include="CmdHandler\CmdGetShiftSchedulesHandler.cs" />
     <Compile Include="CmdHandler\CmdAnnounceEmergencyHandler.cs" />
@@ -117,8 +119,13 @@
     <Compile Include="DatabaseCommunication\IDatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\LaborContext.cs" />
     <Compile Include="DatabaseCommunication\TransactionEndOperation.cs" />
+    <Compile Include="DistanceCalculation\DistanceMatrixAddress.cs" />
     <Compile Include="DistanceCalculation\DistanceContainer.cs" />
     <Compile Include="DistanceCalculation\DistanceCalculation.cs" />
+    <Compile Include="DistanceCalculation\DistanceMatrixGPSPosition.cs" />
+    <Compile Include="DistanceCalculation\IDistanceMatrixPlace.cs" />
+    <Compile Include="DriverController\DriverController.cs" />
+    <Compile Include="DriverController\IDriverController.cs" />
     <Compile Include="ExtremeValueCheck\ExtremeValueChecker.cs" />
     <Compile Include="ExtremeValueCheck\IExtremeValueChecker.cs" />
     <Compile Include="Program.cs" />

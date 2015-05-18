@@ -15,7 +15,7 @@ namespace Server.DistanceCalculation.Tests
         
 
         [TestMethod()]
-        public void CalculateDistanceInKmTest()
+        public void CalculateDistanceInKm_WithTwoGPSPositions_ReturnsRealisticDistance()
         {
             var container = DistanceCalculation.CalculateDistanceInKm(new GPSPosition{Latitude = 48.48548f, Longitude = 7.94121f},
                 new GPSPosition{Latitude = 48.4580221f, Longitude = 7.9423354f});
@@ -24,7 +24,7 @@ namespace Server.DistanceCalculation.Tests
         }
 
         [TestMethod()]
-        public void CalculateDistanceInKmTest1()
+        public void CalculateDistanceInKmTest_WithGPSPositionAndAddress_ReturnsRealisticTime()
         {
             var container = DistanceCalculation.CalculateDistanceInKm(new GPSPosition{Latitude = 48.48548f, Longitude = 7.94121f},
                 new Address()
@@ -38,7 +38,7 @@ namespace Server.DistanceCalculation.Tests
         }
 
         [TestMethod()]
-        public void CalculateDistanceInKmTest2()
+        public void CalculateDistanceInKmTest_WithTwoAddresses_ReturnsRealisticTime()
         {
             var container = DistanceCalculation.CalculateDistanceInKm(
                 new Address()
@@ -56,5 +56,6 @@ namespace Server.DistanceCalculation.Tests
             Assert.IsTrue(container.Distance > 3.5f && container.Distance < 4.0f);
             Assert.IsTrue(container.Time > 0.13f && container.Time < 0.14f);
         }
+
     }
 }
