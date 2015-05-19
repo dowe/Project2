@@ -18,7 +18,7 @@ namespace Server.DriverController
             this.distanceCalculator = distanceCalculator;
         }
 
-        public async Task<DriverSendOption> CalculateDistance(Car car, IEnumerable<Order> hisOrders, IDistanceMatrixPlace destination)
+        public async Task<DriverSendOption> CalculateDistance(Car car, IEnumerable<Order> hisOrders, IDistanceMatrixPlace destination, IDistanceMatrixPlace home)
         {
             var waypoints = new List<IDistanceMatrixPlace>();
             foreach (Order o in hisOrders)

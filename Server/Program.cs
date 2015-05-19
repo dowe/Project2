@@ -7,6 +7,7 @@ using Common.Communication.Server;
 using Common.Commands;
 using Server.CmdHandler;
 using Server.DatabaseCommunication;
+using Server.DriverController;
 using Server.Timer;
 
 namespace Server
@@ -21,11 +22,12 @@ namespace Server
             ServerConnection connection = new ServerConnection("http://+:8080");
             IDatabaseCommunicator db = new DatabaseCommunicator();
             LocalServerData data = new LocalServerData();
+            IDriverController driverController = new DriverController.DriverController(data.ZmsAddress);
             connection.ServerStarted += (object sender, EventArgs e) => OnServerStarted(connection, db, data);
             connection.BeforeHandlingCommand += connection_BeforeHandlingCommand;
 
             Console.WriteLine("Registering Handlers...");
-            RegisterHandlers(connection, db, data);
+            RegisterHandlers(connection, db, data, driverController);
 
             Console.WriteLine("Starting server...");
             connection.RunForever();
@@ -39,7 +41,8 @@ namespace Server
         private static void RegisterHandlers(
             ServerConnection connection,
             IDatabaseCommunicator db,
-            LocalServerData data)
+            LocalServerData data,
+            IDriverController driverController)
         {
 
             // TODO: REGISTER SERVER HANDLER HERE
@@ -63,7 +66,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateDailyStatisticHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetDailyStatisticHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAnalysesHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdAddOrderHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdAddOrderHandler(connection, db, driverController));
             connection.RegisterCommandHandler(new CmdGetCustomerAddressHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOccupiedCarsHandler(connection, db));

@@ -8,7 +8,7 @@ using Server.DatabaseCommunication;
 
 namespace Server.DriverController
 {
-    interface IDriverController
+    public interface IDriverController
     {
         /// <summary>
         /// Returns the driver that can reach the destination under all constraints in the shortest time.
@@ -16,7 +16,7 @@ namespace Server.DriverController
         /// <param name="db"></param>
         /// <param name="position"></param>
         /// <returns></returns>
-        Driver DetermineDriverOrNull(IDatabaseCommunicator db, GPSPosition position);
+        Driver DetermineDriverOrNullInsideTransaction(IDatabaseCommunicator db, GPSPosition position);
 
         /// <summary>
         /// Returns the driver that can reach the destination under all constraints in the shortest time.
@@ -24,6 +24,6 @@ namespace Server.DriverController
         /// <param name="db"></param>
         /// <param name="position"></param>
         /// <returns></returns>
-        Driver DetermineDriverOrNull(IDatabaseCommunicator db, Address address);
+        Driver DetermineDriverOrNullInsideTransaction(IDatabaseCommunicator db, Address address);
     }
 }
