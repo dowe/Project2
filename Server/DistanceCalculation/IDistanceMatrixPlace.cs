@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManagementSoftware.ViewModel
+namespace Server.DistanceCalculation
 {
-    class TableTestsVM
+    public interface IDistanceMatrixPlace
     {
+        string FormatAsDistanceMatrixPlace();
     }
 }

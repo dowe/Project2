@@ -1,7 +1,7 @@
 ﻿using System;
 using Common.DataTransferObjects;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.Messages
 {
 	public class MsgSetOrderDetailsModel
 	{

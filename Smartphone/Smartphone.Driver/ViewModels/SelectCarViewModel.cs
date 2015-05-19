@@ -7,8 +7,11 @@ using Common.Communication.Client;
 using Common.DataTransferObjects;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Smartphone.Driver.Models;
+using Smartphone.Driver.Messages;
+using Smartphone.Driver.GPS;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class SelectCarViewModel : ViewModelBase
 	{
@@ -21,6 +24,7 @@ namespace Smartphone.Driver
 
 		private IClientConnection connection = null;
 		private Session session = null;
+		private GPSPositionSender gpsSender = null;
 
 		private WrappedCars availableCars = null;
 		private int selectedCarIndex = -1;
@@ -28,10 +32,11 @@ namespace Smartphone.Driver
 		private bool isCommunicating = false;
 		private RelayCommand selectCarCommand = null;
 
-		public SelectCarViewModel (IClientConnection connection, Session session, WrappedCars availableCars)
+		public SelectCarViewModel (IClientConnection connection, Session session, WrappedCars availableCars, GPSPositionSender gpsSender)
 		{
 			this.connection = connection;
 			this.session = session;
+			this.gpsSender = gpsSender;
 			AvailableCars = availableCars;
 		}
 
@@ -129,7 +134,7 @@ namespace Smartphone.Driver
 					Car car = availableCars.Collection [selectedCarIndex];
 					CmdSelectCar selectCar = new CmdSelectCar (session.Username, car.CarID, startKm);
 					CmdReturnSelectCar response = connection.SendWait<CmdReturnSelectCar>(selectCar);
-					if (response.Success)
+					if (response != null && response.Success)
 					{
 						OnCarSelectionSuccessful ();
 					}
@@ -151,8 +156,10 @@ namespace Smartphone.Driver
 		{
 			session.CarID = availableCars.Collection [selectedCarIndex].CarID;
 
-			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders (session.Username); // TODO get username from session.
+			CmdGetDriversUnfinishedOrders getUnfinishedOrders = new CmdGetDriversUnfinishedOrders (session.Username);
 			connection.Send (getUnfinishedOrders);
+
+			gpsSender.Start ();
 
 			Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
 		}

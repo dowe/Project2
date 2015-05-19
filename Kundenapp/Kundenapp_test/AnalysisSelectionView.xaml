@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Kundenapp.AnalysisSelectionView">
+	<ContentPage.Content>
+		<StackLayout>
+			<ListView ItemsSource="{Binding Patient.ListofAnalysis}">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<ViewCell.View>
+								<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
+									<Label Text="{Binding Analysis.Name}"/>
+									<Label Text="{Binding Analysis.PriceInEuro}"/>
+									<Switch IsToggled="{Binding Selected}"/>
+								</StackLayout>	
+							</ViewCell.View>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

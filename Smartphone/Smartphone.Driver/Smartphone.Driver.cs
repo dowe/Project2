@@ -1,5 +1,7 @@
 ﻿using Xamarin.Forms;
 using GalaSoft.MvvmLight.Messaging;
+using Smartphone.Driver.ViewModels;
+using Smartphone.Driver.Messages;
 
 namespace Smartphone.Driver
 {

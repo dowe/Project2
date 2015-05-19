@@ -6,8 +6,10 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.AspNet.SignalR.Client;
+using Smartphone.Driver.Models;
+using Smartphone.Driver.Messages;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class LoginViewModel : ViewModelBase
 	{
@@ -23,7 +25,6 @@ namespace Smartphone.Driver
 
 		private string username = null;
 		private string password = null;
-		private bool canConnect = false;
 		private bool communicating = false;
 		private RelayCommand loginCommand = null;
 
@@ -32,8 +33,8 @@ namespace Smartphone.Driver
 			this.connection = connection;
 			this.session = session;
 
-			username = "Ole";
-			password = "o";
+			username = "Driv1";
+			password = "Driv1";
 			communicating = false;
 		}
 
@@ -57,18 +58,6 @@ namespace Smartphone.Driver
 				{
 					password = value;
 					RaisePropertyChanged (PasswordProperty);
-				}
-			}
-		}
-
-		public bool CanConnect
-		{
-			get { return canConnect; }
-			set {
-				if (canConnect != value)
-				{
-					canConnect = value;
-					RaisePropertyChanged (CanConnectProperty);
 				}
 			}
 		}
@@ -103,9 +92,9 @@ namespace Smartphone.Driver
 			IsCommunicating = true;
 			if (!connection.ConnectionState.Equals(ConnectionState.Connected))
 			{
-				CanConnect = await Connect ();
+				await Connect ();
 			}
-			if (CanConnect)
+			if (connection.ConnectionState.Equals(ConnectionState.Connected))
 			{
 				var cmdLogin = new CmdLoginDriver(username, password);
 				var response = connection.SendWait<CmdReturnLoginDriver> (cmdLogin);

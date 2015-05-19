@@ -44,20 +44,28 @@ namespace Server
 
             // TODO: REGISTER SERVER HANDLER HERE
             // Register all command handler to the connection here.
-            connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection));
+            connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection, db));
             connection.RegisterCommandHandler(new CmdLoginCustomerHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetShiftSchedulesHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection));
-            connection.RegisterCommandHandler(new CmdSelectCarHandler(connection));
-            connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection));
-            connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection));
-            connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection));
-            connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection));
+            connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdSelectCarHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler(db));
+            connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection, db));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllCustomersHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGetAllOrdersHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGetUsersOrderResultsHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGenerateDailyStatisticHandler(connection, db, data));
+            connection.RegisterCommandHandler(new CmdGetDailyStatisticHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAnalysesHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdAddOrderHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGetCustomerAddressHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
         }
 
         private static void OnServerStarted(
@@ -67,6 +75,8 @@ namespace Server
         {
             data.GenerateShiftScheduleTimer = new GenerateShiftScheduleTimer(connection);
             connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
+            connection.InjectInternal(new CmdGenerateDailyStatistic());
+            connection.InjectInternal(new CmdGenerateBills());
         }
     }
 }

@@ -1,11 +1,14 @@
-﻿using System;
-using Microsoft.Practices.ServiceLocation;
+﻿using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight.Ioc;
 using Common.Communication.Client;
-using Common.DataTransferObjects;
-using System.Collections.Generic;
+using Smartphone.Driver.Models;
+using Smartphone.Driver.Handlers;
+using Smartphone.Driver.ViewModels;
+using Smartphone.Driver.GPS;
+using Smartphone.Driver.NativeServices;
+using Xamarin.Forms;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class ViewModelLocator
 	{
@@ -14,21 +17,31 @@ namespace Smartphone.Driver
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-			Session session = new Session ();
-			SimpleIoc.Default.Register<Session> (() => session);
-
-			WrappedOrders orders = new WrappedOrders ();
-			SimpleIoc.Default.Register<WrappedOrders> (() => orders);
-
-			WrappedCars cars = new WrappedCars ();
-			SimpleIoc.Default.Register<WrappedCars> (() => cars);
-
+			// Connection
 			IClientConnection clientConnection = new ClientConnection ("http://192.168.56.1:8080/commands");
-			clientConnection.RegisterCommandHandler (new CmdReturnGetAvailableCarsHandler (cars));
-			clientConnection.RegisterCommandHandler (new CmdReturnGetDriversUnfinishedOrdersHandler (orders));
 			clientConnection.Start ();
 			SimpleIoc.Default.Register<IClientConnection> (() => clientConnection);
 
+			// Model
+			Session session = new Session ();
+			SimpleIoc.Default.Register<Session> (() => session);
+			WrappedOrders orders = new WrappedOrders ();
+			SimpleIoc.Default.Register<WrappedOrders> (() => orders);
+			WrappedCars cars = new WrappedCars ();
+			SimpleIoc.Default.Register<WrappedCars> (() => cars);
+
+			// Native stuff
+			IGPSLocator gpsLocator = DependencyService.Get<IGPSLocator> ();
+			GPSPositionSender gpsPositionSender = new GPSPositionSender (clientConnection, session, gpsLocator);
+			SimpleIoc.Default.Register<GPSPositionSender> (() => gpsPositionSender);
+			INotificationController notificationController = DependencyService.Get<INotificationController> ();
+
+			// Connection
+			clientConnection.RegisterCommandHandler (new CmdReturnGetAvailableCarsHandler (cars));
+			clientConnection.RegisterCommandHandler (new CmdReturnGetDriversUnfinishedOrdersHandler (orders));
+			clientConnection.RegisterCommandHandler (new CmdRemindDriverOfOrderHandler (notificationController));
+			
+			// ViewModels
 			SimpleIoc.Default.Register<LoginViewModel> ();
 			SimpleIoc.Default.Register<SelectCarViewModel> ();
 			SimpleIoc.Default.Register<OrdersViewModel> ();

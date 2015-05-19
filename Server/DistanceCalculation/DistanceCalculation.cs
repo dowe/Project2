@@ -18,15 +18,15 @@ namespace Server.DistanceCalculation
     /// </summary>
     public static class DistanceCalculation
     {
-        /// <summary>
-        /// Calculates distance (km) and time (h) between the two given coodinates.
-        /// </summary>
-        /// <param name="positionA"></param>
-        /// <param name="positionB"></param>
-        /// <returns>distance in km between the two points and time in hours to travel. 0km, 0h if it failed</returns>
-        public static DistanceContainer CalculateDistanceInKm(GPSPosition positionA, GPSPosition positionB)
+        public static DistanceContainer CalculateDistanceInKm(IDistanceMatrixPlace origin, IDistanceMatrixPlace destination)
         {
-            string url = string.Format(@"http://maps.googleapis.com/maps/api/distancematrix/xml?origins={0},{1}&destinations={2},{3}&mode=driving&sensor=false&language=en-EN", Regex.Replace(positionA.Latitude.ToString(), ",", "."), Regex.Replace(positionA.Longitude.ToString(), ",", "."), Regex.Replace(positionB.Latitude.ToString(), ",", "."), Regex.Replace(positionB.Longitude.ToString(), ",", "."));
+            StringBuilder urlBuilder = new StringBuilder();
+            urlBuilder.Append(@"http://maps.googleapis.com/maps/api/distancematrix/xml?origins=");
+            urlBuilder.Append(origin.FormatAsDistanceMatrixPlace());
+            urlBuilder.Append(@"&destinations=");
+            urlBuilder.Append(destination.FormatAsDistanceMatrixPlace());
+            urlBuilder.Append(@"&mode=driving&sensor=false&language=en-EN");
+            string url = urlBuilder.ToString();
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -50,6 +50,20 @@ namespace Server.DistanceCalculation
             }
 
             return new DistanceContainer();
+        }
+
+        /// <summary>
+        /// Calculates distance (km) and time (h) between the two given coodinates.
+        /// </summary>
+        /// <param name="positionA"></param>
+        /// <param name="positionB"></param>
+        /// <returns>distance in km between the two points and time in hours to travel. 0km, 0h if it failed</returns>
+        public static DistanceContainer CalculateDistanceInKm(GPSPosition positionA, GPSPosition positionB)
+        {
+            IDistanceMatrixPlace origin = new DistanceMatrixGPSPosition(positionA);
+            IDistanceMatrixPlace destination = new DistanceMatrixGPSPosition(positionB);
+
+            return CalculateDistanceInKm(origin, destination);
         }
 
         /// <summary>
@@ -60,30 +74,10 @@ namespace Server.DistanceCalculation
         /// <returns>distance in km between the two points and time in hours to travel. 0km, 0h if it failed</returns>
         public static DistanceContainer CalculateDistanceInKm(GPSPosition position, Address address)
         {
-            string url = string.Format(@"http://maps.googleapis.com/maps/api/distancematrix/xml?origins={0},{1}&destinations={2}+{3}+{4}&mode=driving&sensor=false&language=en-EN", Regex.Replace(position.Latitude.ToString(), ",", "."), Regex.Replace(position.Longitude.ToString(), ",", "."), address.Street, address.PostalCode, address.City);
+            IDistanceMatrixPlace origin = new DistanceMatrixGPSPosition(position);
+            IDistanceMatrixPlace destination = new DistanceMatrixAddress(address);
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            using (var streamReader = new StreamReader(response.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-
-                if (!string.IsNullOrEmpty(result))
-                {
-                    var xmlResponse = XDocument.Parse(result);
-
-                    if (xmlResponse.Descendants("status").FirstOrDefault().Value == "OK")
-                    {
-                        var container = new DistanceContainer();
-                        container.Distance = (float)xmlResponse.Descendants("distance").Descendants("value").FirstOrDefault() / 1000;
-                        container.Time = (float)xmlResponse.Descendants("duration").Descendants("value").FirstOrDefault() / 3600;
-                        return container;
-                    }
-
-                }
-            }
-
-            return new DistanceContainer();
+            return CalculateDistanceInKm(origin, destination);
         }
 
         /// <summary>
@@ -94,30 +88,10 @@ namespace Server.DistanceCalculation
         /// <returns>distance in km between the two points and time in hours to travel. 0km, 0h if it failed</returns>
         public static DistanceContainer CalculateDistanceInKm(Address address1, Address address2)
         {
-            string url = string.Format(@"http://maps.googleapis.com/maps/api/distancematrix/xml?origins={0}+{1}+{2}&destinations={3}+{4}+{5}&mode=driving&sensor=false&language=en-EN", address1.Street, address1.PostalCode, address1.City, address2.Street, address2.PostalCode, address2.City);
+            IDistanceMatrixPlace origin = new DistanceMatrixAddress(address1);
+            IDistanceMatrixPlace destination = new DistanceMatrixAddress(address2);
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            using (var streamReader = new StreamReader(response.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-
-                if (!string.IsNullOrEmpty(result))
-                {
-                    var xmlResponse = XDocument.Parse(result);
-
-                    if (xmlResponse.Descendants("status").FirstOrDefault().Value == "OK")
-                    {
-                        var container = new DistanceContainer();
-                        container.Distance = (float)xmlResponse.Descendants("distance").Descendants("value").FirstOrDefault() / 1000;
-                        container.Time = (float)xmlResponse.Descendants("duration").Descendants("value").FirstOrDefault() / 3600;
-                        return container;
-                    }
-
-                }
-            }
-
-            return new DistanceContainer();
+            return CalculateDistanceInKm(origin, destination);
         }
     }
 }

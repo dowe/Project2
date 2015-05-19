@@ -1,11 +1,15 @@
-﻿using Common.Communication.Client;
+﻿using Common.Commands;
+using Common.Communication;
+using Common.Communication.Client;
 using Common.DataTransferObjects;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ManagementSoftware.ViewModel
 {
@@ -19,7 +23,44 @@ namespace ManagementSoftware.ViewModel
             this._ClientConnection = _ClientConnection;
             _DailyStatistic = new DailyStatistic();
 
+
+            this.LoadCommand = new RelayCommand(LoadData);
+            LoadData();
         }
+
+         private void LoadData()
+         {
+             Command request = new CmdGetDailyStatistic();
+             CmdReturnGetDailyStatistic response = _ClientConnection.SendWait<CmdReturnGetDailyStatistic>(request);
+             if (response == null)
+             {
+                 MessageBox.Show("Fehler beim aktualisieren der Tagesstatistik. \n - Überprüfen Sie ihre Internetverbindung\n - Wenden Sie sich an den Kundendienst");
+             }
+             else
+             {
+                 _DailyStatistic = response.DailyStatistic;
+                 
+                
+             }
+         }
+
+         public RelayCommand LoadCommand { get; set; }
+
+
+        public String TimeSpan
+         {
+             get
+             {
+                 return _DailyStatistic.Date.AddDays(-1).ToString("dd-MM-yyyy") + " bis " + _DailyStatistic.Date.ToString("dd-MM-yyyy") ;
+             }
+             set
+             {
+                 TimeSpan = _DailyStatistic.Date.AddDays(1).ToString("dd-MM-yyyy") + " bis " + _DailyStatistic.Date.ToString("dd-MM-yyyy");
+                 RaisePropertyChanged();
+
+             }
+            
+         }
 
         public int NewOrders 
         {
@@ -34,16 +75,15 @@ namespace ManagementSoftware.ViewModel
             }
         }
 
-        //TODO: Fehlendes Attribut CompletedOrders?
-        public int OrdersCompleted
+        public int CompletedOrders
         {
             get
             {
-                return _DailyStatistic.NumberOfCompletedTests;
+                return _DailyStatistic.NumberOfCompletedOrders;
             }
             set
             {
-                _DailyStatistic.NumberOfCompletedTests = value;
+                _DailyStatistic.NumberOfCompletedOrders = value;
                 RaisePropertyChanged();
             }
         }

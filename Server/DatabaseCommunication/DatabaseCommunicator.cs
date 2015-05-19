@@ -81,6 +81,7 @@ namespace Server.DatabaseCommunication
                     throw raise;
                 }
             }
+            Context.Dispose();
             Context = null;
         }
 
@@ -170,13 +171,18 @@ namespace Server.DatabaseCommunication
 
         public Driver GetDriver(string userName)
         {
-            return Context.Driver.Find(userName);
+            return Context.Driver.Where(d => d.UserName.Equals(userName)).FirstOrDefault();
         }
 
         public Car GetCar(string CarID)
         {
             return Context.Car.Find(CarID);
         }
+
+	    public GPSPosition GetGPSPosition(string positionID)
+	    {
+	        return Context.GpsPosition.Find(positionID);
+	    }
 
         public Car GetCarbyDriver(string driverUserName)
         {
@@ -197,6 +203,15 @@ namespace Server.DatabaseCommunication
         public void CreateShiftSchedule(ShiftSchedule shift)
         {
             Context.ShiftSchedule.Add(shift);
+        }
+
+
+        public void AttachAnalysises(List<Analysis> analysises)
+        {
+            foreach (Analysis an in analysises)
+            {
+                Context.Analysis.Attach(an);    
+            }
         }
     }
 }

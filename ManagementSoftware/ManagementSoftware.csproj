@@ -82,16 +82,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper\AnalysisNameConverter.cs" />
     <Compile Include="Helper\BindingProxy.cs" />
     <Compile Include="Helper\ClientConnectionCreator.cs" />
     <Compile Include="Helper\ColumnVisibilityConverter.cs" />
     <Compile Include="Helper\EmployeeTypeConverter.cs" />
     <Compile Include="Helper\GridColorConverter.cs" />
+    <Compile Include="Helper\MyListBox.cs" />
     <Compile Include="Model\ISwitchShiftScheduleView.cs" />
     <Compile Include="Model\ShiftScheduleDayEntry.cs" />
     <Compile Include="Model\ShiftScheduleModel.cs" />
     <Compile Include="Model\ShiftScheduleMonthEntry.cs" />
     <Compile Include="Model\ShiftScheduleRawModel.cs" />
+    <Compile Include="Model\TestEntryModel.cs" />
+    <Compile Include="Model\CreateOrderM.cs" />
     <Compile Include="ViewModel\CreateOrderVM.cs" />
     <Compile Include="ViewModel\CustomerListVM.cs" />
     <Compile Include="ViewModel\DailyStatisticVM.cs" />
@@ -100,8 +104,6 @@
     <Compile Include="ViewModel\ShiftScheduleDayVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleMonthVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleVM.cs" />
-    <Compile Include="ViewModel\TableTestsVM.cs" />
-    <Compile Include="ViewModel\TestDetailVM.cs" />
     <Compile Include="ViewModel\TestsVM.cs" />
     <Compile Include="View\CreateOrderView.xaml.cs">
       <DependentUpon>CreateOrderView.xaml</DependentUpon>
@@ -128,14 +130,8 @@
     <Compile Include="View\ShiftScheduleView.xaml.cs">
       <DependentUpon>ShiftScheduleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TestDetailView.xaml.cs">
-      <DependentUpon>TestDetailView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\TestsView.xaml.cs">
       <DependentUpon>TestsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestTableView.xaml.cs">
-      <DependentUpon>TestTableView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -181,15 +177,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TestDetailView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\TestsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TestTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

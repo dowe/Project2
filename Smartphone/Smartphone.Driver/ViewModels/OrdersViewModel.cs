@@ -6,8 +6,11 @@ using GalaSoft.MvvmLight.Command;
 using Common.Commands;
 using Common.Communication.Client;
 using GalaSoft.MvvmLight.Messaging;
+using Smartphone.Driver.Models;
+using Smartphone.Driver.Messages;
+using Smartphone.Driver.GPS;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class OrdersViewModel : ViewModelBase
 	{
@@ -17,16 +20,19 @@ namespace Smartphone.Driver
 
 		private IClientConnection connection = null;
 		private Session session = null;
+		private GPSPositionSender gpsSender = null;
 
 		private WrappedOrders wrappedOrders = null;
 		private Order selectedOrder = null;
 		private RelayCommand logoutCommand = null;
 		private RelayCommand emergencyCommand = null;
 
-		public OrdersViewModel(IClientConnection connection, Session session, WrappedOrders wrappedOrders)
+		public OrdersViewModel(IClientConnection connection, Session session, WrappedOrders wrappedOrders, GPSPositionSender gpsSender)
 		{
 			this.connection = connection;
+			this.session = session;
 			this.wrappedOrders = wrappedOrders;
+			this.gpsSender = gpsSender;
 		}
 
 		public WrappedOrders WrappedOrders
@@ -91,22 +97,26 @@ namespace Smartphone.Driver
 		public void OnConfirmedEmergency()
 		{
 			// TODO Get GPS position.
-			CmdAnnounceEmergency announceEmergency = new CmdAnnounceEmergency (session.Username, new GPSPosition (0, 0));
+			CmdAnnounceEmergency announceEmergency = new CmdAnnounceEmergency (session.Username, session.CarID, new GPSPosition {Latitude = 0, Longitude = 0});
 			CmdReturnAnnounceEmergency response = connection.SendWait<CmdReturnAnnounceEmergency> (announceEmergency);
-			if (response != null)
+			if (response != null && response.Success)
 			{
-				if (response.Success)
-				{
-					session.Reset ();
-
-					Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage());		
-				}
+				OnEmergencySuccessful ();
 			}
 		}
 
 		public void OnCanceledEmergency()
 		{
 			// Nothing.
+		}
+
+		private void OnEmergencySuccessful()
+		{
+			gpsSender.Stop ();
+
+			session.Reset ();
+
+			Messenger.Default.Send<MsgSwitchLoginPage> (new MsgSwitchLoginPage ());	
 		}
 
 	}

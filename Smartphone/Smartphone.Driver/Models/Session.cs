@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.Models
 {
 	public class Session
 	{

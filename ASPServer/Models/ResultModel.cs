@@ -10,55 +10,59 @@ using Common.DataTransferObjects;
 namespace ASPServer.Models
 {
     public class ResultModel
-	{
-		public virtual long OrderNo
-		{
-			get;
-			set;
-		}
+    {
+        public virtual long OrderNo
+        {
+            get;
+            set;
+        }
 
-		public virtual string Patient
-		{
-			get;
-			set;
-		}
+        public virtual string Patient
+        {
+            get;
+            set;
+        }
 
-		public virtual TestState Status
-		{
-			get;
-			set;
-		}
+        public virtual TestState Status
+        {
+            get;
+            set;
+        }
 
-		public virtual string Analysis
-		{
-			get;
-			set;
-		}
+        public virtual string Analysis
+        {
+            get;
+            set;
+        }
 
-		public virtual float ResultValue
-		{
-			get;
-			set;
-		}
+        public virtual float ResultValue
+        {
+            get;
+            set;
+        }
 
-		public virtual float MinCritValue
-		{
-			get;
-			set;
-		}
+        public virtual float MinCritValue
+        {
+            get;
+            set;
+        }
 
-		public virtual float MaxCritValue
-		{
-			get;
-			set;
-		}
+        public virtual float MaxCritValue
+        {
+            get;
+            set;
+        }
 
-		public virtual bool Critical
-		{
-			get;
-			set;
-		}
+        public virtual string UnitOfMeasure
+        {
+            get;
+            set;
+        }
 
-	}
+        public virtual bool Critical
+        {
+            get;
+            set;
+        }
+    }
 }
-

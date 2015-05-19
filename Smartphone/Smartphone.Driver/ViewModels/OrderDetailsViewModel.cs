@@ -5,8 +5,10 @@ using Common.DataTransferObjects;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Command;
 using Common.Commands;
+using Smartphone.Driver.Messages;
+using Smartphone.Driver.Models;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.ViewModels
 {
 	public class OrderDetailsViewModel : ViewModelBase
 	{
@@ -131,7 +133,7 @@ namespace Smartphone.Driver
 		{
 			CmdSetOrderCollected setOrderCollected = new CmdSetOrderCollected (session.Username, order.OrderID);
 			CmdReturnSetOrderCollected response = connection.SendWait<CmdReturnSetOrderCollected>(setOrderCollected);
-			if (response.Success)
+			if (response != null && response.Success)
 			{
 				// Switch back to order list.
 				Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());

@@ -4,15 +4,53 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             DataContext="{Binding Tests, Source={StaticResource Locator}}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             DataContext="{Binding Tests, Mode=OneWay, Source={StaticResource Locator}}"
+             d:DesignHeight="611" d:DesignWidth="649">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="350" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <Button Grid.Row="0" Content="Aktualisiere" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Width="75" Command="{Binding LoadCommand, Mode=OneWay}"/>
 
-        <ContentControl Grid.Row="0" Content="{Binding TestTableView}" />
+        <DataGrid Grid.Row="1" Name="SamplesDataGrid" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"
+                      HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Test ID" Binding="{Binding Tests.DataList/TestID, Source={StaticResource Locator}}"/>
+                <DataGridTextColumn Header="Patienten ID" Binding="{Binding Tests.DataList/PatientID, Source={StaticResource Locator}}"/>
+                <DataGridTextColumn Header="Bestellung" Binding="{Binding Tests.DataList/OrderID, Source={StaticResource Locator}}"/>
+                <DataGridTextColumn Header="Probe" Binding="{Binding Tests.DataList/SampleTypeAndAnalysis, Source={StaticResource Locator}}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Tests.DataList/AlarmState, Source={StaticResource Locator}}"/>
+                <DataGridCheckBoxColumn Header="Eingetroffen" Binding="{Binding Tests.DataList/SampleCollected, Source={StaticResource Locator}}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Alarmstatus" Binding="{Binding Tests.DataList/AlarmState, Source={StaticResource Locator}}"/>
+                <DataGridTextColumn Header="Bringdatum" Binding="{Binding Tests.DataList/BringDate, Source={StaticResource Locator}}"/>
+                <DataGridTextColumn Header="Kundenbezeichnung" Binding="{Binding Tests.DataList/CustomerLabel, Source={StaticResource Locator}}"/>
+            </DataGrid.Columns>
+            
+        </DataGrid>
+        <GroupBox Name="DetailsGroupBox" Header="Probendetails" Grid.Row="2" IsEnabled="False">
+            <Grid>
+                <Label Content="Test ID:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label Name="TestID"  HorizontalAlignment="Left" Margin="54,0,0,0" VerticalAlignment="Top" Width="37"/>
+                <Label Content="Bringdatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="125,0,0,0"/>
+                <Label Name="Bringdatum"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="205,0,0,0"/>
+                <Label Content="Bestelldatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="276,0,0,0"/>
+                <Label Name="Bestelldatum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="362,0,0,0"/>
+                <Label Content="Kundenadresse:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,31,0,0"/>
+                <Label Name="Kundenadresse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="99,31,0,0"/>
+                <Label Content="Telefon:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="304,31,0,0"/>
+                <Label Name="Telefon" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="361,31,0,0"/>
+                <Separator Margin="0,62,0,123"/>
+                <Label Content="Resultat:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,87,0,0"/>
+                <TextBox Name="ResultValue" HorizontalAlignment="Left" Height="23" Margin="54,91,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+                <Label Name="Einheit" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,87,0,0"/>
+                <Label Content="Grenzwerte:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="251,87,0,0"/>
+                <Label Name="Grenzwert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="329,87,0,0"/>
+                <Label Name="EinheitGrenzwert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="379,87,0,0"/>
+                <Button Name="Btn_Fertig" Content="Test fertig" HorizontalAlignment="Left" Margin="99,124,0,0" VerticalAlignment="Top" Width="75" />
+            </Grid>
 
+        </GroupBox>
     </Grid>
 </UserControl>

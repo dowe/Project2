@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using Common.DataTransferObjects;
 
-namespace Smartphone.Driver
+namespace Smartphone.Driver.Messages
 {
 	public class MsgUpdateCarIDsPicker
 	{

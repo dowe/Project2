@@ -3,27 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:helper="clr-namespace:ManagementSoftware.Helper"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="600" d:DesignWidth="800"
              DataContext="{Binding CreateOrder, Mode=OneWay, Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <helper:AnalysisNameConverter x:Key="AnalysisNameConverter"/>
+    </UserControl.Resources>
     <Grid Margin="11">
         <Grid.RowDefinitions>
-            <RowDefinition Height="28"/>
-            <RowDefinition Height="123*"/>
+            <RowDefinition Height="58"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Content="Kunden ID:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="73,4,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Kundennummer nicht gefunden." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,0,0,0"/>
-        <Label Content="Patienten ID:" HorizontalAlignment="Left" Margin="0,8,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <ListBox Name="PatientListBox" HorizontalAlignment="Left" Height="139" Margin="0,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" SelectionMode="Single"/>
-        <Label Content="Alle Untersuchungen:" HorizontalAlignment="Left" Margin="155,8,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="Ausgewählte Untersuchungen:" HorizontalAlignment="Left" Margin="280,8,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <ListBox Name="AllSamplesListBox" HorizontalAlignment="Left" Height="139" Margin="155,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" SelectionMode="Multiple"/>
-        <ListBox ItemsSource="{Binding ElementName=AllSamplesListBox, Path=SelectedItems}"  HorizontalAlignment="Left" Height="139" Margin="280,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
-        <TextBox Name="NewPatientTextBox" HorizontalAlignment="Left" Height="23" Margin="0,223,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Hinzufügen" HorizontalAlignment="Left" Margin="125,222,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" />
-        <Button Content="Entfernen" HorizontalAlignment="Left" Margin="25,183,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" />
-        <Button Content="Bestellen" HorizontalAlignment="Left" Margin="260,222,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" />
-        <Button Content="Abbruch" HorizontalAlignment="Left" Margin="348,222,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Kunden ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" Margin="2,0,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="73,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Text="{Binding CustomerUsername}"/>
+        <Label Content="{Binding CustomerAddressText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="248,0,0,0" Height="48" Width="181"/>
+        <Label Content="Patienten ID:" HorizontalAlignment="Left" Margin="0,8,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="77"/>
+        <ListBox Name="PatientListBox" HorizontalAlignment="Left" Height="201" Margin="0,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="180" SelectionMode="Single" ItemsSource="{Binding PatientIDs}" SelectedItem="{Binding SelectedPatient}"/>
+        <Label Content="Alle Untersuchungen:" HorizontalAlignment="Left" Margin="248,8,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="123"/>
+        <Label Content="Ausgewählte Untersuchungen:" HorizontalAlignment="Left" Margin="501,13,0,0" VerticalAlignment="Top" Height="26" Width="180" Grid.Row="1"/>
+        <helper:MyListBox x:Name="AllSamplesListBox" HorizontalAlignment="Left" Height="201" Margin="247,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="150" SelectionMode="Multiple" ItemsSource="{Binding AvaibleAnalysis, Mode=OneWay}" DisplayMemberPath="Name" RenderTransformOrigin="0.5,0.5" SelectionChanged="AllSamplesListBox_SelectionChanged"/>
+
+        <helper:MyListBox ItemsSource="{Binding SelectedAnalysis}"  HorizontalAlignment="Left" Height="170" Margin="501,70,0,0" Grid.Row="1" VerticalAlignment="Top" Width="180" DisplayMemberPath="Name"/>
+        <TextBox Name="NewPatientTextBox" HorizontalAlignment="Left" Height="23" Margin="0,240,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Text="{Binding NewPatientID}"/>
+        <Button Content="Hinzufügen" HorizontalAlignment="Left" Margin="2,278,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80" Height="20" Command="{Binding AddPatientAction}" />
+        <Button Content="Entfernen" HorizontalAlignment="Left" Margin="100,278,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80" Height="20" Command="{Binding RemovePatientAction}" />
+        <Button Content="Bestellen" HorizontalAlignment="Left" Margin="621,278,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="20" Command="{Binding CreateOrderAction}" />
+        <Button Content="Abbruch" HorizontalAlignment="Left" Margin="501,278,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Height="20" Command="{Binding CancelOrderAction}"/>
+        <Image HorizontalAlignment="Left" Height="25" Margin="197,132,0,0" VerticalAlignment="Top" Width="30" Source="/ManagementSoftware;component/Resources/arrow.png" Grid.Row="1" Opacity="0.6"  />
+        <Image HorizontalAlignment="Left" Height="25" Margin="435,132,0,0" VerticalAlignment="Top" Width="30" Source="/ManagementSoftware;component/Resources/arrow.png" Grid.Row="1" Opacity="0.6"  />
+        <Label Content="{Binding PatientIDText, Mode=OneWay}" HorizontalAlignment="Left" Margin="501,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="180"/>
     </Grid>
 </UserControl>
