@@ -27,6 +27,7 @@ namespace Server.DriverController
                 waypoints.Add(new DistanceMatrixAddress(o.Customer.Address));
             }
             waypoints.Add(destination);
+            waypoints.Add(home);
 
             DistanceContainer totalLeftDistance =
                 await distanceCalculator.CalculateRouteDistance(waypoints);
