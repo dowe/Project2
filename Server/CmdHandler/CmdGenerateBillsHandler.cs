@@ -94,9 +94,14 @@ namespace Server.CmdHandler
                      gfx.DrawString("Für den Zeitraum vom " + now.AddDays(-8).ToString("dd-MM-yyyy") + "bis" + now.AddDays(-1).ToString("dd-MM-yyyy"), fontSmall, XBrushes.Black, headline2);
                      y += fontHeightSmall;
 
+                     //Start Orders
                      XRect orders = new XRect(marginLeft, y, page.Width, fontHeightSmall * 2 + 10);
                      gfx.DrawString(OrderAmount.ToString() + " Fahrt(en)", fontSmall, XBrushes.Black, orders);
                      gfx.DrawString(b.Customer.TwoWayRoadCostInEuro.ToString(),fontSmall, XBrushes.Black, orders, XStringFormats.Center);
+
+
+                     //TODO: Start Tests
+
 
 
                      doc.Save(b.PDFPath);
