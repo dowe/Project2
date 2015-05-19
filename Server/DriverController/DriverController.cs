@@ -58,7 +58,7 @@ namespace Server.DriverController
             return DetermineDriverOrNullInsideTransaction(allOccupiedCars, allUnfinishedOrders, destination);
         }
 
-        private Driver DetermineDriverOrNullInsideTransaction(IEnumerable<Car> allOccupiedCars, IEnumerable<Order> allUnfinishedOrders,
+        public Driver DetermineDriverOrNullInsideTransaction(IEnumerable<Car> allOccupiedCars, IEnumerable<Order> allUnfinishedOrders,
             IDistanceMatrixPlace destination)
         {
             var calcDistanceTasks = new List<Task<DriverSendOption>>();
