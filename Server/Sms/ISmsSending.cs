@@ -1,6 +1,6 @@
 ﻿namespace Server.Sms
 {
-    interface ISmsSending
+    public interface ISmsSending
     {
         void Send(string number, string message);
     }
