@@ -12,12 +12,15 @@
             <RowDefinition Height="350" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Content="Aktualisiere" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Width="75" Command="{Binding LoadCommand, Mode=OneWay}"/>
-
+        <Button Grid.Row="0" Content="Aktualisiere" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Width="75" Command="{Binding LoadCommand, Mode=OneWay}" />
+        <DataGrid Grid.Row="1" VerticalAlignment="Top" Height="400" ItemsSource="{Binding DataList}" CanUserReorderColumns="False" IsReadOnly="True" />
+        <!--
         <DataGrid Grid.Row="1" Name="SamplesDataGrid" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"
-                      HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
+                      HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" ItemsSource="{Binding DataList}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Test ID" Binding="{Binding Tests.DataList/TestID, Source={StaticResource Locator}}"/>
+                <DataGridTextColumn Header="#" Binding="{Binding Count}"/>
+                <DataGridTextColumn Header="Test ID" Binding="{Binding TestID, Source={StaticResource Locator}}" />
+             
                 <DataGridTextColumn Header="Patienten ID" Binding="{Binding Tests.DataList/PatientID, Source={StaticResource Locator}}"/>
                 <DataGridTextColumn Header="Bestellung" Binding="{Binding Tests.DataList/OrderID, Source={StaticResource Locator}}"/>
                 <DataGridTextColumn Header="Probe" Binding="{Binding Tests.DataList/SampleTypeAndAnalysis, Source={StaticResource Locator}}"/>
@@ -27,8 +30,9 @@
                 <DataGridTextColumn Header="Bringdatum" Binding="{Binding Tests.DataList/BringDate, Source={StaticResource Locator}}"/>
                 <DataGridTextColumn Header="Kundenbezeichnung" Binding="{Binding Tests.DataList/CustomerLabel, Source={StaticResource Locator}}"/>
             </DataGrid.Columns>
-            
+           
         </DataGrid>
+         -->
         <GroupBox Name="DetailsGroupBox" Header="Probendetails" Grid.Row="2" IsEnabled="False">
             <Grid>
                 <Label Content="Test ID:" HorizontalAlignment="Left" VerticalAlignment="Top"/>

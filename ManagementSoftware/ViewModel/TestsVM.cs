@@ -11,6 +11,7 @@ using Common.Communication;
 using Common.Commands;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
+using System.Collections.ObjectModel;
 
 namespace ManagementSoftware.ViewModel
 {
@@ -36,10 +37,11 @@ namespace ManagementSoftware.ViewModel
              {
                  _DataList = value;
                  RaisePropertyChanged();
+                
              }
          }
          public RelayCommand LoadCommand { get; set; }
-
+        
          private void LoadData()
          {
              IList<TestEntryModel> _TestList = new List<TestEntryModel>();
@@ -94,7 +96,6 @@ namespace ManagementSoftware.ViewModel
                         _TestList.Add(temp);
                      }
                  }
-
                  DataList = _TestList;
                  Console.WriteLine(DataList[0].TestID.ToString());
                  Console.WriteLine(DataList[0].OrderID.ToString());
