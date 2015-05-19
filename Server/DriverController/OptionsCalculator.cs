@@ -18,7 +18,7 @@ namespace Server.DriverController
             this.distanceCalculator = distanceCalculator;
         }
 
-        public async Task<DriverSendOption> CalculateDistance(Driver driver, IEnumerable<Order> hisOrders, IDistanceMatrixPlace destination)
+        public async Task<DriverSendOption> CalculateDistance(Car car, IEnumerable<Order> hisOrders, IDistanceMatrixPlace destination)
         {
             var waypoints = new List<IDistanceMatrixPlace>();
             foreach (Order o in hisOrders)
@@ -30,7 +30,7 @@ namespace Server.DriverController
 
             DistanceContainer totalLeftDistance =
                 await distanceCalculator.CalculateRouteDistance(waypoints);
-            DriverSendOption option = new DriverSendOption(driver, totalLeftDistance);
+            DriverSendOption option = new DriverSendOption(car, totalLeftDistance);
 
             return option;
         }

@@ -11,19 +11,19 @@ namespace Server.DriverController
     interface IDriverController
     {
         /// <summary>
-        /// Returns the closest driver that can reach the destination until the end of his shift.
+        /// Returns the driver that can reach the destination under all constraints in the shortest time.
         /// </summary>
-        /// <param name="allDrivers"></param>
-        /// <param name="destination"></param>
+        /// <param name="db"></param>
+        /// <param name="position"></param>
         /// <returns></returns>
-        Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders, Address destination);
+        Driver DetermineDriverOrNull(IDatabaseCommunicator db, GPSPosition position);
 
         /// <summary>
-        /// Returns the closest driver that can reach the destination until the end of his shift.
+        /// Returns the driver that can reach the destination under all constraints in the shortest time.
         /// </summary>
-        /// <param name="allDrivers"></param>
-        /// <param name="destination"></param>
+        /// <param name="db"></param>
+        /// <param name="position"></param>
         /// <returns></returns>
-        Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders, GPSPosition destination);
+        Driver DetermineDriverOrNull(IDatabaseCommunicator db, Address address);
     }
 }
