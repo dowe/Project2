@@ -137,6 +137,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LocalServerData.cs" />
+    <Compile Include="Sms\ISmsSending.cs" />
+    <Compile Include="Sms\SmsSending.cs" />
     <Compile Include="Timer\GenerateShiftScheduleTimer.cs" />
     <Compile Include="Timer\ScheduledTimer.cs" />
   </ItemGroup>

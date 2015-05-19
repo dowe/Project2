@@ -48,7 +48,7 @@ namespace DatabaseInitialize
                 OrderDate = DateTime.Now,
                 Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault()
             });
-            con.Car.Find("OG-LA-001").CurrentDriver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault();
+            
             con.Order.AddRange(orders);
             con.SaveChanges();
         }
@@ -108,6 +108,12 @@ namespace DatabaseInitialize
             AddCar(con, "OG-LA-005");
             AddCar(con, "OG-LA-006");
 
+            con.Car.Find("OG-LA-001").CurrentDriver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault();
+            con.Car.Find("OG-LA-002").CurrentDriver = con.Driver.Where(d => d.UserName == "Driv2").FirstOrDefault();
+            var gps = con.GpsPosition.Find("OG-LA-002");
+            gps.Latitude =48.4615593f;
+            gps.Longitude =7.9511829f;
+
             try
             {
                 con.SaveChanges();
@@ -133,7 +139,7 @@ namespace DatabaseInitialize
 
         private static void AddCar(LaborContext context, string carID)
         {
-            GPSPosition position = new GPSPosition{CarID = carID, Latitude = 0, Longitude = 0};
+            GPSPosition position = new GPSPosition { CarID = carID, Latitude = 48.4580221f, Longitude = 7.9423354f };
             context.GpsPosition.Add(position);
             Car car = new Car() { CarID = carID, CarLogbook = new CarLogbook() { CarId = carID}, Roadworthy = true, LastPosition = position };
             context.Car.Add(car);
@@ -143,7 +149,7 @@ namespace DatabaseInitialize
         {
             LaborContext con = new LaborContext();
             List<Customer> customers = new List<Customer>();
-            customers.Add(new Customer() { UserName = "house", Password = "asdf", Address = new Address() { Street = "Am Arsch der Welt", PostalCode = "12345", City = "Springfield" } });
+            customers.Add(new Customer("Dr.", "House", "house", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Dr. House imba Werkstatt"));
             customers.Add(new Customer("Alice", "Vette", "vette", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Vetter Alice Fachärztin für Allgemeinmedizin", new BankAccount("1asdf243ew", "Alice Vette")));
             customers.Add(new Customer("Wolfgang", "Bätz", "lolo", "asdf", new Address("Am Marktplatz 7", "77652", "Offenburg"), "Bätz Wolfgang Dr.med. Gefäßchirurg", new BankAccount("ASDLF23456", "Wolfgang Bätz"), true, "107438570935"));
             customers.Add(new Customer("Michael", "Brake", "holzmichel", "asdf", new Address("Hauptstr. 98", "77652", "Offenburg"), "Brake Michael Dr. med. Arzt für Urologie", new BankAccount("ALKFJ34565768", "Michael Brake"), true, "9347983476"));

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Common.DataTransferObjects;
+using Server.DatabaseCommunication;
 using Server.DistanceCalculation;
 
 namespace Server.DriverController
@@ -19,38 +21,51 @@ namespace Server.DriverController
         /// </summary>
         /// <param name="routeCalculator"></param>
         /// <param name="evaluator"></param>
-        public DriverController(OptionsCalculator routeCalculator, OptionsEvaluator evaluator)
+        public DriverController(OptionsCalculator routeCalculator, OptionsEvaluator evaluator, Address home)
         {
             this.routeCalculator = routeCalculator;
             this.evaluator = evaluator;
+            this.home = new DistanceMatrixAddress(home);
         }
 
-        public DriverController()
-            : this(new OptionsCalculator(new DirectionsRouteDistanceCalculator(false)), new OptionsEvaluator())
+        public DriverController(Address home)
+            : this(new OptionsCalculator(new DirectionsRouteDistanceCalculator(false)), new OptionsEvaluator(), home)
         {
             evaluator.AddHardConstraint(o => o.TotalLeftDistance.Time < 6); // All orders must be finished before 6h passed.
             // TODO Add shift time hard constraint.
             evaluator.SetSoftConstraint(o => -o.TotalLeftDistance.Time); // The faster, the better.
         }
 
-        public Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders, Address destination)
+        public Driver DetermineDriverOrNullInsideTransaction(IDatabaseCommunicator db, GPSPosition position)
         {
-            return DetermineDriverOrNull(allDrivers, allUnfinishedOrders, new DistanceMatrixAddress(destination));
+            IDistanceMatrixPlace destination = new DistanceMatrixGPSPosition(position);
+
+            return DetermineDriverOrNullInsideTransaction(db, destination);
         }
 
-        public Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders, GPSPosition destination)
+        public Driver DetermineDriverOrNullInsideTransaction(IDatabaseCommunicator db, Address address)
         {
-            return DetermineDriverOrNull(allDrivers, allUnfinishedOrders, new DistanceMatrixGPSPosition(destination));
+            IDistanceMatrixPlace destination = new DistanceMatrixAddress(address);
+
+            return DetermineDriverOrNullInsideTransaction(db, destination);
         }
 
-        public Driver DetermineDriverOrNull(IEnumerable<Driver> allDrivers, IEnumerable<Order> allUnfinishedOrders,
+        private Driver DetermineDriverOrNullInsideTransaction(IDatabaseCommunicator db, IDistanceMatrixPlace destination)
+        {
+            IEnumerable<Car> allOccupiedCars = db.GetAllCars(c => c.CurrentDriver != null);
+            IEnumerable<Order> allUnfinishedOrders = db.GetAllOrders(o => o.CollectDate == null);
+
+            return DetermineDriverOrNullInsideTransaction(allOccupiedCars, allUnfinishedOrders, destination);
+        }
+
+        public Driver DetermineDriverOrNullInsideTransaction(IEnumerable<Car> allOccupiedCars, IEnumerable<Order> allUnfinishedOrders,
             IDistanceMatrixPlace destination)
         {
             var calcDistanceTasks = new List<Task<DriverSendOption>>();
-            foreach (Driver driver in allDrivers)
+            foreach (Car car in allOccupiedCars)
             {
-                var driversOrders = allUnfinishedOrders.Where(o => o.Driver.UserName.Equals(driver.UserName));
-                calcDistanceTasks.Add(routeCalculator.CalculateDistance(driver, driversOrders, destination));
+                var driversOrders = allUnfinishedOrders.Where(o => o.Driver.UserName.Equals(car.CurrentDriver.UserName));
+                calcDistanceTasks.Add(routeCalculator.CalculateDistance(car, driversOrders, destination, home));
             }
 
             // Route calculation is done parallel.
@@ -65,7 +80,7 @@ namespace Server.DriverController
             Driver optimalDriver = null;
             if (bestOptionOrNull != null)
             {
-                optimalDriver = bestOptionOrNull.Driver;
+                optimalDriver = bestOptionOrNull.Car.CurrentDriver;
             }
 
             return optimalDriver;

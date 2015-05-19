@@ -25,11 +25,10 @@ namespace Server.CmdHandler
         {
             _db.StartTransaction();
             var data = _db.GetAllCars(c => c.CurrentDriver != null);
-            _db.EndTransaction(TransactionEndOperation.READONLY);
-
-
+            
             var response = new CmdReturnGetAllOccupiedCars(command.Id, data);
             _connection.Unicast(response, connectionIdOrNull);
+            _db.EndTransaction(TransactionEndOperation.READONLY);
         }
     }
 }

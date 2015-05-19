@@ -268,11 +268,6 @@ namespace ASPServer.Controllers
                 }
             }
 
-            // Add some example Data
-            results.Add(new ResultModel() { Patient = "3756", Analysis = "Blut", UnitOfMeasure = "mg" });
-            results.Add(new ResultModel() { Analysis = "Speichel", UnitOfMeasure = "mg" });
-            results.Add(new ResultModel() { Analysis = "Urin", Critical = true, UnitOfMeasure = "ml" });
-
             return View(results);
         }
 

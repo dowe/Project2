@@ -39,23 +39,32 @@ namespace ManagementSoftware.View
         private int _carIndex = 0;
         private readonly IClientConnection _connection;
         private readonly Address _laborPos;
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private bool executed = false;
+
+
 
         public MapView()
         {
             InitializeComponent();
-
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 5, 0);
             _connection = SimpleIoc.Default.GetInstance<IClientConnection>();
             _laborPos = new LocalServerData().ZmsAddress;
             WebBrowserGoogle.ObjectForScripting = new ExposedJSObject(WebBrowserGoogle, this);
+            //WebBrowserGoogle.NavigateToString(Properties.Resources.GoogleMaps);
+            string curDir = Directory.GetCurrentDirectory();
+            this.WebBrowserGoogle.Navigate(new Uri(String.Format("file:///{0}/Resources/GoogleMaps.html", curDir)));
+            TxtCar.Text = "Fahrer: Max Mustermann";
+            LblCar.Content = "DummyCar";
 
-            
-            WebBrowserGoogle.NavigateToString(Properties.Resources.GoogleMaps);
-            //string curDir = Directory.GetCurrentDirectory();
-            //this.WebBrowserGoogle.Navigate(new Uri(String.Format("file:///{0}/GoogleMaps.html", curDir)));
-            TxtCar.Text = "Autooo";
-            LblCar.Content = "RoflCar";
+
         }
 
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
 
 
         public void SetCarText(DistanceContainer distance)
@@ -69,7 +78,7 @@ namespace ManagementSoftware.View
             if (_driversOrders.Any())
             {
                 var cust = _driversOrders.FirstOrDefault().Customer;
-                sb.Append(cust.Label ?? cust.FirstName + " " + cust.LastName + "\n");
+                sb.Append(cust.Label + "\n" ?? cust.FirstName + " " + cust.LastName + "\n");
                 sb.Append(cust.Address.Street + "\n");
                 sb.Append(cust.Address.PostalCode + " " + cust.Address.City + "\n");
             }
@@ -79,11 +88,11 @@ namespace ManagementSoftware.View
                 sb.Append(_laborPos.Street + "\n");
                 sb.Append(_laborPos.PostalCode + " " + _laborPos.City + "\n");
             }
-            sb.Append("Entfernung: " + distance.Distance + "km in " + distance.Time + "h\n");
+            sb.Append("Entfernung: " + distance.Distance + "km in " + distance.Time.ToString("0.00") + "h\n");
 
             if (_driversOrders.Any() && _driversOrders.Count > 1)
             {
-                sb.Append("________________________\n\n");
+                sb.Append("_________________________________\n\n");
                 sb.Append("Weitere Ziele:\n\n");
 
                 for (int i = 1; i < _driversOrders.Count; i++)
@@ -94,17 +103,19 @@ namespace ManagementSoftware.View
                     sb.Append(cust.Address.PostalCode + " " + cust.Address.City + "\n\n");
                 }
             }
-            
+
             TxtCar.Text = sb.ToString();
         }
 
-        public void RefreshData()
+        public async void RefreshData()
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             _cars = _connection.SendWait<CmdReturnGetAllOccupiedCars>(new CmdGetAllOccupiedCars()).OccupiedCars.ToList();
             _customers = _connection.SendWait<CmdReturnGetAllCustomers>(new CmdGetAllCustomers()).Customers.ToList();
 
             SetMapIcons();
             RefreshDriver(_carIndex);
+            Mouse.OverrideCursor = null;
         }
 
         private void RefreshDriver(int carid)
@@ -114,12 +125,11 @@ namespace ManagementSoftware.View
             var car = _cars[carid];
 
             GetDriverDestinations(car);
-            
-            NavigateOnMap(car.LastPosition,
-                _driversOrders.FirstOrDefault().Customer.Address ?? _laborPos);
-
-            var distance = DistanceCalculation.CalculateDistanceInKm(car.LastPosition,
-                _driversOrders.FirstOrDefault().Customer.Address ?? _laborPos);
+            var address = _laborPos;
+            if (_driversOrders.Any())
+                address = _driversOrders.FirstOrDefault().Customer.Address;
+            NavigateOnMap(car.LastPosition, address);
+            var distance = DistanceCalculation.CalculateDistanceInKm(car.LastPosition, address);
             SetCarText(distance);
         }
 
@@ -136,42 +146,62 @@ namespace ManagementSoftware.View
 
         private void SetMapIcons()
         {
-            foreach (var car in _cars)
-            {
-                WebBrowserGoogle.InvokeScript("addCar", new Object[] { car.LastPosition.Latitude, car.LastPosition.Longitude, car.CarID });
-            }
+            WebBrowserGoogle.InvokeScript("addLaboratory", new Object[] { _laborPos.Street + ", " + _laborPos.PostalCode + " " + _laborPos.City, "Zentrallabor" });
 
-            foreach (var cust in _customers)
-            {
-                WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, cust.Label ?? cust.FirstName + " " + cust.LastName });
-            }
+            if (_customers != null)
+                foreach (var cust in _customers)
+                {
+                    WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, cust.Label ?? cust.FirstName + " " + cust.LastName });
+                }
 
-            //WebBrowserGoogle.InvokeScript("addCar", new Object[] { 48.3173913, 8.0490079, "Auto A" });
-            //WebBrowserGoogle.InvokeScript("addCar", new Object[] { 48.3531049, 8.0855398, "Auto B" });
-            //WebBrowserGoogle.InvokeScript("addHouse", new Object[] { 48.3154922, 8.005414, "Dr.House" });
-            //WebBrowserGoogle.InvokeScript("addHouse", new Object[] { 48.2807446, 8.0906837, "Dr. Sheldon Cooper" });
-            //WebBrowserGoogle.InvokeScript("addHouse", new Object[] { 48.3817759, 8.1600809, "Zentrallabor" });
-            //WebBrowserGoogle.InvokeScript("addHouse", new Object[] { 48.3770449, 8.0833999, "Dr. Velvet" });
-            //WebBrowserGoogle.InvokeScript("addAddress", new Object[] { "Jauschbach 6, 77784 Oberharmersbach", "Auenland" });
+            if (_cars != null)
+                foreach (var car in _cars)
+                {
+                    WebBrowserGoogle.InvokeScript("addCar", new Object[] { car.LastPosition.Latitude, car.LastPosition.Longitude, car.CarID });
+                }
+        }
+
+        public void SwitchCar(string carid)
+        {
+            var car = _cars.Where(c => c.CarID == carid).FirstOrDefault();
+            if (car != null)
+            {
+                _carIndex = _cars.IndexOf(car);
+                RefreshDriver(_carIndex);
+            }
         }
 
         private void RightArrow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            var old = _carIndex;
             _carIndex++;
             if (_carIndex >= _cars.Count)
                 _carIndex = 0;
 
-            RefreshDriver(_carIndex);
+            if (old != _carIndex)
+                RefreshDriver(_carIndex);
         }
 
         private void LeftArrow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            var old = _carIndex;
             _carIndex--;
             if (_carIndex < 0)
                 _carIndex = _cars.Count - 1;
-
-            RefreshDriver(_carIndex);
+            if (old != _carIndex)
+                RefreshDriver(_carIndex);
         }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible && executed == false)
+            {
+                executed = true;
+                dispatcherTimer.Start();
+            }
+        }
+
+
     }
 
     //Klassen für C#<->webbrowser:JS kommunikation
@@ -210,7 +240,7 @@ namespace ManagementSoftware.View
 
         public void CarClicked(string car)
         {
-            //_window.SwitchCar(car);
+            _window.SwitchCar(car);
         }
     }
 

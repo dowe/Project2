@@ -216,23 +216,23 @@
     <packageShape Id="d5a30d85-bef2-4e86-bcfd-0a61eb9d2053" absoluteBounds="8.5, 8.5, 4.125, 4" customColor="255, 249, 230" hideQualifiedName="false">
       <packageMoniker Id="fdf7db93-e830-44e7-8771-fee424f5942e" LastKnownName="SMSSending" />
       <nestedChildShapes>
-        <interfaceShape Id="16060f97-3b96-4a61-ae8a-324cf446e2ae" absoluteBounds="8.625, 9, 3.25, 1.5429687152306233" hideQualifiedName="false" increaseHeight="0" customColor="207, 223, 191">
+        <interfaceShape Id="16060f97-3b96-4a61-ae8a-324cf446e2ae" absoluteBounds="8.625, 9, 3.25, 1.0624999801317845" hideQualifiedName="false" increaseHeight="0" customColor="207, 223, 191">
           <interfaceMoniker Id="35bfff35-80fa-4fc2-8c26-dba8de97f395" LastKnownName="ISMSSending" />
           <nestedChildShapes>
             <AttributeElementListCompartment Id="af6af4f4-8f8b-4a68-ab0e-f0fb7e6234be" absoluteBounds="8.64, 9.39, 3.2199999999999998, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
-            <OperationElementListCompartment Id="09ef56c5-9e31-4493-b54f-9c762fc0797f" absoluteBounds="8.64, 9.60117186754942, 3.2199999999999998, 0.84179684768120444" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="09ef56c5-9e31-4493-b54f-9c762fc0797f" absoluteBounds="8.64, 9.60117186754942, 3.2199999999999998, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
           </nestedChildShapes>
         </interfaceShape>
-        <classShape Id="c7f1aa51-ae04-45f3-aaf3-eb47ba5d3f6e" absoluteBounds="8.875, 10.875, 3, 1.5429687152306233" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+        <classShape Id="c7f1aa51-ae04-45f3-aaf3-eb47ba5d3f6e" absoluteBounds="8.875, 10.875, 3, 1.2226562251647319" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
           <classMoniker Id="2c7fdf8b-5f54-45af-bccb-92e44a5e2544" LastKnownName="SMSSending" />
           <nestedChildShapes>
             <AttributeElementListCompartment Id="0a6ce348-4701-44f8-be34-6ce41211bec1" absoluteBounds="8.89, 11.265, 2.9699999999999998, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
-            <OperationElementListCompartment Id="333d358b-cde9-488a-bba2-807ac3ccec96" absoluteBounds="8.89, 11.47617186754942, 2.9699999999999998, 0.84179684768120444" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="333d358b-cde9-488a-bba2-807ac3ccec96" absoluteBounds="8.89, 11.47617186754942, 2.9699999999999998, 0.52148435761531187" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
           </nestedChildShapes>
         </classShape>
       </nestedChildShapes>
     </packageShape>
-    <realizationConnector edgePoints="[(10.375 : 10.875); (10.375 : 10.7349687152306); (10.25 : 10.7349687152306); (10.25 : 10.5429687152306)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" showAsLollipop="false">
+    <realizationConnector edgePoints="[(10.375 : 10.875); (10.375 : 10.4374999801318); (10.25 : 10.4374999801318); (10.25 : 10.0624999801318)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" showAsLollipop="false">
       <interfaceRealizationMoniker Id="eeae5950-73fd-44c2-ab9c-765ce2e90c10" />
       <relativeChildShapes />
       <nodes>

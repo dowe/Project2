@@ -18,10 +18,14 @@ namespace ServerTests.DriverController
 
         private DriverSendOption CreateDummyOption(string driverUsername, float duration, float distance)
         {
-            return new DriverSendOption(new Driver
-            {
-                UserName = driverUsername
-            }, new DistanceContainer { Distance = distance, Time = duration });
+            return new DriverSendOption(
+                new Car
+                {
+                    CurrentDriver = new Driver
+                    {
+                        UserName = driverUsername
+                    }
+                }, new DistanceContainer { Distance = distance, Time = duration });
         }
 
         [TestMethod]
@@ -31,7 +35,7 @@ namespace ServerTests.DriverController
             var options = new List<DriverSendOption>();
 
             var result = testee.ChooseBestOptionOrNull(options);
-            
+
             Assert.IsNull(result);
         }
 
@@ -63,7 +67,7 @@ namespace ServerTests.DriverController
 
             var result = testee.ChooseBestOptionOrNull(options);
 
-            Assert.AreEqual("o1", result.Driver.UserName);
+            Assert.AreEqual("o1", result.Car.CurrentDriver.UserName);
         }
 
         [TestMethod]
@@ -81,7 +85,7 @@ namespace ServerTests.DriverController
 
             var result = testee.ChooseBestOptionOrNull(options);
 
-            Assert.AreEqual("o2", result.Driver.UserName);
+            Assert.AreEqual("o2", result.Car.CurrentDriver.UserName);
         }
     }
 }

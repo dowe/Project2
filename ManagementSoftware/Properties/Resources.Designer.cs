@@ -83,9 +83,19 @@ namespace ManagementSoftware.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Gandalf {
+        internal static System.Drawing.Bitmap car {
             get {
-                object obj = ResourceManager.GetObject("Gandalf", resourceCulture);
+                object obj = ResourceManager.GetObject("car", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap doctor {
+            get {
+                object obj = ResourceManager.GetObject("doctor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -96,10 +106,10 @@ namespace ManagementSoftware.Properties {
         ///&lt;head&gt;
         ///    &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, user-scalable=no&quot; /&gt;
         ///    &lt;script type=&quot;text/javascript&quot;
-        ///            src=&quot;http://maps.google.com.mx/maps/api/js?sensor=true&amp;language=es&amp;key=AIzaSyDAdzdTF82kLM_-Rz0xdskVUpMGEVqG-WQ&quot;&gt;&lt;/script&gt;
+        ///            src=&quot;http://maps.google.com.mx/maps/api/js?sensor=true&amp;language=de-DE&amp;key=AIzaSyDAdzdTF82kLM_-Rz0xdskVUpMGEVqG-WQ&quot;&gt;&lt;/script&gt;
         ///    &lt;script src=&apos;http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js&apos;&gt;
         ///    &lt;/script&gt;
-        ///    &lt;script src=&quot;http://google-maps-utility-library-v3.googlecode. [rest of string was truncated]&quot;;.
+        ///    &lt;script src=&quot;http://google-maps-utility-library-v3.googleco [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GoogleMaps {
             get {
@@ -110,9 +120,9 @@ namespace ManagementSoftware.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hobbitHouse {
+        internal static System.Drawing.Bitmap microscope {
             get {
-                object obj = ResourceManager.GetObject("hobbitHouse", resourceCulture);
+                object obj = ResourceManager.GetObject("microscope", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

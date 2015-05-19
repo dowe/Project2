@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1200"
-             DataContext="{Binding Map, Source={StaticResource Locator}}">
+             DataContext="{Binding Map, Source={StaticResource Locator}}" IsVisibleChanged="UserControl_IsVisibleChanged">
     <Grid>
         <WebBrowser x:Name="WebBrowserGoogle" Margin="242,10,0,10"/>
         <Grid HorizontalAlignment="Left" Height="580" Margin="0,10,0,0" VerticalAlignment="Top" Width="242">
@@ -15,7 +15,7 @@
             </Grid.RowDefinitions>
             <Image  Source="/ManagementSoftware;component/Resources/arrowReverse.png" Margin="10,10,0,0" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="36" MouseLeftButtonUp="LeftArrow_MouseLeftButtonUp"/>
             <Image Grid.Row="0" Source="/ManagementSoftware;component/Resources/arrow.png" Margin="196,10,0,0" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="36" RenderTransformOrigin="0.488,0.487" MouseLeftButtonUp="RightArrow_MouseLeftButtonUp"/>
-            <Label Grid.Row="0" x:Name="LblCar" Content="Auto A" HorizontalAlignment="Left" Margin="83,10,0,0" VerticalAlignment="Top" Width="70" FontSize="18" Foreground="Red"/>
+            <Label Grid.Row="0" x:Name="LblCar" Content="Auto A" HorizontalAlignment="Left"  Margin="51,10,0,0" VerticalAlignment="Top" Width="140" FontSize="18" Foreground="Red"/>
             <TextBlock x:Name="TxtCar" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="541" Width="222" FontSize="14"/>
         </Grid>
     </Grid>

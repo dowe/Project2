@@ -33,7 +33,7 @@
             <TabItem Header="Probenübersicht">
                 <views:TestsView/>
             </TabItem>
-            <TabItem Header="Map">
+            <TabItem Header="Fahrerkarte">
                 <views:MapView/>
             </TabItem>
             <TabItem Header="Bestellung">

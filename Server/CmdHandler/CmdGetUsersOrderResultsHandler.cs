@@ -29,10 +29,10 @@ namespace Server.CmdHandler
             // Get all orders from the customer that is currently logged in
             db.StartTransaction();
             userOrders = db.GetAllOrders(order => order.Customer.UserName == command.Username);
-            db.EndTransaction(TransactionEndOperation.READONLY);
 
             var response = new CmdReturnGetUsersOrderResults(command.Id, userOrders);
             connection.Unicast(response, connectionIdOrNull);
+            db.EndTransaction(TransactionEndOperation.READONLY);
         }
     }
 }

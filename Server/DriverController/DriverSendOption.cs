@@ -11,12 +11,12 @@ namespace Server.DriverController
     public class DriverSendOption
     {
 
-        public Driver Driver { get; private set; }
+        public Car Car { get; private set; }
         public DistanceContainer TotalLeftDistance { get; private set; }
 
-        public DriverSendOption(Driver driver, DistanceContainer totalLeftDistance)
+        public DriverSendOption(Car car, DistanceContainer totalLeftDistance)
         {
-            Driver = driver;
+            Car = car;
             TotalLeftDistance = totalLeftDistance;
         }
 

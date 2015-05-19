@@ -64,6 +64,7 @@
     <Compile Include="DistanceCalculation\DirectionsRouteDistanceCalculatorTests.cs" />
     <Compile Include="DriverController\OptionsEvaluatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sms\SmsSendingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.DataTransferObjects\Common.DataTransferObjects.csproj">
