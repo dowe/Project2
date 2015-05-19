@@ -11,7 +11,7 @@ namespace Common.Commands
 {
     public class CmdReturnGetAllOccupiedCars : ResponseCommand
     {
-        public ReadOnlyCollection<Car> OccupiedCars;
+        public ReadOnlyCollection<Car> OccupiedCars { get; set; }
 
         public CmdReturnGetAllOccupiedCars(Guid requestId, IList<Car> occupiedCars) : base(requestId)
         {
