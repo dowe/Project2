@@ -34,9 +34,8 @@ namespace DatabaseInitialize
             var anal = new Dictionary<string, List<Analysis>>();
             anal.Add("IrgendeinPatient", new List<Analysis>()
             {
-                new Analysis("Blut_Leukozyten", 4, 10, "Tsd./µl", (float)29.99, SampleType.BLOOD),
-                new Analysis("Blut_Hämoglobin", (float)12, (float)18, "g/dl", (float)15.95, SampleType.BLOOD),
-                new Analysis("Speichel_Cortisol", (float)0, (float)9.8, "µg/l", (float)4.50, SampleType.SALIVA)
+                con.Analysis.Find("Blut_Hämoglobin"),
+                 con.Analysis.Find("Speichel_Cortisol")
             });
 
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault())
@@ -47,8 +46,9 @@ namespace DatabaseInitialize
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "ulli").FirstOrDefault())
             {
                 OrderDate = DateTime.Now,
-                Driver = con.Driver.Where(d => d.UserName == "Driv2").FirstOrDefault()
+                Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault()
             });
+            con.Car.Find("OG-LA-001").CurrentDriver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault();
             con.Order.AddRange(orders);
             con.SaveChanges();
         }
