@@ -199,6 +199,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -233,8 +234,20 @@
       <Project>{12f1826a-1f92-40f8-bb4c-7ee98c343ba9}</Project>
       <Name>Common.Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Server\Server.csproj">
+      <Project>{FF3DCEBD-8438-436C-81FF-39A5F1F9A78C}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Gandalf.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Resources\GoogleMaps.html" />
+    <Resource Include="Resources\hobbitHouse.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\arrow.png" />
     <Resource Include="Resources\arrowReverse.png" />

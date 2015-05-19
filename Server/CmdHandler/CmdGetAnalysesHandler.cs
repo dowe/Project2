@@ -27,7 +27,7 @@ namespace Server.CmdHandler
             var analyses = db.GetAllAnalysis(null);
             db.EndTransaction(TransactionEndOperation.READONLY);
             
-            var response = new CmdReturnGetAnalyses(command.Id, analyses); //TODO: analysis
+            var response = new CmdReturnGetAnalyses(command.Id, analyses);
             connection.Unicast(response, connectionIdOrNull);
         }
     }
