@@ -24,6 +24,33 @@ namespace DatabaseInitialize
             InitializeCars();
             InitializeDrivers();
             InitializeCustomer();
+            InitializeOrders();
+        }
+
+        private static void InitializeOrders()
+        {
+            LaborContext con = new LaborContext();
+            List<Order> orders = new List<Order>();
+            var anal = new Dictionary<string, List<Analysis>>();
+            anal.Add("IrgendeinPatient", new List<Analysis>()
+            {
+                new Analysis("Blut_Leukozyten", 4, 10, "Tsd./µl", (float)29.99, SampleType.BLOOD),
+                new Analysis("Blut_Hämoglobin", (float)12, (float)18, "g/dl", (float)15.95, SampleType.BLOOD),
+                new Analysis("Speichel_Cortisol", (float)0, (float)9.8, "µg/l", (float)4.50, SampleType.SALIVA)
+            });
+
+            orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault())
+            {
+               OrderDate = DateTime.Now,
+               Driver = con.Driver.Where(d=>d.UserName=="Driv1").FirstOrDefault()
+            });
+            orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "ulli").FirstOrDefault())
+            {
+                OrderDate = DateTime.Now,
+                Driver = con.Driver.Where(d => d.UserName == "Driv2").FirstOrDefault()
+            });
+            con.Order.AddRange(orders);
+            con.SaveChanges();
         }
 
         private static void InitializeAnalysis()
@@ -117,6 +144,13 @@ namespace DatabaseInitialize
             LaborContext con = new LaborContext();
             List<Customer> customers = new List<Customer>();
             customers.Add(new Customer() { UserName = "house", Password = "asdf", Address = new Address() { Street = "Am Arsch der Welt", PostalCode = "12345", City = "Springfield" } });
+            customers.Add(new Customer("Alice", "Vette", "vette", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Vetter Alice Fachärztin für Allgemeinmedizin", new BankAccount("1asdf243ew", "Alice Vette")));
+            customers.Add(new Customer("Wolfgang", "Bätz", "lolo", "asdf", new Address("Am Marktplatz 7", "77652", "Offenburg"), "Bätz Wolfgang Dr.med. Gefäßchirurg", new BankAccount("ASDLF23456", "Wolfgang Bätz"), true, "107438570935"));
+            customers.Add(new Customer("Michael", "Brake", "holzmichel", "asdf", new Address("Hauptstr. 98", "77652", "Offenburg"), "Brake Michael Dr. med. Arzt für Urologie", new BankAccount("ALKFJ34565768", "Michael Brake"), true, "9347983476"));
+            customers.Add(new Customer("Elke", "Brüderle", "Elli", "asdf", new Address("Ebertplatz 12", "77652", "Offenburg"), "Brüderle Elke Dr. Frauenärztin", new BankAccount("LKFJGFG23456", "Brüderle Elke")));
+            customers.Add(new Customer("Traunecker", "Ulrich", "ulli", "asdf", new Address("Leutkirchstraße 13", "77723", "Gengenbach"), "Dr. med. Ulrich Traunecker", new BankAccount("UZJH87698347", "Ulrich Traunecker"), true, "379786546"));
+            customers.Add(new Customer("Matthias", "Ruff", "ruffi", "asdf", new Address("Hauptstraße 24", "77723", "Gengenbach"), "Dr. med. Matthias Ruff", new BankAccount("HUGZGU87687625", "Matthias Ruff")));
+            customers.Add(new Customer("Stefan", "Leuthner", "leuti", "asdf", new Address("Hauptstraße 61", "77799", "Ortenberg"), "Herr Dr. med. Stefan Leuthner", new BankAccount("UIGUZ7868", "Leuthners Frau")));
             con.Customer.AddRange(customers);
             con.SaveChanges();
         }

@@ -34,6 +34,18 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
+        public Address()
+        {
+            
+        }
+
+        public Address(string street, string postalCode, string city)
+        {
+            Street = street;
+            PostalCode = postalCode;
+            City = city;
+        }
+
 	}
 }
 

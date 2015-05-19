@@ -27,6 +27,17 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
+	    public BankAccount()
+	    {
+	        
+	    }
+
+	    public BankAccount(string iban, string accountOwner)
+	    {
+	        IBAN = iban;
+	        AccountOwner = accountOwner;
+	    }
+
 	}
 }
 

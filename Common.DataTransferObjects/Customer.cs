@@ -81,6 +81,24 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
+	    public Customer()
+	    {
+	        
+	    }
+
+	    public Customer(string firstname, string lastname, string username, string password, Address address, string label, BankAccount acc = null, bool smsrequested = false, string mobile = null )
+	    {
+	        FirstName = firstname;
+	        LastName = lastname;
+	        UserName = username;
+	        Password = password;
+	        Address = address;
+	        Label = label;
+	        SMSRequested = smsrequested;
+	        MobileNumber = mobile;
+	        BankAccount = acc;
+	    }
+
 	}
 }
 
