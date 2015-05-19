@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="8656ea1a-ab95-4dbe-ac9c-a83872188208"
   name="SMSSending" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -23,7 +23,7 @@
         <ownedOperationsInternal>
           <operation
             Id="f02b20b9-56f4-434e-ae32-9833615bfd13"
-            name="ISMSSending"
+            name="Send"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -51,54 +51,6 @@
                   direction="In"
                   isUnique="false">
                   <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="60b308c1-07e3-471b-9409-5d19996c274b"
-                      LastKnownName="int"
-                      LastKnownLocation="UML.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="7fca1010-79b1-4bd6-95d0-efb1d7ec8af3"
-            name="send"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="a8cdd423-ac85-4c57-88b2-70ed5883b57a"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="2f05379c-af01-4c31-ab6a-54446c1c30c7"
-                      LastKnownName="void"
-                      LastKnownLocation="UML.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="608ff622-be28-43e1-8aad-a06bed538d4f"
-            name="getMessage"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="d32da166-e8ff-4636-ae67-f6f4428e2ea1"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
                     <primitiveTypeMoniker
                       Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
                       LastKnownName="String"
@@ -109,29 +61,13 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="ce3dc9a6-0fc7-4a37-b50f-abaed0910b63"
-            name="getNumber"
+            Id="34872df5-bbd7-4274-9819-cc4fdb8a31fc"
+            name="SMSSending"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="74dce499-52a3-44d0-b502-88fd10ad7bd7"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="60b308c1-07e3-471b-9409-5d19996c274b"
-                      LastKnownName="int"
-                      LastKnownLocation="UML.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
+            isQuery="false" />
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -144,7 +80,7 @@
         <ownedOperations>
           <operation
             Id="07dc9b9e-460a-4f30-b743-0010e7eacc1d"
-            name="ISMSSending"
+            name="Send"
             isLeaf="false"
             isStatic="false"
             isAbstract="true"
@@ -153,7 +89,7 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="deb71a71-b71d-44c8-aa99-b41f81ce8286"
+                  Id="2e452a3c-e8bb-4c4c-8048-86e2eed0c154"
                   name="message"
                   direction="In"
                   isUnique="false">
@@ -167,86 +103,14 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="18c616b5-c7ae-4e01-bbf7-bd95c000dcb4"
+                  Id="a8fb4bd1-af5e-4fcd-9b70-0895d9ad482a"
                   name="number"
                   direction="In"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="60b308c1-07e3-471b-9409-5d19996c274b"
-                      LastKnownName="int"
-                      LastKnownLocation="UML.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="0e18749e-219e-4807-afed-3fe3b615e3d8"
-            name="send"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="e0531666-071f-4691-abde-d796bb1902e2"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="2f05379c-af01-4c31-ab6a-54446c1c30c7"
-                      LastKnownName="void"
-                      LastKnownLocation="UML.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="80da881f-9674-431d-90c4-bfd2cc76a703"
-            name="getMessage"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="2b29486a-78ab-4ba0-9663-7d11aee3ae8e"
-                  direction="Return"
                   isUnique="false">
                   <type_NamedElement>
                     <primitiveTypeMoniker
                       Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
                       LastKnownName="String"
-                      LastKnownLocation="UML.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="c6bbe18b-7af9-426e-9b16-18bd623b2c21"
-            name="getNumber"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="9339ca59-14c6-49a9-8071-58a8f6c5520a"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="60b308c1-07e3-471b-9409-5d19996c274b"
-                      LastKnownName="int"
                       LastKnownLocation="UML.uml" />
                   </type_NamedElement>
                 </parameter>
