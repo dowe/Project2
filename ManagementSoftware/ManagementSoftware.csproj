@@ -246,7 +246,11 @@
       <Name>Common.Util</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Gandalf.png" />
+    <Content Include="Resources\GoogleMaps.html" />
+    <Resource Include="Resources\hobbitHouse.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\arrow.png" />
     <Resource Include="Resources\arrowReverse.png" />

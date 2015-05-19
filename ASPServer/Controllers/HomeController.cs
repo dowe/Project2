@@ -183,11 +183,11 @@ namespace ASPServer.Controllers
                 var cmd =
                     _clientConnection.SendWait<CmdReturnGetAllBillsOfUser>(
                         new CmdGetAllBillsOfUser((string)Session[UserID]));
-                billsRaw = cmd.Bills.ToList();
 
-                if (!billsRaw.Any())
+                if (!cmd.Bills.Any())
                     return View();
 
+                billsRaw = cmd.Bills.ToList();
                 Session[SessionBills] = billsRaw;
             }
             else
