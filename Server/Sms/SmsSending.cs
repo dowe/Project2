@@ -28,6 +28,12 @@ namespace Server.Sms
             }
         }
 
+        /// <summary>
+        ///     Sends a sms to the specified number.
+        ///     works by sending out an email to an Sms Gateway
+        /// </summary>
+        /// <param name="number">the phone number</param>
+        /// <param name="message">the message to send</param>
         public void Send(string number, string message)
         {
             MailMessage mail = new MailMessage();
@@ -35,6 +41,7 @@ namespace Server.Sms
             NetworkCredential gmailLogin = new NetworkCredential(user, password);
             MailAddress fromAddress = new MailAddress(user);
 
+            // Gmail specific smtp setup
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -42,6 +49,7 @@ namespace Server.Sms
             smtp.EnableSsl = true;
             smtp.Credentials = gmailLogin;
 
+            // Make the mail
             mail.From = fromAddress;
             mail.Subject = number.ToString();
             mail.Body = message;
