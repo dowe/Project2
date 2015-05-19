@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript"
-            src="http://maps.google.com.mx/maps/api/js?sensor=true&language=es&key=AIzaSyDAdzdTF82kLM_-Rz0xdskVUpMGEVqG-WQ"></script>
+            src="http://maps.google.com.mx/maps/api/js?sensor=true&language=de-DE&key=AIzaSyDAdzdTF82kLM_-Rz0xdskVUpMGEVqG-WQ"></script>
     <script src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js'>
     </script>
     <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
@@ -81,8 +81,6 @@
             directionsService.route(request, function (response, status) {
                 if (status == window.google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
-                    var leg = response.routes[0].legs[0];
-                    external.App.SetDistance(leg.distance.text + ' in ' + leg.duration.text);
                 }
             });
         }

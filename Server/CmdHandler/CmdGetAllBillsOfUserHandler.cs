@@ -24,18 +24,9 @@ namespace Server.CmdHandler
 
         protected override void Handle(CmdGetAllBillsOfUser command, string connectionIdOrNull)
         {
-            List<Bill> billsRaw = new List<Bill>();
-            if ("Ole".Equals(command.Username))
-            {
-                billsRaw = new List<Bill>()
-            {
-                new Bill(){Customer = null, Date = new DateTime(123,1,1), PDFPath = "/App_Data/Erste_Schritte.pdf"},
-                new Bill(){Customer = null, Date = new DateTime(133,1,1), PDFPath = "/App_Data/Erste_Schritte.pdf"},
-                new Bill(){Customer = null, Date = new DateTime(144,1,1), PDFPath = "/App_Data/Erste_Schritte.pdf"},
-                new Bill(){Customer = null, Date = new DateTime(155,1,1), PDFPath = "/App_Data/Erste_Schritte.pdf"},
-
-            };
-            }
+            db.StartTransaction();
+            var billsRaw = db.GetAllBills(b => b.Customer.UserName == command.Username);
+            db.EndTransaction(TransactionEndOperation.READONLY);
 
             var response = new CmdReturnGetAllBillsOfUser(command.Id, billsRaw);
             connection.Unicast(response, connectionIdOrNull);
