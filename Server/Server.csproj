@@ -141,6 +141,7 @@
     <Compile Include="Sms\SmsSending.cs" />
     <Compile Include="Timer\GenerateShiftScheduleTimer.cs" />
     <Compile Include="Timer\ScheduledTimer.cs" />
+    <Compile Include="UsernameToConnectionIdMapping.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

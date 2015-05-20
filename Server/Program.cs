@@ -24,12 +24,12 @@ namespace Server
             IDatabaseCommunicator db = new DatabaseCommunicator();
             LocalServerData data = new LocalServerData();
             IDriverController driverController = new DriverController.DriverController(data.ZmsAddress);
-            Dictionary<string, string> driverMapping = new Dictionary<string, string>();
+            UsernameToConnectionIdMapping driverToConnectionIdMapping = new UsernameToConnectionIdMapping();
             connection.ServerStarted += (object sender, EventArgs e) => OnServerStarted(connection, db, data);
             connection.BeforeHandlingCommand += connection_BeforeHandlingCommand;
 
             Console.WriteLine("Registering Handlers...");
-            RegisterHandlers(connection, db, data, driverController, driverMapping);
+            RegisterHandlers(connection, db, data, driverController, driverToConnectionIdMapping);
 
             Console.WriteLine("Starting server...");
             connection.RunForever();
@@ -45,7 +45,7 @@ namespace Server
             IDatabaseCommunicator db,
             LocalServerData data,
             IDriverController driverController,
-            Dictionary<string, string> driverMapping)
+            UsernameToConnectionIdMapping driverMapping)
         {
 
             // TODO: REGISTER SERVER HANDLER HERE

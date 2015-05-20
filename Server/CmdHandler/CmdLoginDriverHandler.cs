@@ -16,8 +16,8 @@ namespace Server.CmdHandler
 
         private IServerConnection connection = null;
         private IDatabaseCommunicator db = null;
-        private Dictionary<string, string> driverMapping;
-        public CmdLoginDriverHandler(IServerConnection connection, IDatabaseCommunicator db, Dictionary<string,string> driverMapping)
+        private UsernameToConnectionIdMapping driverMapping = null;
+        public CmdLoginDriverHandler(IServerConnection connection, IDatabaseCommunicator db, UsernameToConnectionIdMapping driverMapping)
         {
             this.connection = connection;
             this.db = db;
@@ -30,17 +30,18 @@ namespace Server.CmdHandler
 
             db.StartTransaction();
             Driver driver = db.GetDriver(command.Username);
-            db.EndTransaction(TransactionEndOperation.READONLY);
 
             if (driver != null && driver.Password.Equals(command.Password))
             {
+                driverMapping.Set(driver.UserName, connectionIdOrNull);
                 success = true;
             }
             else
             {
                 success = false;
             }
-            driverMapping.Add(driver.UserName, connectionIdOrNull);
+            db.EndTransaction(TransactionEndOperation.READONLY);
+
             var response = new CmdReturnLoginDriver(command.Id, success);
             connection.Unicast(response, connectionIdOrNull);
         }
