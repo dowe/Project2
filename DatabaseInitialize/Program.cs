@@ -24,8 +24,8 @@ namespace DatabaseInitialize
             InitializeCars();
             InitializeDrivers();
             InitializeCustomer();
-         //   InitializeOrders();
-            InitializeOrdersForDailyStatistics();
+            InitializeOrders();
+            //InitializeOrdersForDailyStatistics();
         }
 
         private static void InitializeOrdersForDailyStatistics()
