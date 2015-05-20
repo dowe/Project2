@@ -37,7 +37,7 @@ namespace Common.Communication
         {
             deserializeBlock = new TransformBlock<Received<string>, Received<Command>>(receivedMessage =>
                 {
-                    return new Received<Command>(serializer.DeserializeCommand(receivedMessage.Value, parsableTypes.Keys), receivedMessage.ConnectionIdOrNull);
+                    return new Received<Command>(serializer.DeserializeCommandOrNull(receivedMessage.Value, parsableTypes.Keys), receivedMessage.ConnectionIdOrNull);
                 });
             injectBlock = new TransformBlock<Command, Received<Command>>(command =>
                 {
@@ -49,12 +49,18 @@ namespace Common.Communication
                 });
             handleBlock = new ActionBlock<Received<Command>>(receivedCommand =>
                 {
-                    OnBeforeHandlingComand(receivedCommand.Value);
-                    handlers.TryHandleCommand(receivedCommand.Value, receivedCommand.ConnectionIdOrNull);
+                    if (receivedCommand.Value != null)
+                    {
+                        OnBeforeHandlingComand(receivedCommand.Value);
+                        handlers.TryHandleCommand(receivedCommand.Value, receivedCommand.ConnectionIdOrNull);
+                    }
                 });
             waitHandleBlock = new ActionBlock<Received<Command>>(receivedCommand =>
                 {
-                    responseHandlers.TryHandleCommand(receivedCommand.Value, receivedCommand.ConnectionIdOrNull);
+                    if (receivedCommand.Value != null)
+                    {
+                        responseHandlers.TryHandleCommand(receivedCommand.Value, receivedCommand.ConnectionIdOrNull);
+                    }
                 });
 
             deserializeBlock.LinkTo(broadcastHandleBlock);

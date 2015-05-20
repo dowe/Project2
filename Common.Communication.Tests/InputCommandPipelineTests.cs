@@ -82,7 +82,7 @@ namespace Common.Communication.Tests
             var serializedCommand = "Look at me I am Json.";
             var deserializedCommand = new DummyCommand();
             var fakeSerializer = Substitute.For<ICommandSerializer>();
-            fakeSerializer.DeserializeCommand(serializedCommand, Arg.Any <IEnumerable<Type>>()).Returns(deserializedCommand);
+            fakeSerializer.DeserializeCommandOrNull(serializedCommand, Arg.Any <IEnumerable<Type>>()).Returns(deserializedCommand);
             var fakeHandler = Substitute.For<ICommandHandler>();
             fakeHandler.AcceptedType.Returns(typeof (DummyCommand));
             var fakeResponseHandler = Substitute.For<ICommandHandler>();
@@ -97,6 +97,33 @@ namespace Common.Communication.Tests
             testee.Stop();
             fakeHandler.Received().TryHandleCommand(deserializedCommand, connectionSource);
             fakeResponseHandler.Received().TryHandleCommand(deserializedCommand, connectionSource);
+        }
+
+        [TestMethod]
+        public void AddReceived_FirstWithoutMatchingThenWithMatchingCommandHandler_CallsCommandHandlerForSecond()
+        {
+            var connectionSource = "Look at me I am the sender.";
+            var unknownSerializedCommand = "Look at me I am unknown Json.";
+            var knownSerializedCommand = "Look at me I am known Json.";
+            var deserializedKnownCommand = new DummyCommand();
+            var fakeSerializer = Substitute.For<ICommandSerializer>();
+            fakeSerializer.DeserializeCommandOrNull(unknownSerializedCommand, Arg.Any <IEnumerable<Type>>()).Returns((Command)null);
+            fakeSerializer.DeserializeCommandOrNull(knownSerializedCommand, Arg.Any <IEnumerable<Type>>()).Returns((Command)deserializedKnownCommand);
+            var fakeHandler = Substitute.For<ICommandHandler>();
+            fakeHandler.AcceptedType.Returns(typeof (DummyCommand));
+            var fakeResponseHandler = Substitute.For<ICommandHandler>();
+            fakeResponseHandler.AcceptedType.Returns(typeof (DummyCommand));
+            var testee = CreateTestee(fakeSerializer);
+            testee.RegisterCommandHandler(fakeHandler);
+            testee.Start();
+            testee.RegisterResponseCommandHandler(fakeResponseHandler);
+
+            testee.AddReceived(unknownSerializedCommand, connectionSource);
+            testee.AddReceived(knownSerializedCommand, connectionSource);
+
+            testee.Stop();
+            fakeHandler.Received().TryHandleCommand(deserializedKnownCommand, connectionSource);
+            fakeResponseHandler.Received().TryHandleCommand(deserializedKnownCommand, connectionSource);
         }
 
         private class DummyCommand : Command

@@ -23,7 +23,7 @@ namespace Common.Communication.Tests
             command.Value = "Look at me I am a value.";
 
             string serializedCommand = testee.SerializeCommand(command);
-            DummyCommand deserializedCommand = (DummyCommand) testee.DeserializeCommand(serializedCommand, deserializableTypes);
+            DummyCommand deserializedCommand = (DummyCommand) testee.DeserializeCommandOrNull(serializedCommand, deserializableTypes);
 
             Assert.AreEqual(command, deserializedCommand);
         }
