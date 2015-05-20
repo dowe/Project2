@@ -27,7 +27,7 @@ namespace Server.CmdHandler
         {
             db.StartTransaction();
             List<Order> driversUnfinishedOrders =
-                db.GetAllOrders(o => o.Driver.UserName.Equals(command.Username) && o.CollectDate == null);
+                db.GetAllOrders(o => o.Driver != null && o.Driver.UserName.Equals(command.Username) && o.CollectDate == null);
             CmdReturnGetDriversUnfinishedOrders response = new CmdReturnGetDriversUnfinishedOrders(command.Id,
                 driversUnfinishedOrders);
 
