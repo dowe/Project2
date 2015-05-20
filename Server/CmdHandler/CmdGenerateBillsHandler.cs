@@ -197,7 +197,7 @@ namespace Server.CmdHandler
                      else
                      {
                          doc.Save(b.PDFPath);
-                         db.CreateBill(b);
+                         //db.CreateBill(b);
                      }
                  }
 
