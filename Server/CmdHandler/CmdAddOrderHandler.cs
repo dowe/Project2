@@ -59,7 +59,7 @@ namespace Server.CmdHandler
             {
                 // TODO: Call taxi.
             }
-
+            connection.Broadcast(new CmdUpdateOrder(order));
             CmdReturnAddOrder ret = new CmdReturnAddOrder(command.Id, order.OrderID);
             connection.Unicast(ret, connectionIdOrNull);
         }
