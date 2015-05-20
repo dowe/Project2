@@ -16,11 +16,12 @@ namespace Server.CmdHandler
 
         private IServerConnection connection = null;
         private IDatabaseCommunicator db = null;
-
-        public CmdLoginDriverHandler(IServerConnection connection, IDatabaseCommunicator db)
+        private Dictionary<string, string> driverMapping;
+        public CmdLoginDriverHandler(IServerConnection connection, IDatabaseCommunicator db, Dictionary<string,string> driverMapping)
         {
             this.connection = connection;
             this.db = db;
+            this.driverMapping = driverMapping;
         }
 
         protected override void Handle(CmdLoginDriver command, string connectionIdOrNull)
@@ -39,7 +40,7 @@ namespace Server.CmdHandler
             {
                 success = false;
             }
-
+            driverMapping.Add(driver.UserName, connectionIdOrNull);
             var response = new CmdReturnLoginDriver(command.Id, success);
             connection.Unicast(response, connectionIdOrNull);
         }

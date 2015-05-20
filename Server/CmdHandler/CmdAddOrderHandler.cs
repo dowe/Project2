@@ -19,12 +19,14 @@ namespace Server.CmdHandler
         private IServerConnection connection = null;
         private IDatabaseCommunicator db;
         private IDriverController driverController = null;
+        private Dictionary<string, string> driverMapping;
 
-        public CmdAddOrderHandler(IServerConnection connection, IDatabaseCommunicator db, IDriverController driverController)
+        public CmdAddOrderHandler(IServerConnection connection, IDatabaseCommunicator db, IDriverController driverController, Dictionary<string, string> driverMapping)
         {
             this.connection = connection;
             this.db = db;
             this.driverController = driverController;
+            this.driverMapping = driverMapping;
         }
 
         protected override void Handle(CmdAddOrder command, string connectionIdOrNull)
@@ -45,13 +47,19 @@ namespace Server.CmdHandler
 
             if (optimalDriverOrNull != null)
             {
-                // TODO: Notify driver.
+                CmdSendNotification sendnot = new CmdSendNotification(order);
+                string connectionId = driverMapping[optimalDriverOrNull.UserName];
+                if(connectionId == null)
+                {
+                    throw new Exception("Der Fahrer dem die Notification gesendet werden soll ist nicht eingeloggt.");
+                }
+                connection.Unicast(sendnot, connectionId);
             }
             else
             {
                 // TODO: Call taxi.
             }
-
+            connection.Broadcast(new CmdUpdateOrder(order));
             CmdReturnAddOrder ret = new CmdReturnAddOrder(command.Id, order.OrderID);
             connection.Unicast(ret, connectionIdOrNull);
         }

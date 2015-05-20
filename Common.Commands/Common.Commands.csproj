@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdSendNotification.cs" />
     <Compile Include="CmdAddOrder.cs" />
     <Compile Include="CmdAnnounceEmergency.cs" />
     <Compile Include="CmdCheckNotificationTimes.cs" />
