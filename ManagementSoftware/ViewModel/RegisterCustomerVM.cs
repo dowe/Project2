@@ -31,8 +31,8 @@ namespace ManagementSoftware.ViewModel
             _Customer.Address = new Address();
 
             _RegisterCustomerAction = new RelayCommand(RegisterCustomer);
-            _Title = Util.CreateValuePair<ETitle>(ETitle.Mr);
-            _SMSRequested = Util.CreateValuePair<ESMSRequested>(ESMSRequested.No);
+            Title = Util.CreateValuePair<ETitle>(ETitle.Mr);
+            SMSRequested = Util.CreateValuePair<ESMSRequested>(ESMSRequested.No);
         }
 
         public RelayCommand RegisterCustomerAction
