@@ -111,8 +111,13 @@ namespace ManagementSoftware.View
         public void RefreshData()
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            _cars = _connection.SendWait<CmdReturnGetAllOccupiedCars>(new CmdGetAllOccupiedCars()).OccupiedCars.ToList();
-            _customers = _connection.SendWait<CmdReturnGetAllCustomers>(new CmdGetAllCustomers()).Customers.ToList();
+            var cars = _connection.SendWait<CmdReturnGetAllOccupiedCars>(new CmdGetAllOccupiedCars());
+            var cust = _connection.SendWait<CmdReturnGetAllCustomers>(new CmdGetAllCustomers());
+            if (cars == null || cust == null)
+                return;
+
+            _cars = cars.OccupiedCars.ToList();
+            _customers = cust.Customers.ToList();
 
             SetMapIcons();
             RefreshDriver(_carIndex);

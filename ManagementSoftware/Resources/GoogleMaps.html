@@ -28,6 +28,16 @@
         width: 300px;
         white-space: nowrap;
     }
+
+    .labelZMS {
+        color: red;
+        font-family: "Lucida Grande", "Arial", sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+        width: 80px;
+        white-space: nowrap;
+    }
 </style>
 <script type="text/javascript">
 
@@ -167,8 +177,8 @@
                     map: map,
                     icon: 'microscope.png',
                     labelContent: title,
-                    labelAnchor: new google.maps.Point(50, 0),
-                    labelClass: "labelsHouse", // the CSS class for the label
+                    labelAnchor: new google.maps.Point(40, 0),
+                    labelClass: "labelZMS", // the CSS class for the label
                     labelStyle: { opacity: 0.75 },
                     title: tooltip,
                     zIndex: normalMarker()
