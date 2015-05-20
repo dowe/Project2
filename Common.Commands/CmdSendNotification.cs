@@ -11,7 +11,7 @@ namespace Common.Commands
     public class CmdSendNotification : Command
     {
 
-        public Order Order;
+        public Order Order { get; private set; }
 
         public CmdSendNotification(Order order)
         {

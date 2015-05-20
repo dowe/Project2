@@ -131,7 +131,7 @@ namespace DatabaseInitialize
                 CollectDate = DateTime.Now,
                 CompleteDate = DateTime.Now,
                 Invoiced = false,
-                RemindAfterFiveHours = false,
+                RemindedAfterFiveHours = false,
                 Customer = con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault(),
                 Test = new List<Test>()
                 {

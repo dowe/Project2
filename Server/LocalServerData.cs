@@ -26,5 +26,6 @@ namespace Server
         public Address ZmsAddress { get; private set; }
         public float RoadCostInEuroPerKm { get; private set; }
         public ScheduledTimer GenerateShiftScheduleTimer { get; set; }
+        public ScheduledTimer CheckOrdersFiveHoursLeftScheduledTimer { get; set; }
     }
 }

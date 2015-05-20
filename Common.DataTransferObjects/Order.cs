@@ -25,6 +25,7 @@ namespace Common.DataTransferObjects
             this.BringDate = null;
             this.CollectDate = null;
             this.CompleteDate = null;
+            this.RemindedAfterFiveHours = false;
             this.Test = new List<Test>();
             foreach(KeyValuePair<string, List<Analysis>> kVAnalysises in Analysises)
             {
@@ -71,7 +72,7 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual bool RemindAfterFiveHours
+		public virtual bool RemindedAfterFiveHours
 		{
 			get;
 			set;

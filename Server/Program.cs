@@ -56,6 +56,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSelectCarHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdCheckOrdersFiveHoursLeftHandler(connection, db, driverMapping));
             connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection, db));
             connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler(db));
             connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection, db));
@@ -81,6 +82,7 @@ namespace Server
             LocalServerData data)
         {
             data.GenerateShiftScheduleTimer = new GenerateShiftScheduleTimer(connection);
+            data.CheckOrdersFiveHoursLeftScheduledTimer = new CheckOrdersFiveHoursLeftScheduledTimer(connection);
             connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
             connection.InjectInternal(new CmdGenerateDailyStatistic());
             connection.InjectInternal(new CmdGenerateBills());

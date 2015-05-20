@@ -43,11 +43,10 @@ namespace Server.CmdHandler
                 Driver = optimalDriverOrNull
             };
             db.CreateOrder(order);
-            db.EndTransaction(TransactionEndOperation.SAVE);
 
             if (optimalDriverOrNull != null)
             {
-                CmdSendNotification sendNotification = new CmdSendNotification(order);
+                var sendNotification = new CmdSendNotification(order);
                 string connectionId = driverMap.ResolveConnectionIDOrNull(optimalDriverOrNull.UserName);
                 if(connectionId != null)
                 {
@@ -58,10 +57,11 @@ namespace Server.CmdHandler
             {
                 // TODO: Call taxi.
             }
-            connection.Broadcast(new CmdUpdateOrder(order));
 
             CmdReturnAddOrder ret = new CmdReturnAddOrder(command.Id, order.OrderID);
             connection.Unicast(ret, connectionIdOrNull);
+
+            db.EndTransaction(TransactionEndOperation.SAVE);
         }
     }
 }
