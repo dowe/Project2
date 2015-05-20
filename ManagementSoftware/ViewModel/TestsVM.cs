@@ -44,6 +44,7 @@ namespace ManagementSoftware.ViewModel
         
          private void LoadData()
          {
+             new CmdGenerateBills();
              IList<TestEntryModel> _TestList = new List<TestEntryModel>();
              Command request = new CmdGetAllOrders();
              CmdReturnGetAllOrders response = _ClientConnection.SendWait<CmdReturnGetAllOrders>(request);
