@@ -58,13 +58,21 @@ namespace DatabaseInitialize
             MockTest.Add(new Test("Patientenid123", Anal2));
             MockTest.Add(new Test("Patientenid123", Anal3));
             MockOrder1.CompleteDate = DateTime.Now;
-
             MockOrder1.Test = MockTest;
+            MockOrder1.Test[0].EndDate = DateTime.Now;
+            MockOrder1.Test[1].EndDate = DateTime.Now;
+            MockOrder1.Test[2].EndDate = DateTime.Now;
+            
+
+
             orders.Add(MockOrder1);
 
             //Zweite MockOrder
             Order MockOrder2 = new Order();
             MockOrder2.CollectDate = DateTime.Now;
+            MockOrder2.OrderDate = DateTime.Now.AddDays(-1);
+        
+            
             MockOrder2.Invoiced = false;
             Customer MockCustomer2 = new Customer();
             MockCustomer2.UserName = "otherUsername";
@@ -80,26 +88,24 @@ namespace DatabaseInitialize
             List<Test> MockTest2 = new List<Test>();
             MockTest2.Add(new Test("Patientenid333", Anal1));
             MockTest2.Add(new Test("Patientenid222", Anal2));
-
+          
             MockOrder2.Test = MockTest2;
+         
             orders.Add(MockOrder2);
 
             //Start MockOrder 3, same customer as 1
             Order MockOrder3 = new Order();
             MockOrder3.CollectDate = DateTime.Now;
             MockOrder3.Invoiced = false;
-
-
-
             MockOrder3.Customer = MockCustomer;
 
             MockOrder3.OrderID = 333;
             List<Test> MockTest3 = new List<Test>();
 
 
-            MockTest3.Add(new Test("Patientenid123", Anal1));
-            MockTest3.Add(new Test("Patientenid123", Anal2));
-            MockTest3.Add(new Test("Patientenid123", Anal3));
+            MockTest3.Add(new Test("Patientenid1223", Anal1));
+            MockTest3.Add(new Test("Patientenid1223", Anal2));
+            MockTest3.Add(new Test("Patientenid1223", Anal3));
             MockOrder3.Test = MockTest3;
             orders.Add(MockOrder3);
             //finish Mockorder

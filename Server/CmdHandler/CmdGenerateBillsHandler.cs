@@ -81,6 +81,7 @@ namespace Server.CmdHandler
                              
                          }
                      }
+
                      //now all Tests and the amount of Orders should be gathered correctly for the Customer
 
                      
@@ -129,9 +130,10 @@ namespace Server.CmdHandler
 
                      pricetotal = OrderAmount * b.Customer.TwoWayRoadCostInEuro;
 
-                     XRect orders = new XRect(marginLeft, y, page.Width, fontHeightSmall);
+                     XRect orders = new XRect(marginLeft, y, page.Width/2, fontHeightSmall);
                      gfx.DrawString(OrderAmount.ToString() + " Fahrt(en)", fontSmall, XBrushes.Black, orders, XStringFormats.TopLeft);
-                     gfx.DrawString((b.Customer.TwoWayRoadCostInEuro * OrderAmount).ToString(),fontSmall, XBrushes.Black, orders, XStringFormats.Center);
+                     tf.Alignment = XParagraphAlignment.Right;
+                     tf.DrawString((b.Customer.TwoWayRoadCostInEuro * OrderAmount).ToString("C"),fontSmall, XBrushes.Black, orders, XStringFormats.TopLeft);
                      y += fontHeightSmall;
                      y += 2*absatz;
 
@@ -145,9 +147,9 @@ namespace Server.CmdHandler
                      foreach (Test t in _TestList)
                      {
                          pricetotal += t.Analysis.PriceInEuro;
-                         XRect tests = new XRect(marginLeft, y, page.Width, fontHeightSmall);
+                         XRect tests = new XRect(marginLeft, y, page.Width/2, fontHeightSmall);
                          gfx.DrawString(t.Analysis.Name, fontSmall, XBrushes.Black, tests, XStringFormats.TopLeft);
-                         gfx.DrawString(t.Analysis.PriceInEuro.ToString(), fontSmall, XBrushes.Black, tests, XStringFormats.Center);
+                         tf.DrawString(t.Analysis.PriceInEuro.ToString("C"), fontSmall, XBrushes.Black, tests, XStringFormats.TopLeft);
                          y += fontHeightSmall;
                          TestAmount++;
                      }
@@ -156,16 +158,16 @@ namespace Server.CmdHandler
 
                      y += 2*absatz;
                      //Start Total
-                     XRect total1 = new XRect(30, y, page.Width, fontHeightSmall);
-                     XRect total2 = new XRect(marginLeft, y, page.Width , fontHeightSmall);
+                     XRect total1 = new XRect(0, y, page.Width, fontHeightSmall);
+                     XRect total2 = new XRect(marginLeft, y, page.Width/2 , fontHeightSmall);
                      gfx.DrawString("Gesamt:", fontSmallBold, XBrushes.Black, total1, XStringFormats.Center);
-                     gfx.DrawString(pricetotal.ToString() , fontSmallBold, XBrushes.Black, total2, XStringFormats.Center);
+                     tf.DrawString(pricetotal.ToString("C") , fontSmallBold, XBrushes.Black, total2, XStringFormats.TopLeft);
                      y += fontHeightSmall;
                      y += absatz;
 
-
+                     tf.Alignment = XParagraphAlignment.Left;
                      XRect totaltext = new XRect(marginLeft, y, page.Width-2*marginLeft, fontHeightSmall*4);
-                     tf.DrawString("Der Betrag in Höhe von " + pricetotal.ToString() +" wird von ihrem Konto (IBAN: "
+                     tf.DrawString("Der Betrag in Höhe von " + pricetotal.ToString("C") +" wird von ihrem Konto (IBAN: "
                          + b.Customer.BankAccount.IBAN 
                         + ") abgebucht."
                          , fontSmall, XBrushes.Black, totaltext, XStringFormats.TopLeft);
