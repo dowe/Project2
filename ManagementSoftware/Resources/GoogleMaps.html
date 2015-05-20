@@ -1,210 +1,227 @@
 ﻿<!-- saved from url=(0014)about:internet -->
 <html>
 <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <script type="text/javascript"
-            src="http://maps.google.com.mx/maps/api/js?sensor=true&language=de-DE&key=AIzaSyDAdzdTF82kLM_-Rz0xdskVUpMGEVqG-WQ"></script>
-    <script src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js'>
-    </script>
-    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
-    <style type="text/css">
-        .labels {
-            color: red;
-            font-family: "Lucida Grande", "Arial", sans-serif;
-            font-size: 13px;
-            font-weight: bold;
-            text-align: center;
-            width: 80px;
-            white-space: nowrap;
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+<script type="text/javascript"
+        src="http://maps.google.com.mx/maps/api/js?v=3.18&sensor=true&language=de-DE&key=AIzaSyDAdzdTF82kLM_-Rz0xdskVUpMGEVqG-WQ"></script>
+<script src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js'>
+    
+</script>
+<script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
+<style type="text/css">
+    .labels {
+        color: red;
+        font-family: "Lucida Grande", "Arial", sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+        width: 80px;
+        white-space: nowrap;
+    }
+
+    .labelsHouse {
+        color: #1E5861;
+        font-family: "Lucida Grande", "Arial", sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+        width: 300px;
+        white-space: nowrap;
+    }
+</style>
+<script type="text/javascript">
+
+    var directionsDisplay;
+    var geocoder;
+    var directionsService = new google.maps.DirectionsService();
+    var origin = new google.maps.LatLng(48.3817759, 8.1600809);
+    var destination = new google.maps.LatLng(48.3154922, 8.005414);
+    var map;
+
+    //initialisiert map
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+
+        var rendererOptions = {
+            map: map,
+            suppressMarkers: true
         }
+        directionsDisplay = new window.google.maps.DirectionsRenderer(rendererOptions);
 
-        .labelsHouse {
-            color: #1E5861;
-            font-family: "Lucida Grande", "Arial", sans-serif;
-            font-size: 13px;
-            font-weight: bold;
-            text-align: center;
-            width: 80px;
-            white-space: nowrap;
-        }
-    </style>
-    <script type="text/javascript">
+        var myOptions = {
+            zoom: 12,
+            center: origin,
+            mapTypeId: window.google.maps.MapTypeId.ROADMAP
+        };
+        map = new window.google.maps.Map(document.getElementById("googleMap"), myOptions);
+        directionsDisplay.setMap(map);
 
-        var directionsDisplay;
-        var geocoder;
-        var directionsService = new google.maps.DirectionsService();
-        var origin = new google.maps.LatLng(48.3817759, 8.1600809);
-        var destination = new google.maps.LatLng(48.3154922, 8.005414);
-        var map;
+        external.App.MapInitiliazingFinished();
+    }
 
-        //initialisiert map
-        function initialize() {
-            geocoder = new google.maps.Geocoder();
+    //markiert route und rechnet distanz aus
+    function navigateToAddress(fromLat, fromLon, toAddress) {
+        var from = new window.google.maps.LatLng(fromLat, fromLon);
+        calcRouteAddress(from, toAddress);
+    }
 
-            var rendererOptions = {
-                map: map,
-                suppressMarkers: true
+    //markiert route und rechnet distanz aus
+    function navigate(fromLat, fromLon, toLat, toLon) {
+        var from = new window.google.maps.LatLng(fromLat, fromLon);
+        var to = new window.google.maps.LatLng(toLat, toLon);
+        calcRoute(from, to);
+    }
+
+    //markiert die übergebene route in der map und ruft c# methode mit distanz als parameter auf
+    function calcRoute(origin1, destination1) {
+        var selectedMode = window.google.maps.TravelMode.DRIVING;
+        var request = {
+            origin: origin1,
+            destination: destination1,
+            travelMode: window.google.maps.TravelMode[selectedMode]
+        };
+        directionsService.route(request, function(response, status) {
+            if (status == window.google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
             }
-            directionsDisplay = new window.google.maps.DirectionsRenderer(rendererOptions);
+        });
+    }
 
-            var myOptions = {
-                zoom: 12,
-                center: origin,
-                mapTypeId: window.google.maps.MapTypeId.ROADMAP
-            };
-            map = new window.google.maps.Map(document.getElementById("googleMap"), myOptions);
-            directionsDisplay.setMap(map);
+    //holt LatLng für die übergebene Adresse und ruft calcRoute auf
+    function calcRouteAddress(from, address) {
+        geocoder.geocode({ 'address': address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var to = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+                calcRoute(from, to);
+            } else {
+                alert("JS-calcRouteAddress:Geocode of " + from + " to " + address + " was not successful for the following reason: " + status);
+            }
+        });
+    }
 
-            external.App.MapInitiliazingFinished();
-        }
+    //add marker (autos) welche von c# aus aufgerufen wird
+    function addCar(lat, long, title, tooltip) {
+        var latLng = new window.google.maps.LatLng(lat, long);
+        var marker1 = new MarkerWithLabel({
+            position: latLng,
+            map: map,
+            icon: 'car.png',
+            labelContent: title,
+            labelAnchor: new google.maps.Point(40, 0),
+            labelClass: "labels", // the CSS class for the label
+            labelStyle: { opacity: 0.75 },
+            title: tooltip,
+            zIndex: specialMarker()
 
-        //markiert route und rechnet distanz aus
-        function navigateToAddress(fromLat, fromLon, toAddress) {
-            var from = new window.google.maps.LatLng(fromLat, fromLon);
-            calcRouteAddress(from, toAddress);
-        }
+        });
+        marker1.setMap(map);
 
-        //markiert route und rechnet distanz aus
-        function navigate(fromLat, fromLon, toLat, toLon) {
-            var from = new window.google.maps.LatLng(fromLat, fromLon);
-            var to = new window.google.maps.LatLng(toLat, toLon);
-            calcRoute(from, to);
-        }
-
-        //markiert die übergebene route in der map und ruft c# methode mit distanz als parameter auf
-        function calcRoute(origin1, destination1) {
-            var selectedMode = window.google.maps.TravelMode.DRIVING;
-            var request = {
-                origin: origin1,
-                destination: destination1,
-                travelMode: window.google.maps.TravelMode[selectedMode]
-            };
-            directionsService.route(request, function (response, status) {
-                if (status == window.google.maps.DirectionsStatus.OK) {
-                    directionsDisplay.setDirections(response);
-                }
+        //hänge click-event an marker an
+        window.google.maps.event.addListener(marker1, 'click', function () {
+            var infowindow = new google.maps.InfoWindow({
+                content: marker1.title
             });
-        }
+            infowindow.open(map, marker1);
+            external.App.CarClicked(marker1.labelContent);
+        });
+    }
 
-        //holt LatLng für die übergebene Adresse und ruft calcRoute auf
-        function calcRouteAddress(from, address) {
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    map.setCenter(results[0].geometry.location);
-                    var to = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-                    calcRoute(from, to);
-                } else {
-                    alert("JS-calcRouteAddress:Geocode of " + from + " to " + address + " was not successful for the following reason: " + status);
-                }
-            });
-        }
+    //add marker für eine Adresse
+    function addAddress(address, title, tooltip) {
+        geocoder.geocode({ 'address': address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker1 = new MarkerWithLabel({
+                    position: results[0].geometry.location,
+                    map: map,
+                    icon: 'doctor.png',
+                    labelContent: title,
+                    labelAnchor: new google.maps.Point(150, 0),
+                    labelClass: "labelsHouse", // the CSS class for the label
+                    labelStyle: { opacity: 0.75 },
+                    title: tooltip,
+                    zIndex: normalMarker()
+                });
+                marker1.setMap(map);
 
-        //add marker (autos) welche von c# aus aufgerufen wird
-        function addCar(lat, long, title) {
-            var latLng = new window.google.maps.LatLng(lat, long);
-            var marker1 = new MarkerWithLabel({
-                position: latLng,
-                map: map,
-                icon: 'car.png',
-                labelContent: title,
-                labelAnchor: new google.maps.Point(40, 0),
-                labelClass: "labels", // the CSS class for the label
-                labelStyle: { opacity: 0.75 }
-            });
-            marker1.setMap(map);
-
-            //hänge click-event an marker an
-            window.google.maps.event.addListener(marker1, 'click', function () {
-                external.App.CarClicked(marker1.labelContent);
-            });
-        }
-
-        //add marker für eine Adresse
-        function addAddress(address, title) {
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    map.setCenter(results[0].geometry.location);
-                    var marker1 = new MarkerWithLabel({
-                        position: results[0].geometry.location,
-                        map: map,
-                        icon: 'doctor.png',
-                        labelContent: title,
-                        labelAnchor: new google.maps.Point(50, 0),
-                        labelClass: "labelsHouse", // the CSS class for the label
-                        labelStyle: { opacity: 0.75 },
-                        title: title
+                //hänge click-event an marker an
+                window.google.maps.event.addListener(marker1, 'click', function() {
+                    var infowindow = new google.maps.InfoWindow({
+                        content: marker1.title
                     });
-                    marker1.setMap(map);
+                    infowindow.open(map, marker1);
+                });
+            } else {
+                alert("JS-addAddress: Geocode of " + address + " was not successful for the following reason: " + status);
+            }
+        });
+    }
 
-                    //hänge click-event an marker an
-                    window.google.maps.event.addListener(marker1, 'click', function () {
-                        var infowindow = new google.maps.InfoWindow({
-                            content: marker1.title
-                        });
-                        infowindow.open(map, marker1);
+    function addLaboratory(address, title, tooltip) {
+        geocoder.geocode({ 'address': address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker1 = new MarkerWithLabel({
+                    position: results[0].geometry.location,
+                    map: map,
+                    icon: 'microscope.png',
+                    labelContent: title,
+                    labelAnchor: new google.maps.Point(50, 0),
+                    labelClass: "labelsHouse", // the CSS class for the label
+                    labelStyle: { opacity: 0.75 },
+                    title: tooltip,
+                    zIndex: normalMarker()
+                });
+                marker1.setMap(map);
+
+                //hänge click-event an marker an
+                window.google.maps.event.addListener(marker1, 'click', function() {
+                    var infowindow = new google.maps.InfoWindow({
+                        content: marker1.title
                     });
-                } else {
-                    alert("JS-addAddress: Geocode of " + address + " was not successful for the following reason: " + status);
-                }
-            });
-        }
+                    infowindow.open(map, marker1);
+                });
+            } else {
+                alert("JS-addAddress: Geocode of " + address + " was not successful for the following reason: " + status);
+            }
+        });
+    }
 
-        function addLaboratory(address, title) {
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    map.setCenter(results[0].geometry.location);
-                    var marker1 = new MarkerWithLabel({
-                        position: results[0].geometry.location,
-                        map: map,
-                        icon: 'microscope.png',
-                        labelContent: title,
-                        labelAnchor: new google.maps.Point(50, 0),
-                        labelClass: "labelsHouse", // the CSS class for the label
-                        labelStyle: { opacity: 0.75 },
-                        title: title
-                    });
-                    marker1.setMap(map);
+    function specialMarker() {
+        return 9999;
+    }
 
-                    //hänge click-event an marker an
-                    window.google.maps.event.addListener(marker1, 'click', function () {
-                        var infowindow = new google.maps.InfoWindow({
-                            content: marker1.title
-                        });
-                        infowindow.open(map, marker1);
-                    });
-                } else {
-                    alert("JS-addAddress: Geocode of " + address + " was not successful for the following reason: " + status);
-                }
-            });
-        }
+    function normalMarker() {
+        return Math.floor(Math.random()*1000);
+    }
+    //addHouse für eine Adresse NICHT BENÖTIGT
+    //function addHouse(lat, long, title) {
+    //    var latLng = new window.google.maps.LatLng(lat, long);
+    //    var marker1 = new MarkerWithLabel({
+    //        position: latLng,
+    //        map: map,
+    //        icon: 'hobbitHouse.png',
+    //        labelContent: title,
+    //        labelAnchor: new google.maps.Point(50, 0),
+    //        labelClass: "labelsHouse", // the CSS class for the label
+    //        labelStyle: { opacity: 0.75 },
+    //        title: title
+    //    });
+    //    marker1.setMap(map);
 
-        //addHouse für eine Adresse NICHT BENÖTIGT
-        //function addHouse(lat, long, title) {
-        //    var latLng = new window.google.maps.LatLng(lat, long);
-        //    var marker1 = new MarkerWithLabel({
-        //        position: latLng,
-        //        map: map,
-        //        icon: 'hobbitHouse.png',
-        //        labelContent: title,
-        //        labelAnchor: new google.maps.Point(50, 0),
-        //        labelClass: "labelsHouse", // the CSS class for the label
-        //        labelStyle: { opacity: 0.75 },
-        //        title: title
-        //    });
-        //    marker1.setMap(map);
+    //    //hänge click-event an marker an
+    //    window.google.maps.event.addListener(marker1, 'click', function () {
+    //        var infowindow = new google.maps.InfoWindow({
+    //            content: marker1.title
+    //        });
+    //        infowindow.open(map, marker1);
+    //    });
+    //}
 
-        //    //hänge click-event an marker an
-        //    window.google.maps.event.addListener(marker1, 'click', function () {
-        //        var infowindow = new google.maps.InfoWindow({
-        //            content: marker1.title
-        //        });
-        //        infowindow.open(map, marker1);
-        //    });
-        //}
-
-        //rufe initialize bei fensteraufruf auf
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+    //rufe initialize bei fensteraufruf auf
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 </head>
 <body>
     <div id="googleMap" style="width:100%; height:100%"></div>
