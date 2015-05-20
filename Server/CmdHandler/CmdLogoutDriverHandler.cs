@@ -16,9 +16,9 @@ namespace Server.CmdHandler
 
         private IServerConnection connection = null;
         private IDatabaseCommunicator db = null;
-        private Dictionary<string, string> driverMapping;
+        private UsernameToConnectionIdMapping driverMapping = null;
 
-        public CmdLogoutDriverHandler(IServerConnection connection, IDatabaseCommunicator db, Dictionary<string, string> driverMapping)
+        public CmdLogoutDriverHandler(IServerConnection connection, IDatabaseCommunicator db, UsernameToConnectionIdMapping driverMapping)
         {
             this.connection = connection;
             this.db = db;

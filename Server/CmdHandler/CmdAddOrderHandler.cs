@@ -17,16 +17,16 @@ namespace Server.CmdHandler
     {
 
         private IServerConnection connection = null;
-        private IDatabaseCommunicator db;
+        private IDatabaseCommunicator db = null;
         private IDriverController driverController = null;
-        private Dictionary<string, string> driverMapping;
+        private UsernameToConnectionIdMapping driverMap = null;
 
-        public CmdAddOrderHandler(IServerConnection connection, IDatabaseCommunicator db, IDriverController driverController, Dictionary<string, string> driverMapping)
+        public CmdAddOrderHandler(IServerConnection connection, IDatabaseCommunicator db, IDriverController driverController, UsernameToConnectionIdMapping driverMap)
         {
             this.connection = connection;
             this.db = db;
             this.driverController = driverController;
-            this.driverMapping = driverMapping;
+            this.driverMap = driverMap;
         }
 
         protected override void Handle(CmdAddOrder command, string connectionIdOrNull)
@@ -47,19 +47,19 @@ namespace Server.CmdHandler
 
             if (optimalDriverOrNull != null)
             {
-                CmdSendNotification sendnot = new CmdSendNotification(order);
-                string connectionId = driverMapping[optimalDriverOrNull.UserName];
-                if(connectionId == null)
+                CmdSendNotification sendNotification = new CmdSendNotification(order);
+                string connectionId = driverMap.ResolveConnectionIDOrNull(optimalDriverOrNull.UserName);
+                if(connectionId != null)
                 {
-                    throw new Exception("Der Fahrer dem die Notification gesendet werden soll ist nicht eingeloggt.");
+                    connection.Unicast(sendNotification, connectionId);
                 }
-                connection.Unicast(sendnot, connectionId);
             }
             else
             {
                 // TODO: Call taxi.
             }
             connection.Broadcast(new CmdUpdateOrder(order));
+
             CmdReturnAddOrder ret = new CmdReturnAddOrder(command.Id, order.OrderID);
             connection.Unicast(ret, connectionIdOrNull);
         }

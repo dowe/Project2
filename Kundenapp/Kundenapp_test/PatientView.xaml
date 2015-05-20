@@ -8,18 +8,27 @@
 						<ViewCell>
 							<ViewCell.View>
 								<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
-									<StackLayout HorizontalOptions="FillAndExpand">
-										<Label Text="Patient" Style="{DynamicResource TitleStyle}"/>
-										<Label Text="Benötigte Proben"/>
-										<Label Text="Untersuchungen"/>
-										<Button Text="Bearbeiten" Command="{Binding EditCMD}"/>
-									</StackLayout>
-									<StackLayout HorizontalOptions="FillAndExpand">
-										<Label Text="{Binding PatientID}"/>
-										<Label Text="{Binding Samples}"/>
-										<Label Text="{Binding Analysises}"/>
-										<Button Text="Löschen" Command="{Binding DelCMD}"/>
-									</StackLayout>
+									<Grid>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+										<Label Grid.Column="0" Grid.Row="0" Text="Patient" Style="{DynamicResource TitleStyle}"/>
+										<Label Grid.Column="0" Grid.Row="1" Text="Benötigte Proben"/>
+										<Label Grid.Column="0" Grid.Row="2" Text="Untersuchungen"/>
+										<Button Grid.Column="0" Grid.Row="3" Text="Bearbeiten" Command="{Binding EditCMD}"/>
+
+										<Label Grid.Column="1" Grid.Row="0" Text="{Binding PatientID}"/>
+										<Label Grid.Column="1" Grid.Row="1" Text="{Binding Samples}"/>
+										<Label Grid.Column="1" Grid.Row="2" Text="{Binding Analysises}"/>
+										<Button Grid.Column="1" Grid.Row="3" Text="Löschen" Command="{Binding DelCMD}"/>
+									</Grid>
 								</StackLayout>	
 							</ViewCell.View>
 						</ViewCell>
