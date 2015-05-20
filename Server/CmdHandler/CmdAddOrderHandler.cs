@@ -49,11 +49,10 @@ namespace Server.CmdHandler
             {
                 CmdSendNotification sendNotification = new CmdSendNotification(order);
                 string connectionId = driverMap.ResolveConnectionIDOrNull(optimalDriverOrNull.UserName);
-                if(connectionId == null)
+                if(connectionId != null)
                 {
-                    throw new Exception("Der Fahrer dem die Notification gesendet werden soll ist nicht eingeloggt.");
+                    connection.Unicast(sendNotification, connectionId);
                 }
-                connection.Unicast(sendNotification, connectionId);
             }
             else
             {
