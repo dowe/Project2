@@ -10,6 +10,7 @@ namespace Server.Sms
         private const string fileName = "GMailAccount.txt";
         private string user;
         private string password;
+        public bool Enabled { get; private set; }
 
         public SmsSending()
         {
@@ -20,11 +21,13 @@ namespace Server.Sms
                 string[] credentials = File.ReadAllLines(path);
                 user = credentials[0];
                 password = credentials[1];
+                Enabled = true;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Fehler beim Einlesen der GMail Account Daten (" + e.Message + ")");
-                throw;
+                Console.WriteLine("Fehler beim Einlesen der GMail Account Daten (" + e.Message +
+                                  "). SMS Sending ist disabled.");
+                Enabled = false;
             }
         }
 
@@ -36,32 +39,35 @@ namespace Server.Sms
         /// <param name="message">the message to send</param>
         public void Send(string number, string message)
         {
-            MailMessage mail = new MailMessage();
-            SmtpClient smtp = new SmtpClient();
-            NetworkCredential gmailLogin = new NetworkCredential(user, password);
-            MailAddress fromAddress = new MailAddress(user);
-
-            // Gmail specific smtp setup
-            smtp.Host = "smtp.gmail.com";
-            smtp.Port = 587;
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.UseDefaultCredentials = false;
-            smtp.EnableSsl = true;
-            smtp.Credentials = gmailLogin;
-
-            // Make the mail
-            mail.From = fromAddress;
-            mail.Subject = number.ToString();
-            mail.Body = message;
-            mail.To.Add(user);
-
-            try
+            if (Enabled)
             {
-                smtp.Send(mail);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Fehler beim Senden der Mail (" + e.Message + ")");
+                MailMessage mail = new MailMessage();
+                SmtpClient smtp = new SmtpClient();
+                NetworkCredential gmailLogin = new NetworkCredential(user, password);
+                MailAddress fromAddress = new MailAddress(user);
+
+                // Gmail specific smtp setup
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.UseDefaultCredentials = false;
+                smtp.EnableSsl = true;
+                smtp.Credentials = gmailLogin;
+
+                // Make the mail
+                mail.From = fromAddress;
+                mail.Subject = number.ToString();
+                mail.Body = message;
+                mail.To.Add(user);
+
+                try
+                {
+                    smtp.Send(mail);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Fehler beim Senden der Mail (" + e.Message + ")");
+                }
             }
         }
     }
