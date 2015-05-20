@@ -11,6 +11,10 @@ namespace Kundenapp
 		{
 			InitializeComponent ();
 			BindingContext = App.Locator.AnalysisVM;
+			this.Disappearing += (sender, e) => {
+				AnalysisSelectionVM vm = (BindingContext as AnalysisSelectionVM);
+				vm.Patient.ChangedCMD.Execute(null);
+			};
 		}
 	}
 }

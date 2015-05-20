@@ -37,71 +37,7 @@ namespace Server.CmdHandler
              _OrderList = db.GetAllOrders(x => x.Invoiced == false);
              
 
-             //Start Creating a Mockorder for testing
-             Order MockOrder1 = new Order();
-             MockOrder1.CollectDate = DateTime.Now;
-             MockOrder1.Invoiced = false;
-             Customer MockCustomer = new Customer();
-             MockCustomer.UserName = "myUsername";
-             MockCustomer.LastName = "Müller";
-             MockCustomer.FirstName = "Hans";
-
-             MockCustomer.BankAccount = new BankAccount("DE 2323 1212 3333 1111", "Hans Müller");
-
-             MockCustomer.TwoWayRoadCostInEuro = 42.11f;
-             MockOrder1.Customer = MockCustomer;
-           
-             MockOrder1.OrderID = 1111;
-             List<Test> MockTest = new List<Test>();
-             MockTest.Add(new Test("Patientenid123", new Analysis("Blutzeug", 1.0f, 11.0f, "Kilo", 42.42f, SampleType.BLOOD)));
-             MockTest.Add(new Test("Patientenid222", new Analysis("Urinzeug", 1.0f, 11.0f, "Kilo", 35.99f, SampleType.URINE)));
-             MockTest.Add(new Test("Patientenid123", new Analysis("Blutzeug", 1.0f, 11.0f, "Kilo", 42.42f, SampleType.BLOOD)));
-             MockTest.Add(new Test("Patientenid999", new Analysis("Blutzeug", 1.0f, 11.0f, "Kilo", 42.42f, SampleType.BLOOD)));
-             MockTest.Add(new Test("Patientenid123", new Analysis("Urinzeug", 1.0f, 11.0f, "Kilo", 35.99f, SampleType.URINE)));
-             MockOrder1.Test = MockTest;
-             _OrderList.Add(MockOrder1);
-
-             //Zweite MockOrder
-             Order MockOrder2 = new Order();
-             MockOrder2.CollectDate = DateTime.Now;
-             MockOrder2.Invoiced = false;
-             Customer MockCustomer2 = new Customer();
-             MockCustomer2.UserName = "otherUsername";
-             MockCustomer2.LastName = "Maier";
-             MockCustomer2.FirstName = "Peter";
-
-             MockCustomer2.BankAccount = new BankAccount("DE 2323 1212 3333 1111", "Maier Peter");
-
-             MockCustomer2.TwoWayRoadCostInEuro = 69.96f;
-             MockOrder2.Customer = MockCustomer2;
-
-             MockOrder2.OrderID = 2222;
-             List<Test> MockTest2 = new List<Test>();
-             MockTest2.Add(new Test("Patientenid123", new Analysis("Spuckezeug", 1.0f, 11.0f, "Kilo", 33.33f, SampleType.SALIVA)));
-             MockTest2.Add(new Test("Patientenid222", new Analysis("Urinzeug", 1.0f, 11.0f, "Kilo", 35.99f, SampleType.URINE)));
-    
-             MockOrder2.Test = MockTest2;
-             _OrderList.Add(MockOrder2);
-
-             //Start MockOrder 3, same customer as 1
-             Order MockOrder3 = new Order();
-             MockOrder3.CollectDate = DateTime.Now;
-             MockOrder3.Invoiced = false;
-
-
-          
-             MockOrder3.Customer = MockCustomer;
-
-             MockOrder3.OrderID = 333;
-             List<Test> MockTest3 = new List<Test>();
-             MockTest3.Add(new Test("Patientenid123", new Analysis("Spermazeug", 1.0f, 11.0f, "Kilo", 33.33f, SampleType.SPERM)));
-             MockTest3.Add(new Test("Patientenid222", new Analysis("Urinzeug", 1.0f, 11.0f, "Kilo", 35.99f, SampleType.URINE)));
-             MockTest3.Add(new Test("Patientenid123", new Analysis("Spermazeug", 1.0f, 11.0f, "Kilo", 33.33f, SampleType.SPERM)));
-             MockTest3.Add(new Test("Patientenid999", new Analysis("Blutzeug", 1.0f, 11.0f, "Kilo", 42.42f, SampleType.BLOOD)));
             
-             MockOrder3.Test = MockTest3;
-             _OrderList.Add(MockOrder3);
-             //finish Mockorder
 
              
              DateTime now = DateTime.Now;
