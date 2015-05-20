@@ -24,8 +24,8 @@ namespace DatabaseInitialize
             InitializeCars();
             InitializeDrivers();
             InitializeCustomer();
-         //   InitializeOrders();
-            InitializeOrdersForDailyStatistics();
+            InitializeOrders();
+            //InitializeOrdersForDailyStatistics();
         }
 
         private static void InitializeOrdersForDailyStatistics()
@@ -58,13 +58,21 @@ namespace DatabaseInitialize
             MockTest.Add(new Test("Patientenid123", Anal2));
             MockTest.Add(new Test("Patientenid123", Anal3));
             MockOrder1.CompleteDate = DateTime.Now;
-
             MockOrder1.Test = MockTest;
+            MockOrder1.Test[0].EndDate = DateTime.Now;
+            MockOrder1.Test[1].EndDate = DateTime.Now;
+            MockOrder1.Test[2].EndDate = DateTime.Now;
+            
+
+
             orders.Add(MockOrder1);
 
             //Zweite MockOrder
             Order MockOrder2 = new Order();
             MockOrder2.CollectDate = DateTime.Now;
+            MockOrder2.OrderDate = DateTime.Now.AddDays(-1);
+        
+            
             MockOrder2.Invoiced = false;
             Customer MockCustomer2 = new Customer();
             MockCustomer2.UserName = "otherUsername";
@@ -80,26 +88,24 @@ namespace DatabaseInitialize
             List<Test> MockTest2 = new List<Test>();
             MockTest2.Add(new Test("Patientenid333", Anal1));
             MockTest2.Add(new Test("Patientenid222", Anal2));
-
+          
             MockOrder2.Test = MockTest2;
+         
             orders.Add(MockOrder2);
 
             //Start MockOrder 3, same customer as 1
             Order MockOrder3 = new Order();
             MockOrder3.CollectDate = DateTime.Now;
             MockOrder3.Invoiced = false;
-
-
-
             MockOrder3.Customer = MockCustomer;
 
             MockOrder3.OrderID = 333;
             List<Test> MockTest3 = new List<Test>();
 
 
-            MockTest3.Add(new Test("Patientenid123", Anal1));
-            MockTest3.Add(new Test("Patientenid123", Anal2));
-            MockTest3.Add(new Test("Patientenid123", Anal3));
+            MockTest3.Add(new Test("Patientenid1223", Anal1));
+            MockTest3.Add(new Test("Patientenid1223", Anal2));
+            MockTest3.Add(new Test("Patientenid1223", Anal3));
             MockOrder3.Test = MockTest3;
             orders.Add(MockOrder3);
             //finish Mockorder
@@ -267,14 +273,14 @@ namespace DatabaseInitialize
         {
             LaborContext con = new LaborContext();
             List<Customer> customers = new List<Customer>();
-            customers.Add(new Customer("Dr.", "House", "house", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Dr. House imba Werkstatt", new BankAccount("SDLFKJSDLKFJ", "Dr. House")));
-            customers.Add(new Customer("Alice", "Vette", "vette", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Vetter Alice Fachärztin für Allgemeinmedizin", new BankAccount("1asdf243ew", "Alice Vette")));
-            customers.Add(new Customer("Wolfgang", "Bätz", "lolo", "asdf", new Address("Am Marktplatz 7", "77652", "Offenburg"), "Bätz Wolfgang Dr.med. Gefäßchirurg", new BankAccount("ASDLF23456", "Wolfgang Bätz"), true, "107438570935"));
-            customers.Add(new Customer("Michael", "Brake", "holzmichel", "asdf", new Address("Hauptstr. 98", "77652", "Offenburg"), "Brake Michael Dr. med. Arzt für Urologie", new BankAccount("ALKFJ34565768", "Michael Brake"), true, "9347983476"));
-            customers.Add(new Customer("Elke", "Brüderle", "Elli", "asdf", new Address("Ebertplatz 12", "77652", "Offenburg"), "Brüderle Elke Dr. Frauenärztin", new BankAccount("LKFJGFG23456", "Brüderle Elke")));
-            customers.Add(new Customer("Traunecker", "Ulrich", "ulli", "asdf", new Address("Leutkirchstraße 13", "77723", "Gengenbach"), "Dr. med. Ulrich Traunecker", new BankAccount("UZJH87698347", "Ulrich Traunecker"), true, "379786546"));
-            customers.Add(new Customer("Matthias", "Ruff", "ruffi", "asdf", new Address("Hauptstraße 24", "77723", "Gengenbach"), "Dr. med. Matthias Ruff", new BankAccount("HUGZGU87687625", "Matthias Ruff")));
-            customers.Add(new Customer("Stefan", "Leuthner", "leuti", "asdf", new Address("Hauptstraße 61", "77799", "Ortenberg"), "Herr Dr. med. Stefan Leuthner", new BankAccount("UIGUZ7868", "Leuthners Frau")));
+            customers.Add(new Customer("Dr.", "House", "house", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Dr. House imba Werkstatt", new BankAccount("SDLFKJSDLKFJ", "Dr. House")){TwoWayRoadCostInEuro = 11.11f});
+            customers.Add(new Customer("Alice", "Vette", "vette", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Vetter Alice Fachärztin für Allgemeinmedizin", new BankAccount("1asdf243ew", "Alice Vette")) { TwoWayRoadCostInEuro = 1.11f });
+            customers.Add(new Customer("Wolfgang", "Bätz", "lolo", "asdf", new Address("Am Marktplatz 7", "77652", "Offenburg"), "Bätz Wolfgang Dr.med. Gefäßchirurg", new BankAccount("ASDLF23456", "Wolfgang Bätz"), true, "107438570935") { TwoWayRoadCostInEuro = 2.11f });
+            customers.Add(new Customer("Michael", "Brake", "holzmichel", "asdf", new Address("Hauptstr. 98", "77652", "Offenburg"), "Brake Michael Dr. med. Arzt für Urologie", new BankAccount("ALKFJ34565768", "Michael Brake"), true, "9347983476") { TwoWayRoadCostInEuro = 44.11f });
+            customers.Add(new Customer("Elke", "Brüderle", "Elli", "asdf", new Address("Ebertplatz 12", "77652", "Offenburg"), "Brüderle Elke Dr. Frauenärztin", new BankAccount("LKFJGFG23456", "Brüderle Elke")) { TwoWayRoadCostInEuro = 1.11f });
+            customers.Add(new Customer("Traunecker", "Ulrich", "ulli", "asdf", new Address("Leutkirchstraße 13", "77723", "Gengenbach"), "Dr. med. Ulrich Traunecker", new BankAccount("UZJH87698347", "Ulrich Traunecker"), true, "379786546") { TwoWayRoadCostInEuro = 0.11f });
+            customers.Add(new Customer("Matthias", "Ruff", "ruffi", "asdf", new Address("Hauptstraße 24", "77723", "Gengenbach"), "Dr. med. Matthias Ruff", new BankAccount("HUGZGU87687625", "Matthias Ruff")) { TwoWayRoadCostInEuro = 5.11f });
+            customers.Add(new Customer("Stefan", "Leuthner", "leuti", "asdf", new Address("Hauptstraße 61", "77799", "Ortenberg"), "Herr Dr. med. Stefan Leuthner", new BankAccount("UIGUZ7868", "Leuthners Frau")) { TwoWayRoadCostInEuro = 6.11f });
             con.Customer.AddRange(customers);
             con.SaveChanges();
         }

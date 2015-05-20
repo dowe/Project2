@@ -28,13 +28,19 @@ namespace Common.DataTransferObjects
 			set;
 		}
         
-        [Key, Column(Order = 0)]
         public virtual Customer Customer
         {
             get;
             set;
         }
 
+        [ForeignKey("Customer")]
+        [Key, Column(Order = 0)]
+        public virtual String CustomerUserName
+        {
+            get;
+            set;
+        }
 	}
 }
 

@@ -213,6 +213,11 @@ namespace Server.DatabaseCommunication
                 Context.Analysis.Attach(an);    
             }
         }
-    }
+
+	    public void CreateBill(Bill bill)
+	    {
+	        Context.Bill.Add(bill);
+	    }
+	}
 }
 

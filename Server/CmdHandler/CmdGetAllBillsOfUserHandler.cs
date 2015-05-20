@@ -26,10 +26,11 @@ namespace Server.CmdHandler
         {
             db.StartTransaction();
             var billsRaw = db.GetAllBills(b => b.Customer.UserName == command.Username);
-            db.EndTransaction(TransactionEndOperation.READONLY);
+           
 
             var response = new CmdReturnGetAllBillsOfUser(command.Id, billsRaw);
             connection.Unicast(response, connectionIdOrNull);
+            db.EndTransaction(TransactionEndOperation.READONLY);
         }
     }
 }
