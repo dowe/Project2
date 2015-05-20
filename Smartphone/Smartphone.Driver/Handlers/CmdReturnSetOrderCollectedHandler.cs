@@ -17,7 +17,10 @@ namespace Smartphone.Driver.Handlers
 			
 		protected override void Handle (CmdReturnSetOrderCollected command, string connectionIdOrNull)
 		{
-			orders.RemoveSingle (o => o.OrderID == command.OrderID);
+			if (command.Success)
+			{
+				orders.RemoveSingle (o => o.OrderID == command.OrderID);
+			}
 		}
 
 	}
