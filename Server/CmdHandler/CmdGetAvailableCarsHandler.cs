@@ -26,7 +26,7 @@ namespace Server.CmdHandler
         protected override void Handle(CmdGetAvailableCars command, string connectionIdOrNull)
         {
             db.StartTransaction();
-            List<Car> cars = db.GetAllCars(c => c.Roadworthy && c.CurrentDriver == null);
+            List<Car> cars = db.GetAllCars(c => c.CurrentDriver == null);
 
             CmdReturnGetAvailableCars response = new CmdReturnGetAvailableCars(command.Id, cars);
 
