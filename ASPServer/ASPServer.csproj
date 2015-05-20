@@ -205,6 +205,10 @@
       <Project>{3476b14d-b58a-457c-8357-ce9801106aae}</Project>
       <Name>Common.DataTransferObjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common.Util\Common.Util.csproj">
+      <Project>{12f1826a-1f92-40f8-bb4c-7ee98c343ba9}</Project>
+      <Name>Common.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

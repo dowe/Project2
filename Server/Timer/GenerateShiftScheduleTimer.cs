@@ -16,7 +16,7 @@ namespace Server.Timer
         {
             this.connection = connection;
 
-            Start(GetTimeSpan, TimeElapsed);
+            Start(GetTimeSpan, TimeElapsed, false);
         }
 
         private void TimeElapsed()

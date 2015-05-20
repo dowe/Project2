@@ -51,11 +51,14 @@ namespace ManagementSoftware.ViewModel
          {
              get
              {
-                 return _DailyStatistic.Date.AddDays(-1).ToString("dd-MM-yyyy") + " bis " + _DailyStatistic.Date.ToString("dd-MM-yyyy") ;
+                 if (_DailyStatistic.Date == default(DateTime))
+                     return "Fehler";
+                 else
+                     return _DailyStatistic.Date.AddDays(-1).ToString("dd-MM-yyyy") + " bis " + _DailyStatistic.Date.ToString("dd-MM-yyyy") ;
              }
              set
              {
-                 TimeSpan = _DailyStatistic.Date.AddDays(1).ToString("dd-MM-yyyy") + " bis " + _DailyStatistic.Date.ToString("dd-MM-yyyy");
+                 TimeSpan = _DailyStatistic.Date.AddDays(-1).ToString("dd-MM-yyyy") + " bis " + _DailyStatistic.Date.ToString("dd-MM-yyyy");
                  RaisePropertyChanged();
 
              }

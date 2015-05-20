@@ -12,11 +12,13 @@ namespace Server.Timer
         private Func<TimeSpan> _GetSpan;
         private Action _DoActionScheduled;
         private CancellationTokenSource _ctSource;
+        private bool once;
 
-        protected void Start(Func<TimeSpan> _GetSpan, Action _DoActionScheduled)
+        protected void Start(Func<TimeSpan> _GetSpan, Action _DoActionScheduled, bool once)
         {
             this._GetSpan = _GetSpan;
             this._DoActionScheduled = _DoActionScheduled;
+            this.once = once;
             RunCode();
         } 
 
@@ -32,7 +34,10 @@ namespace Server.Timer
                     _DoActionScheduled();
 
                     //setup call next day
-                    RunCode();
+                    if (!once)
+                    {
+                        RunCode();
+                    }
 
                 }, _ctSource.Token);
         }

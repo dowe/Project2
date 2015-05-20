@@ -24,7 +24,87 @@ namespace DatabaseInitialize
             InitializeCars();
             InitializeDrivers();
             InitializeCustomer();
-            InitializeOrders();
+         //   InitializeOrders();
+            InitializeOrdersForDailyStatistics();
+        }
+
+        private static void InitializeOrdersForDailyStatistics()
+        {
+            LaborContext con = new LaborContext();
+            List<Order> orders = new List<Order>();
+            
+
+            //Start Creating a Mockorder for testing
+            Order MockOrder1 = new Order();
+            MockOrder1.CollectDate = DateTime.Now;
+            MockOrder1.Invoiced = false;
+            Customer MockCustomer = new Customer();
+            MockCustomer.UserName = "myUsername";
+            MockCustomer.LastName = "Müller";
+            MockCustomer.FirstName = "Hans";
+
+            MockCustomer.BankAccount = new BankAccount("DE 2323 1212 3333 1111", "Hans Müller");
+            MockCustomer.Address = new Address("Kurzestr","3333","Offenburg");
+
+            MockCustomer.TwoWayRoadCostInEuro = 42.11f;
+            MockOrder1.Customer = MockCustomer;
+            Analysis Anal1 = new Analysis("Blutzeug", 1.0f, 11.0f, "Liter", 42.42f, SampleType.BLOOD);
+            Analysis Anal2 = new Analysis("Spermazeug", 5.0f, 22.0f, "Kilo", 16.20f, SampleType.SPERM);
+            Analysis Anal3 = new Analysis("Urinzeug", 2.0f, 3.0f, "Liter", 4.20f, SampleType.URINE);
+
+            MockOrder1.OrderID = 1111;
+            List<Test> MockTest = new List<Test>();
+            MockTest.Add(new Test("Patientenid123", Anal1));
+            MockTest.Add(new Test("Patientenid123", Anal2));
+            MockTest.Add(new Test("Patientenid123", Anal3));
+            MockOrder1.CompleteDate = DateTime.Now;
+
+            MockOrder1.Test = MockTest;
+            orders.Add(MockOrder1);
+
+            //Zweite MockOrder
+            Order MockOrder2 = new Order();
+            MockOrder2.CollectDate = DateTime.Now;
+            MockOrder2.Invoiced = false;
+            Customer MockCustomer2 = new Customer();
+            MockCustomer2.UserName = "otherUsername";
+            MockCustomer2.LastName = "Maier";
+            MockCustomer2.FirstName = "Peter";
+
+            MockCustomer2.BankAccount = new BankAccount("DE 2323 1212 XXXX 1111", "Maier Peter");
+            MockCustomer2.Address = new Address("Langestr", "3333", "Offenburg");
+            MockCustomer2.TwoWayRoadCostInEuro = 69.96f;
+            MockOrder2.Customer = MockCustomer2;
+
+            MockOrder2.OrderID = 2222;
+            List<Test> MockTest2 = new List<Test>();
+            MockTest2.Add(new Test("Patientenid333", Anal1));
+            MockTest2.Add(new Test("Patientenid222", Anal2));
+
+            MockOrder2.Test = MockTest2;
+            orders.Add(MockOrder2);
+
+            //Start MockOrder 3, same customer as 1
+            Order MockOrder3 = new Order();
+            MockOrder3.CollectDate = DateTime.Now;
+            MockOrder3.Invoiced = false;
+
+
+
+            MockOrder3.Customer = MockCustomer;
+
+            MockOrder3.OrderID = 333;
+            List<Test> MockTest3 = new List<Test>();
+
+
+            MockTest3.Add(new Test("Patientenid123", Anal1));
+            MockTest3.Add(new Test("Patientenid123", Anal2));
+            MockTest3.Add(new Test("Patientenid123", Anal3));
+            MockOrder3.Test = MockTest3;
+            orders.Add(MockOrder3);
+            //finish Mockorder
+            con.Order.AddRange(orders);
+            con.SaveChanges();
         }
 
         private static void InitializeOrders()
@@ -40,15 +120,53 @@ namespace DatabaseInitialize
 
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault())
             {
-               OrderDate = DateTime.Now,
-               Driver = con.Driver.Where(d=>d.UserName=="Driv1").FirstOrDefault()
+                OrderDate = DateTime.Now,
+                Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault()
+            });
+            orders.Add(new Order()
+            {
+                OrderDate = DateTime.Now,
+                Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault(),
+                BringDate = DateTime.Now,
+                CollectDate = DateTime.Now,
+                CompleteDate = DateTime.Now,
+                Invoiced = false,
+                RemindAfterFiveHours = false,
+                Customer = con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault(),
+                Test = new List<Test>()
+                {
+                    new Test("NochNPatient", con.Analysis.Find("Blut_Hämoglobin"))
+                    {
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        ResultValue = 13f,
+                        TestState = TestState.COMPLETED
+                    },
+                    new Test("NochNPatient", con.Analysis.Find("Urin_Gewicht"))
+                    {
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        ResultValue = 1000f,
+                        AlarmState = AlarmState.FIRST_ALARM_CONFIRMED,
+                        Critical = true,
+                        TestState = TestState.COMPLETED
+                    },
+                    new Test("NochNPatient", con.Analysis.Find("Stuhl_Candida"))
+                    {
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        ResultValue = 11000f,
+                        AlarmState = AlarmState.FIRST_ALARM_CONFIRMED,
+                        Critical = true,
+                        TestState = TestState.COMPLETED
+                    },
+                }
             });
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "ulli").FirstOrDefault())
             {
                 OrderDate = DateTime.Now,
                 Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault()
             });
-            
             con.Order.AddRange(orders);
             con.SaveChanges();
         }

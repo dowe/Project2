@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:helper="clr-namespace:ManagementSoftware.Helper"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              DataContext="{Binding Tests, Mode=OneWay, Source={StaticResource Locator}}"
@@ -13,26 +14,26 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Content="Aktualisiere" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Width="75" Command="{Binding LoadCommand, Mode=OneWay}" />
-        <DataGrid Grid.Row="1" VerticalAlignment="Top" Height="400" ItemsSource="{Binding DataList}" CanUserReorderColumns="False" IsReadOnly="True" />
-        <!--
-        <DataGrid Grid.Row="1" Name="SamplesDataGrid" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"
+        
+        <DataGrid Grid.Row="1" Name="SamplesDataGrid" AutoGenerateColumns="False" IsReadOnly="False"
                       HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" ItemsSource="{Binding DataList}">
+            <DataGrid.Resources>
+                <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </DataGrid.Resources>
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="#" Binding="{Binding Count}"/>
-                <DataGridTextColumn Header="Test ID" Binding="{Binding TestID, Source={StaticResource Locator}}" />
-             
-                <DataGridTextColumn Header="Patienten ID" Binding="{Binding Tests.DataList/PatientID, Source={StaticResource Locator}}"/>
-                <DataGridTextColumn Header="Bestellung" Binding="{Binding Tests.DataList/OrderID, Source={StaticResource Locator}}"/>
-                <DataGridTextColumn Header="Probe" Binding="{Binding Tests.DataList/SampleTypeAndAnalysis, Source={StaticResource Locator}}"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Tests.DataList/AlarmState, Source={StaticResource Locator}}"/>
-                <DataGridCheckBoxColumn Header="Eingetroffen" Binding="{Binding Tests.DataList/SampleCollected, Source={StaticResource Locator}}" IsReadOnly="False"/>
-                <DataGridTextColumn Header="Alarmstatus" Binding="{Binding Tests.DataList/AlarmState, Source={StaticResource Locator}}"/>
-                <DataGridTextColumn Header="Bringdatum" Binding="{Binding Tests.DataList/BringDate, Source={StaticResource Locator}}"/>
-                <DataGridTextColumn Header="Kundenbezeichnung" Binding="{Binding Tests.DataList/CustomerLabel, Source={StaticResource Locator}}"/>
+                <DataGridTextColumn Header="Patienten ID" Binding="{Binding PatientID}" IsReadOnly="true"/>
+                <DataGridTextColumn Header="Bestellung" Binding="{Binding SampleTypeAndAnalysis}" IsReadOnly="true"/>
+                <DataGridTextColumn Header="Probe" Binding="{Binding SampleTypeAndAnalysis}" IsReadOnly="true"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding TestState}" IsReadOnly="true"/>
+                <DataGridCheckBoxColumn Header="Eingetroffen" Binding="{Binding SampleCollected}"  />
+                <DataGridTextColumn Header="Alarmstatus" Binding="{Binding AlarmState}" IsReadOnly="true"/>
+                <DataGridTextColumn Header="Bringdatum" Binding="{Binding BringDate}" IsReadOnly="true"/>
+                <DataGridTextColumn Header="Kundenbezeichnung" Binding="{Binding CustomerLabel}" IsReadOnly="true"/>
             </DataGrid.Columns>
            
         </DataGrid>
-         -->
+        
         <GroupBox Name="DetailsGroupBox" Header="Probendetails" Grid.Row="2" IsEnabled="False">
             <Grid>
                 <Label Content="Test ID:" HorizontalAlignment="Left" VerticalAlignment="Top"/>

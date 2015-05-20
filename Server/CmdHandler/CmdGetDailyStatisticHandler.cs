@@ -30,8 +30,6 @@ namespace Server.CmdHandler
         protected override void Handle(CmdGetDailyStatistic command, string connectionIdOrNull)
         {
             ds = data.DailyStatistic;
-        
-            ds.NumberOfNewOrders = 42;
             ResponseCommand response = new CmdReturnGetDailyStatistic(command.Id, ds);
             connection.Unicast(response, connectionIdOrNull);
         }

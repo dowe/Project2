@@ -83,7 +83,7 @@ namespace Server
             data.GenerateShiftScheduleTimer = new GenerateShiftScheduleTimer(connection);
             connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
             connection.InjectInternal(new CmdGenerateDailyStatistic());
-           // connection.InjectInternal(new CmdGenerateBills());
+            connection.InjectInternal(new CmdGenerateBills());
         }
     }
 }
