@@ -29,9 +29,10 @@ namespace Server.CmdHandler
 
             db.StartTransaction();
             Car car = db.GetCar(command.SelectedCarId);
-            if (car.CurrentDriver == null && car.Roadworthy)
+            if (car.CurrentDriver == null)
             {
                 Driver newDriver = db.GetDriver(command.Username);
+                car.Roadworthy = true;
                 car.CurrentDriver = newDriver;
                 if (car.CarLogbook == null)
                 {
