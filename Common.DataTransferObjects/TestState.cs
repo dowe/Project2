@@ -4,6 +4,9 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using System.ComponentModel;
+
 namespace Common.DataTransferObjects
 {
 	using System;
@@ -13,9 +16,13 @@ namespace Common.DataTransferObjects
 
 	public enum TestState : int
 	{
+        [Description("Bestellt")]
 		ORDERED,
+        [Description("Abgeholt")]
 		WAITING_FOR_DRIVER,
+        [Description("In Bearbeitung")]
 		IN_PROGRESS,
+        [Description("Abgeschlossen")]
 		COMPLETED,
 	}
 }
