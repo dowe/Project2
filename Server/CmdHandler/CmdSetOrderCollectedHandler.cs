@@ -43,7 +43,7 @@ namespace Server.CmdHandler
             }
             db.EndTransaction(TransactionEndOperation.SAVE);
 
-            CmdReturnSetOrderCollected response = new CmdReturnSetOrderCollected(command.Id, success);
+            CmdReturnSetOrderCollected response = new CmdReturnSetOrderCollected(command.Id, command.OrderId, success);
             connection.Unicast(response, connectionIdOrNull);
         }
     }
