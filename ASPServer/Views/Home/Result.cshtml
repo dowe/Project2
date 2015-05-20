@@ -63,7 +63,7 @@
                 @Html.DisplayFor(modelItem => resultModel.Analysis)
             </td>
             <td style="width: 150px">
-                @Util.GetDescription(resultModel.Status, typeof(TestState))
+                @resultModel.Status.GetDescription()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => resultModel.ResultValue) @Html.DisplayFor(modelItem => resultModel.UnitOfMeasure)
