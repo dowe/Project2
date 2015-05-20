@@ -78,9 +78,10 @@ namespace ManagementSoftware.View
             if (_driversOrders.Any())
             {
                 var cust = _driversOrders.FirstOrDefault().Customer;
-                sb.Append(cust.Label + "\n" ?? cust.FirstName + " " + cust.LastName + "\n");
+                sb.Append(String.IsNullOrWhiteSpace(cust.Label) ? cust.FirstName + " " + cust.LastName + "\n" : cust.Label + "\n");
                 sb.Append(cust.Address.Street + "\n");
                 sb.Append(cust.Address.PostalCode + " " + cust.Address.City + "\n");
+                sb.Append("Proben abzuholen: " + _driversOrders.FirstOrDefault().Test.Count + "\n");
             }
             else
             {
@@ -92,7 +93,7 @@ namespace ManagementSoftware.View
 
             if (_driversOrders.Any() && _driversOrders.Count > 1)
             {
-                sb.Append("_________________________________\n\n");
+                sb.Append("______________________________________\n\n");
                 sb.Append("Weitere Ziele:\n\n");
 
                 for (int i = 1; i < _driversOrders.Count; i++)
@@ -107,11 +108,16 @@ namespace ManagementSoftware.View
             TxtCar.Text = sb.ToString();
         }
 
-        public async void RefreshData()
+        public void RefreshData()
         {
             Mouse.OverrideCursor = Cursors.Wait;
-            _cars = _connection.SendWait<CmdReturnGetAllOccupiedCars>(new CmdGetAllOccupiedCars()).OccupiedCars.ToList();
-            _customers = _connection.SendWait<CmdReturnGetAllCustomers>(new CmdGetAllCustomers()).Customers.ToList();
+            var cars = _connection.SendWait<CmdReturnGetAllOccupiedCars>(new CmdGetAllOccupiedCars());
+            var cust = _connection.SendWait<CmdReturnGetAllCustomers>(new CmdGetAllCustomers());
+            if (cars == null || cust == null)
+                return;
+
+            _cars = cars.OccupiedCars.ToList();
+            _customers = cust.Customers.ToList();
 
             SetMapIcons();
             RefreshDriver(_carIndex);
@@ -146,25 +152,26 @@ namespace ManagementSoftware.View
 
         private void SetMapIcons()
         {
-            WebBrowserGoogle.InvokeScript("addLaboratory", new Object[] { _laborPos.Street + ", " + _laborPos.PostalCode + " " + _laborPos.City, "Zentrallabor" });
+            WebBrowserGoogle.InvokeScript("addLaboratory", new Object[] { _laborPos.Street + ", " + _laborPos.PostalCode + " " + _laborPos.City, "Zentrallabor", "Zentrallabor<br/>" + _laborPos.Street + "<br/>" + _laborPos.PostalCode + " " + _laborPos.City });
 
             if (_customers != null)
                 foreach (var cust in _customers)
                 {
-                    WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, cust.Label ?? cust.FirstName + " " + cust.LastName });
+                    var name = String.IsNullOrWhiteSpace(cust.Label) ? cust.FirstName + " " + cust.LastName : cust.Label;
+                    WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, name, name + "<br/>" + cust.Address.Street + "<br/>" + cust.Address.PostalCode + " " + cust.Address.City });
                 }
 
             if (_cars != null)
                 foreach (var car in _cars)
                 {
-                    WebBrowserGoogle.InvokeScript("addCar", new Object[] { car.LastPosition.Latitude, car.LastPosition.Longitude, car.CarID });
+                    WebBrowserGoogle.InvokeScript("addCar", new Object[] { car.LastPosition.Latitude, car.LastPosition.Longitude, car.CarID, "Kennzeichen: "+car.CarID + "<br/>Fahrer: "+car.CurrentDriver.FirstName + " " + car.CurrentDriver.LastName });
                 }
         }
 
         public void SwitchCar(string carid)
         {
             var car = _cars.Where(c => c.CarID == carid).FirstOrDefault();
-            if (car != null)
+            if (car != null && _carIndex != _cars.IndexOf(car))
             {
                 _carIndex = _cars.IndexOf(car);
                 RefreshDriver(_carIndex);
