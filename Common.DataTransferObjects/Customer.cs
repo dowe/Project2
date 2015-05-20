@@ -86,7 +86,7 @@ namespace Common.DataTransferObjects
 	        
 	    }
 
-	    public Customer(string firstname, string lastname, string username, string password, Address address, string label, BankAccount acc = null, bool smsrequested = false, string mobile = null )
+	    public Customer(string firstname, string lastname, string username, string password, Address address, string label, BankAccount acc, bool smsrequested = false, string mobile = null )
 	    {
 	        FirstName = firstname;
 	        LastName = lastname;
