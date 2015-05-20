@@ -43,6 +43,45 @@ namespace DatabaseInitialize
                OrderDate = DateTime.Now,
                Driver = con.Driver.Where(d=>d.UserName=="Driv1").FirstOrDefault()
             });
+            orders.Add(new Order()
+            {
+                OrderDate = DateTime.Now,
+                Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault(),
+                BringDate = DateTime.Now,
+                CollectDate = DateTime.Now,
+                CompleteDate = DateTime.Now,
+                Invoiced = false,
+                RemindAfterFiveHours = false,
+                Customer = con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault(),
+                Test = new List<Test>()
+                {
+                    new Test("NochNPatient", con.Analysis.Find("Blut_Hämoglobin"))
+                    {
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        ResultValue = 13f,
+                        TestState = TestState.COMPLETED
+                    },
+                    new Test("NochNPatient", con.Analysis.Find("Urin_Gewicht"))
+                    {
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        ResultValue = 1000f,
+                        AlarmState = AlarmState.FIRST_ALARM_CONFIRMED,
+                        Critical = true,
+                        TestState = TestState.COMPLETED
+                    },
+                    new Test("NochNPatient", con.Analysis.Find("Stuhl_Candida"))
+                    {
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        ResultValue = 11000f,
+                        AlarmState = AlarmState.FIRST_ALARM_CONFIRMED,
+                        Critical = true,
+                        TestState = TestState.COMPLETED
+                    },
+                }
+            });
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "ulli").FirstOrDefault())
             {
                 OrderDate = DateTime.Now,
