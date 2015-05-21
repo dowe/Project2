@@ -17,7 +17,8 @@ namespace Smartphone.Driver.Handlers
 
 		protected override void Handle (CmdSendNotification command, string connectionIdOrNull)
 		{
-			orders.UpdateSingle (command.Order);
+			// Update Orders model.
+			Xamarin.Forms.Device.BeginInvokeOnMainThread (new Action (() => orders.UpdateSingle (command.Order)));
 		}
 
 	}
