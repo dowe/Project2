@@ -96,8 +96,7 @@ namespace Smartphone.Driver.ViewModels
 
 		public void OnConfirmedEmergency()
 		{
-			// TODO Get GPS position.
-			CmdAnnounceEmergency announceEmergency = new CmdAnnounceEmergency (session.Username, session.CarID, new GPSPosition {Latitude = 0, Longitude = 0});
+			CmdAnnounceEmergency announceEmergency = new CmdAnnounceEmergency (session.Username, session.CarID);
 			CmdReturnAnnounceEmergency response = connection.SendWait<CmdReturnAnnounceEmergency> (announceEmergency);
 			if (response != null && response.Success)
 			{

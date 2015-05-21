@@ -54,14 +54,14 @@ namespace Server.CmdHandler
 
                 // Forward all left unfinished orders to another driver. All to one driver as the destination is all the same.
                 IList<Order> leftUnfinishedOrders = db.GetAllOrders(o => o.Driver.UserName.Equals(command.Username) && o.BringDate == null);
-                Driver optimalDriverOrNull = driverController.DetermineDriverOrNullInsideTransaction(db, command.DriverGPSPosition);
+                Driver optimalDriverOrNull = driverController.DetermineDriverOrNullInsideTransaction(db, car.LastPosition);
                 foreach (Order o in leftUnfinishedOrders)
                 {
                     o.Driver = optimalDriverOrNull;
                     if (o.CollectDate != null)
                     {
                         // Emergency occured after having collected the order.
-                        GPSPosition emergencyPosition = db.CreateGPSPosition(command.DriverGPSPosition);
+                        GPSPosition emergencyPosition = db.CreateGPSPosition(new GPSPosition { Latitude = car.LastPosition.Latitude, Longitude = car.LastPosition.Longitude });
                         o.EmergencyPosition = emergencyPosition;
                         // Update TestStates.
                         if (optimalDriverOrNull != null)
@@ -89,11 +89,6 @@ namespace Server.CmdHandler
             else
             {
                 success = false;
-            }
-            if (car.LastPosition != null)
-            {
-                car.LastPosition.Latitude = command.DriverGPSPosition.Latitude;
-                car.LastPosition.Longitude = command.DriverGPSPosition.Longitude;
             }
             db.EndTransaction(TransactionEndOperation.SAVE);
 
