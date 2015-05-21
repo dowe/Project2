@@ -70,6 +70,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGetCustomerAddressHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOccupiedCarsHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdSetOrderReceivedHandler(db));
         }
 
         private static void OnServerStarted(
