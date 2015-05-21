@@ -26,24 +26,42 @@ namespace Server.CmdHandler
 
         protected override void Handle(CmdLoginDriver command, string connectionIdOrNull)
         {
-            bool success = false;
-
             db.StartTransaction();
-            Driver driver = db.GetDriver(command.Username);
-
-            if (driver != null && driver.Password.Equals(command.Password))
+            Car assignedCarOrNull = db.GetAllCars(c => c.CurrentDriver != null && c.CurrentDriver.UserName.Equals(command.Username))
+                    .FirstOrDefault();
+            Driver driverOrNull = null;
+            string assignedCarIDOrNull = null;
+            if (assignedCarOrNull != null)
             {
-                driverMapping.Set(driver.UserName, connectionIdOrNull);
+                // Driver already has a car assigned.
+                driverOrNull = assignedCarOrNull.CurrentDriver;
+                assignedCarIDOrNull = assignedCarOrNull.CarID;
+            }
+            else
+            {
+                // Driver does not have a car assigned.
+                driverOrNull = db.GetDriver(command.Username);
+                assignedCarIDOrNull = null;
+            }
+
+            // Check credentials.
+            bool success = false;
+            if (driverOrNull != null && driverOrNull.Password.Equals(command.Password))
+            {
+                driverMapping.Set(driverOrNull.UserName, connectionIdOrNull);
                 success = true;
             }
             else
             {
                 success = false;
+                assignedCarIDOrNull = null;
             }
-            db.EndTransaction(TransactionEndOperation.READONLY);
 
-            var response = new CmdReturnLoginDriver(command.Id, success);
+            var response = new CmdReturnLoginDriver(command.Id, assignedCarIDOrNull, success);
             connection.Unicast(response, connectionIdOrNull);
+
+            db.EndTransaction(TransactionEndOperation.READONLY);
         }
+
     }
 }
