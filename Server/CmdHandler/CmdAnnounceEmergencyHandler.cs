@@ -53,7 +53,7 @@ namespace Server.CmdHandler
                 }
 
                 // Forward all left unfinished orders to another driver. All to one driver as the destination is all the same.
-                IList<Order> leftUnfinishedOrders = db.GetAllOrders(o => o.Driver.UserName.Equals(command.Username) && o.BringDate == null);
+                IList<Order> leftUnfinishedOrders = db.GetAllOrders(o => o. Driver != null && o.Driver.UserName.Equals(command.Username) && o.BringDate == null);
                 Driver optimalDriverOrNull = driverController.DetermineDriverOrNullInsideTransaction(db, car.LastPosition);
                 foreach (Order o in leftUnfinishedOrders)
                 {
