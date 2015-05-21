@@ -83,5 +83,27 @@ namespace ServerTests.DriverControlling
 
             Assert.AreEqual(driverFastAndPossible, optimalDriver);
         }
+
+        [TestMethod]
+        public void DetermineDriverOrNull_WithNoSolutionInsideTimeLimi_ReturnsNull()
+        {
+            List<Car> cars = new List<Car>();
+            List<Order> orders = new List<Order>();
+            // Slow because has order
+            Driver driverImpossible = CreateDriver("impossible");
+            Car carImpossible = new Car()
+            {
+                CurrentDriver = driverImpossible,
+                LastPosition = new GPSPosition() { Latitude = 48.4580221f, Longitude = 7.9423354f }, // Home
+                Roadworthy = true
+            };
+            cars.Add(carImpossible);
+
+            Address destination = new Address("Platz der Republik 1", "11011", "Berlin"); // More than 5 hrs away.
+            DriverController testee = CreateTestee(HOME_ADDRESS, TimeSpan.FromHours(5));
+            Driver optimalDriver = testee.DetermineDriverOrNull(cars, orders, new DistanceMatrixAddress(destination));
+
+            Assert.IsNull(optimalDriver);
+        }
     }
 }
