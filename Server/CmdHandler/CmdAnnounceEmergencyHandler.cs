@@ -55,6 +55,14 @@ namespace Server.CmdHandler
                 // Forward all left unfinished orders to another driver. All to one driver as the destination is all the same.
                 IList<Order> leftUnfinishedOrders = db.GetAllOrders(o => o. Driver != null && o.Driver.UserName.Equals(command.Username) && o.BringDate == null);
                 Driver optimalDriverOrNull = driverController.DetermineDriverOrNullInsideTransaction(db, car.LastPosition);
+                if (optimalDriverOrNull != null)
+                {
+                    Console.WriteLine("Forwarding orders to driver " + optimalDriverOrNull.UserName + ".");
+                }
+                else
+                {
+                    Console.WriteLine("Forwarding orders to a taxi driver.");
+                }
                 foreach (Order o in leftUnfinishedOrders)
                 {
                     o.Driver = optimalDriverOrNull;
@@ -109,9 +117,20 @@ namespace Server.CmdHandler
             }
             else
             {
-                smsSending.Send(serverData.TaxiPhoneNumber,
-                    "New order " + orderToPush.OrderID + ". Please collect at " + orderToPush.EmergencyPosition.Latitude +
-                    ", " + orderToPush.EmergencyPosition.Longitude + ".");
+                if (orderToPush.EmergencyPosition != null)
+                {
+                    smsSending.Send(serverData.TaxiPhoneNumber,
+                        "New order " + orderToPush.OrderID + ". Please collect at " +
+                        orderToPush.EmergencyPosition.Latitude +
+                        ", " + orderToPush.EmergencyPosition.Longitude + ".");
+                }
+                else
+                {
+                    smsSending.Send(serverData.TaxiPhoneNumber,
+                        "New order " + orderToPush.OrderID + ". Please collect at " +
+                        orderToPush.Customer.Address.Street +
+                        ", " + orderToPush.Customer.Address.PostalCode + ", " + orderToPush.Customer.Address.City + ".");
+                }
             }
         }
     }
