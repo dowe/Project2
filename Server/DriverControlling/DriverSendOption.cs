@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Common.DataTransferObjects;
 using Server.DistanceCalculation;
 
-namespace Server.DriverController
+namespace Server.DriverControlling
 {
     public class DriverSendOption
     {

@@ -128,11 +128,12 @@
     <Compile Include="DistanceCalculation\DistanceMatrixGPSPosition.cs" />
     <Compile Include="DistanceCalculation\IDistanceMatrixPlace.cs" />
     <Compile Include="DistanceCalculation\IRouteDistanceCalculator.cs" />
-    <Compile Include="DriverController\DriverController.cs" />
-    <Compile Include="DriverController\DriverSendOption.cs" />
-    <Compile Include="DriverController\IDriverController.cs" />
-    <Compile Include="DriverController\OptionsCalculator.cs" />
-    <Compile Include="DriverController\OptionsEvaluator.cs" />
+    <Compile Include="DriverControlling\DriverController.cs" />
+    <Compile Include="DriverControlling\DriverControllerSettings.cs" />
+    <Compile Include="DriverControlling\DriverSendOption.cs" />
+    <Compile Include="DriverControlling\IDriverController.cs" />
+    <Compile Include="DriverControlling\OptionsCalculator.cs" />
+    <Compile Include="DriverControlling\OptionsEvaluator.cs" />
     <Compile Include="ExtremeValueCheck\ExtremeValueChecker.cs" />
     <Compile Include="ExtremeValueCheck\IExtremeValueChecker.cs" />
     <Compile Include="Program.cs" />

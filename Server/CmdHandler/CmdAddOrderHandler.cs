@@ -9,7 +9,7 @@ using Common.Communication;
 using Common.Communication.Server;
 using Common.DataTransferObjects;
 using Server.DatabaseCommunication;
-using Server.DriverController;
+using Server.DriverControlling;
 
 namespace Server.CmdHandler
 {
@@ -46,6 +46,7 @@ namespace Server.CmdHandler
 
             if (optimalDriverOrNull != null)
             {
+                Console.WriteLine("Assigned order to driver " + optimalDriverOrNull.UserName + ".");
                 var sendNotification = new CmdSendNotification(order);
                 string connectionId = driverMap.ResolveConnectionIDOrNull(optimalDriverOrNull.UserName);
                 if(connectionId != null)

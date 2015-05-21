@@ -7,7 +7,8 @@ using Common.Communication.Server;
 using Common.Commands;
 using Server.CmdHandler;
 using Server.DatabaseCommunication;
-using Server.DriverController;
+using Server.DistanceCalculation;
+using Server.DriverControlling;
 using Server.Sms;
 using Server.Timer;
 using Common.DataTransferObjects;
@@ -24,7 +25,9 @@ namespace Server
             ServerConnection connection = new ServerConnection("http://+:8080");
             IDatabaseCommunicator db = new DatabaseCommunicator();
             LocalServerData data = new LocalServerData();
-            IDriverController driverController = new DriverController.DriverController(data.ZmsAddress);
+            DriverControllerSettings driverControllerSettings =
+                new DriverControllerSettings(new DistanceMatrixAddress(data.ZmsAddress), TimeSpan.FromHours(6));
+            IDriverController driverController = new DriverControlling.DriverController(driverControllerSettings);
             UsernameToConnectionIdMapping driverToConnectionIdMapping = new UsernameToConnectionIdMapping();
             ISmsSending smsSending = new SmsSending();
 

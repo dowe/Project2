@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Common.DataTransferObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Server.DistanceCalculation;
-using Server.DriverController;
+using Server.DriverControlling;
 
-namespace ServerTests.DriverController
+namespace ServerTests.DriverControlling
 {
     [TestClass]
     public class OptionsEvaluatorTests

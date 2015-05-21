@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Common.DataTransferObjects;
 using Server.DatabaseCommunication;
 
-namespace Server.DriverController
+namespace Server.DriverControlling
 {
     public interface IDriverController
     {
