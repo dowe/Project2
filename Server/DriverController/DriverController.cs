@@ -55,10 +55,10 @@ namespace Server.DriverController
             IEnumerable<Car> allOccupiedCars = db.GetAllCars(c => c.CurrentDriver != null);
             IEnumerable<Order> allUnfinishedOrders = db.GetAllOrders(o => o.CollectDate == null);
 
-            return DetermineDriverOrNullInsideTransaction(allOccupiedCars, allUnfinishedOrders, destination);
+            return DetermineDriverOrNull(allOccupiedCars, allUnfinishedOrders, destination);
         }
 
-        public Driver DetermineDriverOrNullInsideTransaction(IEnumerable<Car> allOccupiedCars, IEnumerable<Order> allUnfinishedOrders,
+        public Driver DetermineDriverOrNull(IEnumerable<Car> allOccupiedCars, IEnumerable<Order> allUnfinishedOrders,
             IDistanceMatrixPlace destination)
         {
             var calcDistanceTasks = new List<Task<DriverSendOption>>();
