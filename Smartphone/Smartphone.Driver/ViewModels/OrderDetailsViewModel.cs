@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using Common.Commands;
 using Smartphone.Driver.Messages;
 using Smartphone.Driver.Models;
+using Smartphone.Driver.NativeServices;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -120,7 +121,16 @@ namespace Smartphone.Driver.ViewModels
 			{
 				try
 				{
-					new NativeMapAppLauncher ().LaunchMapApp (order.Customer.Address);
+					NativeMapAppLauncher launcher = new NativeMapAppLauncher();
+
+					if (order.EmergencyPosition != null)
+					{
+						launcher.LaunchMapApp(order.EmergencyPosition);
+					}
+					else
+					{
+						launcher.LaunchMapApp (order.Customer.Address);
+					}
 				}
 				catch (Exception)
 				{
