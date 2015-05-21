@@ -53,31 +53,36 @@ namespace Server.CmdHandler
                 }
 
                 // Forward all left unfinished orders to another driver. All to one driver as the destination is all the same.
-                IList<Order> leftUnfinishedOrders = db.GetAllOrders(o => o.Driver.UserName.Equals(command.Username));
+                IList<Order> leftUnfinishedOrders = db.GetAllOrders(o => o.Driver.UserName.Equals(command.Username) && o.BringDate == null);
                 Driver optimalDriverOrNull = driverController.DetermineDriverOrNullInsideTransaction(db, command.DriverGPSPosition);
                 foreach (Order o in leftUnfinishedOrders)
                 {
-                    GPSPosition emergencyPosition = db.CreateGPSPosition(command.DriverGPSPosition);
-                    o.EmergencyPosition = emergencyPosition;
                     o.Driver = optimalDriverOrNull;
-                    // Update TestStates.
-                    if (optimalDriverOrNull != null)
+                    if (o.CollectDate != null)
                     {
-                        // Employee driver
-                        foreach (Test test in o.Test)
+                        // Emergency occured after having collected the order.
+                        GPSPosition emergencyPosition = db.CreateGPSPosition(command.DriverGPSPosition);
+                        o.EmergencyPosition = emergencyPosition;
+                        // Update TestStates.
+                        if (optimalDriverOrNull != null)
                         {
-                            test.TestState = TestState.ORDERED;
+                            // Employee driver
+                            foreach (Test test in o.Test)
+                            {
+                                test.TestState = TestState.ORDERED;
+                            }
+                        }
+                        else
+                        {
+                            o.CollectDate = DateTime.Now;
+                            foreach (Test test in o.Test)
+                            {
+                                // Taxi driver
+                                test.TestState = TestState.WAITING_FOR_DRIVER;
+                            }
                         }
                     }
-                    else
-                    {
-                        o.CollectDate = DateTime.Now;
-                        foreach (Test test in o.Test)
-                        {
-                            // Taxi driver
-                            test.TestState = TestState.WAITING_FOR_DRIVER;
-                        }
-                    }
+                    o.CollectDate = null;
                     PushNotificationToDriverOrTaxi(o, optimalDriverOrNull);
                 }
             }

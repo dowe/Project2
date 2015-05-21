@@ -183,6 +183,13 @@ namespace DatabaseInitialize
                 OrderDate = DateTime.Now.Subtract(TimeSpan.FromHours(3)),
                 Driver = con.Driver.Where(d => d.UserName == "Driv3").FirstOrDefault()
             });
+            orders.Add(new Order(anal, con.Customer.Where(c => c.UserName.Equals("house")).FirstOrDefault())
+            {
+                OrderDate = DateTime.Now.Subtract(TimeSpan.FromHours(5)),
+                Driver = con.Driver.Where(d => d.UserName == "Driv3").FirstOrDefault(),
+                BringDate = DateTime.Now.Subtract(TimeSpan.FromHours(1)),
+                CollectDate = DateTime.Now.Subtract(TimeSpan.FromHours(2))
+            });
             con.Order.AddRange(orders);
             con.SaveChanges();
         }
