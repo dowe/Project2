@@ -33,8 +33,8 @@ namespace Smartphone.Driver.ViewModels
 			this.connection = connection;
 			this.session = session;
 
-			username = "Driv1";
-			password = "Driv1";
+			username = "Driv3";
+			password = "Driv3";
 			communicating = false;
 		}
 

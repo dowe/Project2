@@ -8,6 +8,7 @@ using Common.Commands;
 using Server.CmdHandler;
 using Server.DatabaseCommunication;
 using Server.DriverController;
+using Server.Sms;
 using Server.Timer;
 using Common.DataTransferObjects;
 
@@ -25,11 +26,13 @@ namespace Server
             LocalServerData data = new LocalServerData();
             IDriverController driverController = new DriverController.DriverController(data.ZmsAddress);
             UsernameToConnectionIdMapping driverToConnectionIdMapping = new UsernameToConnectionIdMapping();
+            ISmsSending smsSending = new SmsSending();
+
             connection.ServerStarted += (object sender, EventArgs e) => OnServerStarted(connection, db, data);
             connection.BeforeHandlingCommand += connection_BeforeHandlingCommand;
 
             Console.WriteLine("Registering Handlers...");
-            RegisterHandlers(connection, db, data, driverController, driverToConnectionIdMapping);
+            RegisterHandlers(connection, db, data, driverController, driverToConnectionIdMapping, smsSending);
 
             Console.WriteLine("Starting server...");
             connection.RunForever();
@@ -45,7 +48,8 @@ namespace Server
             IDatabaseCommunicator db,
             LocalServerData data,
             IDriverController driverController,
-            UsernameToConnectionIdMapping driverMapping)
+            UsernameToConnectionIdMapping driverMapping,
+            ISmsSending smsSending)
         {
 
             // TODO: REGISTER SERVER HANDLER HERE
@@ -59,7 +63,8 @@ namespace Server
             connection.RegisterCommandHandler(new CmdCheckOrdersFiveHoursLeftHandler(connection, db, driverMapping));
             connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection, db));
             connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler(db));
-            connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection, db, driverController,
+                driverMapping, smsSending, data));
             connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection, db, driverMapping));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection, db));

@@ -21,6 +21,7 @@ namespace Common.DataTransferObjects
         public Order(Dictionary<string, List<Analysis>> Analysises, Customer Customer)
         {
             this.Customer = Customer;
+            this.EmergencyPosition = null;
             this.OrderDate = DateTime.Now;
             this.BringDate = null;
             this.CollectDate = null;
@@ -77,6 +78,12 @@ namespace Common.DataTransferObjects
 			get;
 			set;
 		}
+
+	    public virtual GPSPosition EmergencyPosition
+	    {
+	        get;
+            set;
+        }
 
 		public virtual Customer Customer
 		{

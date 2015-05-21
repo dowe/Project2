@@ -52,9 +52,20 @@ namespace Smartphone.Driver.ViewModels
 					{
 						orderID = string.Empty;
 					}
-					if (value != null && value.Customer != null && value.Customer.Address != null)
+					if (value != null)
 					{
-						CustomerAddress = value.Customer.Address.Street + "\n" + value.Customer.Address.PostalCode + value.Customer.Address.City;
+						if (value.EmergencyPosition != null)
+						{
+							CustomerAddress = value.EmergencyPosition.Latitude + ", " + value.EmergencyPosition.Longitude;
+						}
+						else if (value.Customer != null && value.Customer.Address != null)
+						{
+							CustomerAddress = value.Customer.Address.Street + "\n" + value.Customer.Address.PostalCode + value.Customer.Address.City;
+						}
+						else
+						{
+							customerAddress = string.Empty;
+						}
 					}
 					else
 					{

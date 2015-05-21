@@ -173,6 +173,16 @@ namespace DatabaseInitialize
                 OrderDate = DateTime.Now,
                 Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault()
             });
+            orders.Add(new Order(anal, con.Customer.Where(c => c.UserName.Equals("house")).FirstOrDefault())
+            {
+                OrderDate = DateTime.Now.Subtract(TimeSpan.FromHours(5)),
+                Driver = con.Driver.Where(d => d.UserName == "Driv3").FirstOrDefault()
+            });
+            orders.Add(new Order(anal, con.Customer.Where(c => c.UserName.Equals("house")).FirstOrDefault())
+            {
+                OrderDate = DateTime.Now.Subtract(TimeSpan.FromHours(3)),
+                Driver = con.Driver.Where(d => d.UserName == "Driv3").FirstOrDefault()
+            });
             con.Order.AddRange(orders);
             con.SaveChanges();
         }
@@ -234,9 +244,6 @@ namespace DatabaseInitialize
 
             con.Car.Find("OG-LA-001").CurrentDriver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault();
             con.Car.Find("OG-LA-002").CurrentDriver = con.Driver.Where(d => d.UserName == "Driv2").FirstOrDefault();
-            var gps = con.GpsPosition.Find("OG-LA-002");
-            gps.Latitude =48.4615593f;
-            gps.Longitude =7.9511829f;
 
             try
             {
@@ -263,7 +270,7 @@ namespace DatabaseInitialize
 
         private static void AddCar(LaborContext context, string carID)
         {
-            GPSPosition position = new GPSPosition { CarID = carID, Latitude = 48.4580221f, Longitude = 7.9423354f };
+            GPSPosition position = new GPSPosition { Latitude = 48.4580221f, Longitude = 7.9423354f };
             context.GpsPosition.Add(position);
             Car car = new Car() { CarID = carID, CarLogbook = new CarLogbook() { CarId = carID}, Roadworthy = true, LastPosition = position };
             context.Car.Add(car);

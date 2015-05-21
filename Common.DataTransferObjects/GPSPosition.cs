@@ -16,12 +16,13 @@ namespace Common.DataTransferObjects
 	public class GPSPosition
 	{
         [Key]
-        public string CarID { get; set; }
+        public Guid GPSPositionID { get; set; }
 	    public float Latitude { get; set; }
 	    public float Longitude { get; set; }
 
 	    public GPSPosition()
 	    {
+	        GPSPositionID = Guid.NewGuid();
 	    }
 
 	}
