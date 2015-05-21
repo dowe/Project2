@@ -23,11 +23,14 @@ namespace Server.CmdHandler
         protected override void Handle(CmdStoreDriverGPSPosition command, string connectionIdOrNull)
         {
             db.StartTransaction();
-            GPSPosition lastPosition = db.GetGPSPosition(command.CarID);
-            if (lastPosition != null)
+            Car car = db.GetCar(command.CarID);
+            if (car != null)
             {
-                lastPosition.Latitude = command.DriverGPSPosition.Latitude;
-                lastPosition.Longitude = command.DriverGPSPosition.Longitude;
+                if (car.LastPosition != null)
+                {
+                    car.LastPosition.Latitude = command.DriverGPSPosition.Latitude;
+                    car.LastPosition.Longitude = command.DriverGPSPosition.Longitude;
+                }
             }
             db.EndTransaction(TransactionEndOperation.SAVE);
         }

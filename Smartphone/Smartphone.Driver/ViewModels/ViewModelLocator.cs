@@ -39,7 +39,9 @@ namespace Smartphone.Driver.ViewModels
 			// Connection
 			clientConnection.RegisterCommandHandler (new CmdReturnGetAvailableCarsHandler (cars));
 			clientConnection.RegisterCommandHandler (new CmdReturnGetDriversUnfinishedOrdersHandler (orders));
+			clientConnection.RegisterCommandHandler (new CmdSendNotificationHandler (orders));
 			clientConnection.RegisterCommandHandler (new CmdRemindDriverOfOrderHandler (notificationController));
+			clientConnection.RegisterCommandHandler (new CmdReturnSetOrderCollectedHandler (orders));
 			
 			// ViewModels
 			SimpleIoc.Default.Register<LoginViewModel> ();

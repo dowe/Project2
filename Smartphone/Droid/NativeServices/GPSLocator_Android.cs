@@ -17,7 +17,7 @@ namespace Smartphone.Driver.Droid.NativeServices
 		private TimeSpan updateInterval = TimeSpan.FromSeconds (0);
 		private bool subscribedToUpdates = false;
 
-		public event Action<GPSPosition> LocationUpdated;
+		public event Action<NativeGPSPosition> LocationUpdated;
 
 		public GPSLocator_Android ()
 		{
@@ -57,7 +57,7 @@ namespace Smartphone.Driver.Droid.NativeServices
 		{
 			if (LocationUpdated != null)
 			{
-				GPSPosition position = new GPSPosition (location.Latitude, location.Longitude);
+				NativeGPSPosition position = new NativeGPSPosition (location.Latitude, location.Longitude);
 				LocationUpdated (position);
 			}
 		}

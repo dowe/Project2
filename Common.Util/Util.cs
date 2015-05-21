@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Common.Util
 {
-    public class Util
+    public static class Util
     {
         private static Random rnd = new Random(DateTime.Now.Second);
 
@@ -42,6 +42,19 @@ namespace Common.Util
             return descriptionAttribute != null
               ? descriptionAttribute.Description
               : enumValue.ToString();
+        }
+
+        public static string GetDescription(this Enum o)
+        {
+            var descriptionAttribute = o.GetType()
+              .GetField(o.ToString())
+              .GetCustomAttributes(typeof(DescriptionAttribute), false)
+              .FirstOrDefault() as DescriptionAttribute;
+
+
+            return descriptionAttribute != null
+              ? descriptionAttribute.Description
+              : o.ToString();
         }
 
         public static string ToString(object elem)

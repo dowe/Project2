@@ -13,7 +13,7 @@ namespace Common.Communication
             return JsonConvert.SerializeObject(command);
         }
 
-        public Command DeserializeCommand(string jsonCommand, IEnumerable<Type> parsableCommandTypes)
+        public Command DeserializeCommandOrNull(string jsonCommand, IEnumerable<Type> parsableCommandTypes)
         {
             string commandTypeString = ParseSerializedCommandType(jsonCommand);
             Type matchingType = null;
@@ -25,12 +25,13 @@ namespace Common.Communication
                 }
             }
 
-            if (matchingType == null)
+            Command deserialized = null;
+            if (matchingType != null)
             {
-                throw new KeyNotFoundException("Did not find a command with the matching type " + commandTypeString + ".");
+                deserialized = (Command)JsonConvert.DeserializeObject(jsonCommand, matchingType);
             }
 
-            return (Command)JsonConvert.DeserializeObject(jsonCommand, matchingType);
+            return deserialized;
         }
 
         private string ParseSerializedCommandType(string jsonCommand)

@@ -29,7 +29,7 @@ namespace Server.CmdHandler
 
             db.StartTransaction();
             Order order = db.GetOrder(command.OrderId);
-            if (order != null && order.CollectDate != null)
+            if (order != null && order.CollectDate == null)
             {
                 order.CollectDate = DateTime.Now;
                 foreach (Test test in order.Test)
@@ -43,7 +43,7 @@ namespace Server.CmdHandler
             }
             db.EndTransaction(TransactionEndOperation.SAVE);
 
-            CmdReturnSetOrderCollected response = new CmdReturnSetOrderCollected(command.Id, success);
+            CmdReturnSetOrderCollected response = new CmdReturnSetOrderCollected(command.Id, command.OrderId, success);
             connection.Unicast(response, connectionIdOrNull);
         }
     }

@@ -10,14 +10,8 @@ namespace ServerTests.Sms
         [TestMethod]
         public void CheckIfGmailAccountCredentialsFileExists()
         {
-            try
-            {
-                ISmsSending sms = new SmsSending();
-            }
-            catch (Exception e)
-            {
-                Assert.Fail("Gmail Credentials file not found (" + e.Message + ")");
-            }
+            ISmsSending sms = new SmsSending();
+            Assert.IsTrue(sms.Enabled);
         }
     }
 }

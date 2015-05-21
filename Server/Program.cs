@@ -8,7 +8,9 @@ using Common.Commands;
 using Server.CmdHandler;
 using Server.DatabaseCommunication;
 using Server.DriverController;
+using Server.Sms;
 using Server.Timer;
+using Common.DataTransferObjects;
 
 namespace Server
 {
@@ -23,11 +25,14 @@ namespace Server
             IDatabaseCommunicator db = new DatabaseCommunicator();
             LocalServerData data = new LocalServerData();
             IDriverController driverController = new DriverController.DriverController(data.ZmsAddress);
+            UsernameToConnectionIdMapping driverToConnectionIdMapping = new UsernameToConnectionIdMapping();
+            ISmsSending smsSending = new SmsSending();
+
             connection.ServerStarted += (object sender, EventArgs e) => OnServerStarted(connection, db, data);
             connection.BeforeHandlingCommand += connection_BeforeHandlingCommand;
 
             Console.WriteLine("Registering Handlers...");
-            RegisterHandlers(connection, db, data, driverController);
+            RegisterHandlers(connection, db, data, driverController, driverToConnectionIdMapping, smsSending);
 
             Console.WriteLine("Starting server...");
             connection.RunForever();
@@ -42,21 +47,25 @@ namespace Server
             ServerConnection connection,
             IDatabaseCommunicator db,
             LocalServerData data,
-            IDriverController driverController)
+            IDriverController driverController,
+            UsernameToConnectionIdMapping driverMapping,
+            ISmsSending smsSending)
         {
 
             // TODO: REGISTER SERVER HANDLER HERE
             // Register all command handler to the connection here.
-            connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdLoginDriverHandler(connection, db, driverMapping));
             connection.RegisterCommandHandler(new CmdLoginCustomerHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetShiftSchedulesHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAvailableCarsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSelectCarHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetDriversUnfinishedOrdersHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdCheckOrdersFiveHoursLeftHandler(connection, db, driverMapping));
             connection.RegisterCommandHandler(new CmdSetOrderCollectedHandler(connection, db));
             connection.RegisterCommandHandler(new CmdStoreDriverGPSPositionHandler(db));
-            connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection, db));
+            connection.RegisterCommandHandler(new CmdAnnounceEmergencyHandler(connection, db, driverController,
+                driverMapping, smsSending, data));
+            connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection, db, driverMapping));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
@@ -66,7 +75,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateDailyStatisticHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetDailyStatisticHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAnalysesHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdAddOrderHandler(connection, db, driverController));
+            connection.RegisterCommandHandler(new CmdAddOrderHandler(connection, db, driverController, driverMapping));
             connection.RegisterCommandHandler(new CmdGetCustomerAddressHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOccupiedCarsHandler(connection, db));
@@ -79,9 +88,10 @@ namespace Server
             LocalServerData data)
         {
             data.GenerateShiftScheduleTimer = new GenerateShiftScheduleTimer(connection);
+            data.CheckOrdersFiveHoursLeftScheduledTimer = new CheckOrdersFiveHoursLeftScheduledTimer(connection);
             connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
             connection.InjectInternal(new CmdGenerateDailyStatistic());
-           // connection.InjectInternal(new CmdGenerateBills());
+            connection.InjectInternal(new CmdGenerateBills());
         }
     }
 }

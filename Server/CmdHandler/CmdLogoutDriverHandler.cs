@@ -16,11 +16,13 @@ namespace Server.CmdHandler
 
         private IServerConnection connection = null;
         private IDatabaseCommunicator db = null;
+        private UsernameToConnectionIdMapping driverMapping = null;
 
-        public CmdLogoutDriverHandler(IServerConnection connection, IDatabaseCommunicator db)
+        public CmdLogoutDriverHandler(IServerConnection connection, IDatabaseCommunicator db, UsernameToConnectionIdMapping driverMapping)
         {
             this.connection = connection;
             this.db = db;
+            this.driverMapping = driverMapping;
         }
 
         protected override void Handle(CmdLogoutDriver command, string connectionIdOrNull)
@@ -47,7 +49,7 @@ namespace Server.CmdHandler
                 success = false;
             }
             db.EndTransaction(TransactionEndOperation.SAVE);
-
+            driverMapping.Remove(command.Username);
             CmdReturnLogoutDriver response = new CmdReturnLogoutDriver(command.Id, success);
             connection.Unicast(response, connectionIdOrNull);
         }

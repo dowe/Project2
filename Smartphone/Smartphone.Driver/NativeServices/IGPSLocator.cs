@@ -7,7 +7,7 @@ namespace Smartphone.Driver.NativeServices
 
 		// See http://developer.xamarin.com/guides/cross-platform/xamarin-forms/dependency-service/
 
-		event Action<GPSPosition> LocationUpdated;
+		event Action<NativeGPSPosition> LocationUpdated;
 
 		void StartLocationUpdates (TimeSpan timeInterval);
 		void StopLocationUpdates();

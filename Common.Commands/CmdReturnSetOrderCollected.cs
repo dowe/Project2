@@ -11,9 +11,11 @@ namespace Common.Commands
     {
 
         public bool Success { get; private set; }
+        public long OrderID { get; private set; }
 
-        public CmdReturnSetOrderCollected(Guid requestId, bool success) : base(requestId)
+        public CmdReturnSetOrderCollected(Guid requestId, long orderID, bool success) : base(requestId)
         {
+            OrderID = orderID;
             Success = success;
         }
 

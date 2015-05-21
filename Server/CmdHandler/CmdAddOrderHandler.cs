@@ -17,14 +17,16 @@ namespace Server.CmdHandler
     {
 
         private IServerConnection connection = null;
-        private IDatabaseCommunicator db;
+        private IDatabaseCommunicator db = null;
         private IDriverController driverController = null;
+        private UsernameToConnectionIdMapping driverMap = null;
 
-        public CmdAddOrderHandler(IServerConnection connection, IDatabaseCommunicator db, IDriverController driverController)
+        public CmdAddOrderHandler(IServerConnection connection, IDatabaseCommunicator db, IDriverController driverController, UsernameToConnectionIdMapping driverMap)
         {
             this.connection = connection;
             this.db = db;
             this.driverController = driverController;
+            this.driverMap = driverMap;
         }
 
         protected override void Handle(CmdAddOrder command, string connectionIdOrNull)
@@ -41,11 +43,15 @@ namespace Server.CmdHandler
                 Driver = optimalDriverOrNull
             };
             db.CreateOrder(order);
-            db.EndTransaction(TransactionEndOperation.SAVE);
 
             if (optimalDriverOrNull != null)
             {
-                // TODO: Notify driver.
+                var sendNotification = new CmdSendNotification(order);
+                string connectionId = driverMap.ResolveConnectionIDOrNull(optimalDriverOrNull.UserName);
+                if(connectionId != null)
+                {
+                    connection.Unicast(sendNotification, connectionId);
+                }
             }
             else
             {
@@ -54,6 +60,8 @@ namespace Server.CmdHandler
 
             CmdReturnAddOrder ret = new CmdReturnAddOrder(command.Id, order.OrderID);
             connection.Unicast(ret, connectionIdOrNull);
+
+            db.EndTransaction(TransactionEndOperation.SAVE);
         }
     }
 }

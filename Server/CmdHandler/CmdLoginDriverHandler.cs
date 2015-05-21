@@ -16,32 +16,52 @@ namespace Server.CmdHandler
 
         private IServerConnection connection = null;
         private IDatabaseCommunicator db = null;
-
-        public CmdLoginDriverHandler(IServerConnection connection, IDatabaseCommunicator db)
+        private UsernameToConnectionIdMapping driverMapping = null;
+        public CmdLoginDriverHandler(IServerConnection connection, IDatabaseCommunicator db, UsernameToConnectionIdMapping driverMapping)
         {
             this.connection = connection;
             this.db = db;
+            this.driverMapping = driverMapping;
         }
 
         protected override void Handle(CmdLoginDriver command, string connectionIdOrNull)
         {
-            bool success = false;
-
             db.StartTransaction();
-            Driver driver = db.GetDriver(command.Username);
-            db.EndTransaction(TransactionEndOperation.READONLY);
-
-            if (driver != null && driver.Password.Equals(command.Password))
+            Car assignedCarOrNull = db.GetAllCars(c => c.CurrentDriver != null && c.CurrentDriver.UserName.Equals(command.Username))
+                    .FirstOrDefault();
+            Driver driverOrNull = null;
+            string assignedCarIDOrNull = null;
+            if (assignedCarOrNull != null)
             {
+                // Driver already has a car assigned.
+                driverOrNull = assignedCarOrNull.CurrentDriver;
+                assignedCarIDOrNull = assignedCarOrNull.CarID;
+            }
+            else
+            {
+                // Driver does not have a car assigned.
+                driverOrNull = db.GetDriver(command.Username);
+                assignedCarIDOrNull = null;
+            }
+
+            // Check credentials.
+            bool success = false;
+            if (driverOrNull != null && driverOrNull.Password.Equals(command.Password))
+            {
+                driverMapping.Set(driverOrNull.UserName, connectionIdOrNull);
                 success = true;
             }
             else
             {
                 success = false;
+                assignedCarIDOrNull = null;
             }
 
-            var response = new CmdReturnLoginDriver(command.Id, success);
+            var response = new CmdReturnLoginDriver(command.Id, assignedCarIDOrNull, success);
             connection.Unicast(response, connectionIdOrNull);
+
+            db.EndTransaction(TransactionEndOperation.READONLY);
         }
+
     }
 }

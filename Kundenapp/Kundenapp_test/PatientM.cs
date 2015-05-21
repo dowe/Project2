@@ -79,12 +79,12 @@ namespace Kundenapp
 				{
 					if (Analysis.Selected) 
 					{
-						if (!String.IsNullOrEmpty(ret)) 
-						{
-							ret = ret + ", ";
-						}
 						if (!ret.Contains (Analysis.Analysis.SampleType.ToString ()))
 						{
+							if (!String.IsNullOrEmpty(ret)) 
+							{
+								ret = ret + ", ";
+							}
 							ret = ret + Analysis.Analysis.SampleType.ToString ();
 						}
 						
@@ -110,13 +110,27 @@ namespace Kundenapp
 		{
 			get
 			{
-				return editCMD ?? (editCMD = new RelayCommand (()=>Messenger.Default.Send<PatientM> (this, "editPat")));
+				return editCMD ?? (editCMD = new RelayCommand (()=>
+					{
+						Messenger.Default.Send<PatientM> (this, "editPat");
+					}));
+			}
+		}
+			
+		private RelayCommand changedCMD;
+
+		public RelayCommand ChangedCMD
+		{
+			get
+			{
+				return changedCMD ?? (changedCMD = new RelayCommand (()=>Changed()));
 			}
 		}
 
 		public void Changed()
 		{
-			RaisePropertyChanged ();
+			RaisePropertyChanged("Samples");
+			RaisePropertyChanged ("Analysises");
 		}
 	}
 }

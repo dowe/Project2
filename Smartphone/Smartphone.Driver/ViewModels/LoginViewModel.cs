@@ -33,8 +33,8 @@ namespace Smartphone.Driver.ViewModels
 			this.connection = connection;
 			this.session = session;
 
-			username = "Driv1";
-			password = "Driv1";
+			username = "Driv3";
+			password = "Driv3";
 			communicating = false;
 		}
 
@@ -100,7 +100,7 @@ namespace Smartphone.Driver.ViewModels
 				var response = connection.SendWait<CmdReturnLoginDriver> (cmdLogin);
 				if (response != null && response.Success)
 				{
-					OnLoginSuccessful ();
+					OnLoginSuccessful (response.AssignedCarIDOrNull);
 				}
 			}
 			IsCommunicating = false;
@@ -125,14 +125,27 @@ namespace Smartphone.Driver.ViewModels
 			});
 		}
 
-		private void OnLoginSuccessful()
+		private void OnLoginSuccessful(string assignedCarIDOrNull)
 		{
 			session.Username = username;
+			if (assignedCarIDOrNull != null)
+			{
+				// Driver already has a car assigned. Skip the car selection.
+				session.CarID = assignedCarIDOrNull;
 
-			CmdGetAvailableCars getAvailableCars = new CmdGetAvailableCars();
-			connection.Send (getAvailableCars);
+				CmdGetDriversUnfinishedOrders cmdGetOrders = new CmdGetDriversUnfinishedOrders (session.Username);
+				connection.Send (cmdGetOrders);
 
-			Messenger.Default.Send<MsgSwitchSelectCarPage> (new MsgSwitchSelectCarPage ());
+				Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
+			}
+			else
+			{
+				// Driver does not yet have a car assigned.
+				CmdGetAvailableCars getAvailableCars = new CmdGetAvailableCars ();
+				connection.Send (getAvailableCars);
+
+				Messenger.Default.Send<MsgSwitchSelectCarPage> (new MsgSwitchSelectCarPage ());
+			}
 		}
 
 	}

@@ -32,86 +32,13 @@ namespace Server.CmdHandler
 
          protected override void Handle(CmdGenerateBills command, string connectionIdOrNull)
          {
+             _OrderList = new List<Order>();
              db.StartTransaction();
              _OrderList = db.GetAllOrders(x => x.Invoiced == false);
-             db.EndTransaction(TransactionEndOperation.READONLY);
+             
 
-             Console.WriteLine("ok1");
-
-             //Start Creating a Mockorder for testing
-             Order MockOrder1 = new Order();
-             MockOrder1.CollectDate = DateTime.Now;
-             MockOrder1.Invoiced = false;
-             Customer MockCustomer = new Customer();
-             MockCustomer.UserName = "myUsername";
-             MockCustomer.LastName = "Müller";
-             MockCustomer.FirstName = "Hans";
-             Console.WriteLine("ok2");
-
-           //  MockOrder.Customer.BankAccount = new BankAccount("DE 2323 1212 3333 1111", "Hans Müller");
-             Console.WriteLine("ok3");
-
-             MockCustomer.TwoWayRoadCostInEuro = 42.11f;
-             MockOrder1.Customer = MockCustomer;
-           
-             MockOrder1.OrderID = 1111;
-             List<Test> MockTest = new List<Test>();
-             MockTest.Add(new Test("Patientenid123", new Analysis("Blutzeug", 1.0f, 11.0f, "Kilo", 42.42f, SampleType.BLOOD)));
-             MockTest.Add(new Test("Patientenid222", new Analysis("Urinzeug", 1.0f, 11.0f, "Kilo", 35.99f, SampleType.URINE)));
-             MockTest.Add(new Test("Patientenid123", new Analysis("Blutzeug", 1.0f, 11.0f, "Kilo", 42.42f, SampleType.BLOOD)));
-             MockTest.Add(new Test("Patientenid999", new Analysis("Blutzeug", 1.0f, 11.0f, "Kilo", 42.42f, SampleType.BLOOD)));
-             MockTest.Add(new Test("Patientenid123", new Analysis("Urinzeug", 1.0f, 11.0f, "Kilo", 35.99f, SampleType.URINE)));
-             MockOrder1.Test = MockTest;
-             _OrderList.Add(MockOrder1);
-
-             //Zweite MockOrder
-             Order MockOrder2 = new Order();
-             MockOrder2.CollectDate = DateTime.Now;
-             MockOrder2.Invoiced = false;
-             Customer MockCustomer2 = new Customer();
-             MockCustomer2.UserName = "otherUsername";
-             MockCustomer2.LastName = "Müller";
-             MockCustomer2.FirstName = "Hans";
-             Console.WriteLine("ok2");
-
-             //  MockOrder.Customer.BankAccount = new BankAccount("DE 2323 1212 3333 1111", "Hans Müller");
-             Console.WriteLine("ok3");
-
-             MockCustomer2.TwoWayRoadCostInEuro = 69.96f;
-             MockOrder2.Customer = MockCustomer2;
-
-             MockOrder2.OrderID = 2222;
-             List<Test> MockTest2 = new List<Test>();
-             MockTest2.Add(new Test("Patientenid123", new Analysis("Spuckezeug", 1.0f, 11.0f, "Kilo", 33.33f, SampleType.SALIVA)));
-             MockTest2.Add(new Test("Patientenid222", new Analysis("Urinzeug", 1.0f, 11.0f, "Kilo", 35.99f, SampleType.URINE)));
-    
-             MockOrder2.Test = MockTest2;
-             _OrderList.Add(MockOrder2);
-
-             //Start MockOrder 3, same customer as 1
-             Order MockOrder3 = new Order();
-             MockOrder3.CollectDate = DateTime.Now;
-             MockOrder3.Invoiced = false;
-             Console.WriteLine("ok2");
-
-             //  MockOrder.Customer.BankAccount = new BankAccount("DE 2323 1212 3333 1111", "Hans Müller");
-             Console.WriteLine("ok3");
-
-          
-             MockOrder3.Customer = MockCustomer;
-
-             MockOrder3.OrderID = 333;
-             List<Test> MockTest3 = new List<Test>();
-             MockTest3.Add(new Test("Patientenid123", new Analysis("Spermazeug", 1.0f, 11.0f, "Kilo", 33.33f, SampleType.SPERM)));
-             MockTest3.Add(new Test("Patientenid222", new Analysis("Urinzeug", 1.0f, 11.0f, "Kilo", 35.99f, SampleType.URINE)));
-             MockTest3.Add(new Test("Patientenid123", new Analysis("Spermazeug", 1.0f, 11.0f, "Kilo", 33.33f, SampleType.SPERM)));
-             MockTest3.Add(new Test("Patientenid999", new Analysis("Blutzeug", 1.0f, 11.0f, "Kilo", 42.42f, SampleType.BLOOD)));
             
-             MockOrder3.Test = MockTest3;
-             _OrderList.Add(MockOrder3);
-             //finish Mockorder
 
-             Console.WriteLine("Start");
              
              DateTime now = DateTime.Now;
              Bill b;
@@ -119,24 +46,32 @@ namespace Server.CmdHandler
              int OrderAmount, TestAmount = 0; ;
              for (int i = 0; i < _OrderList.Count; i++)
              {
+
                  //New Customer whose Oders havent been invoiced
                  if (_OrderList[i].Invoiced == false)
                  {
+
                      _TestList = new List<Test>();
                      OrderAmount = 1;
                      TestAmount = 0;
+
                      //Create new Bill
                      b = new Bill();
+
                      b.Customer = _OrderList[i].Customer;
+
                      b.Date = now;
+
                      string targetdir = Directory.GetCurrentDirectory() + "/App_Data/" + _OrderList[i].Customer.UserName;
                      b.PDFPath = Directory.GetCurrentDirectory() + "/App_Data/" + _OrderList[i].Customer.UserName + "/" + now.ToString("dd-MM-yyyy")+".pdf";
                      //Add Testlist from Order
+
                      _TestList = (List<Test>) _OrderList[i].Test;
-                    
+
                      //Check if Customer has other Orders pending
                      for (int j = i+1; j < _OrderList.Count; j++)
                      {
+
                          //Yes? get all tests in customers testlist 
                          if (_OrderList[j].Customer.UserName.Equals(b.Customer.UserName) && _OrderList[j].Invoiced == false)
                          {
@@ -146,6 +81,7 @@ namespace Server.CmdHandler
                              
                          }
                      }
+
                      //now all Tests and the amount of Orders should be gathered correctly for the Customer
 
                      
@@ -161,7 +97,6 @@ namespace Server.CmdHandler
                      XFont fontBig = new XFont("Arial", fontHeightBig);
                      XFont fontSmall = new XFont("Arial", fontHeightSmall);
 
-                     Console.WriteLine("Start pdf");
                      //generate PDF
                      PdfDocument doc = new PdfDocument();
                      PdfPage page = doc.AddPage();
@@ -170,7 +105,6 @@ namespace Server.CmdHandler
                      XTextFormatter tf = new XTextFormatter(gfx);
                      XPen pen = new XPen(XColors.Black, 1);
 
-                     Console.WriteLine("Start headlines");
 
 
                      //Start Headlines
@@ -185,7 +119,6 @@ namespace Server.CmdHandler
                      y += fontHeightSmall;
                      y += 2*absatz;
 
-                     Console.WriteLine("Start orders");
 
                      //Start Orders
                      XRect ordershead = new XRect(marginLeft, y, page.Width, fontHeightSmall);
@@ -197,13 +130,13 @@ namespace Server.CmdHandler
 
                      pricetotal = OrderAmount * b.Customer.TwoWayRoadCostInEuro;
 
-                     XRect orders = new XRect(marginLeft, y, page.Width, fontHeightSmall);
+                     XRect orders = new XRect(marginLeft, y, page.Width/2, fontHeightSmall);
                      gfx.DrawString(OrderAmount.ToString() + " Fahrt(en)", fontSmall, XBrushes.Black, orders, XStringFormats.TopLeft);
-                     gfx.DrawString((b.Customer.TwoWayRoadCostInEuro * OrderAmount).ToString(),fontSmall, XBrushes.Black, orders, XStringFormats.Center);
+                     tf.Alignment = XParagraphAlignment.Right;
+                     tf.DrawString((b.Customer.TwoWayRoadCostInEuro * OrderAmount).ToString("C"),fontSmall, XBrushes.Black, orders, XStringFormats.TopLeft);
                      y += fontHeightSmall;
                      y += 2*absatz;
 
-                     Console.WriteLine("Start tests");
                      //Start Tests
                      XRect testshead = new XRect(marginLeft, y, page.Width, fontHeightSmall);
                     
@@ -214,9 +147,9 @@ namespace Server.CmdHandler
                      foreach (Test t in _TestList)
                      {
                          pricetotal += t.Analysis.PriceInEuro;
-                         XRect tests = new XRect(marginLeft, y, page.Width, fontHeightSmall);
+                         XRect tests = new XRect(marginLeft, y, page.Width/2, fontHeightSmall);
                          gfx.DrawString(t.Analysis.Name, fontSmall, XBrushes.Black, tests, XStringFormats.TopLeft);
-                         gfx.DrawString(t.Analysis.PriceInEuro.ToString(), fontSmall, XBrushes.Black, tests, XStringFormats.Center);
+                         tf.DrawString(t.Analysis.PriceInEuro.ToString("C"), fontSmall, XBrushes.Black, tests, XStringFormats.TopLeft);
                          y += fontHeightSmall;
                          TestAmount++;
                      }
@@ -224,20 +157,18 @@ namespace Server.CmdHandler
                      gfx.DrawRectangle(pen, marginLeft - 5, y - 5 - ((TestAmount +1) * fontHeightSmall) - absatz  , page.Width - (2 * marginLeft),  ((TestAmount+1)*fontHeightSmall)+absatz+ 10);
 
                      y += 2*absatz;
-                     Console.WriteLine("Start total");
                      //Start Total
-                     XRect total1 = new XRect(30, y, page.Width, fontHeightSmall);
-                     XRect total2 = new XRect(marginLeft, y, page.Width , fontHeightSmall);
+                     XRect total1 = new XRect(0, y, page.Width, fontHeightSmall);
+                     XRect total2 = new XRect(marginLeft, y, page.Width/2 , fontHeightSmall);
                      gfx.DrawString("Gesamt:", fontSmallBold, XBrushes.Black, total1, XStringFormats.Center);
-                     gfx.DrawString(pricetotal.ToString() , fontSmallBold, XBrushes.Black, total2, XStringFormats.Center);
+                     tf.DrawString(pricetotal.ToString("C") , fontSmallBold, XBrushes.Black, total2, XStringFormats.TopLeft);
                      y += fontHeightSmall;
                      y += absatz;
 
-                     Console.WriteLine("Start text");
-
+                     tf.Alignment = XParagraphAlignment.Left;
                      XRect totaltext = new XRect(marginLeft, y, page.Width-2*marginLeft, fontHeightSmall*4);
-                     tf.DrawString("Der Betrag in Höhe von " + pricetotal.ToString() +" wird von ihrem Konto (IBAN: TODO: BankAccount hängt"
-                        // + b.Customer.BankAccount.IBAN 
+                     tf.DrawString("Der Betrag in Höhe von " + pricetotal.ToString("C") +" wird von ihrem Konto (IBAN: "
+                         + b.Customer.BankAccount.IBAN 
                         + ") abgebucht."
                          , fontSmall, XBrushes.Black, totaltext, XStringFormats.TopLeft);
 
@@ -247,7 +178,6 @@ namespace Server.CmdHandler
 
 
                      //Start saving PDF on server
-                     Console.WriteLine("Creating Dir " + targetdir);
 
                      //Create Directory For Customer
                      if (Directory.Exists(targetdir))
@@ -269,11 +199,12 @@ namespace Server.CmdHandler
                      else
                      {
                          doc.Save(b.PDFPath);
+                         db.CreateBill(b);
                      }
-                     Console.WriteLine("Finish saving pdf");
                  }
 
              }
+         db.EndTransaction(TransactionEndOperation.SAVE);
 
          }
 

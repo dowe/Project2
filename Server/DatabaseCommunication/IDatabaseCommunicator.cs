@@ -56,15 +56,17 @@ namespace Server.DatabaseCommunication
 
 		Car GetCar(string carId);
 
-	    GPSPosition GetGPSPosition(string carID);
-
 		CarLogbookEntry GetLastCarLogbookEntry(string carID);
+
+	    GPSPosition CreateGPSPosition(GPSPosition position);
 
 		void CreateCarLogbookEnry(CarLogbookEntry entry);
 
         void CreateShiftSchedule(ShiftSchedule shift);
 
         void AttachAnalysises(List<Analysis> analysises);
+
+	    void CreateBill(Bill bill);
 
 	}
 }

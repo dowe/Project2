@@ -31,7 +31,6 @@ namespace Server.CmdHandler
            
             db.StartTransaction();
             IList<Order> list = db.GetAllOrders(null);
-            db.EndTransaction(TransactionEndOperation.READONLY);
 
             //Start Creating a Mockorder for testing
             Order MockOrder = new Order();
@@ -50,6 +49,8 @@ namespace Server.CmdHandler
 
             ResponseCommand response = new CmdReturnGetAllOrders(command.Id, list);
             connection.Unicast(response, connectionIdOrNull);
+            db.EndTransaction(TransactionEndOperation.READONLY);
+
         }
     }
 }

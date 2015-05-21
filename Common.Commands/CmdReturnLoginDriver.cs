@@ -11,10 +11,12 @@ namespace Common.Commands
     {
 
         public bool Success { get; private set; }
+        public string AssignedCarIDOrNull { get; private set; }
 
-        public CmdReturnLoginDriver(Guid requestId, bool success) : base(requestId)
+        public CmdReturnLoginDriver(Guid requestId, string assignedCarIDOrNull, bool success) : base(requestId)
         {
             Success = success;
+            AssignedCarIDOrNull = assignedCarIDOrNull;
         }
 
     }

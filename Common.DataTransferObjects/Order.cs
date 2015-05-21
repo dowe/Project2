@@ -21,10 +21,12 @@ namespace Common.DataTransferObjects
         public Order(Dictionary<string, List<Analysis>> Analysises, Customer Customer)
         {
             this.Customer = Customer;
+            this.EmergencyPosition = null;
             this.OrderDate = DateTime.Now;
             this.BringDate = null;
             this.CollectDate = null;
             this.CompleteDate = null;
+            this.RemindedAfterFiveHours = false;
             this.Test = new List<Test>();
             foreach(KeyValuePair<string, List<Analysis>> kVAnalysises in Analysises)
             {
@@ -71,11 +73,17 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
-		public virtual bool RemindAfterFiveHours
+		public virtual bool RemindedAfterFiveHours
 		{
 			get;
 			set;
 		}
+
+	    public virtual GPSPosition EmergencyPosition
+	    {
+	        get;
+            set;
+        }
 
 		public virtual Customer Customer
 		{

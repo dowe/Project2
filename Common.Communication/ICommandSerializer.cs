@@ -6,7 +6,7 @@ namespace Common.Communication
     {
 
         string SerializeCommand(Command command);
-        Command DeserializeCommand(string jsonCommand, IEnumerable<Type> parsableCommandTypes);
+        Command DeserializeCommandOrNull(string jsonCommand, IEnumerable<Type> parsableCommandTypes);
 
     }
 }

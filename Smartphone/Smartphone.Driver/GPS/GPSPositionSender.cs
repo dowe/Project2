@@ -34,7 +34,7 @@ namespace Smartphone.Driver.GPS
 			locator.StopLocationUpdates ();
 		}
 
-		private void OnLocationUpdate(GPSPosition position)
+		private void OnLocationUpdate(NativeGPSPosition position)
 		{
 			Common.DataTransferObjects.GPSPosition dtoPosition = new Common.DataTransferObjects.GPSPosition {Latitude = (float)position.Latitude, Longitude = (float)position.Longitude};
 			CmdStoreDriverGPSPosition cmdStorePosition = new CmdStoreDriverGPSPosition (session.CarID, dtoPosition);

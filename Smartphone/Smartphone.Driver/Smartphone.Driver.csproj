@@ -63,16 +63,18 @@
     <Compile Include="Messages\MsgSwitchSelectCarPage.cs" />
     <Compile Include="Messages\MsgUpdateCarIDsPicker.cs" />
     <Compile Include="Messages\MsgSwitchOrderDetailsPage.cs" />
-    <Compile Include="ViewModels\NativeMapAppLauncher.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Handlers\CmdReturnGetAvailableCarsHandler.cs" />
     <Compile Include="Handlers\CmdReturnGetDriversUnfinishedOrdersHandler.cs" />
     <Compile Include="NativeServices\IGPSLocator.cs" />
-    <Compile Include="NativeServices\GPSPosition.cs" />
     <Compile Include="GPS\GPSPositionSender.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="NativeServices\INotificationController.cs" />
     <Compile Include="Handlers\CmdRemindDriverOfOrderHandler.cs" />
+    <Compile Include="Handlers\CmdReturnSetOrderCollectedHandler.cs" />
+    <Compile Include="Handlers\CmdSendNotificationHandler.cs" />
+    <Compile Include="NativeServices\NativeMapAppLauncher.cs" />
+    <Compile Include="NativeServices\NativeGPSPosition.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

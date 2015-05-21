@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using Common.Commands;
 using Smartphone.Driver.Messages;
 using Smartphone.Driver.Models;
+using Smartphone.Driver.NativeServices;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -52,9 +53,20 @@ namespace Smartphone.Driver.ViewModels
 					{
 						orderID = string.Empty;
 					}
-					if (value != null && value.Customer != null && value.Customer.Address != null)
+					if (value != null)
 					{
-						CustomerAddress = value.Customer.Address.Street + "\n" + value.Customer.Address.PostalCode + value.Customer.Address.City;
+						if (value.EmergencyPosition != null)
+						{
+							CustomerAddress = value.EmergencyPosition.Latitude + ", " + value.EmergencyPosition.Longitude;
+						}
+						else if (value.Customer != null && value.Customer.Address != null)
+						{
+							CustomerAddress = value.Customer.Address.Street + "\n" + value.Customer.Address.PostalCode + value.Customer.Address.City;
+						}
+						else
+						{
+							customerAddress = string.Empty;
+						}
 					}
 					else
 					{
@@ -109,7 +121,16 @@ namespace Smartphone.Driver.ViewModels
 			{
 				try
 				{
-					new NativeMapAppLauncher ().LaunchMapApp (order.Customer.Address);
+					NativeMapAppLauncher launcher = new NativeMapAppLauncher();
+
+					if (order.EmergencyPosition != null)
+					{
+						launcher.LaunchMapApp(order.EmergencyPosition);
+					}
+					else
+					{
+						launcher.LaunchMapApp (order.Customer.Address);
+					}
 				}
 				catch (Exception)
 				{

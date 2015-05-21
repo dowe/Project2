@@ -179,11 +179,6 @@ namespace Server.DatabaseCommunication
             return Context.Car.Find(CarID);
         }
 
-	    public GPSPosition GetGPSPosition(string positionID)
-	    {
-	        return Context.GpsPosition.Find(positionID);
-	    }
-
         public Car GetCarbyDriver(string driverUserName)
         {
             return Context.Car.Where(c => c.CurrentDriver.UserName == driverUserName).FirstOrDefault();
@@ -200,6 +195,11 @@ namespace Server.DatabaseCommunication
             throw new NotImplementedException();
         }
 
+	    public GPSPosition CreateGPSPosition(GPSPosition position)
+	    {
+	        return Context.GpsPosition.Add(position);
+	    }
+
         public void CreateShiftSchedule(ShiftSchedule shift)
         {
             Context.ShiftSchedule.Add(shift);
@@ -213,6 +213,11 @@ namespace Server.DatabaseCommunication
                 Context.Analysis.Attach(an);    
             }
         }
-    }
+
+	    public void CreateBill(Bill bill)
+	    {
+	        Context.Bill.Add(bill);
+	    }
+	}
 }
 
