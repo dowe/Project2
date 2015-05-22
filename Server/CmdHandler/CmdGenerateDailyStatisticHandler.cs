@@ -46,14 +46,14 @@ namespace Server.CmdHandler
                 if (o.CompleteDate != null && (o.CompleteDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
                     ds.NumberOfCompletedOrders++;
                 //sonst falls in progress
-                else if (o.BringDate != null && (o.BringDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
+                else if (o.BringDate != null && o.CompleteDate==null)
                     ds.NumberOfOrdersInProgress++;
 
                 //Alles für tests
                 foreach (Test t in o.Test)
                 {
                     //in letzten 24h gestartet aber noch nicht zu ende
-                    if (t.StartDate != null && (t.StartDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24 && t.EndDate == null)
+                    if (t.StartDate != null &&  t.EndDate == null)
                         ds.NumberOfTestsInProgress++;
                     //in letzten 24h beendet
                     else if (t.EndDate != null && (t.EndDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)

@@ -15,21 +15,21 @@
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Content="Aktualisiere" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Width="75" Command="{Binding LoadCommand, Mode=OneWay}" />
         
-        <DataGrid Grid.Row="1" Name="SamplesDataGrid" AutoGenerateColumns="False" IsReadOnly="False"
+        <DataGrid Grid.Row="1" Name="SamplesDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
                       HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" ItemsSource="{Binding DataList}">
             <DataGrid.Resources>
                 <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Patienten ID" Binding="{Binding PatientID}" IsReadOnly="true"/>
-                <DataGridTextColumn Header="Bestellung" Binding="{Binding SampleTypeAndAnalysis}" IsReadOnly="true"/>
-                <DataGridTextColumn Header="Probe" Binding="{Binding SampleTypeAndAnalysis}" IsReadOnly="true"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding TestState}" IsReadOnly="true"/>
+                <DataGridTextColumn Header="Patienten ID" Binding="{Binding PatientID}" />
+                <DataGridTextColumn Header="Bestellung" Binding="{Binding OrderID}" />
+                <DataGridTextColumn Header="Probe" Binding="{Binding SampleTypeAndAnalysis}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding TestState}" />
                 <DataGridCheckBoxColumn Header="Eingetroffen" Binding="{Binding SampleCollected}"  />
-                <DataGridTextColumn Header="Alarmstatus" Binding="{Binding AlarmState}" IsReadOnly="true"/>
-                <DataGridTextColumn Header="Bringdatum" Binding="{Binding BringDate}" IsReadOnly="true"/>
-                <DataGridTextColumn Header="Kundenbezeichnung" Binding="{Binding CustomerLabel}" IsReadOnly="true"/>
+                <DataGridTextColumn Header="Alarmstatus" Binding="{Binding AlarmState}" />
+                <DataGridTextColumn Header="Bringdatum" Binding="{Binding BringDate}"/>
+                <DataGridTextColumn Header="Kundenbezeichnung" Binding="{Binding CustomerLabel}" />
             </DataGrid.Columns>
            
         </DataGrid>
