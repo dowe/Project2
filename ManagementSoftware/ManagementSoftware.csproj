@@ -95,6 +95,7 @@
     <Compile Include="Model\ShiftScheduleModel.cs" />
     <Compile Include="Model\ShiftScheduleMonthEntry.cs" />
     <Compile Include="Model\ShiftScheduleRawModel.cs" />
+    <Compile Include="Model\TestDetailModel.cs" />
     <Compile Include="Model\TestEntryModel.cs" />
     <Compile Include="Model\CreateOrderM.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

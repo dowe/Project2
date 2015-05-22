@@ -16,7 +16,7 @@
         <Button Grid.Row="0" Content="Aktualisiere" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Width="75" Command="{Binding LoadCommand, Mode=OneWay}" />
         
         <DataGrid Grid.Row="1" Name="SamplesDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
-                      HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" ItemsSource="{Binding DataList}">
+                      HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" ItemsSource="{Binding DataList}" SelectedItem="{Binding SelectedTestEntry}">
             <DataGrid.Resources>
                 <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
             </DataGrid.Resources>
