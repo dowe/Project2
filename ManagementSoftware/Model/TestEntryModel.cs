@@ -11,11 +11,6 @@ namespace ManagementSoftware.Model
         private String _AlarmState, _BringDate, _CustomerLabel, _OrderID, _PatientID, _SampleTypeAndAnalysis, _TestID, _TestState;
         private bool _SampleCollected;
 
-        public TestEntryModel()
-        {
-
-        }
-
         public bool SampleCollected
         {
             get { return _SampleCollected; }

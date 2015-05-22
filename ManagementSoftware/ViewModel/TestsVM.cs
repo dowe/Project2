@@ -21,12 +21,27 @@ namespace ManagementSoftware.ViewModel
          private IClientConnection _ClientConnection;
          private IList<TestEntryModel> _DataList;
          private IList<Order> _OrderList;
+         private TestDetailModel _Detail;
+         private TestEntryModel _SelectedTestEntry;
+
+        
+
          public TestsVM(IClientConnection _ClientConnection)
         {
             this._ClientConnection = _ClientConnection;
             this.LoadCommand = new RelayCommand(LoadData);
+            _SelectedTestEntry = null;
+
           
         }
+         public TestDetailModel Detail
+         {
+             get { return _Detail; }
+             set 
+             {
+                 _Detail = value; 
+             }
+         }
          public IList<TestEntryModel> DataList
          {
              get
@@ -41,7 +56,33 @@ namespace ManagementSoftware.ViewModel
              }
          }
          public RelayCommand LoadCommand { get; set; }
-        
+         public TestEntryModel SelectedTestEntry
+         {
+             get
+             {
+                 return _SelectedTestEntry;
+             }
+             set
+             {
+                 _SelectedTestEntry = value;
+                 
+                 RefreshDetail();
+                 RaisePropertyChanged();
+             }
+         }
+
+         private void RefreshDetail()
+         {
+             //TODO Detail befüllen
+             if (_SelectedTestEntry != null)
+             {
+                 Console.WriteLine(_SelectedTestEntry.PatientID);
+             }
+             else
+             {
+                 Console.WriteLine("NULL ENTRY");
+             }
+         }
          private void LoadData()
          {
              new CmdGenerateBills();
