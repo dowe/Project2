@@ -140,6 +140,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LocalServerData.cs" />
+    <Compile Include="ShiftScheduleCreation\IShiftScheduleCreator.cs" />
+    <Compile Include="ShiftScheduleCreation\ShiftScheduleCreator.cs" />
     <Compile Include="Sms\ISmsSending.cs" />
     <Compile Include="Sms\SmsSending.cs" />
     <Compile Include="Timer\CheckOrdersFiveHoursLeftScheduledTimer.cs" />
