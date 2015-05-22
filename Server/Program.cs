@@ -86,7 +86,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOccupiedCarsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSetOrderReceivedHandler(db));
-            connection.RegisterCommandHandler(new CmdSetTestResultHandler(db, checker, smsSending, data));
+            connection.RegisterCommandHandler(new CmdSetTestResultHandler(db, checker, smsSending, data, connection));
         }
 
         private static void OnServerStarted(
