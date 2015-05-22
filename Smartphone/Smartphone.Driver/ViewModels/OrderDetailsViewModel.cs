@@ -8,6 +8,7 @@ using Common.Commands;
 using Smartphone.Driver.Messages;
 using Smartphone.Driver.Models;
 using Smartphone.Driver.NativeServices;
+using Smartphone.Driver.Const;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -136,7 +137,7 @@ namespace Smartphone.Driver.ViewModels
 				}
 				catch (Exception)
 				{
-					toaster.MakeToast ("Could not start the map. Make sure you have Google Maps installed.");
+					toaster.MakeToast (ToastTexts.FAILED_LAUNCH_MAP);
 				}
 			}
 		}
@@ -165,13 +166,13 @@ namespace Smartphone.Driver.ViewModels
 				}
 				else
 				{
-					toaster.MakeToast ("Could not set order collected.");
+					toaster.MakeToast (ToastTexts.FAILED_SET_COLLECTED);
 					connection.Send (new CmdGetDriversUnfinishedOrders (session.Username));
 				}
 			}
 			else
 			{
-				toaster.MakeToast ("Server did not answer.");
+				toaster.MakeToast (ToastTexts.SERVER_NO_ANSWER);
 			}
 		}
 

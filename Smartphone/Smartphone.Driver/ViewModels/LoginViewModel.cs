@@ -9,6 +9,7 @@ using Microsoft.AspNet.SignalR.Client;
 using Smartphone.Driver.Models;
 using Smartphone.Driver.Messages;
 using Smartphone.Driver.NativeServices;
+using Smartphone.Driver.Const;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -107,12 +108,12 @@ namespace Smartphone.Driver.ViewModels
 				}
 				else
 				{
-					toaster.MakeToast ("Login failed.");
+					toaster.MakeToast (ToastTexts.FAILED_LOGIN);
 				}
 			}
 			else
 			{
-				toaster.MakeToast ("Server did not answer.");
+				toaster.MakeToast (ToastTexts.SERVER_NO_ANSWER);
 			}
 			IsCommunicating = false;
 		}
@@ -143,7 +144,7 @@ namespace Smartphone.Driver.ViewModels
 			{
 				// Driver already has a car assigned. Skip the car selection.
 				session.CarID = assignedCarIDOrNull;
-				toaster.MakeToast ("Already assigned to car " + assignedCarIDOrNull);
+				toaster.MakeToast (ToastTexts.AlreadyAssignedToCar(assignedCarIDOrNull));
 
 				CmdGetDriversUnfinishedOrders cmdGetOrders = new CmdGetDriversUnfinishedOrders (session.Username);
 				connection.Send (cmdGetOrders);

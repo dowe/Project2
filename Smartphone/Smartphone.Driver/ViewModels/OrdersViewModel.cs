@@ -10,6 +10,7 @@ using Smartphone.Driver.Models;
 using Smartphone.Driver.Messages;
 using Smartphone.Driver.GPS;
 using Smartphone.Driver.NativeServices;
+using Smartphone.Driver.Const;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -95,7 +96,7 @@ namespace Smartphone.Driver.ViewModels
 			}
 			else
 			{
-				toaster.MakeToast ("You still have orders left.");
+				toaster.MakeToast (ToastTexts.FAILED_LOGOUT_ORDERS_LEFT);
 			}
 		}
 
@@ -115,12 +116,12 @@ namespace Smartphone.Driver.ViewModels
 					OnEmergencySuccessful ();
 				} else
 				{
-					toaster.MakeToast ("Emergerncy failed.");
+					toaster.MakeToast (ToastTexts.FAILED_EMERGENCY);
 				}
 			}
 			else
 			{
-				toaster.MakeToast ("Server did not answer.");
+				toaster.MakeToast (ToastTexts.SERVER_NO_ANSWER);
 			}
 
 		}
