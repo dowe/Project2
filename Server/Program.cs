@@ -10,6 +10,7 @@ using Server.DatabaseCommunication;
 using Server.DriverController;
 using Server.Sms;
 using Server.Timer;
+using Server.ExtremeValueCheck;
 using Common.DataTransferObjects;
 
 namespace Server
@@ -27,12 +28,13 @@ namespace Server
             IDriverController driverController = new DriverController.DriverController(data.ZmsAddress);
             UsernameToConnectionIdMapping driverToConnectionIdMapping = new UsernameToConnectionIdMapping();
             ISmsSending smsSending = new SmsSending();
+            IExtremeValueChecker checker = new ExtremeValueChecker();
 
             connection.ServerStarted += (object sender, EventArgs e) => OnServerStarted(connection, db, data);
             connection.BeforeHandlingCommand += connection_BeforeHandlingCommand;
 
             Console.WriteLine("Registering Handlers...");
-            RegisterHandlers(connection, db, data, driverController, driverToConnectionIdMapping, smsSending);
+            RegisterHandlers(connection, db, data, driverController, driverToConnectionIdMapping, smsSending, checker);
 
             Console.WriteLine("Starting server...");
             connection.RunForever();
@@ -49,7 +51,8 @@ namespace Server
             LocalServerData data,
             IDriverController driverController,
             UsernameToConnectionIdMapping driverMapping,
-            ISmsSending smsSending)
+            ISmsSending smsSending,
+            IExtremeValueChecker checker)
         {
 
             // TODO: REGISTER SERVER HANDLER HERE
@@ -80,6 +83,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOccupiedCarsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSetOrderReceivedHandler(db));
+            connection.RegisterCommandHandler(new CmdSetTestResultHandler(db, checker, smsSending));
         }
 
         private static void OnServerStarted(
