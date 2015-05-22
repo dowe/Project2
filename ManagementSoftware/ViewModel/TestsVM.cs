@@ -65,8 +65,8 @@ namespace ManagementSoftware.ViewModel
                          temp.OrderID = o.OrderID.ToString();
                          temp.PatientID = t.PatientID;
                          temp.BringDate = o.BringDate.ToString(); 
-                         temp.CustomerLabel = o.Customer.ToString();
-                         temp.SampleTypeAndAnalysis = t.Analysis.ToString();
+                         temp.CustomerLabel = o.Customer.Label;
+                         temp.SampleTypeAndAnalysis = t.Analysis.Name;
                          temp.TestID = t.TestID.ToString();
 
                          //Eingetroffen?
@@ -74,7 +74,25 @@ namespace ManagementSoftware.ViewModel
                              temp.SampleCollected = true;
                          else
                              temp.SampleCollected = false;
-
+                         //Teststate Converten
+                         switch(t.TestState)
+                         {
+                             case  TestState.COMPLETED:
+                                 temp.TestState = "Fertig";
+                                 break;
+                             case TestState.IN_PROGRESS:
+                                 temp.TestState = "In Bearbeitung";
+                                 break;
+                             case TestState.ORDERED:
+                                 temp.TestState = "Bestellt";
+                                 break;
+                             case TestState.WAITING_FOR_DRIVER:
+                                 temp.TestState = "Warten auf Fahrer";
+                                 break;
+                             default:
+                                 temp.TestState = "Kein Status vorhanden";
+                             break;
+                         }
                          //Alarmstatus converten
                          switch (t.AlarmState)
                          {

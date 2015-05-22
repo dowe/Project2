@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Server.ShiftScheduleCreation;
 
 namespace Server.CmdHandler
 {
@@ -67,7 +68,7 @@ namespace Server.CmdHandler
         private void CreateForMonth(DateTime refDate)
         {
 
-            ShiftSchedule previousShiftSchedule;
+            ShiftSchedule previousShiftSchedule = new ShiftSchedule();
             DateTime previousMonth = refDate.AddMonths(-1);
 
             //GET ALL ShiftSchedules
@@ -99,11 +100,15 @@ namespace Server.CmdHandler
             }
 
             //TODO: create real ShiftSchedule use (refDate, previousMonth) and dedicated Unit
-            ShiftSchedule newShiftSchedule = Util.CreateTestData(refDate);
+            //ShiftSchedule newShiftSchedule = Util.CreateTestData(refDate);
+
+            IShiftScheduleCreator creator = new ShiftScheduleCreator();
+            ShiftSchedule cur = creator.createShiftSchedule(previousShiftSchedule, refDate);
+
 
             //store ShiftSchedule in db
             db.StartTransaction();
-            db.CreateShiftSchedule(newShiftSchedule);
+            db.CreateShiftSchedule(cur);
             db.EndTransaction(TransactionEndOperation.SAVE);
 
             Console.WriteLine("SHIFT_SCHEDULE CREATED FOR <{0}>", refDate);

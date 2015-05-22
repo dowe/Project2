@@ -4,6 +4,7 @@ using Common.Communication;
 using Smartphone.Driver.NativeServices;
 using Xamarin.Forms;
 using Smartphone.Driver.Models;
+using Smartphone.Driver.Const;
 
 namespace Smartphone.Driver.Handlers
 {
@@ -19,10 +20,10 @@ namespace Smartphone.Driver.Handlers
 			
 		protected override void Handle (CmdRemindDriverOfOrder command, string connectionIdOrNull)
 		{
-			string title = "Order " + command.OrderId;
-			string message = "Only one hour left to collect the samples. Hurry up!";
+			string title = NotificationTexts.OrderReminderTitle (command.OrderId);
+			string message = NotificationTexts.ORDER_REMINDER_TEXT;
 
-			notificationController.PutNotification (title, message);
+			notificationController.PutNotification (title, message, command.OrderId);
 		}
 
 	}

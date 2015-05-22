@@ -8,6 +8,7 @@ using Common.Commands;
 using Smartphone.Driver.Messages;
 using Smartphone.Driver.Models;
 using Smartphone.Driver.NativeServices;
+using Smartphone.Driver.Const;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -19,6 +20,7 @@ namespace Smartphone.Driver.ViewModels
 
 		private IClientConnection connection = null;
 		private Session session = null;
+		private IToaster toaster = null;
 
 		private Order order = null;
 
@@ -27,10 +29,11 @@ namespace Smartphone.Driver.ViewModels
 		private RelayCommand launchMapCommand = null;
 		private RelayCommand collectedCommand = null;
 
-		public OrderDetailsViewModel (IClientConnection connection, Session session)
+		public OrderDetailsViewModel (IClientConnection connection, Session session, IToaster toaster)
 		{
 			this.connection = connection;
 			this.session = session;
+			this.toaster = toaster;
 
 			Messenger.Default.Register<MsgSetOrderDetailsModel> (this, SetOrder);
 		}
@@ -134,7 +137,7 @@ namespace Smartphone.Driver.ViewModels
 				}
 				catch (Exception)
 				{
-					// TODO show toast or something that no map app could be launched.
+					toaster.MakeToast (ToastTexts.FAILED_LAUNCH_MAP);
 				}
 			}
 		}
@@ -154,14 +157,22 @@ namespace Smartphone.Driver.ViewModels
 		{
 			CmdSetOrderCollected setOrderCollected = new CmdSetOrderCollected (session.Username, order.OrderID);
 			CmdReturnSetOrderCollected response = connection.SendWait<CmdReturnSetOrderCollected>(setOrderCollected);
-			if (response != null && response.Success)
+			if (response != null)
 			{
-				// Switch back to order list.
-				Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
+				if (response.Success)
+				{
+					// Switch back to order list.
+					Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
+				}
+				else
+				{
+					toaster.MakeToast (ToastTexts.FAILED_SET_COLLECTED);
+					connection.Send (new CmdGetDriversUnfinishedOrders (session.Username));
+				}
 			}
-			else 
+			else
 			{
-				// TODO show toast or something.
+				toaster.MakeToast (ToastTexts.SERVER_NO_ANSWER);
 			}
 		}
 

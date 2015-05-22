@@ -9,7 +9,7 @@ using Common.Communication;
 using Common.Communication.Server;
 using Common.DataTransferObjects;
 using Server.DatabaseCommunication;
-using Server.DriverController;
+using Server.DriverControlling;
 
 namespace Server.CmdHandler
 {
@@ -43,9 +43,13 @@ namespace Server.CmdHandler
                 Driver = optimalDriverOrNull
             };
             db.CreateOrder(order);
+            db.EndTransaction(TransactionEndOperation.SAVE);
 
+            db.StartTransaction();
+            db.AttachOrder(order);
             if (optimalDriverOrNull != null)
             {
+                Console.WriteLine("Assigned order to driver " + optimalDriverOrNull.UserName + ".");
                 var sendNotification = new CmdSendNotification(order);
                 string connectionId = driverMap.ResolveConnectionIDOrNull(optimalDriverOrNull.UserName);
                 if(connectionId != null)
@@ -60,8 +64,8 @@ namespace Server.CmdHandler
 
             CmdReturnAddOrder ret = new CmdReturnAddOrder(command.Id, order.OrderID);
             connection.Unicast(ret, connectionIdOrNull);
+            db.EndTransaction(TransactionEndOperation.READONLY);
 
-            db.EndTransaction(TransactionEndOperation.SAVE);
         }
     }
 }

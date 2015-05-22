@@ -8,6 +8,8 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.AspNet.SignalR.Client;
 using Smartphone.Driver.Models;
 using Smartphone.Driver.Messages;
+using Smartphone.Driver.NativeServices;
+using Smartphone.Driver.Const;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -22,16 +24,18 @@ namespace Smartphone.Driver.ViewModels
 
 		private IClientConnection connection = null;
 		private Session session = null;
+		private IToaster toaster = null;
 
 		private string username = null;
 		private string password = null;
 		private bool communicating = false;
 		private RelayCommand loginCommand = null;
 
-		public LoginViewModel (IClientConnection connection, Session session)
+		public LoginViewModel (IClientConnection connection, Session session, IToaster toaster)
 		{
 			this.connection = connection;
 			this.session = session;
+			this.toaster = toaster;
 
 			username = "Driv3";
 			password = "Driv3";
@@ -94,14 +98,28 @@ namespace Smartphone.Driver.ViewModels
 			{
 				await Connect ();
 			}
-			if (connection.ConnectionState.Equals(ConnectionState.Connected))
+			if (connection.ConnectionState.Equals (ConnectionState.Connected))
 			{
-				var cmdLogin = new CmdLoginDriver(username, password);
+				var cmdLogin = new CmdLoginDriver (username, password);
 				var response = connection.SendWait<CmdReturnLoginDriver> (cmdLogin);
-				if (response != null && response.Success)
+				if (response != null)
 				{
-					OnLoginSuccessful (response.AssignedCarIDOrNull);
+					if (response.Success)
+					{
+						OnLoginSuccessful (response.AssignedCarIDOrNull);
+					} else
+					{
+						toaster.MakeToast (ToastTexts.FAILED_LOGIN);
+					}
 				}
+				else
+				{
+					toaster.MakeToast (ToastTexts.SERVER_NO_ANSWER);
+				}
+			}
+			else
+			{
+				toaster.MakeToast (ToastTexts.SERVER_NO_ANSWER);
 			}
 			IsCommunicating = false;
 		}
@@ -132,6 +150,7 @@ namespace Smartphone.Driver.ViewModels
 			{
 				// Driver already has a car assigned. Skip the car selection.
 				session.CarID = assignedCarIDOrNull;
+				toaster.MakeToast (ToastTexts.AlreadyAssignedToCar(assignedCarIDOrNull));
 
 				CmdGetDriversUnfinishedOrders cmdGetOrders = new CmdGetDriversUnfinishedOrders (session.Username);
 				connection.Send (cmdGetOrders);

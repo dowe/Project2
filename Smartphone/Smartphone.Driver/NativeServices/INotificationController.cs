@@ -4,6 +4,6 @@ namespace Smartphone.Driver.NativeServices
 {
 	public interface INotificationController
 	{
-		void PutNotification (string title, string message);
+		void PutNotification (string title, string message, long id);
 	}
 }

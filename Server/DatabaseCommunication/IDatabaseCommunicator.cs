@@ -66,6 +66,8 @@ namespace Server.DatabaseCommunication
 
         void AttachAnalysises(List<Analysis> analysises);
 
+	    void AttachOrder(Order order);
+
 	    void CreateBill(Bill bill);
 
 	}

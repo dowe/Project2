@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Common.DataTransferObjects;
 using Server.DistanceCalculation;
 
-namespace Server.DriverController
+namespace Server.DriverControlling
 {
     public class OptionsCalculator
     {
@@ -21,10 +21,17 @@ namespace Server.DriverController
         public async Task<DriverSendOption> CalculateDistance(Car car, IEnumerable<Order> hisOrders, IDistanceMatrixPlace destination, IDistanceMatrixPlace home)
         {
             var waypoints = new List<IDistanceMatrixPlace>();
+            waypoints.Add(new DistanceMatrixGPSPosition(car.LastPosition));
             foreach (Order o in hisOrders)
             {
-                // TODO Add support for emergency positions.
-                waypoints.Add(new DistanceMatrixAddress(o.Customer.Address));
+                if (o.EmergencyPosition != null)
+                {
+                    waypoints.Add(new DistanceMatrixGPSPosition(o.EmergencyPosition));
+                }
+                else
+                {
+                    waypoints.Add(new DistanceMatrixAddress(o.Customer.Address));
+                }
             }
             waypoints.Add(destination);
             waypoints.Add(home);

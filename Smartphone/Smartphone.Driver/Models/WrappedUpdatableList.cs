@@ -36,14 +36,20 @@ namespace Smartphone.Driver.Models
 
 		public void UpdateSingle(T item)
 		{
+			bool replacedOne = false;
 			for (int i = 0; i < Collection.Count; i++)
 			{
 				if (itemsEqual(Collection [i], item))
 				{
 					Collection.RemoveAt (i);
 					Collection.Insert (i, item);
+					replacedOne = true;
 					break;
 				}
+			}
+			if (!replacedOne)
+			{
+				Collection.Add (item);
 			}
 		}
 

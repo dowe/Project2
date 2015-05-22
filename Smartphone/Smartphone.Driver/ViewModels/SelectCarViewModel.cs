@@ -10,6 +10,8 @@ using GalaSoft.MvvmLight.Messaging;
 using Smartphone.Driver.Models;
 using Smartphone.Driver.Messages;
 using Smartphone.Driver.GPS;
+using Smartphone.Driver.NativeServices;
+using Smartphone.Driver.Const;
 
 namespace Smartphone.Driver.ViewModels
 {
@@ -25,6 +27,7 @@ namespace Smartphone.Driver.ViewModels
 		private IClientConnection connection = null;
 		private Session session = null;
 		private GPSPositionSender gpsSender = null;
+		private IToaster toaster = null;
 
 		private WrappedCars availableCars = null;
 		private int selectedCarIndex = -1;
@@ -32,12 +35,13 @@ namespace Smartphone.Driver.ViewModels
 		private bool isCommunicating = false;
 		private RelayCommand selectCarCommand = null;
 
-		public SelectCarViewModel (IClientConnection connection, Session session, WrappedCars availableCars, GPSPositionSender gpsSender)
+		public SelectCarViewModel (IClientConnection connection, Session session, WrappedCars availableCars, GPSPositionSender gpsSender, IToaster toaster)
 		{
 			this.connection = connection;
 			this.session = session;
-			this.gpsSender = gpsSender;
 			AvailableCars = availableCars;
+			this.gpsSender = gpsSender;
+			this.toaster = toaster;
 		}
 
 		public WrappedCars AvailableCars
@@ -134,15 +138,23 @@ namespace Smartphone.Driver.ViewModels
 					Car car = availableCars.Collection [selectedCarIndex];
 					CmdSelectCar selectCar = new CmdSelectCar (session.Username, car.CarID, startKm);
 					CmdReturnSelectCar response = connection.SendWait<CmdReturnSelectCar>(selectCar);
-					if (response != null && response.Success)
+					if (response != null)
 					{
-						OnCarSelectionSuccessful ();
+						if (response.Success)
+						{
+							OnCarSelectionSuccessful ();
+						}
+						else
+						{
+							toaster.MakeToast(ToastTexts.FAILED_SELECT_CAR);
+							// Update the cars. Maybe the user selected a car that was already assigned to another user.
+							CmdGetAvailableCars getAvailableCars = new CmdGetAvailableCars ();
+							connection.Send (getAvailableCars);
+						}
 					}
 					else
 					{
-						// Update the cars. Maybe the user selected a car that was already assigned to another user.
-						CmdGetAvailableCars getAvailableCars = new CmdGetAvailableCars ();
-						connection.Send (getAvailableCars);
+						toaster.MakeToast(ToastTexts.SERVER_NO_ANSWER);
 					}
 				}
 			}

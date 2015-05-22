@@ -214,6 +214,11 @@ namespace Server.DatabaseCommunication
             }
         }
 
+	    public void AttachOrder(Order order)
+	    {
+	        Context.Order.Attach(order);
+	    }
+
 	    public void CreateBill(Bill bill)
 	    {
 	        Context.Bill.Add(bill);
