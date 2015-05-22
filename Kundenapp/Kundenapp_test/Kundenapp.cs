@@ -19,6 +19,7 @@ namespace Kundenapp
 		public App ()
 		{
 			// The root page of your application
+			PatientVM vmini = Locator.PatientVM;
 			AnalysisSelectionVM vm = Locator.AnalysisVM;
 			MainPage = new NavigationPage(new Login());
 		}
