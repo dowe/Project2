@@ -112,7 +112,7 @@ namespace Smartphone.Driver.ViewModels
 			}
 			else
 			{
-				toaster.MakeToast ("Server not reachable");
+				toaster.MakeToast ("Server did not answer.");
 			}
 			IsCommunicating = false;
 		}
