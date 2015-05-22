@@ -74,6 +74,7 @@
     <Compile Include="NativeServices\GPSLocator_Android.cs" />
     <Compile Include="NativeServices\NotificationController_Android.cs" />
     <Compile Include="NativeServices\IncIntGenerator.cs" />
+    <Compile Include="NativeServices\Toaster_Android.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

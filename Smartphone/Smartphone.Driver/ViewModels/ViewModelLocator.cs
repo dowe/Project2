@@ -31,6 +31,8 @@ namespace Smartphone.Driver.ViewModels
 			SimpleIoc.Default.Register<WrappedCars> (() => cars);
 
 			// Native stuff
+			IToaster toaster = DependencyService.Get<IToaster>();
+			SimpleIoc.Default.Register<IToaster> (() => toaster);
 			IGPSLocator gpsLocator = DependencyService.Get<IGPSLocator> ();
 			GPSPositionSender gpsPositionSender = new GPSPositionSender (clientConnection, session, gpsLocator);
 			SimpleIoc.Default.Register<GPSPositionSender> (() => gpsPositionSender);
