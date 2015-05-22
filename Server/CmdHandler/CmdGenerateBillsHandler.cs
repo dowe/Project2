@@ -35,11 +35,6 @@ namespace Server.CmdHandler
              _OrderList = new List<Order>();
              db.StartTransaction();
              _OrderList = db.GetAllOrders(x => x.Invoiced == false);
-             
-
-            
-
-             
              DateTime now = DateTime.Now;
              Bill b;
              float pricetotal = 0;
@@ -171,11 +166,6 @@ namespace Server.CmdHandler
                          + b.Customer.BankAccount.IBAN 
                         + ") abgebucht."
                          , fontSmall, XBrushes.Black, totaltext, XStringFormats.TopLeft);
-
- 
-
- 
-
 
                      //Start saving PDF on server
 
