@@ -89,7 +89,14 @@ namespace Smartphone.Driver.ViewModels
 
 		private void Logout()
 		{
-			Messenger.Default.Send<MsgSwitchLogoutPage> (new MsgSwitchLogoutPage ());
+			if (wrappedOrders.Collection.Count == 0)
+			{
+				Messenger.Default.Send<MsgSwitchLogoutPage> (new MsgSwitchLogoutPage ());
+			}
+			else
+			{
+				toaster.MakeToast ("You still have orders left.");
+			}
 		}
 
 		private void Emergency()
