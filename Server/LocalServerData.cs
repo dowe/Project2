@@ -23,6 +23,7 @@ namespace Server
 
             RoadCostInEuroPerKm = 0.80F;
 
+            TimerList = new Dictionary<Guid, CheckAlarmConfirmedTenMinutesScheduledTimer>();
         }
 
         public DailyStatistic DailyStatistic { get; set; }
@@ -31,5 +32,6 @@ namespace Server
         public float RoadCostInEuroPerKm { get; private set; }
         public ScheduledTimer GenerateShiftScheduleTimer { get; set; }
         public ScheduledTimer CheckOrdersFiveHoursLeftScheduledTimer { get; set; }
+        public Dictionary<Guid,CheckAlarmConfirmedTenMinutesScheduledTimer> TimerList { get; set; }
     }
 }

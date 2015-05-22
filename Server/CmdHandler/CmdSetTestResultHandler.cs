@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Timer;
+using Common.Communication.Server;
 
 namespace Server.CmdHandler
 {
@@ -18,12 +20,21 @@ namespace Server.CmdHandler
         private IDatabaseCommunicator db;
         private IExtremeValueChecker checker;
         private ISmsSending sms;
+        private LocalServerData data;
+        private IServerConnection connection;
 
-        public CmdSetTestResultHandler(IDatabaseCommunicator db, IExtremeValueChecker checker, ISmsSending sms)
+        public CmdSetTestResultHandler(
+            IDatabaseCommunicator db,
+            IExtremeValueChecker checker,
+            ISmsSending sms,
+            LocalServerData data,
+            IServerConnection connection)
         {
             this.checker = checker;
             this.db = db;
             this.sms = sms;
+            this.data = data;
+            this.connection = connection;
         }
 
         protected override void Handle(CmdSetTestResult command, string connectionIdOrNull)
@@ -49,7 +60,7 @@ namespace Server.CmdHandler
                 + "überschritt die Grenzwerte. "
                 + "Zur Bestätigung dieses Alarms senden Sie diese SMS an die Sendenummer zurück.");
 
-                //TODO: new timer second alarm
+                new CheckAlarmConfirmedTenMinutesScheduledTimer(connection, data, t, o);
             }
 
             if (o.Customer.SMSRequested)
