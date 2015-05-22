@@ -102,13 +102,19 @@ namespace Smartphone.Driver.ViewModels
 			{
 				var cmdLogin = new CmdLoginDriver (username, password);
 				var response = connection.SendWait<CmdReturnLoginDriver> (cmdLogin);
-				if (response != null && response.Success)
+				if (response != null)
 				{
-					OnLoginSuccessful (response.AssignedCarIDOrNull);
+					if (response.Success)
+					{
+						OnLoginSuccessful (response.AssignedCarIDOrNull);
+					} else
+					{
+						toaster.MakeToast (ToastTexts.FAILED_LOGIN);
+					}
 				}
 				else
 				{
-					toaster.MakeToast (ToastTexts.FAILED_LOGIN);
+					toaster.MakeToast (ToastTexts.SERVER_NO_ANSWER);
 				}
 			}
 			else
