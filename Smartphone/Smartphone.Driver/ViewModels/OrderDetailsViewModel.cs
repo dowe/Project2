@@ -19,6 +19,7 @@ namespace Smartphone.Driver.ViewModels
 
 		private IClientConnection connection = null;
 		private Session session = null;
+		private IToaster toaster = null;
 
 		private Order order = null;
 
@@ -27,10 +28,11 @@ namespace Smartphone.Driver.ViewModels
 		private RelayCommand launchMapCommand = null;
 		private RelayCommand collectedCommand = null;
 
-		public OrderDetailsViewModel (IClientConnection connection, Session session)
+		public OrderDetailsViewModel (IClientConnection connection, Session session, IToaster toaster)
 		{
 			this.connection = connection;
 			this.session = session;
+			this.toaster = toaster;
 
 			Messenger.Default.Register<MsgSetOrderDetailsModel> (this, SetOrder);
 		}
@@ -134,7 +136,7 @@ namespace Smartphone.Driver.ViewModels
 				}
 				catch (Exception)
 				{
-					// TODO show toast or something that no map app could be launched.
+					toaster.MakeToast ("Could not start the map. Make sure you have Google Maps installed.");
 				}
 			}
 		}
@@ -154,14 +156,22 @@ namespace Smartphone.Driver.ViewModels
 		{
 			CmdSetOrderCollected setOrderCollected = new CmdSetOrderCollected (session.Username, order.OrderID);
 			CmdReturnSetOrderCollected response = connection.SendWait<CmdReturnSetOrderCollected>(setOrderCollected);
-			if (response != null && response.Success)
+			if (response != null)
 			{
-				// Switch back to order list.
-				Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
+				if (response.Success)
+				{
+					// Switch back to order list.
+					Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
+				}
+				else
+				{
+					toaster.MakeToast ("Could not set order collected.");
+					connection.Send (new CmdGetDriversUnfinishedOrders (session.Username));
+				}
 			}
-			else 
+			else
 			{
-				// TODO show toast or something.
+				toaster.MakeToast ("Server did not answer.");
 			}
 		}
 
