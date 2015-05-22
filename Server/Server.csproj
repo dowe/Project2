@@ -116,6 +116,7 @@
     <Compile Include="CmdHandler\CmdSelectCarHandler.cs" />
     <Compile Include="CmdHandler\CmdSetOrderCollectedHandler.cs" />
     <Compile Include="CmdHandler\CmdSetOrderReceivedHandler.cs" />
+    <Compile Include="CmdHandler\CmdSetTestResultHandler.cs" />
     <Compile Include="CmdHandler\CmdStoreDriverGPSPositionHandler.cs" />
     <Compile Include="DatabaseCommunication\DatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\IDatabaseCommunicator.cs" />

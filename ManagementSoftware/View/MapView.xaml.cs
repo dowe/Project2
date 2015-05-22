@@ -78,9 +78,20 @@ namespace ManagementSoftware.View
             if (_driversOrders.Any())
             {
                 var cust = _driversOrders.FirstOrDefault().Customer;
-                sb.Append(String.IsNullOrWhiteSpace(cust.Label) ? cust.FirstName + " " + cust.LastName + "\n" : cust.Label + "\n");
-                sb.Append(cust.Address.Street + "\n");
-                sb.Append(cust.Address.PostalCode + " " + cust.Address.City + "\n");
+                sb.Append(String.IsNullOrWhiteSpace(cust.Label)
+                    ? cust.FirstName + " " + cust.LastName + "\n"
+                    : cust.Label + "\n");
+                if (_driversOrders.FirstOrDefault().EmergencyPosition == null)
+                {
+                    sb.Append(cust.Address.Street + "\n");
+                    sb.Append(cust.Address.PostalCode + " " + cust.Address.City + "\n");
+                }
+                else
+                {
+                    //Emergency Position
+                    sb.Append("Außergewöhnliche Abholung bei\n");
+                    sb.Append("GPS Position: " + _driversOrders.FirstOrDefault().EmergencyPosition.Latitude + "/" + _driversOrders.FirstOrDefault().EmergencyPosition.Longitude + "\n");
+                }
                 sb.Append("Proben abzuholen: " + _driversOrders.FirstOrDefault().Test.Count + "\n");
             }
             else
@@ -100,8 +111,16 @@ namespace ManagementSoftware.View
                 {
                     var cust = _driversOrders[i].Customer;
                     sb.Append(cust.Label ?? cust.FirstName + " " + cust.LastName + "\n");
-                    sb.Append(cust.Address.Street + "\n");
-                    sb.Append(cust.Address.PostalCode + " " + cust.Address.City + "\n\n");
+                    if (_driversOrders[i].EmergencyPosition == null)
+                    {
+                        sb.Append(cust.Address.Street + "\n");
+                        sb.Append(cust.Address.PostalCode + " " + cust.Address.City + "\n\n");
+                    }
+                    else
+                    {
+                        sb.Append("Außergewöhnliche Abholung bei\n");
+                        sb.Append("GPS Position: " + _driversOrders[i].EmergencyPosition.Latitude + "/" + _driversOrders[i].EmergencyPosition.Longitude + "\n");
+                    }
                 }
             }
 
@@ -164,7 +183,7 @@ namespace ManagementSoftware.View
             if (_cars != null)
                 foreach (var car in _cars)
                 {
-                    WebBrowserGoogle.InvokeScript("addCar", new Object[] { car.LastPosition.Latitude, car.LastPosition.Longitude, car.CarID, "Kennzeichen: "+car.CarID + "<br/>Fahrer: "+car.CurrentDriver.FirstName + " " + car.CurrentDriver.LastName });
+                    WebBrowserGoogle.InvokeScript("addCar", new Object[] { car.LastPosition.Latitude, car.LastPosition.Longitude, car.CarID, "Kennzeichen: " + car.CarID + "<br/>Fahrer: " + car.CurrentDriver.FirstName + " " + car.CurrentDriver.LastName });
                 }
         }
 
