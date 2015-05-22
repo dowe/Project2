@@ -1,11 +1,13 @@
 ﻿<!-- saved from url=(0014)about:internet -->
 <html>
 <head>
+<title>Google Fahrerkarte</title>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 <script type="text/javascript"
         src="http://maps.google.com.mx/maps/api/js?v=3.18&sensor=true&language=de-DE&key=AIzaSyDAdzdTF82kLM_-Rz0xdskVUpMGEVqG-WQ"></script>
 <script src='http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js'>
-    
+
+
 </script>
 <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
 <style type="text/css">
@@ -128,7 +130,7 @@
         marker1.setMap(map);
 
         //hänge click-event an marker an
-        window.google.maps.event.addListener(marker1, 'click', function () {
+        window.google.maps.event.addListener(marker1, 'click', function() {
             var infowindow = new google.maps.InfoWindow({
                 content: marker1.title
             });
@@ -203,9 +205,10 @@
     }
 
     function normalMarker() {
-        return Math.floor(Math.random()*1000);
+        return Math.floor(Math.random() * 1000);
     }
-    //addHouse für eine Adresse NICHT BENÖTIGT
+
+//addHouse für eine Adresse NICHT BENÖTIGT
     //function addHouse(lat, long, title) {
     //    var latLng = new window.google.maps.LatLng(lat, long);
     //    var marker1 = new MarkerWithLabel({
