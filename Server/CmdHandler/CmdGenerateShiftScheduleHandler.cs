@@ -103,7 +103,7 @@ namespace Server.CmdHandler
             //ShiftSchedule newShiftSchedule = Util.CreateTestData(refDate);
 
             IShiftScheduleCreator creator = new ShiftScheduleCreator();
-            ShiftSchedule cur = creator.createShiftSchedule(previousShiftSchedule, refDate);
+            ShiftSchedule cur = creator.createShiftSchedule(previousShiftSchedule, new DateTime(refDate.Year, refDate.Month, 1));
 
 
             //store ShiftSchedule in db

@@ -86,7 +86,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOccupiedCarsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSetOrderReceivedHandler(db));
-            connection.RegisterCommandHandler(new CmdSetTestResultHandler(db, checker, smsSending, data));
+            connection.RegisterCommandHandler(new CmdSetTestResultHandler(db, checker, smsSending, data, connection));
         }
 
         private static void OnServerStarted(
@@ -96,7 +96,7 @@ namespace Server
         {
             data.GenerateShiftScheduleTimer = new GenerateShiftScheduleTimer(connection);
             data.CheckOrdersFiveHoursLeftScheduledTimer = new CheckOrdersFiveHoursLeftScheduledTimer(connection);
-           // connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
+            // connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
             connection.InjectInternal(new CmdGenerateDailyStatistic());
             connection.InjectInternal(new CmdGenerateBills());
         }

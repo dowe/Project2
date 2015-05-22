@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Server.Timer
 {
-    class CheckAlarmConfirmedTenMinutesScheduledTimer : ScheduledTimer
+    public class CheckAlarmConfirmedTenMinutesScheduledTimer : ScheduledTimer
     {
           private IServerConnection connection = null;
           private Test test;
