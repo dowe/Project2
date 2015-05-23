@@ -8,14 +8,22 @@ namespace ManagementSoftware.Model
 {
     public class TestDetailModel
     {
-        TestEntryModel _Entry;
-        String _BestellDatum, _Telefon, _KundenAdresse, _Grenzwerte, _Resultat, _Einheit;
 
-        public TestEntryModel Entry
+        String _BestellDatum, _Telefon, _KundenAdresse, _Grenzwerte, _Resultat, _Einheit, _TestID, _BringDatum;
+
+        public String BringDatum
         {
-            get { return _Entry; }
-            set { _Entry = value; }
+            get { return _BringDatum; }
+            set { _BringDatum = value; }
         }
+
+        public String TestID
+        {
+            get { return _TestID; }
+            set { _TestID = value; }
+        }
+
+      
         public String Einheit
         {
             get { return _Einheit; }

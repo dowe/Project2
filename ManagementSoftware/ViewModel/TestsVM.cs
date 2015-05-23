@@ -12,6 +12,7 @@ using Common.Commands;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace ManagementSoftware.ViewModel
 {
@@ -22,25 +23,55 @@ namespace ManagementSoftware.ViewModel
          private IList<TestEntryModel> _DataList;
          private IList<Order> _OrderList;
          private TestDetailModel _Detail;
-         private TestEntryModel _SelectedTestEntry;
+         private String _ResultatDetailEnabled;
+         private String _ResultatDetail;
+         private String _ButtonDetail;
 
-        
+         private String _ButtonDetailVisible;
+
+         private TestEntryModel _SelectedTestEntry;
+         private Order currentOrder;
 
          public TestsVM(IClientConnection _ClientConnection)
         {
             this._ClientConnection = _ClientConnection;
             this.LoadCommand = new RelayCommand(LoadData);
-            _SelectedTestEntry = null;
-
-          
+            _SelectedTestEntry = new TestEntryModel();
+            _Detail = new TestDetailModel();
+            ButtonPressAction = new RelayCommand(ButtonPress);
+            ButtonDetail = "Eingetroffen";
+            ButtonDetailVisible = "Hidden";
+            ResultatDetailEnabled ="False";
+            ResultatDetail = "";
         }
-         public TestDetailModel Detail
+
+         private void ButtonPress()
          {
-             get { return _Detail; }
-             set 
+
+             if (ButtonDetail.Equals("Eingetroffen"))
              {
-                 _Detail = value; 
+                 Console.WriteLine("Order recv");
+                 new CmdSetOrderReceived(currentOrder.OrderID);
+                 LoadData();
              }
+             else if(ButtonDetail.Equals("Test fertig"))
+             {
+                 Console.WriteLine("Test fertig!" + ResultatDetail);
+
+                 new CmdSetTestResult(SelectedTestEntry.Test.TestID, Convert.ToSingle(ResultatDetail));
+                 LoadData();
+
+             }else if(ButtonDetail.Equals("Alarm Bestätigt"))
+             {
+                 new CmdSetFirstAlertReceived(SelectedTestEntry.Test.TestID);
+                 LoadData();
+             }
+             else if (ButtonDetail.Equals("Eingetroffen"))
+             {
+                 new CmdSetOrderCollected("Taxi", currentOrder.OrderID);
+                 LoadData();
+             }
+            
          }
          public IList<TestEntryModel> DataList
          {
@@ -56,27 +87,106 @@ namespace ManagementSoftware.ViewModel
              }
          }
          public RelayCommand LoadCommand { get; set; }
-         public TestEntryModel SelectedTestEntry
-         {
-             get
-             {
-                 return _SelectedTestEntry;
-             }
-             set
-             {
-                 _SelectedTestEntry = value;
-                 
-                 RefreshDetail();
-                 RaisePropertyChanged();
-             }
-         }
-
+         public RelayCommand ButtonPressAction { get; set; }
          private void RefreshDetail()
          {
-             //TODO Detail befüllen
              if (_SelectedTestEntry != null)
              {
-                 Console.WriteLine(_SelectedTestEntry.PatientID);
+               
+                if (SelectedTestEntry.BringDate != "")
+                    BringDatumDetail = SelectedTestEntry.BringDate;
+                else
+                    BringDatumDetail = "#";
+             
+                if (SelectedTestEntry.TestID != null)
+                    TestIDDetail = SelectedTestEntry.TestID;
+                else
+                    TestIDDetail = "#";
+               
+                if (SelectedTestEntry.Test.Analysis.UnitOfMeasure != null)
+                    Detail.Einheit = SelectedTestEntry.Test.Analysis.UnitOfMeasure;
+                else
+                    Detail.Einheit = "#";
+                
+                if (SelectedTestEntry.Test.Analysis.ExtremeMinValue != 0 && SelectedTestEntry.Test.Analysis.ExtremeMaxValue != 0)
+                    Detail.Grenzwerte = SelectedTestEntry.Test.Analysis.ExtremeMinValue + " - " + SelectedTestEntry.Test.Analysis.ExtremeMaxValue;
+                else
+                    Detail.Grenzwerte = "# - #";
+                if (SelectedTestEntry.Test.ResultValue != 0)
+                    Detail.Resultat = SelectedTestEntry.Test.ResultValue.ToString();
+                else
+                    Detail.Resultat = "#";
+
+                //Get Info for Selected Test from the Order
+                Detail.BestellDatum = "#";
+                Detail.KundenAdresse = "#";
+                Detail.Telefon = "#";
+                foreach(Order o in _OrderList)
+                {
+                    //If this Test is from the current Order, get all Infos
+                    if (o.Test.Any(x => x.TestID.ToString().Equals(SelectedTestEntry.TestID)))
+                    {
+                        //save current order for more infos later
+                        currentOrder = o;
+
+                        if (o.OrderDate != default(DateTime))
+                            Detail.BestellDatum = o.OrderDate.GetValueOrDefault().ToString("dd.MM.yyyy HH:mm");
+                        if (o.Customer.Address != null)
+                            Detail.KundenAdresse = o.Customer.Address.Street + ", " + o.Customer.Address.PostalCode + " " +o.Customer.Address.City;
+                        if (o.Customer.MobileNumber != null)
+                            Detail.Telefon = o.Customer.MobileNumber;
+                    }
+
+                    
+                }
+
+                //ButtonDetails
+                if (SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_TRANSMITTED && SelectedTestEntry.Test.TestState == TestState.COMPLETED)
+                {
+                    ButtonDetail = "Alarm Bestätigt";
+                    ButtonDetailVisible = "Visible";
+                    ResultatDetailEnabled = "False";
+
+                }
+                else if(SelectedTestEntry.Test.TestState == TestState.COMPLETED)
+                {
+                    ButtonDetailVisible = "Hidden";
+                    ResultatDetailEnabled = "False";
+                }
+                else if(SelectedTestEntry.Test.TestState == TestState.IN_PROGRESS)
+                {
+
+                    ResultatDetailEnabled = "True";
+                    ButtonDetailVisible = "Visible";
+                    ButtonDetail = "Test fertig";
+                }
+                else if(SelectedTestEntry.Test.TestState == TestState.ORDERED && !( SelectedTestEntry.Test.TestState== TestState.WAITING_FOR_DRIVER ))
+                {
+
+                    ResultatDetailEnabled = "False";
+                    ButtonDetail = "Eingetroffen";
+                    ButtonDetailVisible = "Visible";
+                }
+                else if (SelectedTestEntry.Test.TestState == TestState.ORDERED && (SelectedTestEntry.Test.TestState == TestState.WAITING_FOR_DRIVER))
+                {
+                    ResultatDetailEnabled = "False";
+                    ButtonDetail = "Abgeholt";
+                    ButtonDetailVisible = "Visible";
+                }
+
+
+                RaisePropertyChanged();
+                RaisePropertyChanged(() => Detail);
+                RaisePropertyChanged(() => BringDatumDetail);
+                RaisePropertyChanged(() => TelefonDetail);
+                RaisePropertyChanged(() => ResultatDetailEnabled);
+                RaisePropertyChanged(() => KundenAdresseDetail);
+                RaisePropertyChanged(() => GrenzwerteDetail);
+                RaisePropertyChanged(() => EinheitDetail);
+                RaisePropertyChanged(() => BestellDatumDetail);
+                RaisePropertyChanged(() => TestIDDetail);
+                RaisePropertyChanged(() => ButtonDetail);
+                RaisePropertyChanged(() => ButtonDetailVisible);
              }
              else
              {
@@ -109,7 +219,7 @@ namespace ManagementSoftware.ViewModel
                          temp.CustomerLabel = o.Customer.Label;
                          temp.SampleTypeAndAnalysis = t.Analysis.Name;
                          temp.TestID = t.TestID.ToString();
-
+                         temp.Test = t;
                          //Eingetroffen?
                          if (t.TestState.Equals(TestState.COMPLETED) || t.TestState.Equals(TestState.IN_PROGRESS))
                              temp.SampleCollected = true;
@@ -157,11 +267,169 @@ namespace ManagementSoftware.ViewModel
                      }
                  }
                  DataList = _TestList;
-                 Console.WriteLine(DataList[0].TestID.ToString());
-                 Console.WriteLine(DataList[0].OrderID.ToString());
-                 MessageBox.Show("Daten abgerufen");
+             
              }
          }
-      
+       
+         public String TelefonDetail
+         {
+             get
+             {
+                 return _Detail.Telefon;
+             }
+             set
+             {
+                 _Detail.Telefon = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public String ResultatDetail
+         {
+             get
+             {
+                 return _ResultatDetail;
+             }
+             set
+             {
+                 _ResultatDetail = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public String ResultatDetailEnabled
+         {
+             get
+             {
+                 return _ResultatDetailEnabled;
+             }
+             set
+             {
+                 _ResultatDetailEnabled = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public String KundenAdresseDetail
+         {
+             get
+             {
+                 return _Detail.KundenAdresse;
+             }
+             set
+             {
+                 _Detail.KundenAdresse = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public String GrenzwerteDetail
+         {
+             get
+             {
+                 return _Detail.Grenzwerte;
+             }
+             set
+             {
+                 _Detail.Grenzwerte = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public String EinheitDetail
+         {
+             get
+             {
+                 return _Detail.Einheit;
+             }
+             set
+             {
+                 _Detail.Einheit = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public String BestellDatumDetail
+         {
+             get
+             {
+                 return _Detail.BestellDatum;
+             }
+             set
+             {
+                 _Detail.BestellDatum = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public String BringDatumDetail
+         {
+             get
+             {
+                 return _Detail.BringDatum;
+             }
+             set
+             {
+                 _Detail.BringDatum = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public String TestIDDetail
+         {
+             get
+             {
+                 return _Detail.TestID;
+             }
+             set
+             {
+                 _Detail.TestID = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public TestEntryModel SelectedTestEntry
+         {
+             get
+             {
+                 return _SelectedTestEntry;
+             }
+             set
+             {
+
+                 _SelectedTestEntry = value;
+                 RefreshDetail();
+                 RaisePropertyChanged();
+
+             }
+         }
+         public TestDetailModel Detail
+         {
+             get
+             {
+                 return _Detail;
+             }
+             set
+             {
+                 _Detail = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public String ButtonDetail
+         {
+             get
+             {
+                 return _ButtonDetail;
+             }
+             set
+             {
+                 _ButtonDetail = value;
+                 RaisePropertyChanged();
+             }
+         }
+
+         public String ButtonDetailVisible
+         {
+             get
+             {
+                 return _ButtonDetailVisible;
+             }
+             set
+             {
+                 _ButtonDetailVisible = value;
+                 RaisePropertyChanged();
+             }
+         }
     }
 }

@@ -5,18 +5,18 @@
              xmlns:helper="clr-namespace:ManagementSoftware.Helper"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             DataContext="{Binding Tests, Mode=OneWay, Source={StaticResource Locator}}"
+             DataContext="{Binding Tests, Source={StaticResource Locator}}"
              d:DesignHeight="611" d:DesignWidth="649">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="350" />
+            <RowDefinition Height="300" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Content="Aktualisiere" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Width="75" Command="{Binding LoadCommand, Mode=OneWay}" />
-        
+
         <DataGrid Grid.Row="1" Name="SamplesDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
-                      HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" ItemsSource="{Binding DataList}" SelectedItem="{Binding SelectedTestEntry}">
+                      HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" ItemsSource="{Binding DataList, Mode=OneWay}" SelectedItem="{Binding SelectedTestEntry}" >
             <DataGrid.Resources>
                 <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
             </DataGrid.Resources>
@@ -31,29 +31,29 @@
                 <DataGridTextColumn Header="Bringdatum" Binding="{Binding BringDate}"/>
                 <DataGridTextColumn Header="Kundenbezeichnung" Binding="{Binding CustomerLabel}" />
             </DataGrid.Columns>
-           
+
         </DataGrid>
-        
-        <GroupBox Name="DetailsGroupBox" Header="Probendetails" Grid.Row="2" IsEnabled="False">
+
+        <GroupBox Name="DetailsGroupBox" Header="Probendetails" Grid.Row="2" IsEnabled="True"  >
             <Grid>
-                <Label Content="Test ID:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Label Name="TestID"  HorizontalAlignment="Left" Margin="54,0,0,0" VerticalAlignment="Top" Width="37"/>
-                <Label Content="Bringdatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="125,0,0,0"/>
-                <Label Name="Bringdatum"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="205,0,0,0"/>
-                <Label Content="Bestelldatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="276,0,0,0"/>
-                <Label Name="Bestelldatum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="362,0,0,0"/>
-                <Label Content="Kundenadresse:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,31,0,0"/>
-                <Label Name="Kundenadresse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="99,31,0,0"/>
-                <Label Content="Telefon:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="304,31,0,0"/>
-                <Label Name="Telefon" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="361,31,0,0"/>
-                <Separator Margin="0,62,0,123"/>
-                <Label Content="Resultat:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,87,0,0"/>
-                <TextBox Name="ResultValue" HorizontalAlignment="Left" Height="23" Margin="54,91,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-                <Label Name="Einheit" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,87,0,0"/>
-                <Label Content="Grenzwerte:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="251,87,0,0"/>
-                <Label Name="Grenzwert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="329,87,0,0"/>
-                <Label Name="EinheitGrenzwert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="379,87,0,0"/>
-                <Button Name="Btn_Fertig" Content="Test fertig" HorizontalAlignment="Left" Margin="99,124,0,0" VerticalAlignment="Top" Width="75" />
+
+                <Label Content="Test ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                <Label Name="TestID"   HorizontalAlignment="Left" Margin="64,10,0,0" VerticalAlignment="Top" Width="268" Content="{Binding TestIDDetail}" Height="26"/>
+                <Label Content="Bringdatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,41,0,0"/>
+                <Label Name="Bringdatum"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,41,0,0" Content="{Binding BringDatumDetail}" Width="100" Height="26"/>
+                <Label Content="Bestelldatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,72,0,0"/>
+                <Label Name="Bestelldatum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="96,72,0,0" Content="{Binding BestellDatumDetail}" Height="26" Width="106"/>
+                <Label Content="Kundenadresse:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,41,0,0"/>
+                <Label Name="Kundenadresse" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="318,41,0,0" Content="{Binding KundenAdresseDetail}" Height="26" Width="243"/>
+                <Label Content="Telefon:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,72,0,0"/>
+                <Label Name="Telefon" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="277,72,0,0" Content="{Binding TelefonDetail}" Height="26" Width="116"/>
+                <Separator Margin="0,110,0,115"/>
+                <Label Content="Resultat:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,130,0,0"/>
+                <TextBox Name="ResultValue" HorizontalAlignment="Left" Height="23" Margin="70,133,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Text="{Binding ResultatDetail}" Width="95"  IsEnabled="{Binding ResultatDetailEnabled}"/>
+                <Label Name="Einheit" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,130,0,0" Content="{Binding EinheitDetail}" Height="32" Width="50"/>
+                <Label Content="Grenzwerte:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,130,0,0"/>
+                <Label Name="Grenzwert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="298,130,0,0" Content="{Binding GrenzwerteDetail}" RenderTransformOrigin="1.1,5.5" Height="26" Width="91"/>
+                <Button Name="Btn_Fertig"  Command="{Binding ButtonPressAction}" Content="{Binding ButtonDetail}" HorizontalAlignment="Left" Margin="70,161,0,0" VerticalAlignment="Top" Width="95" Visibility="{Binding ButtonDetailVisible}" Height="25"/>
             </Grid>
 
         </GroupBox>

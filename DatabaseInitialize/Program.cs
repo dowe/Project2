@@ -157,12 +157,20 @@ namespace DatabaseInitialize
                         Critical = true,
                         TestState = TestState.COMPLETED
                     },
+                      new Test("NochNPatient", con.Analysis.Find("Urin_Albumin"))
+                    {
+                        StartDate = DateTime.Now,
+                        
+                        AlarmState = AlarmState.NO_ALARM,
+                        Critical = true,
+                        TestState = TestState.IN_PROGRESS
+                    },
                     new Test("NochNPatient", con.Analysis.Find("Stuhl_Candida"))
                     {
                         StartDate = DateTime.Now,
                         EndDate = DateTime.Now,
                         ResultValue = 11000f,
-                        AlarmState = AlarmState.FIRST_ALARM_CONFIRMED,
+                        AlarmState = AlarmState.FIRST_ALARM_TRANSMITTED,
                         Critical = true,
                         TestState = TestState.COMPLETED
                     },

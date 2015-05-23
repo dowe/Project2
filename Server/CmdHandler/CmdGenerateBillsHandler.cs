@@ -56,9 +56,9 @@ namespace Server.CmdHandler
                      b.Customer = _OrderList[i].Customer;
 
                      b.Date = now;
-
-                     string targetdir = Directory.GetCurrentDirectory() + "/App_Data/" + _OrderList[i].Customer.UserName;
-                     b.PDFPath = Directory.GetCurrentDirectory() + "/App_Data/" + _OrderList[i].Customer.UserName + "/" + now.ToString("dd-MM-yyyy")+".pdf";
+                     String mainDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent( Directory.GetCurrentDirectory().ToString()).ToString()).ToString()).ToString();
+                     String targetdir = mainDirectory + "/ASPServer/App_Data/" + _OrderList[i].Customer.UserName;
+                     b.PDFPath = mainDirectory + "/ASPServer/App_Data/" + _OrderList[i].Customer.UserName + "/" + now.ToString("dd-MM-yyyy")+".pdf";
                      //Add Testlist from Order
 
                      _TestList = (List<Test>) _OrderList[i].Test;
@@ -169,22 +169,16 @@ namespace Server.CmdHandler
 
                      //Start saving PDF on server
 
-                     //Create Directory For Customer
-                     if (Directory.Exists(targetdir))
-                     {
-                         Console.WriteLine("Dir not created");
-                     }
-                     else
-                     {
-                         Console.WriteLine("Dir created");
+                     //Create Directory For Customer if needed
+                     if (Directory.Exists(targetdir) == false)
                          Directory.CreateDirectory(targetdir);
-                     }
+                   
 
                      //Check if PDF File already Exists 
                      //TODO: Throw Exception
                      if (File.Exists(b.PDFPath))
                      {
-                         Console.WriteLine("Error, File already Exists at: " + b.PDFPath);
+                         Console.WriteLine("Error, Bill already Exists at: " + b.PDFPath);
                      }
                      else
                      {

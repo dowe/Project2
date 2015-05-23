@@ -195,3 +195,5 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+/ManagementSoftware/Model/TestDetailModel.cs
+/ASPServer/App_Data/Thumbs.db

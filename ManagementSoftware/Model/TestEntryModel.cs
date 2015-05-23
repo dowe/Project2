@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,16 @@ namespace ManagementSoftware.Model
 {
     public class TestEntryModel
     {
+        Test _Test;
+
         private String _AlarmState, _BringDate, _CustomerLabel, _OrderID, _PatientID, _SampleTypeAndAnalysis, _TestID, _TestState;
         private bool _SampleCollected;
 
+        public Test Test
+        {
+            get { return _Test; }
+            set { _Test = value; }
+        }
         public bool SampleCollected
         {
             get { return _SampleCollected; }
