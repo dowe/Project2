@@ -60,7 +60,7 @@ namespace Server.CmdHandler
                 + "überschritt die Grenzwerte. "
                 + "Zur Bestätigung dieses Alarms senden Sie diese SMS an die Sendenummer zurück.");
 
-                new CheckAlarmConfirmedTenMinutesScheduledTimer(connection, data, t, o);
+                new CheckAlarmConfirmedTenMinutesScheduledTimer(connection, data, t.TestID, o.OrderID);
             }
 
             if (o.Customer.SMSRequested)

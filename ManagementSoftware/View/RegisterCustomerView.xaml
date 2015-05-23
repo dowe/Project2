@@ -33,7 +33,7 @@
         <TextBox x:Name="tbPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,225,0,0" Width="120" Text="{Binding Password}" TabIndex="8"/>
         <TextBox x:Name="tbIBAN" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="410,277,0,0" Text="{Binding IBAN}" TabIndex="10"/>
         <Button Content="Registrieren" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="450,391,0,0" Width="80" Height="25" Command="{Binding RegisterCustomerAction, Mode=OneWay}" TabIndex="13"/>
-        <Label Content="Sms erwünscht:" ToolTip="Benachrichtigung bei abgeschlossenen Tests" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,325,0,0"/>
+        <Label Content="SMS erwünscht:" ToolTip="Benachrichtigung bei abgeschlossenen Tests" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="300,325,0,0"/>
         <ComboBox x:Name="cbSmsRequested" HorizontalAlignment="Left" Margin="410,327,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" ItemsSource="{Binding ESMSRequestedValues}" DisplayMemberPath="Value" SelectedValue="{Binding Path=SMSRequested }" IsTabStop="True" TabIndex="12"/>
     </Grid>
 </UserControl>

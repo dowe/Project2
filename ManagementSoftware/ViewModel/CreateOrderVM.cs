@@ -36,12 +36,17 @@ namespace ManagementSoftware.ViewModel
             AddPatientAction = new RelayCommand(AddPatient);
             RemovePatientAction = new RelayCommand(RemovePatient, CanRemovePatient);
             CancelOrderAction = new RelayCommand(CancelOrder);
-            CreateOrderAction = new RelayCommand(CreateOrder);//TODO canExecute
+            CreateOrderAction = new RelayCommand(CreateOrder, CanCreateOrder);
         }
 
         private bool CanRemovePatient()
         {
             return SelectedPatient != null;
+        }
+
+        private bool CanCreateOrder()
+        {
+            return model.Validate() == null;
         }
 
         public void SetBox(MyListBox box)
@@ -68,6 +73,7 @@ namespace ManagementSoftware.ViewModel
         private void LoadCustomerAddress()
         {
             model.LoadCustomerAddress();
+            RaisePropertyChanged(() => ValidationText);
             RaisePropertyChanged(() => CustomerAddressText);
         }
 
@@ -75,12 +81,14 @@ namespace ManagementSoftware.ViewModel
         {
             model.RemovePatient();
             SelectedPatient = null;
+            RaisePropertyChanged(() => ValidationText);
             RaisePropertyChanged(() => PatientIDs);
         }
 
         private void AddPatient()
         {
             SelectedPatient = model.AddPatient();
+            RaisePropertyChanged(() => ValidationText);
             RaisePropertyChanged(() => PatientIDs);
             RaisePropertyChanged(() => NewPatientID);
         }
@@ -96,11 +104,21 @@ namespace ManagementSoftware.ViewModel
             RaisePropertyChanged(() => CustomerAddressText);
             RaisePropertyChanged(() => NewPatientID);
             RaisePropertyChanged(() => PatientIDText);
+            RaisePropertyChanged(() => ValidationText);
         }
 
         private void CreateOrder()
         {
             model.CreateOrder();
+        }
+
+        public string ValidationText
+        {
+            get
+            {
+                CreateOrderAction.RaiseCanExecuteChanged();
+                return model.Validate();
+            }
         }
 
         public List<Analysis> AvaibleAnalysis
@@ -125,6 +143,7 @@ namespace ManagementSoftware.ViewModel
             }
 
             model.SelectedAnalysis = list;
+            RaisePropertyChanged(() => ValidationText);
             RaisePropertyChanged(() => SelectedAnalysis);
         }
 
@@ -172,6 +191,7 @@ namespace ManagementSoftware.ViewModel
                 model.CustomerUsername = value;
                 new Thread(LoadCustomerAddress).Start();
                 RaisePropertyChanged();
+                RaisePropertyChanged(() => ValidationText);
             }
         }
 

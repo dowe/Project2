@@ -14,22 +14,22 @@ namespace Server.Timer
     public class CheckAlarmConfirmedTenMinutesScheduledTimer : ScheduledTimer
     {
           private IServerConnection connection = null;
-          private Test test;
-          private Order order;
+          private Guid testID;
+          private long orderID;
           private LocalServerData data;
 
           public CheckAlarmConfirmedTenMinutesScheduledTimer(
               IServerConnection connection, 
               LocalServerData data, 
-              Test test, 
-              Order order)
+              Guid testID,
+              long orderID)
         {
             this.data = data;
-            this.test = test;
-            this.order = order;
+            this.testID = testID;
+            this.orderID = orderID;
             this.connection = connection;
 
-            data.TimerList.Add(test.TestID, this);
+            data.TimerList.Add(testID, this);
 
             Start(GetTimeSpan, DoAction, true);
         }
@@ -41,8 +41,7 @@ namespace Server.Timer
 
         private void DoAction()
         {
-            connection.InjectInternal(new CmdCheckAlarmTenMinutesLeft(test, order));
-            data.TimerList.Remove(test.TestID);
+            connection.InjectInternal(new CmdCheckAlarmTenMinutesLeft(testID, orderID));
         }
     }
 }

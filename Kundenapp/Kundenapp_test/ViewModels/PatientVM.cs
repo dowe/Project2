@@ -25,7 +25,10 @@ namespace Kundenapp
 			Patients = new ObservableCollection<PatientM> ();
 			Messenger.Default.Register<String> (this, "add", addPatient);
 			Messenger.Default.Register<PatientM> (this, "delPat", delPatient);
-			Messenger.Default.Register<String> (this, "Username", (str) => username = str);
+			Messenger.Default.Register<String> (this, "Username", (str) => 
+				{
+					this.username = str;
+				});
 		}
 
 		private String username;
