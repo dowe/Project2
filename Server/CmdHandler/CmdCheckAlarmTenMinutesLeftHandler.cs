@@ -16,26 +16,33 @@ namespace Server.CmdHandler
     {
         private IServerConnection connection = null;
         private IDatabaseCommunicator db = null;
-        Test test;
-        SmsSending sms;
+        private ISmsSending sms;
+        private LocalServerData data;
 
-        public CmdCheckAlarmTenMinutesLeftHandler(IServerConnection connection, IDatabaseCommunicator db)
+        public CmdCheckAlarmTenMinutesLeftHandler(
+            IServerConnection connection,
+            IDatabaseCommunicator db,
+            ISmsSending sms,
+            LocalServerData data)
         {
             this.connection = connection;
             this.db = db;
-            sms = new SmsSending();
+            this.sms = sms;
+            this.data = data;
         }
-
-        
 
         protected override void Handle(CmdCheckAlarmTenMinutesLeft command, string connectionIdOrNull)
         {
-            db.StartTransaction();
-            test = db.GetTest(command.Test.TestID);
-            test.AlarmState = AlarmState.SECOND_ALARM_TRANSMITTED;
-            sms.Send(command.Order.Customer.MobileNumber, "2. Alarm-Meldung: Das Testresultat des Test " + test.Analysis.Name +" des Patienten " + test.PatientID + " der Bestellung"+ command.Order.OrderID + " überschritt die Grenzwerte.");
-            db.EndTransaction(TransactionEndOperation.SAVE);
-
+            //PF 50
+            if (data.TimerList.Remove(command.TestID))
+            {
+                db.StartTransaction();
+                Test test = db.GetTest(command.TestID);
+                Order order = db.GetOrder(command.OrderID);
+                test.AlarmState = AlarmState.SECOND_ALARM_TRANSMITTED;
+                sms.Send(order.Customer.MobileNumber, "2. Alarm-Meldung: Das Testresultat des Test " + test.Analysis.Name + " des Patienten " + test.PatientID + " der Bestellung" + command.OrderID + " überschritt die Grenzwerte.");
+                db.EndTransaction(TransactionEndOperation.SAVE);
+            }
         }
     }
 }

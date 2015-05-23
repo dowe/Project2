@@ -137,19 +137,34 @@ namespace ManagementSoftware.View
                 ShowErrorMessagebox();
                 return;
             }
+            Car oldcar = null;
+            if(_cars!=null && _cars.Count > _carIndex)
+                 oldcar = _cars[_carIndex];
             _cars = cars.OccupiedCars.ToList();
             _customers = cust.Customers.ToList();
+
+            //carindex evtl anpassen
+            if (oldcar != null)
+            {
+                var car = _cars.FirstOrDefault(c => c.CarID == oldcar.CarID);
+                _carIndex = car != null ? _cars.IndexOf(car) : 0;
+            }
 
             SetMapIcons();
             RefreshDriver(_carIndex);
             Mouse.OverrideCursor = null;
         }
 
-        private void RefreshDriver(int carid)
+        private void RefreshDriver(int carindex)
         {
             if (!_cars.Any())
                 return;
-            var car = _cars[carid];
+
+            if (_cars.Count <= carindex)
+                _carIndex = carindex = 0;             
+
+            var car = _cars[carindex];
+
 
             var cmd = _connection.SendWait<CmdReturnGetDriversUnfinishedOrders>(
                 new CmdGetDriversUnfinishedOrders(car.CurrentDriver.UserName));
@@ -163,18 +178,38 @@ namespace ManagementSoftware.View
             _driversOrders = cmd.UnfinishedOrders.ToList();
 
             var address = _laborPos;
-            if (_driversOrders.Any())
-                address = _driversOrders.FirstOrDefault().Customer.Address;
-            NavigateOnMap(car.LastPosition, address);
-            var distance = DistanceCalculation.CalculateDistanceInKm(car.LastPosition, address);
+            Order order = _driversOrders.FirstOrDefault();
+            if (order!=null)
+            {
+                address = order.Customer.Address;
+                if (order.EmergencyPosition == null)
+                    NavigateOnMap(car.LastPosition, order.Customer.Address);
+                else
+                    NavigateOnMap(car.LastPosition, order.EmergencyPosition);
+            }
+            else
+                NavigateOnMap(car.LastPosition, _laborPos);
+
+            IDistanceMatrixPlace destination = (order != null && order.EmergencyPosition != null)
+                ? (IDistanceMatrixPlace) new DistanceMatrixGPSPosition(order.EmergencyPosition)
+                : new DistanceMatrixAddress(address);
+            var distance = DistanceCalculation.CalculateDistanceInKm(new DistanceMatrixGPSPosition(car.LastPosition), destination);
+           
             SetCarText(distance);
         }
+
+        
 
         private void ShowErrorMessagebox()
         {
             Mouse.OverrideCursor = null;
             MessageBox.Show(
                     "Fehler: Bitte überprüfen Sie ihre Internetverbindung oder kontaktieren Sie den nicht vorhandenen Kundendienst.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void NavigateOnMap(GPSPosition from, GPSPosition to)
+        {
+            WebBrowserGoogle.InvokeScript("navigate", new Object[] { from.Latitude, from.Longitude, to.Latitude, to.Longitude });
         }
 
         private void NavigateOnMap(GPSPosition from, Address to)
@@ -184,7 +219,7 @@ namespace ManagementSoftware.View
 
         private void GetDriverDestinations(Car car)
         {
-            
+
         }
 
         private void SetMapIcons()

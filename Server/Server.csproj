@@ -114,6 +114,7 @@
     <Compile Include="CmdHandler\CmdLogoutDriverHandler.cs" />
     <Compile Include="CmdHandler\CmdRegisterCustomerHandler.cs" />
     <Compile Include="CmdHandler\CmdSelectCarHandler.cs" />
+    <Compile Include="CmdHandler\CmdSetFirstAlertReceivedHandler.cs" />
     <Compile Include="CmdHandler\CmdSetOrderCollectedHandler.cs" />
     <Compile Include="CmdHandler\CmdSetOrderReceivedHandler.cs" />
     <Compile Include="CmdHandler\CmdSetTestResultHandler.cs" />
