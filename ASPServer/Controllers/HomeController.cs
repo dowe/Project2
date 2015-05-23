@@ -55,7 +55,11 @@ namespace ASPServer.Controllers
             //Get Analysis-List
             if (Session[SessionAnalysisData] == null)
             {
-                Session[SessionAnalysisData] = _clientConnection.SendWait<CmdReturnGetAnalyses>(new CmdGetAnalyses()).Analyses.ToList();
+                var analyses = _clientConnection.SendWait<CmdReturnGetAnalyses>(new CmdGetAnalyses());
+                if (analyses == null)
+                    return RedirectToAction("NetworkError");
+
+                Session[SessionAnalysisData] = analyses.Analyses.ToList();
                 //populate analysis listbox
                 foreach (var analysis in (List<Analysis>)Session[SessionAnalysisData])
                 {
@@ -131,7 +135,8 @@ namespace ASPServer.Controllers
                         foreach (var analysisName in orderModel.SelectedAnalysis)
                         {
                             var analysesData = Session[SessionAnalysisData] as List<Analysis>;
-                            orderItems[pat].Add(analysesData.Where(a => a.Name == analysisName).FirstOrDefault());
+                            if (orderItems[pat].FirstOrDefault(a => a.Name == analysisName) == null)
+                                orderItems[pat].Add(analysesData.Where(a => a.Name == analysisName).FirstOrDefault());
                         }
                     }
                 }
@@ -183,7 +188,8 @@ namespace ASPServer.Controllers
                 var cmd =
                     _clientConnection.SendWait<CmdReturnGetAllBillsOfUser>(
                         new CmdGetAllBillsOfUser((string)Session[UserID]));
-
+                if (cmd == null)
+                    return RedirectToAction("NetworkError");
                 if (!cmd.Bills.Any())
                     return View();
 
@@ -245,6 +251,8 @@ namespace ASPServer.Controllers
 
             // get all User orders
             CmdReturnGetUsersOrderResults cmd = this._clientConnection.SendWait<CmdReturnGetUsersOrderResults>(new CmdGetUsersOrderResults(Session[UserID].ToString()));
+            if (cmd == null)
+                return RedirectToAction("NetworkError");
             IReadOnlyCollection<Order> rawResults = cmd.Orders;
 
             // Copy the data into the ResultModel
@@ -282,7 +290,8 @@ namespace ASPServer.Controllers
         public ActionResult Login(UserModel userModel)
         {
             CmdReturnLoginCustomer cmd = this._clientConnection.SendWait<CmdReturnLoginCustomer>(new CmdLoginCustomer(userModel.ID, userModel.Password));
-
+            if (cmd == null)
+                return RedirectToAction("NetworkError");
             // Check if the user exists and if the password is correct
             if (cmd.Success)
             {
@@ -339,6 +348,11 @@ namespace ASPServer.Controllers
         {
             Session.Clear();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult NetworkError()
+        {
+            return View();
         }
 
         /// <summary>

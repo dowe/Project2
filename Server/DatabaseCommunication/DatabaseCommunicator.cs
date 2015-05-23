@@ -16,7 +16,7 @@ namespace Server.DatabaseCommunication
 	{
 
         private LaborContext Context;
-
+        private List<Analysis> Analysises;
         public List<Analysis> GetAllAnalysis(Func<Analysis, bool> lambda = null)
         {
             if(lambda != null)
@@ -83,6 +83,7 @@ namespace Server.DatabaseCommunication
             }
             Context.Dispose();
             Context = null;
+            Analysises = null;
         }
 
         public void StartTransaction()
@@ -92,6 +93,7 @@ namespace Server.DatabaseCommunication
                 throw new Exception("Transaction is already started");
             }
             Context = new LaborContext();
+            Analysises = new List<Analysis>();
         }
 
         public void CreateCustomer(Customer customer)
@@ -208,10 +210,28 @@ namespace Server.DatabaseCommunication
 
         public void AttachAnalysises(List<Analysis> analysises)
         {
+            List<Analysis> listtorem = new List<Analysis>();
+            List<Analysis> listtoadd = new List<Analysis>();
+
             foreach (Analysis an in analysises)
             {
-                Context.Analysis.Attach(an);    
+                Analysis found = this.Analysises.Find((a) => a.Name == an.Name);
+                if (found == null)
+                {
+                    Context.Analysis.Attach(an);
+                    Analysises.Add(an);
+                }
+                else
+                {
+                    listtorem.Add(an);
+                    listtoadd.Add(found);
+                }
             }
+            foreach(Analysis an in listtorem)
+            {
+                analysises.Remove(an);
+            }
+            analysises.AddRange(listtoadd);
         }
 
 	    public void AttachOrder(Order order)

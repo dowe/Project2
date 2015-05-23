@@ -133,8 +133,10 @@ namespace ManagementSoftware.View
             var cars = _connection.SendWait<CmdReturnGetAllOccupiedCars>(new CmdGetAllOccupiedCars());
             var cust = _connection.SendWait<CmdReturnGetAllCustomers>(new CmdGetAllCustomers());
             if (cars == null || cust == null)
+            {
+                ShowErrorMessagebox();
                 return;
-
+            }
             _cars = cars.OccupiedCars.ToList();
             _customers = cust.Customers.ToList();
 
@@ -149,13 +151,30 @@ namespace ManagementSoftware.View
                 return;
             var car = _cars[carid];
 
-            GetDriverDestinations(car);
+            var cmd = _connection.SendWait<CmdReturnGetDriversUnfinishedOrders>(
+                new CmdGetDriversUnfinishedOrders(car.CurrentDriver.UserName));
+
+            if (cmd == null)
+            {
+                ShowErrorMessagebox();
+                return;
+            }
+
+            _driversOrders = cmd.UnfinishedOrders.ToList();
+
             var address = _laborPos;
             if (_driversOrders.Any())
                 address = _driversOrders.FirstOrDefault().Customer.Address;
             NavigateOnMap(car.LastPosition, address);
             var distance = DistanceCalculation.CalculateDistanceInKm(car.LastPosition, address);
             SetCarText(distance);
+        }
+
+        private void ShowErrorMessagebox()
+        {
+            Mouse.OverrideCursor = null;
+            MessageBox.Show(
+                    "Fehler: Bitte überprüfen Sie ihre Internetverbindung oder kontaktieren Sie den nicht vorhandenen Kundendienst.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void NavigateOnMap(GPSPosition from, Address to)
@@ -165,8 +184,7 @@ namespace ManagementSoftware.View
 
         private void GetDriverDestinations(Car car)
         {
-            _driversOrders = _connection.SendWait<CmdReturnGetDriversUnfinishedOrders>(
-                new CmdGetDriversUnfinishedOrders(car.CurrentDriver.UserName)).UnfinishedOrders.ToList();
+            
         }
 
         private void SetMapIcons()
@@ -199,8 +217,12 @@ namespace ManagementSoftware.View
 
         private void RightArrow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (_cars == null)
+                return;
+
             var old = _carIndex;
             _carIndex++;
+
             if (_carIndex >= _cars.Count)
                 _carIndex = 0;
 
@@ -210,10 +232,15 @@ namespace ManagementSoftware.View
 
         private void LeftArrow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (_cars == null)
+                return;
+
             var old = _carIndex;
             _carIndex--;
+
             if (_carIndex < 0)
                 _carIndex = _cars.Count - 1;
+
             if (old != _carIndex)
                 RefreshDriver(_carIndex);
         }
