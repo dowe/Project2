@@ -35,7 +35,7 @@
 
                 <Label Grid.Row="0" Grid.Column="0" Content="Neue:" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <Label Grid.Row="1" Grid.Column="0" Content="In Bearbeitung:" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <Label Grid.Row="2" Grid.Column="0" Content="Gesamt:" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="Fertiggestellt:" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                 <Label Name="LNeue" Grid.Row="0" Grid.Column="2" Content="{Binding NewOrders}" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <Label Name="LInBearbeitung" Grid.Row="1" Grid.Column="2" Content="{Binding OrdersInProgress}" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>

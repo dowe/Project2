@@ -41,7 +41,7 @@ namespace Server.CmdHandler
                 //Alles für Orders
                 //falls in den letzten 24h bestellt wurde
                 if (o.OrderDate != null && (o.OrderDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
-                    ds.NumberOfOrderedOrders++;
+                    ds.NumberOfNewOrders++;
                 //falls in den letzten 24h beendet wurde
                 if (o.CompleteDate != null && (o.CompleteDate.GetValueOrDefault() - DateTime.Now).TotalHours < 24)
                     ds.NumberOfCompletedOrders++;
