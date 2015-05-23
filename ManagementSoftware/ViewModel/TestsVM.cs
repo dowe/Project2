@@ -50,29 +50,28 @@ namespace ManagementSoftware.ViewModel
 
              if (ButtonDetail.Equals("Eingetroffen"))
              {
-                 Console.WriteLine(currentOrder.OrderID);
 
-                 Console.WriteLine("Order recv");
-                 new CmdSetOrderReceived(currentOrder.OrderID);
+
+                 _ClientConnection.Send(new CmdSetOrderReceived(currentOrder.OrderID));
+
                  LoadData();
              }
              else if(ButtonDetail.Equals("Test fertig"))
              {
-                 Console.WriteLine("Test fertig!" + ResultatDetail);
                  if (ResultatDetail != "")
                  {
-                     new CmdSetTestResult(SelectedTestEntry.Test.TestID, Convert.ToSingle(ResultatDetail));
+                     _ClientConnection.Send( new CmdSetTestResult(SelectedTestEntry.Test.TestID, Convert.ToSingle(ResultatDetail)));
                      LoadData();
                  }
 
              }else if(ButtonDetail.Equals("Alarm Bestätigt"))
              {
-                 new CmdSetFirstAlertReceived(SelectedTestEntry.Test.TestID);
+                  _ClientConnection.Send(new CmdSetFirstAlertReceived(SelectedTestEntry.Test.TestID));
                  LoadData();
              }
              else if (ButtonDetail.Equals("Bestellt"))
              {
-                 new CmdSetOrderCollected("Taxi", currentOrder.OrderID);
+                 _ClientConnection.Send( new CmdSetOrderCollected("Taxi", currentOrder.OrderID));
                  LoadData();
              }
              RefreshDetail();
