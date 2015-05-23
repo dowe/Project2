@@ -50,6 +50,8 @@ namespace ManagementSoftware.ViewModel
 
              if (ButtonDetail.Equals("Eingetroffen"))
              {
+                 Console.WriteLine(currentOrder.OrderID);
+
                  Console.WriteLine("Order recv");
                  new CmdSetOrderReceived(currentOrder.OrderID);
                  LoadData();
@@ -57,20 +59,24 @@ namespace ManagementSoftware.ViewModel
              else if(ButtonDetail.Equals("Test fertig"))
              {
                  Console.WriteLine("Test fertig!" + ResultatDetail);
-
-                 new CmdSetTestResult(SelectedTestEntry.Test.TestID, Convert.ToSingle(ResultatDetail));
-                 LoadData();
+                 if (ResultatDetail != "")
+                 {
+                     new CmdSetTestResult(SelectedTestEntry.Test.TestID, Convert.ToSingle(ResultatDetail));
+                     LoadData();
+                 }
 
              }else if(ButtonDetail.Equals("Alarm Bestätigt"))
              {
                  new CmdSetFirstAlertReceived(SelectedTestEntry.Test.TestID);
                  LoadData();
              }
-             else if (ButtonDetail.Equals("Eingetroffen"))
+             else if (ButtonDetail.Equals("Bestellt"))
              {
                  new CmdSetOrderCollected("Taxi", currentOrder.OrderID);
                  LoadData();
              }
+             RefreshDetail();
+
             
          }
          public IList<TestEntryModel> DataList

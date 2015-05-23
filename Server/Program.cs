@@ -88,6 +88,8 @@ namespace Server
             connection.RegisterCommandHandler(new CmdSetOrderReceivedHandler(db));
             connection.RegisterCommandHandler(new CmdSetTestResultHandler(db, checker, smsSending, data, connection));
             connection.RegisterCommandHandler(new CmdSetFirstAlertReceivedHandler(db, data));
+            connection.RegisterCommandHandler(new CmdCheckAlarmTenMinutesLeftHandler(connection, db, smsSending ,data));
+
         }
 
         private static void OnServerStarted(
