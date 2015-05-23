@@ -10,12 +10,12 @@ namespace Common.Commands
 {
     public class CmdCheckAlarmTenMinutesLeft : Command
     {
-        public Test Test { get; set; }
-        public Order Order { get; set; }
-        public CmdCheckAlarmTenMinutesLeft(Test test, Order order)
+        public Guid TestID { get; set; }
+        public long OrderID { get; set; }
+        public CmdCheckAlarmTenMinutesLeft(Guid testID, long orderID)
         {
-            Order = order;
-            Test = test;
+            OrderID = orderID;
+            TestID = testID;
         }
     }
 }

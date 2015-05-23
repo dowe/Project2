@@ -168,34 +168,47 @@ namespace ManagementSoftware.Model
             }
         }
 
-        private string Validate()
+        public string Validate()
         {
+            string message = null; 
             if (CustomerUsername.Trim().Length == 0)
             {
-                return "Kunden ID fehlt";
+                message = append(message, "Kunden ID fehlt");
             }
 
             if (CustomerAddress == null)
             {
-                return "Invalider Kunde"
-                    + "\n Kundenadresse unbekannt";
+                message = append(message, "Invalider Kunde"
+                    + "\n   Kundenadresse unbekannt");
             }
 
             if (_PatientTests.Count == 0)
             {
-                return "Keine Patienten hinzugefügt";
+                message = append(message, "Kein Patient hinzugefügt");
             }
 
             foreach (KeyValuePair<String, List<Analysis>>  item in _PatientTests)
             {
                 if (item.Value.Count == 0)
                 {
-                    return "Einem oder mehreren Patienten"
-                    + "\nwurde keine Untersuchung zugewiesen";
+                    return  append(message, "Einem oder mehreren Patienten"
+                    + "\n   wurde keine Untersuchung zugewiesen");
                 }
             }
 
-            return null;
+            return message;
+        }
+
+        private string append(string p, string message)
+        {
+            if (p == null)
+            {
+                return " - " + message;
+            }
+            else
+            {
+                return p + "\n - " + message;
+            }
         }
 
         public Address CustomerAddress { get; set; }

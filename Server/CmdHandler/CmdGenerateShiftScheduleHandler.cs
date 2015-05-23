@@ -99,9 +99,6 @@ namespace Server.CmdHandler
                 return;
             }
 
-            //TODO: create real ShiftSchedule use (refDate, previousMonth) and dedicated Unit
-            //ShiftSchedule newShiftSchedule = Util.CreateTestData(refDate);
-
             IShiftScheduleCreator creator = new ShiftScheduleCreator();
             ShiftSchedule cur = creator.createShiftSchedule(previousShiftSchedule, new DateTime(refDate.Year, refDate.Month, 1));
 
