@@ -80,7 +80,7 @@ namespace Server.CmdHandler
             DistanceContainer container;
             try
             {
-               container = DistanceCalculation.DistanceCalculation.CalculateDistanceInKm(data.ZmsAddress, customer.Address);
+                container = DistanceCalculation.DistanceCalculation.CalculateDistanceInKm(data.ZmsAddress, customer.Address);
             }
             catch (Exception e)
             {
@@ -91,8 +91,10 @@ namespace Server.CmdHandler
                 return "Kunde weiter als 100km entfernt";
             }
 
-            //SET customer.TwoWayRoadCostInEuro 
-            customer.TwoWayRoadCostInEuro = container.Distance * 2.0F * data.RoadCostInEuroPerKm;
+            //SET customer.TwoWayRoadCostInEuro
+            float f = container.Distance * 2.0F * data.RoadCostInEuroPerKm;
+            float truncated = (float)(Math.Truncate((double)f * 100.0) / 100.0);
+            customer.TwoWayRoadCostInEuro = truncated;
 
             return null;
         }

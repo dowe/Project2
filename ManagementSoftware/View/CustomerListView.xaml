@@ -8,6 +8,29 @@
              d:DesignHeight="300" d:DesignWidth="300" DataContext="{Binding CustomerList, Mode=OneWay, Source={StaticResource Locator}}">
     <Grid>
         <Button Content="Aktualisiere" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Command="{Binding LoadCommand, Mode=OneWay}"/>
-        <DataGrid HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="1200" Height="543" ItemsSource="{Binding DataList}" CanUserReorderColumns="False" IsReadOnly="True" />
+        <DataGrid HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="1200" Height="543" ItemsSource="{Binding DataList}" CanUserReorderColumns="False" IsReadOnly="True" AutoGenerateColumns="False" >
+            <DataGrid.Resources>
+                <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Title, Mode=OneWay}" Header="Anrede" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding FirstName, Mode=OneWay}" Header="Vorname" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding LastName, Mode=OneWay}" Header="Name" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Label, Mode=OneWay}" Header="Bezeichnung" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding UserName}" Header="Benutzername" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Password}" Header="Passwort" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding MobileNumber}" Header="Handynummer" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Binding="{Binding SMSRequested}" Header="SMS erwünscht" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TwoWayRoadCostInEuro}" Header="Wegkosten [€]" IsReadOnly="True"/>
+                
+                <DataGridTextColumn Binding="{Binding Address.Street}" Header="Straße+Hnr" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Address.PostalCode}" Header="PLZ" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Address.City}" Header="Ort" IsReadOnly="True"/>
+
+                <DataGridTextColumn Binding="{Binding BankAccount.AccountOwner}" Header="Kontoinhaber" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding BankAccount.IBAN}" Header="IBAN" IsReadOnly="True"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
     </Grid>
 </UserControl>
