@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.Windows;
 
 namespace ManagementSoftware.Helper
 {
     [ExcludeFromCodeCoverage]
-    public class MyListBox : ListBox
+    public class MessageBoxImpl : IMessageBox
     {
-        public void Select(IEnumerable list)
+        public void Show(string messageBoxText)
         {
-            this.SetSelectedItems(list);
+            MessageBox.Show(messageBoxText);
         }
     }
 }

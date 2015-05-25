@@ -8,107 +8,57 @@ using System.Collections.Generic;
 using Common.Communication.Client;
 using Common.Commands;
 using System.Windows;
+using ManagementSoftware.Model;
+using ManagementSoftware.Helper;
 
 namespace ManagementSoftware.ViewModel
 {
     public class RegisterCustomerVM : ViewModelBase
     {
-        private static Dictionary<ETitle, string> _ETitleValues = Util.EnumValues<ETitle>();
-        private static Dictionary<ESMSRequested, string> _ESMSRequestedValues = Util.EnumValues<ESMSRequested>();
+        private RegisterCustomerM model;
+        private IMessageBox _MessageBox;
 
-        private Customer _Customer;
-        private KeyValuePair<ETitle, string> _Title;
-        private KeyValuePair<ESMSRequested, string> _SMSRequested;
-        private RelayCommand _RegisterCustomerAction;
-        private IClientConnection _ClientConnection;
-
-        public RegisterCustomerVM(IClientConnection _ClientConnection)
+        public RegisterCustomerVM(
+            IClientConnection _ClientConnection, IMessageBox _MessageBox)
         {
-            this._ClientConnection = _ClientConnection;
+            this._MessageBox = _MessageBox;
+            this.model = new RegisterCustomerM(_ClientConnection);
 
-            _Customer = new Customer();
-            _Customer.BankAccount = new BankAccount();
-            _Customer.Address = new Address();
-
-            _RegisterCustomerAction = new RelayCommand(RegisterCustomer);
-            Title = Util.CreateValuePair<ETitle>(ETitle.Mr);
-            SMSRequested = Util.CreateValuePair<ESMSRequested>(ESMSRequested.No);
+            RegisterCustomerAction = new RelayCommand(RegisterCustomer);
         }
 
-        public RelayCommand RegisterCustomerAction
+        public RelayCommand RegisterCustomerAction { get; set; }
+
+        public Dictionary<ESMSRequested, string> ESMSRequestedValues
         {
             get
             {
-                return _RegisterCustomerAction;
+                return model.ESMSRequestedValues;
             }
         }
 
-        public object ESMSRequestedValues
+        public Dictionary<ETitle, string> ETitleValues
         {
             get
             {
-                return _ESMSRequestedValues;
-            }
-        }
-
-        public object ETitleValues
-        {
-            get
-            {
-                return _ETitleValues;
+                return model.ETitleValues;
             }
         }
 
         public void RegisterCustomer()
         {
-            Customer copyOfCustomer = new Customer();
-            copyOfCustomer.Address = new Address();
-            copyOfCustomer.BankAccount = new BankAccount();
-
-            copyOfCustomer.LastName = _Customer.LastName;
-            copyOfCustomer.FirstName = _Customer.FirstName;
-            copyOfCustomer.Label = _Customer.Label;
-            copyOfCustomer.Title = _Customer.Title;
-            copyOfCustomer.UserName = _Customer.UserName;
-            copyOfCustomer.Password = _Customer.Password;
-            copyOfCustomer.MobileNumber = _Customer.MobileNumber;
-            copyOfCustomer.SMSRequested = _Customer.SMSRequested;
-            copyOfCustomer.Address.Street = _Customer.Address.Street;
-            copyOfCustomer.Address.City = _Customer.Address.City;
-            copyOfCustomer.Address.PostalCode = _Customer.Address.PostalCode;
-            copyOfCustomer.BankAccount.AccountOwner = _Customer.BankAccount.AccountOwner;
-            copyOfCustomer.BankAccount.IBAN = _Customer.BankAccount.IBAN;
-
-            CmdRegisterCustomer request = new CmdRegisterCustomer(copyOfCustomer);
-            CmdReturnRegisterCustomer response = _ClientConnection.SendWait<CmdReturnRegisterCustomer>(request);
-            if (response == null)
-            {
-                MessageBox.Show("Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");
-            }
-            else if ( response.Success )
-            {
-                MessageBox.Show(response.Message != null ? response.Message : "Kunde wurde angelegt");
-            }
-            else if (!response.Success && response.Message == null)
-            {
-                throw new Exception("Success is false and Error null. Illegal State");
-            }
-            else
-            {
-                MessageBox.Show(response.Message);
-            }
-
+            _MessageBox.Show(model.RegisterCustomer());
         }
 
         public string LastName
         {
             get
             {
-                return _Customer.LastName;
+                return model.Customer.LastName;
             }
             set
             {
-                _Customer.LastName = value;
+                model.Customer.LastName = value;
                 RaisePropertyChanged();
             }
         }
@@ -117,11 +67,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Customer.FirstName;
+                return model.Customer.FirstName;
             }
             set
             {
-                _Customer.FirstName = value;
+                model.Customer.FirstName = value;
                 RaisePropertyChanged();
             }
         }
@@ -130,11 +80,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Customer.Label;
+                return model.Customer.Label;
             }
             set
             {
-                _Customer.Label = value;
+                model.Customer.Label = value;
                 RaisePropertyChanged();
             }
         }
@@ -143,12 +93,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Title;
+                return model.Title;
             }
             set
             {
-                _Title = value;
-                _Customer.Title = _Title.Value;
+                model.Title = value;
                 RaisePropertyChanged();
             }
         }
@@ -157,11 +106,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Customer.UserName;
+                return model.Customer.UserName;
             }
             set
             {
-                _Customer.UserName = value;
+                model.Customer.UserName = value;
                 RaisePropertyChanged();
             }
         }
@@ -170,11 +119,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Customer.Password;
+                return model.Customer.Password;
             }
             set
             {
-                _Customer.Password = value;
+                model.Customer.Password = value;
                 RaisePropertyChanged();
             }
         }
@@ -183,11 +132,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Customer.MobileNumber;
+                return model.Customer.MobileNumber;
             }
             set
             {
-                _Customer.MobileNumber = value;
+                model.Customer.MobileNumber = value;
                 RaisePropertyChanged();
             }
         }
@@ -196,12 +145,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _SMSRequested;
+                return model.SMSRequested;
             }
             set
             {
-                _SMSRequested = value;
-                _Customer.SMSRequested = (_SMSRequested.Key == ESMSRequested.Yes);
+                model.SMSRequested = value;
                 RaisePropertyChanged();
             }
         }
@@ -210,11 +158,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Customer.BankAccount.AccountOwner;
+                return model.Customer.BankAccount.AccountOwner;
             }
             set
             {
-                _Customer.BankAccount.AccountOwner = value;
+                model.Customer.BankAccount.AccountOwner = value;
                 RaisePropertyChanged();
             }
         }
@@ -223,11 +171,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Customer.BankAccount.IBAN;
+                return model.Customer.BankAccount.IBAN;
             }
             set
             {
-                _Customer.BankAccount.IBAN = value;
+                model.Customer.BankAccount.IBAN = value;
                 RaisePropertyChanged();
             }
         }
@@ -236,11 +184,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Customer.Address.City;
+                return model.Customer.Address.City;
             }
             set
             {
-                _Customer.Address.City = value;
+                model.Customer.Address.City = value;
                 RaisePropertyChanged();
             }
         }
@@ -249,11 +197,11 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Customer.Address.PostalCode;
+                return model.Customer.Address.PostalCode;
             }
             set
             {
-                _Customer.Address.PostalCode = value;
+                model.Customer.Address.PostalCode = value;
                 RaisePropertyChanged();
             }
         }
@@ -262,30 +210,16 @@ namespace ManagementSoftware.ViewModel
         {
             get
             {
-                return _Customer.Address.Street;
+                return model.Customer.Address.Street;
             }
             set
             {
-                _Customer.Address.Street = value;
+                model.Customer.Address.Street = value;
                 RaisePropertyChanged();
             }
         }
 
     }
 
-    public enum ESMSRequested
-    {
-        [Description("Ja")]
-        Yes,
-        [Description("Nein")]
-        No
-    }
 
-    public enum ETitle
-    {
-        [Description("Herr")]
-        Mr,
-        [Description("Frau")]
-        Mrs
-    }
 }

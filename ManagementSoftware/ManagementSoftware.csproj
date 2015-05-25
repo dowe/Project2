@@ -85,10 +85,11 @@
     </ApplicationDefinition>
     <Compile Include="Helper\AnalysisNameConverter.cs" />
     <Compile Include="Helper\BindingProxy.cs" />
-    <Compile Include="Helper\ClientConnectionCreator.cs" />
     <Compile Include="Helper\ColumnVisibilityConverter.cs" />
     <Compile Include="Helper\EmployeeTypeConverter.cs" />
     <Compile Include="Helper\GridColorConverter.cs" />
+    <Compile Include="Helper\IMessageBox.cs" />
+    <Compile Include="Helper\MessageBoxImpl.cs" />
     <Compile Include="Helper\MyListBox.cs" />
     <Compile Include="Model\ISwitchShiftScheduleView.cs" />
     <Compile Include="Model\ShiftScheduleDayEntry.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="ViewModel\CustomerListVM.cs" />
     <Compile Include="ViewModel\DailyStatisticVM.cs" />
     <Compile Include="ViewModel\MapVM.cs" />
+    <Compile Include="Model\RegisterCustomerM.cs" />
     <Compile Include="ViewModel\RegisterCustomerVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleDayVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleMonthVM.cs" />

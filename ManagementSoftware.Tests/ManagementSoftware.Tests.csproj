@@ -36,6 +36,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform">
+      <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute">
+      <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net45\NSubstitute.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -51,15 +63,37 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="RegisterCustomerVMTests.cs" />
+    <Compile Include="ModelTests\RegisterCustomerMTests.cs" />
+    <Compile Include="ViewModelTests\RegisterCustomerVMTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Commands\Common.Commands.csproj">
+      <Project>{f74fba9f-fb01-48f6-9ef7-b45eb345e958}</Project>
+      <Name>Common.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Communication.Client\Common.Communication.Client.csproj">
+      <Project>{2b9228e8-bd74-4d56-aa96-551fc8031595}</Project>
+      <Name>Common.Communication.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Communication\Common.Communication.csproj">
+      <Project>{abbc028f-adef-4399-a133-e97f82582bdb}</Project>
+      <Name>Common.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.DataTransferObjects\Common.DataTransferObjects.csproj">
+      <Project>{3476b14d-b58a-457c-8357-ce9801106aae}</Project>
+      <Name>Common.DataTransferObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Util\Common.Util.csproj">
+      <Project>{12f1826a-1f92-40f8-bb4c-7ee98c343ba9}</Project>
+      <Name>Common.Util</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ManagementSoftware\ManagementSoftware.csproj">
       <Project>{88ef00ad-26fb-4389-8429-3340f40f97c9}</Project>
       <Name>ManagementSoftware</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

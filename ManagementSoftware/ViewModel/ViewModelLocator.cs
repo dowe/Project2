@@ -12,9 +12,10 @@
 using Common.Communication.Client;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using ManagementSoftware.Communication;
 using ManagementSoftware.Model;
+using ManagementSoftware.Helper;
 using Microsoft.Practices.ServiceLocation;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ManagementSoftware.ViewModel
 {
@@ -25,13 +26,15 @@ namespace ManagementSoftware.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ViewModelLocator
     {
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.Register<IClientConnection, ClientConnectionCreator>();
+            SimpleIoc.Default.Register<IMessageBox, MessageBoxImpl>();
+            SimpleIoc.Default.Register<IClientConnection>(CreateClientConnection);
             SimpleIoc.Default.Register<RegisterCustomerVM>();
             SimpleIoc.Default.Register<ShiftScheduleVM>();
             SimpleIoc.Default.Register<DailyStatisticVM>();
@@ -40,6 +43,16 @@ namespace ManagementSoftware.ViewModel
             SimpleIoc.Default.Register<MapVM>();
             SimpleIoc.Default.Register<CreateOrderVM>();
 
+        }
+
+        private static IClientConnection CreateClientConnection()
+        {
+            IClientConnection c = new ClientConnection("http://localhost:8080/commands");
+
+            c.Start();
+            c.Connect();
+
+            return c;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",

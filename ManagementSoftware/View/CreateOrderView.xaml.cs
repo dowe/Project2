@@ -3,6 +3,7 @@ using ManagementSoftware.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace ManagementSoftware.View
     /// <summary>
     /// Interaction logic for CreateOrderView.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class CreateOrderView : UserControl
     {
         public CreateOrderView()

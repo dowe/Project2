@@ -45,11 +45,12 @@ namespace Server.DatabaseCommunication.Tests
 
             Com.StartTransaction();
             List<ShiftSchedule> Schedules = Com.GetShiftSchedules();
-            Com.EndTransaction(TransactionEndOperation.READONLY);
+            
 
             Assert.AreEqual(Schedules.Count, 1);
             Assert.AreEqual(Schedules.First().Date, new DateTime(2015, 5, 1));
             Assert.AreEqual(Schedules.First().DayEntry.Count, 1);
+            Com.EndTransaction(TransactionEndOperation.READONLY);
 
             Com.StartTransaction();
             ShiftSchedule schedule2 = new ShiftSchedule() { Date = new DateTime(2015, 6, 1) };
