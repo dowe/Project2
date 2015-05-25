@@ -5,16 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.DataTransferObjects;
 using Server.DatabaseCommunication;
+using Common.Util;
 
 namespace Server.ShiftScheduleCreation
 {
+    public class DummyShiftScheduleCreator : IShiftScheduleCreator
+    {
+
+        public ShiftSchedule createShiftSchedule(ShiftSchedule last, List<Employee> emps, DateTime date)
+        {
+            return Util.CreateTestData(date, emps);
+        }
+
+    }
 
     public class ShiftScheduleCreator : IShiftScheduleCreator
     {
-        public ShiftSchedule createShiftSchedule(ShiftSchedule last, DateTime firstOfMonth)
+        public ShiftSchedule createShiftSchedule(ShiftSchedule last, List<Employee> empl, DateTime firstOfMonth)
         {
-            var context = new LaborContext();
-            var empl = context.Employee.ToList();
 
             List<int> amountOfShifts = new List<int>();
             List<int> shiftsAM = new List<int>();

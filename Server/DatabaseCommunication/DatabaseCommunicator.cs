@@ -243,6 +243,12 @@ namespace Server.DatabaseCommunication
 	    {
 	        Context.Bill.Add(bill);
 	    }
-	}
+
+
+        public List<Employee> GetAllEmployee()
+        {
+            return Context.Employee.ToList();
+        }
+    }
 }
 

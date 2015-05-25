@@ -18,12 +18,15 @@ namespace Server.CmdHandler
         private IServerConnection connection;
         private IDatabaseCommunicator db;
         private LocalServerData data;
+        private IShiftScheduleCreator creator;
 
         public CmdGenerateShiftScheduleHandler(
             IServerConnection connection,
             IDatabaseCommunicator db,
-            LocalServerData data)
+            LocalServerData data, 
+            IShiftScheduleCreator creator)
         {
+            this.creator = creator;
             this.connection = connection;
             this.db = db;
             this.data = data;
@@ -92,19 +95,19 @@ namespace Server.CmdHandler
                     previousShiftSchedule = obj;
                 }
             }
-            db.EndTransaction(TransactionEndOperation.READONLY);
+            
 
             if (existShiftSchedule)
             {
+                db.EndTransaction(TransactionEndOperation.READONLY);
                 return;
             }
 
-            IShiftScheduleCreator creator = new ShiftScheduleCreator();
-            ShiftSchedule cur = creator.createShiftSchedule(previousShiftSchedule, new DateTime(refDate.Year, refDate.Month, 1));
-
-
+            List<Employee> emps = db.GetAllEmployee();
+            
+            ShiftSchedule cur = creator.createShiftSchedule(previousShiftSchedule, emps,new DateTime(refDate.Year, refDate.Month, 1));
+            
             //store ShiftSchedule in db
-            db.StartTransaction();
             db.CreateShiftSchedule(cur);
             db.EndTransaction(TransactionEndOperation.SAVE);
 

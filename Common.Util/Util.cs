@@ -155,16 +155,16 @@ namespace Common.Util
             while (true);
         }
 
-        public static ShiftSchedule CreateTestData(DateTime refDate)
+        public static ShiftSchedule CreateTestData(DateTime refDate, List<Employee> emps)
         {
             ShiftSchedule obj = new ShiftSchedule();
 
             obj.Date = refDate;
             obj.DayEntry = new List<DayEntry>();
 
-            List<Employee> admins = CreateEmployees<AdministrationAssistant>(10);
-            List<Employee> driver = CreateEmployees<Driver>(20);
-            List<Employee> lab = CreateEmployees<LabAssistant>(10);
+            List<Employee> admins = new List<Employee>(emps.Where<Employee>(e=>e.EmployeeType == EEmployeeType.TypeAdministrationAssistant));
+            List<Employee> driver = new List<Employee>(emps.Where<Employee>(e => e.EmployeeType == EEmployeeType.TypeDriver));
+            List<Employee> lab = new List<Employee>(emps.Where<Employee>(e => e.EmployeeType == EEmployeeType.TypeLabAssistant));
 
             List<Employee> empty = new List<Employee>();
 
@@ -177,13 +177,13 @@ namespace Common.Util
                 entry.AM = new List<Employee>();
                 entry.PM = new List<Employee>();
 
-                Add(entry.AM, admins, 3, rnd, empty);
+                Add(entry.AM, admins, 1, rnd, empty);
                 Add(entry.AM, lab, 3, rnd, empty);
-                Add(entry.AM, driver, 6, rnd, empty);
+                Add(entry.AM, driver, 4, rnd, empty);
 
-                Add(entry.PM, admins, 3, rnd, entry.AM);
+                Add(entry.PM, admins, 1, rnd, entry.AM);
                 Add(entry.PM, lab, 3, rnd, entry.AM);
-                Add(entry.PM, driver, 6, rnd, entry.AM);
+                Add(entry.PM, driver, 2, rnd, entry.AM);
 
                 obj.DayEntry.Add(entry);
             }
@@ -207,23 +207,6 @@ namespace Common.Util
             }
         }
 
-        public static List<Employee> CreateEmployees<T>(int n) where T : Employee
-        {
-            Type type = typeof(T);
-
-            List<Employee> list = new List<Employee>();
-            string text = type.Name;
-            for (int i = 0; i < n; i++)
-            {
-                T employee = (T)type.GetConstructor(new Type[] { }).Invoke(new object[] { });
-                list.Add(employee);
-
-                employee.FirstName = "F" + text + i;
-                employee.LastName = "N" + text + i;
-            }
-
-            return list;
-        }
     }
 
 }

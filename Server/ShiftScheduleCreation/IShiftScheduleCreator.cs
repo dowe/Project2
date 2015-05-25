@@ -9,6 +9,6 @@ namespace Server.ShiftScheduleCreation
 {
     public interface IShiftScheduleCreator
     {
-        ShiftSchedule createShiftSchedule(ShiftSchedule last, DateTime date);
+        ShiftSchedule createShiftSchedule(ShiftSchedule last, List<Employee> emps, DateTime date);
     }
 }

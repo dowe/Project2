@@ -89,13 +89,13 @@ namespace ManagementSoftware.ViewModel
             {
                 if (!amShift && entry.EmployeePM == null
                     && entry.EmployeeAM != null
-                    && entry.EmployeeAM.GetType().IsAssignableFrom(emp.GetType()))
+                    && entry.EmployeeAM.EmployeeType == emp.EmployeeType)
                 {
                     return entry;
                 }
                 if (amShift && entry.EmployeeAM == null
                     && entry.EmployeePM != null
-                    && entry.EmployeePM.GetType().IsAssignableFrom(emp.GetType()))
+                    && entry.EmployeePM.EmployeeType == emp.EmployeeType)
                 {
                     return entry;
                 }

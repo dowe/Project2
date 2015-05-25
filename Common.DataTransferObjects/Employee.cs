@@ -8,27 +8,28 @@ namespace Common.DataTransferObjects
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Text;
 
-	public class Employee
-	{
+    public class Employee
+    {
 
         [Key, Column(Order = 0)]
-		public virtual string LastName
-		{
-			get;
-			set;
-		}
+        public virtual string LastName
+        {
+            get;
+            set;
+        }
 
         [Key, Column(Order = 1)]
-		public virtual string FirstName
-		{
-			get;
-			set;
-		}
+        public virtual string FirstName
+        {
+            get;
+            set;
+        }
 
         public virtual string UserName
         {
@@ -42,19 +43,22 @@ namespace Common.DataTransferObjects
             set;
         }
 
-        public virtual EEmployeeType EmployeeType 
+        public virtual EEmployeeType EmployeeType
         {
-            get; 
+            get;
             set;
         }
 
-	}
+    }
 
     public enum EEmployeeType
     {
-       TypeDriver = 0,
-       TypeAdministrationAssistant = 1,
-       TypeLabAssistant = 2
+        [Description("Fahrer")]
+        TypeDriver = 0,
+        [Description("Verwaltung")]
+        TypeAdministrationAssistant = 1,
+        [Description("Labor")]
+        TypeLabAssistant = 2
     }
 }
 

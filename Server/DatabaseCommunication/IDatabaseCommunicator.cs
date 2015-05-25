@@ -36,6 +36,8 @@ namespace Server.DatabaseCommunication
 
 		List<Customer> GetAllCustomer(Func<Customer, bool> lambda);
 
+        List<Employee> GetAllEmployee();
+
 		Customer GetCustomer(string userName);
 
 		Address GetCustomerAddress(string userName);

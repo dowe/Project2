@@ -12,6 +12,7 @@ using Server.DriverControlling;
 using Server.Sms;
 using Server.Timer;
 using Server.ExtremeValueCheck;
+using Server.ShiftScheduleCreation;
 using Common.DataTransferObjects;
 
 namespace Server
@@ -32,12 +33,13 @@ namespace Server
             UsernameToConnectionIdMapping driverToConnectionIdMapping = new UsernameToConnectionIdMapping();
             ISmsSending smsSending = new SmsSending();
             IExtremeValueChecker checker = new ExtremeValueChecker();
+            IShiftScheduleCreator shiftScheduleCreator = new DummyShiftScheduleCreator(); //TODO: Use Real Impl
 
             connection.ServerStarted += (object sender, EventArgs e) => OnServerStarted(connection, db, data);
             connection.BeforeHandlingCommand += connection_BeforeHandlingCommand;
 
             Console.WriteLine("Registering Handlers...");
-            RegisterHandlers(connection, db, data, driverController, driverToConnectionIdMapping, smsSending, checker);
+            RegisterHandlers(connection, db, data, driverController, driverToConnectionIdMapping, smsSending, checker, shiftScheduleCreator);
 
             Console.WriteLine("Starting server...");
             connection.RunForever();
@@ -55,7 +57,8 @@ namespace Server
             IDriverController driverController,
             UsernameToConnectionIdMapping driverMapping,
             ISmsSending smsSending,
-            IExtremeValueChecker checker)
+            IExtremeValueChecker checker,
+            IShiftScheduleCreator shiftScheduleCreator)
         {
 
             // TODO: REGISTER SERVER HANDLER HERE
@@ -74,7 +77,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdLogoutDriverHandler(connection, db, driverMapping));
             connection.RegisterCommandHandler(new CmdRegisterCustomerHandler(connection, db, data));
             connection.RegisterCommandHandler(new CmdGetAllBillsOfUserHandler(connection, db));
-            connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data));
+            connection.RegisterCommandHandler(new CmdGenerateShiftScheduleHandler(connection, db, data, shiftScheduleCreator));
             connection.RegisterCommandHandler(new CmdGetAllCustomersHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOrdersHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetUsersOrderResultsHandler(connection, db));
@@ -99,7 +102,7 @@ namespace Server
         {
             data.GenerateShiftScheduleTimer = new GenerateShiftScheduleTimer(connection);
             data.CheckOrdersFiveHoursLeftScheduledTimer = new CheckOrdersFiveHoursLeftScheduledTimer(connection);
-           // connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
+            connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
             connection.InjectInternal(new CmdGenerateDailyStatistic());
             connection.InjectInternal(new CmdGenerateBills());
         }
