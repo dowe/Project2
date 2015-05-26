@@ -49,34 +49,17 @@ namespace ManagementSoftware.ViewModel
          {
 
              if (ButtonDetail.Equals("Eingetroffen"))
-             {
-
-
                  _ClientConnection.Send(new CmdSetOrderReceived(currentOrder.OrderID));
-
-                 LoadData();
-             }
              else if(ButtonDetail.Equals("Test fertig"))
-             {
-                 if (ResultatDetail != "")
-                 {
+                if (ResultatDetail != "")
                      _ClientConnection.Send( new CmdSetTestResult(SelectedTestEntry.Test.TestID, Convert.ToSingle(ResultatDetail)));
-                     LoadData();
-                 }
-
-             }else if(ButtonDetail.Equals("Alarm Bestätigt"))
-             {
+             else if(ButtonDetail.Equals("Alarm Bestätigt"))
                   _ClientConnection.Send(new CmdSetFirstAlertReceived(SelectedTestEntry.Test.TestID));
-                 LoadData();
-             }
              else if (ButtonDetail.Equals("Bestellt"))
-             {
-                 _ClientConnection.Send( new CmdSetOrderCollected("Taxi", currentOrder.OrderID));
-                 LoadData();
-             }
-             RefreshDetail();
-
-            
+                _ClientConnection.Send( new CmdSetOrderCollected("Taxi", currentOrder.OrderID));
+             
+             LoadData();
+             RefreshDetail();   
          }
          public IList<TestEntryModel> DataList
          {
@@ -97,7 +80,11 @@ namespace ManagementSoftware.ViewModel
          {
              if (_SelectedTestEntry != null)
              {
-               
+
+                 if (_SelectedTestEntry.Test.ResultValue != 0)
+                     ResultatDetail = SelectedTestEntry.Test.ResultValue.ToString();
+                 else
+                     ResultatDetail = "";
                 if (SelectedTestEntry.BringDate != "")
                     BringDatumDetail = SelectedTestEntry.BringDate;
                 else
@@ -146,7 +133,13 @@ namespace ManagementSoftware.ViewModel
                 }
 
                 //ButtonDetails
-                if (SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_TRANSMITTED && SelectedTestEntry.Test.TestState == TestState.COMPLETED)
+                if (SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_CONFIRMED || SelectedTestEntry.Test.AlarmState == AlarmState.SECOND_ALARM_TRANSMITTED)
+                {
+                    ButtonDetailVisible = "Hidden";
+                    ResultatDetailEnabled = "False";
+
+                }
+                else if (SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_TRANSMITTED && SelectedTestEntry.Test.TestState == TestState.COMPLETED)
                 {
                     ButtonDetail = "Alarm Bestätigt";
                     ButtonDetailVisible = "Visible";
@@ -184,6 +177,7 @@ namespace ManagementSoftware.ViewModel
                 RaisePropertyChanged(() => Detail);
                 RaisePropertyChanged(() => BringDatumDetail);
                 RaisePropertyChanged(() => TelefonDetail);
+                RaisePropertyChanged(() => ResultatDetail);
                 RaisePropertyChanged(() => ResultatDetailEnabled);
                 RaisePropertyChanged(() => KundenAdresseDetail);
                 RaisePropertyChanged(() => GrenzwerteDetail);
@@ -192,10 +186,6 @@ namespace ManagementSoftware.ViewModel
                 RaisePropertyChanged(() => TestIDDetail);
                 RaisePropertyChanged(() => ButtonDetail);
                 RaisePropertyChanged(() => ButtonDetailVisible);
-             }
-             else
-             {
-                 Console.WriteLine("NULL ENTRY");
              }
          }
          private void LoadData()

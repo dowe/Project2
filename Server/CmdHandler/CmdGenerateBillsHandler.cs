@@ -21,6 +21,7 @@ namespace Server.CmdHandler
         private IDatabaseCommunicator db;
         List<Order> _OrderList;
         List<Test> _TestList;
+        Dictionary<String, AmountPricePair> dic;
          public CmdGenerateBillsHandler(
             IServerConnection connection,
             IDatabaseCommunicator db
@@ -28,6 +29,30 @@ namespace Server.CmdHandler
         {
             this.connection = connection;
             this.db = db;
+        }
+
+        class AmountPricePair
+        {
+            int _Amount;
+            float _Price;
+            public AmountPricePair(int Amount, float Price)
+            {
+                this._Amount = Amount;
+                this._Price = Price;
+            }
+            public float Price
+            {
+                get { return _Price; }
+                set { _Price = value; }
+            }
+
+            public int Amount
+            {
+                get { return _Amount; }
+                set { _Amount = value; }
+            }
+           
+          
         }
 
          protected override void Handle(CmdGenerateBills command, string connectionIdOrNull)
@@ -59,9 +84,9 @@ namespace Server.CmdHandler
                      String mainDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent( Directory.GetCurrentDirectory().ToString()).ToString()).ToString()).ToString();
                      String targetdir = mainDirectory + "/ASPServer/App_Data/" + _OrderList[i].Customer.UserName;
                      b.PDFPath = mainDirectory + "/ASPServer/App_Data/" + _OrderList[i].Customer.UserName + "/" + now.ToString("dd-MM-yyyy")+".pdf";
+                     
                      //Add Testlist from Order
-
-                     _TestList = (List<Test>) _OrderList[i].Test;
+                    _TestList = (List<Test>) _OrderList[i].Test;
 
                      //Check if Customer has other Orders pending
                      for (int j = i+1; j < _OrderList.Count; j++)
@@ -75,6 +100,18 @@ namespace Server.CmdHandler
                              _TestList = _TestList.Concat(_OrderList[j].Test).ToList();
                              
                          }
+                     }
+                     
+                     //Create a Dictionary with Name as Key and Amount as value
+                     dic = new Dictionary<String,AmountPricePair>();
+                     foreach(Test t in _TestList)
+                     {
+                         if (dic.ContainsKey(t.Analysis.Name))
+                         {
+                             dic[t.Analysis.Name] = new AmountPricePair(dic[t.Analysis.Name].Amount+1, dic[t.Analysis.Name].Price+ t.Analysis.PriceInEuro);
+                         }
+                         else
+                             dic.Add(t.Analysis.Name, new AmountPricePair(1 , t.Analysis.PriceInEuro));
                      }
 
                      //now all Tests and the amount of Orders should be gathered correctly for the Customer
@@ -125,8 +162,11 @@ namespace Server.CmdHandler
 
                      pricetotal = OrderAmount * b.Customer.TwoWayRoadCostInEuro;
 
-                     XRect orders = new XRect(marginLeft, y, page.Width/2, fontHeightSmall);
-                     gfx.DrawString(OrderAmount.ToString() + " Fahrt(en)", fontSmall, XBrushes.Black, orders, XStringFormats.TopLeft);
+                     XRect amountFahrt = new XRect(marginLeft, y, page.Width / 2, fontHeightSmall);
+                     gfx.DrawString(OrderAmount.ToString(), fontSmall, XBrushes.Black, amountFahrt, XStringFormats.TopLeft);
+
+                     XRect orders = new XRect(marginLeft + 20, y, page.Width / 2, fontHeightSmall);
+                     gfx.DrawString("x Fahrt(en)", fontSmall, XBrushes.Black, orders, XStringFormats.TopLeft);
                      tf.Alignment = XParagraphAlignment.Right;
                      tf.DrawString((b.Customer.TwoWayRoadCostInEuro * OrderAmount).ToString("C"),fontSmall, XBrushes.Black, orders, XStringFormats.TopLeft);
                      y += fontHeightSmall;
@@ -139,7 +179,22 @@ namespace Server.CmdHandler
                      y += fontHeightSmall;
                      y += absatz;
                      
-                     foreach (Test t in _TestList)
+                     //Loop through all Tests in Dictionary and print them
+
+                     foreach(var entry in dic)
+                     {
+                         pricetotal += entry.Value.Price;
+                         XRect amount = new XRect(marginLeft, y, page.Width / 2, fontHeightSmall);
+                         gfx.DrawString(entry.Value.Amount.ToString(), fontSmall, XBrushes.Black, amount, XStringFormats.TopLeft);
+                         XRect tests = new XRect(marginLeft + 20, y, page.Width / 2, fontHeightSmall);
+                         gfx.DrawString("x "+entry.Key, fontSmall, XBrushes.Black, tests, XStringFormats.TopLeft);
+                         tf.DrawString(entry.Value.Price.ToString("C"), fontSmall, XBrushes.Black, tests, XStringFormats.TopLeft);
+                         y += fontHeightSmall;
+                         TestAmount++;
+
+                     }
+
+                   /*  foreach (Test t in _TestList)
                      {
                          pricetotal += t.Analysis.PriceInEuro;
                          XRect tests = new XRect(marginLeft, y, page.Width/2, fontHeightSmall);
@@ -148,13 +203,13 @@ namespace Server.CmdHandler
                          y += fontHeightSmall;
                          TestAmount++;
                      }
-                 
+                 */
                      gfx.DrawRectangle(pen, marginLeft - 5, y - 5 - ((TestAmount +1) * fontHeightSmall) - absatz  , page.Width - (2 * marginLeft),  ((TestAmount+1)*fontHeightSmall)+absatz+ 10);
 
                      y += 2*absatz;
                      //Start Total
-                     XRect total1 = new XRect(0, y, page.Width, fontHeightSmall);
-                     XRect total2 = new XRect(marginLeft, y, page.Width/2 , fontHeightSmall);
+                     XRect total1 = new XRect(15, y, page.Width, fontHeightSmall);
+                     XRect total2 = new XRect(marginLeft+17, y, page.Width/2 , fontHeightSmall);
                      gfx.DrawString("Gesamt:", fontSmallBold, XBrushes.Black, total1, XStringFormats.Center);
                      tf.DrawString(pricetotal.ToString("C") , fontSmallBold, XBrushes.Black, total2, XStringFormats.TopLeft);
                      y += fontHeightSmall;
