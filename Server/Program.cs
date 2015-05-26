@@ -109,12 +109,6 @@ namespace Server
             connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
             connection.InjectInternal(new CmdGenerateDailyStatistic());
             connection.InjectInternal(new CmdGenerateBills());
-
-            Func<Command> f = () => new CmdGenerateBills();
-
-            Console.WriteLine(f().Id);
-            Console.WriteLine(f().Id);
-
         }
     }
 }
