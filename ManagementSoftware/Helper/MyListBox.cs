@@ -8,7 +8,6 @@ using System.Windows.Controls;
 
 namespace ManagementSoftware.Helper
 {
-    [ExcludeFromCodeCoverage]
     public class MyListBox : ListBox
     {
         public void Select(IEnumerable list)

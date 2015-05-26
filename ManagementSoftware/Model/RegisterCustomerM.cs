@@ -113,20 +113,6 @@ namespace ManagementSoftware.Model
         }
     }
 
-    public enum ESMSRequested
-    {
-        [Description("Ja")]
-        Yes,
-        [Description("Nein")]
-        No
-    }
-
-    public enum ETitle
-    {
-        [Description("Herr")]
-        Mr,
-        [Description("Frau")]
-        Mrs
-    }
+    
 
 }

@@ -97,6 +97,10 @@
       <Project>{88ef00ad-26fb-4389-8429-3340f40f97c9}</Project>
       <Name>ManagementSoftware</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tests.Util\Tests.Data.csproj">
+      <Project>{e4b97f74-3abe-4041-91b5-28f7c96d157c}</Project>
+      <Name>Tests.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Choose>

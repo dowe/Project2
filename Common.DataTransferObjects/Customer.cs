@@ -8,6 +8,7 @@ namespace Common.DataTransferObjects
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
@@ -100,5 +101,21 @@ namespace Common.DataTransferObjects
 	    }
 
 	}
+
+    public enum ESMSRequested
+    {
+        [Description("Ja")]
+        Yes,
+        [Description("Nein")]
+        No
+    }
+
+    public enum ETitle
+    {
+        [Description("Herr")]
+        Mr,
+        [Description("Frau")]
+        Mrs
+    }
 }
 

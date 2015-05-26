@@ -10,6 +10,7 @@ using NSubstitute;
 using Common.Commands;
 using Common.Communication;
 using ManagementSoftware.View;
+using Tests.Data;
 
 namespace ManagementSoftware.Tests.ViewModel
 {
@@ -33,7 +34,7 @@ namespace ManagementSoftware.Tests.ViewModel
 
             ETitle title = ETitle.Mr;
             ESMSRequested smsRequested = ESMSRequested.Yes;
-            Customer c = CreateTestData(title, smsRequested);
+            Customer c = TestData.CreateTestData(title, smsRequested);
 
             SetValues(vm, c, title, smsRequested);
 
@@ -68,7 +69,7 @@ namespace ManagementSoftware.Tests.ViewModel
 
             ETitle title = ETitle.Mr;
             ESMSRequested smsRequested = ESMSRequested.Yes;
-            Customer c = CreateTestData(title, smsRequested);
+            Customer c = TestData.CreateTestData(title, smsRequested);
 
             SetValues(vm, c, title, smsRequested);
 
@@ -127,20 +128,6 @@ namespace ManagementSoftware.Tests.ViewModel
             return new RegisterCustomerVM(connection, messageBox);
         }
 
-        private Customer CreateTestData(ETitle title, ESMSRequested smsRequested) {
-
-            Customer _Customer = new Customer();
-            _Customer.Title = Util.CreateValuePair<ETitle>(title).Value;
-            _Customer.FirstName = "Hans";
-            _Customer.LastName = "Feil";
-            _Customer.UserName = "hfeil";
-            _Customer.Password = "asdf";
-            _Customer.SMSRequested = smsRequested == ESMSRequested.Yes;
-            _Customer.MobileNumber = "016212345";
-            _Customer.Label = "Praxis ABC";
-            _Customer.Address = new Address("abc 8", "77656", "Offenburg");
-            _Customer.BankAccount = new BankAccount("12345-DE", "Hans feil");
-            return _Customer;
-        }
+        
     }
 }
