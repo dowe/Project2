@@ -104,7 +104,14 @@ namespace Server.CmdHandler
             }
 
             List<Employee> emps = db.GetAllEmployee();
-            
+
+            if (emps.Count == 0)
+            {
+                Console.WriteLine("\n   DB not initialized\n   Employee.Count == 0 !!!\n");
+                db.EndTransaction(TransactionEndOperation.READONLY);
+                return;
+            }
+
             ShiftSchedule cur = creator.createShiftSchedule(previousShiftSchedule, emps,new DateTime(refDate.Year, refDate.Month, 1));
             
             //store ShiftSchedule in db

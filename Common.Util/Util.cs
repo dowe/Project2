@@ -162,9 +162,14 @@ namespace Common.Util
             obj.Date = refDate;
             obj.DayEntry = new List<DayEntry>();
 
-            List<Employee> admins = new List<Employee>(emps.Where<Employee>(e=>e.EmployeeType == EEmployeeType.TypeAdministrationAssistant));
+            List<Employee> admins = new List<Employee>(emps.Where<Employee>(e => e.EmployeeType == EEmployeeType.TypeAdministrationAssistant));
             List<Employee> driver = new List<Employee>(emps.Where<Employee>(e => e.EmployeeType == EEmployeeType.TypeDriver));
             List<Employee> lab = new List<Employee>(emps.Where<Employee>(e => e.EmployeeType == EEmployeeType.TypeLabAssistant));
+
+            if (emps.Count == 0)
+            {
+                return null;
+            }
 
             List<Employee> empty = new List<Employee>();
 
