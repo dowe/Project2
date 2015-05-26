@@ -19,16 +19,6 @@ namespace Server.Timer
             return new TimerFactory(() => TimeSpan.FromMinutes(10.0), true);
         }
 
-        public static ITimerFactory Daily()
-        {
-            return new TimerFactory(() => TimeSpan.FromDays(1.0), false);
-        }
-
-        public static ITimerFactory Hourly()
-        {
-            return new TimerFactory(() => TimeSpan.FromHours(1.0), false);
-        }
-
         public static InjectInternalTimed InjectCmdTimer(
             IServerConnection connection,
             ITimerFactory timerFactory,
@@ -39,12 +29,12 @@ namespace Server.Timer
 
         public static InjectInternalTimed GenerateShiftScheduleTimer(IServerConnection connection)
         {
-            return InjectCmdTimer(connection, TimerFactorys.Daily(), () => new CmdGenerateShiftSchedule());
+            return InjectCmdTimer(connection, new TimerFactory(() => TimeSpan.FromDays(1.0), false), () => new CmdGenerateShiftSchedule());
         }
 
         public static InjectInternalTimed CheckOrdersFiveHoursLeftScheduledTimer(IServerConnection connection)
         {
-            return InjectCmdTimer(connection, TimerFactorys.Hourly(), () => new CmdCheckOrdersFiveHoursLeft());
+            return InjectCmdTimer(connection, new TimerFactory(() => TimeSpan.FromHours(1.0), false), () => new CmdCheckOrdersFiveHoursLeft());
         }
     }
 }
