@@ -14,6 +14,7 @@ using Server.Timer;
 using Server.ExtremeValueCheck;
 using Server.ShiftScheduleCreation;
 using Common.DataTransferObjects;
+using Common.Communication;
 
 namespace Server
 {
@@ -89,7 +90,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOccupiedCarsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSetOrderReceivedHandler(db));
-            connection.RegisterCommandHandler(new CmdSetTestResultHandler(db, checker, smsSending, data, connection));
+            connection.RegisterCommandHandler(new CmdSetTestResultHandler(db, checker, smsSending, data, connection, TimerFactorys.TenMinuteOnce()));
             connection.RegisterCommandHandler(new CmdSetFirstAlertReceivedHandler(db, data));
             connection.RegisterCommandHandler(new CmdCheckAlarmTenMinutesLeftHandler(connection, db, smsSending ,data));
 
@@ -100,11 +101,20 @@ namespace Server
             IDatabaseCommunicator db,
             LocalServerData data)
         {
-            data.GenerateShiftScheduleTimer = new GenerateShiftScheduleTimer(connection);
-            data.CheckOrdersFiveHoursLeftScheduledTimer = new CheckOrdersFiveHoursLeftScheduledTimer(connection);
+            data.GenerateShiftScheduleTimer = InjectInternalTimeds.GenerateShiftScheduleTimer(connection);
+            data.GenerateShiftScheduleTimer.Start();
+            data.CheckOrdersFiveHoursLeftScheduledTimer = InjectInternalTimeds.CheckOrdersFiveHoursLeftScheduledTimer(connection);
+            data.CheckOrdersFiveHoursLeftScheduledTimer.Start();
+
             connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
             connection.InjectInternal(new CmdGenerateDailyStatistic());
             connection.InjectInternal(new CmdGenerateBills());
+
+            Func<Command> f = () => new CmdGenerateBills();
+
+            Console.WriteLine(f().Id);
+            Console.WriteLine(f().Id);
+
         }
     }
 }

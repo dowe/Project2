@@ -22,14 +22,17 @@ namespace Server.CmdHandler
         private ISmsSending sms;
         private LocalServerData data;
         private IServerConnection connection;
+        private ITimerFactory timerFactory;
 
         public CmdSetTestResultHandler(
             IDatabaseCommunicator db,
             IExtremeValueChecker checker,
             ISmsSending sms,
             LocalServerData data,
-            IServerConnection connection)
+            IServerConnection connection,
+            ITimerFactory timerFactory)
         {
+            this.timerFactory = timerFactory;
             this.checker = checker;
             this.db = db;
             this.sms = sms;
@@ -60,7 +63,10 @@ namespace Server.CmdHandler
                 + "überschritt die Grenzwerte. "
                 + "Zur Bestätigung dieses Alarms senden Sie diese SMS an die Sendenummer zurück.");
 
-                new CheckAlarmConfirmedTenMinutesScheduledTimer(connection, data, t.TestID, o.OrderID);
+                Command cmdInject = new CmdCheckAlarmTenMinutesLeft(t.TestID, o.OrderID);
+                InjectInternalTimed timer = InjectInternalTimeds.InjectCmdTimer(connection, timerFactory, ()=>cmdInject);
+                data.TimerList.Add(t.TestID, timer);
+                timer.Start();
             }
 
             if (o.Customer.SMSRequested)

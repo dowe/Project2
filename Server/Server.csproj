@@ -145,10 +145,13 @@
     <Compile Include="ShiftScheduleCreation\ShiftScheduleCreator.cs" />
     <Compile Include="Sms\ISmsSending.cs" />
     <Compile Include="Sms\SmsSending.cs" />
-    <Compile Include="Timer\CheckAlarmConfirmedTenMinutesScheduledTimer.cs" />
-    <Compile Include="Timer\CheckOrdersFiveHoursLeftScheduledTimer.cs" />
-    <Compile Include="Timer\GenerateShiftScheduleTimer.cs" />
+    <Compile Include="Timer\InjectInternalTimed.cs" />
+    <Compile Include="Timer\InjectInternalTimeds.cs" />
+    <Compile Include="Timer\ITimer.cs" />
+    <Compile Include="Timer\ITimerFactory.cs" />
     <Compile Include="Timer\ScheduledTimer.cs" />
+    <Compile Include="Timer\TimerFactory.cs" />
+    <Compile Include="Timer\TimerFactorys.cs" />
     <Compile Include="UsernameToConnectionIdMapping.cs" />
   </ItemGroup>
   <ItemGroup>

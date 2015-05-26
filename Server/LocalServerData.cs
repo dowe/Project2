@@ -23,15 +23,15 @@ namespace Server
 
             RoadCostInEuroPerKm = 0.80F;
 
-            TimerList = new Dictionary<Guid, CheckAlarmConfirmedTenMinutesScheduledTimer>();
+            TimerList = new Dictionary<Guid, InjectInternalTimed>();
         }
 
         public DailyStatistic DailyStatistic { get; set; }
         public Address ZmsAddress { get; private set; }
         public string TaxiPhoneNumber { get; private set; }
         public float RoadCostInEuroPerKm { get; private set; }
-        public ScheduledTimer GenerateShiftScheduleTimer { get; set; }
-        public ScheduledTimer CheckOrdersFiveHoursLeftScheduledTimer { get; set; }
-        public Dictionary<Guid,CheckAlarmConfirmedTenMinutesScheduledTimer> TimerList { get; set; }
+        public InjectInternalTimed GenerateShiftScheduleTimer { get; set; }
+        public InjectInternalTimed CheckOrdersFiveHoursLeftScheduledTimer { get; set; }
+        public Dictionary<Guid, InjectInternalTimed> TimerList { get; set; }
     }
 }

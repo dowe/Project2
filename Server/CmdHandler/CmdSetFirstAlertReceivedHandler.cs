@@ -2,6 +2,7 @@
 using Common.Communication;
 using Common.DataTransferObjects;
 using Server.DatabaseCommunication;
+using Server.Timer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,12 @@ namespace Server.CmdHandler
         protected override void Handle(CmdSetFirstAlertReceived command, string connectionIdOrNull)
         {
             //PF 220
-            if (data.TimerList.Remove(command.TestId))
+            InjectInternalTimed timer = null;
+            data.TimerList.TryGetValue(command.TestId, out timer);
+            if (timer != null)
             {
+                timer.Cacel();
+                data.TimerList.Remove(command.TestId);
                 db.StartTransaction();
                 db.GetTest(command.TestId).AlarmState = AlarmState.FIRST_ALARM_CONFIRMED;
                 db.EndTransaction(TransactionEndOperation.SAVE);

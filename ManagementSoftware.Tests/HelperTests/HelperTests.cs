@@ -8,6 +8,8 @@ using Common.Util;
 using System.Windows.Media;
 using System.Windows.Controls;
 using ManagementSoftware.Model;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace ManagementSoftware.Tests.Helper
 {
@@ -91,6 +93,28 @@ namespace ManagementSoftware.Tests.Helper
             }
 
             return testee.Convert(new object[]{index+1, entry.Days}, typeof(SolidColorBrush), null, default(CultureInfo));
+        }
+
+        [TestMethod]
+        public void MyListBoxTest()
+        {
+            MyListBox box = new MyListBox();
+            box.SelectionMode = SelectionMode.Multiple;
+           
+            List<string> all = new List<string>();
+            all.Add("1");
+            all.Add("2");
+            all.Add("3");
+            all.Add("4");
+
+            List<string> select = new List<string>(all);
+            select.RemoveAt(0);
+
+            box.ItemsSource = all;
+
+            box.Select(select);
+
+            CollectionAssert.AreEqual(box.SelectedItems, new List<string>(select));
         }
     }
 }

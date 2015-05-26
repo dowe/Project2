@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tests.Data;
 
 namespace ManagementSoftware.Tests.Model
 {
@@ -61,7 +62,7 @@ namespace ManagementSoftware.Tests.Model
 
             RegisterCustomerM model = CreateTestee(fakeConnection);
 
-            model.Customer = CreateTestData(ETitle.Mr, ESMSRequested.Yes);
+            model.Customer = TestData.CreateTestData(ETitle.Mr, ESMSRequested.Yes);
 
             return model.RegisterCustomer();
         }
@@ -73,21 +74,5 @@ namespace ManagementSoftware.Tests.Model
             return new RegisterCustomerM(connection);
         }
 
-        private Customer CreateTestData(ETitle title, ESMSRequested smsRequested)
-        {
-
-            Customer _Customer = new Customer();
-            _Customer.Title = Util.CreateValuePair<ETitle>(title).Value;
-            _Customer.FirstName = "Hans";
-            _Customer.LastName = "Feil";
-            _Customer.UserName = "hfeil";
-            _Customer.Password = "asdf";
-            _Customer.SMSRequested = smsRequested == ESMSRequested.Yes;
-            _Customer.MobileNumber = "016212345";
-            _Customer.Label = "Praxis ABC";
-            _Customer.Address = new Address("abc 8", "77656", "Offenburg");
-            _Customer.BankAccount = new BankAccount("12345-DE", "Hans feil");
-            return _Customer;
-        }
     }
 }

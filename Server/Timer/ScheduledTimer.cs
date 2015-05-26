@@ -7,20 +7,30 @@ using System.Threading.Tasks;
 
 namespace Server.Timer
 {
-    public class ScheduledTimer
+    public sealed class ScheduledTimer : ITimer
     {
-        private Func<TimeSpan> _GetSpan;
-        private Action _DoActionScheduled;
-        private CancellationTokenSource _ctSource;
+        private Func<TimeSpan> _GetSpan = null;
         private bool once;
 
-        protected void Start(Func<TimeSpan> _GetSpan, Action _DoActionScheduled, bool once)
+        private Action _DoActionScheduled;
+        private CancellationTokenSource _ctSource;
+
+
+        public ScheduledTimer(Func<TimeSpan> _GetSpan, bool once)
         {
             this._GetSpan = _GetSpan;
-            this._DoActionScheduled = _DoActionScheduled;
             this.once = once;
-            RunCode();
-        } 
+        }
+
+        public void Start(Action _DoActionScheduled)
+        {
+            if (this._DoActionScheduled == null)
+            {
+                this._DoActionScheduled = _DoActionScheduled;
+
+                RunCode();
+            }
+        }
 
         private void RunCode()
         {
@@ -51,5 +61,6 @@ namespace Server.Timer
             }
         }
 
+      
     }
 }
