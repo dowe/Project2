@@ -158,18 +158,18 @@ namespace ManagementSoftware.ViewModel
                     ButtonDetailVisible = "Visible";
                     ButtonDetail = "Test fertig";
                 }
-                else if(SelectedTestEntry.Test.TestState == TestState.ORDERED && !( SelectedTestEntry.Test.TestState== TestState.WAITING_FOR_DRIVER ))
+                
+                else if (SelectedTestEntry.Test.TestState == TestState.ORDERED && currentOrder.Driver == null)
                 {
-
                     ResultatDetailEnabled = "False";
                     ButtonDetail = "Eingetroffen";
                     ButtonDetailVisible = "Visible";
                 }
-                else if (SelectedTestEntry.Test.TestState == TestState.ORDERED && (SelectedTestEntry.Test.TestState == TestState.WAITING_FOR_DRIVER))
+                else if (SelectedTestEntry.Test.TestState == TestState.ORDERED)
                 {
                     ResultatDetailEnabled = "False";
-                    ButtonDetail = "Abgeholt";
-                    ButtonDetailVisible = "Visible";
+                    ButtonDetail = "Eingetroffen";
+                    ButtonDetailVisible = "Hidden";
                 }
 
 
