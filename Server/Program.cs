@@ -101,9 +101,9 @@ namespace Server
             IDatabaseCommunicator db,
             LocalServerData data)
         {
-            data.GenerateShiftScheduleTimer = InjectInternalTimeds.GenerateShiftScheduleTimer(connection);
+            data.GenerateShiftScheduleTimer = TimerFactorys.GenerateShiftScheduleTimer(connection);
             data.GenerateShiftScheduleTimer.Start();
-            data.CheckOrdersFiveHoursLeftScheduledTimer = InjectInternalTimeds.CheckOrdersFiveHoursLeftScheduledTimer(connection);
+            data.CheckOrdersFiveHoursLeftScheduledTimer = TimerFactorys.CheckOrdersFiveHoursLeftScheduledTimer(connection);
             data.CheckOrdersFiveHoursLeftScheduledTimer.Start();
 
             connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));

@@ -32,7 +32,7 @@ namespace Server.CmdHandler
             data.TimerList.TryGetValue(command.TestId, out timer);
             if (timer != null)
             {
-                timer.Cacel();
+                timer.Cancel();
                 data.TimerList.Remove(command.TestId);
                 db.StartTransaction();
                 db.GetTest(command.TestId).AlarmState = AlarmState.FIRST_ALARM_CONFIRMED;

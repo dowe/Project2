@@ -34,7 +34,7 @@ namespace Server.Timer
             _Connection.InjectInternal(_Command());
         }
 
-        public void Cacel()
+        public void Cancel()
         {
             _Timer.Cancel();
         }   

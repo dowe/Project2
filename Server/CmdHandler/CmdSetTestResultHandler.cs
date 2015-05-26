@@ -64,7 +64,7 @@ namespace Server.CmdHandler
                 + "Zur Bestätigung dieses Alarms senden Sie diese SMS an die Sendenummer zurück.");
 
                 Command cmdInject = new CmdCheckAlarmTenMinutesLeft(t.TestID, o.OrderID);
-                InjectInternalTimed timer = InjectInternalTimeds.InjectCmdTimer(connection, timerFactory, ()=>cmdInject);
+                InjectInternalTimed timer = TimerFactorys.InjectCmdTimer(connection, timerFactory, ()=>cmdInject);
                 data.TimerList.Add(t.TestID, timer);
                 timer.Start();
             }

@@ -146,7 +146,6 @@
     <Compile Include="Sms\ISmsSending.cs" />
     <Compile Include="Sms\SmsSending.cs" />
     <Compile Include="Timer\InjectInternalTimed.cs" />
-    <Compile Include="Timer\InjectInternalTimeds.cs" />
     <Compile Include="Timer\ITimer.cs" />
     <Compile Include="Timer\ITimerFactory.cs" />
     <Compile Include="Timer\ScheduledTimer.cs" />
