@@ -15,12 +15,12 @@ namespace Server.CmdHandler
     {
        private ServerConnection connection;
         private IDatabaseCommunicator db;
-        private LocalServerData data;
+        private ILocalServerData data;
         DailyStatistic ds;
         public CmdGetDailyStatisticHandler(
             ServerConnection connection, 
             IDatabaseCommunicator db,
-            LocalServerData data)
+            ILocalServerData data)
         {
             this.connection = connection;
             this.db = db;

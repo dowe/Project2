@@ -17,13 +17,13 @@ namespace Server.CmdHandler
         private IServerConnection connection = null;
         private IDatabaseCommunicator db = null;
         private ISmsSending sms;
-        private LocalServerData data;
+        private ILocalServerData data;
 
         public CmdCheckAlarmTenMinutesLeftHandler(
             IServerConnection connection,
             IDatabaseCommunicator db,
             ISmsSending sms,
-            LocalServerData data)
+            ILocalServerData data)
         {
             this.connection = connection;
             this.db = db;

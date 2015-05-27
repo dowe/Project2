@@ -2,21 +2,27 @@
 using Common.Communication;
 using Common.Communication.Client;
 using Common.DataTransferObjects;
+using ManagementSoftware.Helper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
 
 namespace ManagementSoftware.Model
 {
     public class CreateOrderM
     {
+        public static readonly string FAILURE_LOAD_CUSTOMER_ADDRESS = "Fehler beim versenden der Anfrage zur Kundenadresse \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut";
+        public static readonly string SUCCESS_CREATE_ORDER_PREFIX = "Bestellung erstellt!\nBestellungs ID: ";
+        public static readonly string FAILURE_CREATE_ORDER = "Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut";
+
         private IClientConnection _Connection;
         private Dictionary<String, List<Analysis>> _PatientTests; //Key = Patientid
+        private IMessageBox _MessageBox;
 
-        public CreateOrderM(IClientConnection _Connection)
+        public CreateOrderM(
+            IClientConnection _Connection,
+            IMessageBox _MessageBox)
         {
+            this._MessageBox = _MessageBox;
             this._Connection = _Connection;
             this._PatientTests = new Dictionary<String, List<Analysis>>();
 
@@ -39,7 +45,7 @@ namespace ManagementSoftware.Model
             }
             else
             {
-                MessageBox.Show("Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");
+                _MessageBox.Show(FAILURE_LOAD_CUSTOMER_ADDRESS);
             }
         }
 
@@ -147,24 +153,18 @@ namespace ManagementSoftware.Model
 
         public void CreateOrder()
         {
-            string validateOrder = Validate();
-            if (validateOrder != null)
-            {
-                MessageBox.Show(validateOrder);
-                return;
-            }
 
             Command request = new CmdAddOrder(_PatientTests, CustomerUsername);
             CmdReturnAddOrder response;
             response = _Connection.SendWait<CmdReturnAddOrder>(request);
             if (response != null)
             {
-                MessageBox.Show("Bestellung erstellt!"
-                    + "\nBestellungs ID: " + response.CreatedOrderId);
+                _MessageBox.Show(SUCCESS_CREATE_ORDER_PREFIX 
+                    + response.CreatedOrderId);
             }
             else
             {
-                MessageBox.Show("Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");
+                _MessageBox.Show(FAILURE_CREATE_ORDER);
             }
         }
 

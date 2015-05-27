@@ -1,28 +1,30 @@
 ﻿using GalaSoft.MvvmLight;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common.Communication.Client;
 using GalaSoft.MvvmLight.Command;
-using System.Windows.Data;
 using Common.DataTransferObjects;
-using System.Collections.ObjectModel;
 using Common.Commands;
 using Common.Communication;
-using System.Windows;
-using Common.Util;
+using ManagementSoftware.Helper;
+
 
 namespace ManagementSoftware.ViewModel
 {
     public class CustomerListVM : ViewModelBase
     {
+        public static readonly string LOAD_SUCCESS = "Daten abgerufen";
+        public static readonly string LOAD_FAILURE = "Fehler beim versenden der Anfrage zum Laden der Kundenliste. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut";
+
+
         private IClientConnection _ClientConnection;
+        private IMessageBox _MessageBox;
         private IList<Customer> _DataList;
 
-        public CustomerListVM(IClientConnection connection)
+        public CustomerListVM(
+            IClientConnection connection,
+            IMessageBox _MessageBox)
         {
+            this._MessageBox = _MessageBox;
             this._ClientConnection = connection;
 
             this.LoadCommand = new RelayCommand(LoadData);
@@ -47,14 +49,14 @@ namespace ManagementSoftware.ViewModel
             CmdReturnGetAllCustomers response = _ClientConnection.SendWait<CmdReturnGetAllCustomers>(request);
             if (response == null)
             {
-                MessageBox.Show("Fehler beim versenden der Anfrage zum Laden der Kundenliste. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");
+                _MessageBox.Show(LOAD_FAILURE);
             }
             else
             {
                 DataList = null;
                 DataList = response.Customers;
 
-                MessageBox.Show("Daten abgerufen");
+                _MessageBox.Show(LOAD_SUCCESS);
             }
         }
 

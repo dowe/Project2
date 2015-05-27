@@ -17,13 +17,13 @@ namespace Server.CmdHandler
     {
         private IServerConnection connection;
         private IDatabaseCommunicator db;
-        private LocalServerData data;
+        private ILocalServerData data;
         private IShiftScheduleCreator creator;
 
         public CmdGenerateShiftScheduleHandler(
             IServerConnection connection,
             IDatabaseCommunicator db,
-            LocalServerData data, 
+            ILocalServerData data, 
             IShiftScheduleCreator creator)
         {
             this.creator = creator;

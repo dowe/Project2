@@ -27,7 +27,7 @@ namespace Server
             // Remember to start the app as admin or a 'Access Denied' exception will be thrown.
             ServerConnection connection = new ServerConnection("http://+:8080");
             IDatabaseCommunicator db = new DatabaseCommunicator();
-            LocalServerData data = new LocalServerData();
+            ILocalServerData data = new LocalServerDataImpl();
             DriverControllerSettings driverControllerSettings =
                 new DriverControllerSettings(new DistanceMatrixAddress(data.ZmsAddress), TimeSpan.FromHours(6));
             IDriverController driverController = new DriverControlling.DriverController(driverControllerSettings);
@@ -54,7 +54,7 @@ namespace Server
         private static void RegisterHandlers(
             ServerConnection connection,
             IDatabaseCommunicator db,
-            LocalServerData data,
+            ILocalServerData data,
             IDriverController driverController,
             UsernameToConnectionIdMapping driverMapping,
             ISmsSending smsSending,
@@ -99,7 +99,7 @@ namespace Server
         private static void OnServerStarted(
             IServerConnection connection,
             IDatabaseCommunicator db,
-            LocalServerData data)
+            ILocalServerData data)
         {
             data.GenerateShiftScheduleTimer = TimerFactorys.GenerateShiftScheduleTimer(connection);
             data.GenerateShiftScheduleTimer.Start();

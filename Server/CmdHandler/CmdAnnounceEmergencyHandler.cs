@@ -21,9 +21,9 @@ namespace Server.CmdHandler
         private IDriverController driverController = null;
         private UsernameToConnectionIdMapping driverMapping = null;
         private ISmsSending smsSending = null;
-        private LocalServerData serverData = null;
+        private ILocalServerData serverData = null;
 
-        public CmdAnnounceEmergencyHandler(IServerConnection connection, IDatabaseCommunicator db, IDriverController driverController, UsernameToConnectionIdMapping driverMapping, ISmsSending smsSending, LocalServerData serverData)
+        public CmdAnnounceEmergencyHandler(IServerConnection connection, IDatabaseCommunicator db, IDriverController driverController, UsernameToConnectionIdMapping driverMapping, ISmsSending smsSending, ILocalServerData serverData)
         {
             this.connection = connection;
             this.db = db;

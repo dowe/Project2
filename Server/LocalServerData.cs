@@ -8,11 +8,11 @@ using Server.Timer;
 
 namespace Server
 {
-    public class LocalServerData
+    public class LocalServerDataImpl : ILocalServerData
     {
 
         //key value test id -> timer
-        public LocalServerData()
+        public LocalServerDataImpl()
         {
             ZmsAddress = new Address();
             ZmsAddress.City = "Offenburg";
@@ -32,6 +32,6 @@ namespace Server
         public float RoadCostInEuroPerKm { get; private set; }
         public InjectInternalTimed GenerateShiftScheduleTimer { get; set; }
         public InjectInternalTimed CheckOrdersFiveHoursLeftScheduledTimer { get; set; }
-        public Dictionary<Guid, InjectInternalTimed> TimerList { get; set; }
+        public Dictionary<Guid, InjectInternalTimed> TimerList { get; private set; }
     }
 }

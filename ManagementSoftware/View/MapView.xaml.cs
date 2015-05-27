@@ -50,7 +50,7 @@ namespace ManagementSoftware.View
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 5, 0);
             _connection = SimpleIoc.Default.GetInstance<IClientConnection>();
-            _laborPos = new LocalServerData().ZmsAddress;
+            _laborPos = new LocalServerDataImpl().ZmsAddress;
             WebBrowserGoogle.ObjectForScripting = new ExposedJSObject(WebBrowserGoogle, this);
             //WebBrowserGoogle.NavigateToString(Properties.Resources.GoogleMaps);
             string curDir = Directory.GetCurrentDirectory();

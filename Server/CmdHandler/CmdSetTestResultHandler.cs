@@ -20,7 +20,7 @@ namespace Server.CmdHandler
         private IDatabaseCommunicator db;
         private IExtremeValueChecker checker;
         private ISmsSending sms;
-        private LocalServerData data;
+        private ILocalServerData data;
         private IServerConnection connection;
         private ITimerFactory timerFactory;
 
@@ -28,7 +28,7 @@ namespace Server.CmdHandler
             IDatabaseCommunicator db,
             IExtremeValueChecker checker,
             ISmsSending sms,
-            LocalServerData data,
+            ILocalServerData data,
             IServerConnection connection,
             ITimerFactory timerFactory)
         {

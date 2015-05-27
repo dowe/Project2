@@ -17,12 +17,12 @@ namespace Server.CmdHandler
         private IServerConnection connection;
         private IDatabaseCommunicator db;
         private DailyStatistic ds;
-        LocalServerData data;
+        ILocalServerData data;
         private IList<Order> _OrderList;
         public CmdGenerateDailyStatisticHandler(
             IServerConnection connection,
             IDatabaseCommunicator db,
-            LocalServerData data)
+            ILocalServerData data)
         {
             this.connection = connection;
             this.db = db;

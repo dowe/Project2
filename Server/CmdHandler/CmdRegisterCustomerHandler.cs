@@ -16,12 +16,12 @@ namespace Server.CmdHandler
     {
         private IServerConnection connection;
         private IDatabaseCommunicator db;
-        private LocalServerData data;
+        private ILocalServerData data;
 
         public CmdRegisterCustomerHandler(
             IServerConnection connection,
             IDatabaseCommunicator db,
-            LocalServerData data)
+            ILocalServerData data)
         {
             this.connection = connection;
             this.db = db;

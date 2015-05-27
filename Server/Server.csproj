@@ -138,6 +138,7 @@
     <Compile Include="DriverControlling\OptionsEvaluator.cs" />
     <Compile Include="ExtremeValueCheck\ExtremeValueChecker.cs" />
     <Compile Include="ExtremeValueCheck\IExtremeValueChecker.cs" />
+    <Compile Include="ILocalServerData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LocalServerData.cs" />

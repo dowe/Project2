@@ -14,11 +14,11 @@ namespace Server.CmdHandler
     public class CmdSetFirstAlertReceivedHandler : CommandHandler<CmdSetFirstAlertReceived>
     {
         private IDatabaseCommunicator db;
-        private LocalServerData data;
+        private ILocalServerData data;
 
         public CmdSetFirstAlertReceivedHandler(
             IDatabaseCommunicator db,
-            LocalServerData data)
+            ILocalServerData data)
         {
             this.db = db;
             this.data = data;

@@ -1,13 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using Common.Util;
-using System;
-using System.ComponentModel;
 using Common.DataTransferObjects;
 using System.Collections.Generic;
 using Common.Communication.Client;
-using Common.Commands;
-using System.Windows;
 using ManagementSoftware.Model;
 using ManagementSoftware.Helper;
 

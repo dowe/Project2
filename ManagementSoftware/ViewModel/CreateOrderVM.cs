@@ -1,20 +1,11 @@
-﻿using Common.Communication;
-using Common.Communication.Client;
-using Common.Commands;
+﻿using Common.Communication.Client;
 using Common.DataTransferObjects;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Documents;
 using ManagementSoftware.Helper;
-using System.Globalization;
-using Common.Util;
-using System.Windows;
 using ManagementSoftware.Model;
 using GalaSoft.MvvmLight.Command;
 
