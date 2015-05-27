@@ -18,9 +18,10 @@ namespace ManagementSoftware.ViewModel
         private MyListBox AvaibleAnalysisBox;
 
 
-        public CreateOrderVM(IClientConnection _Connection)
+        public CreateOrderVM(IClientConnection _Connection,
+            IMessageBox _MessageBox)
         {
-            model = new CreateOrderM(_Connection);
+            model = new CreateOrderM(_Connection, _MessageBox);
 
             new Thread(LoadAnalysis).Start();
 
