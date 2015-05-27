@@ -141,7 +141,7 @@
     <Compile Include="ILocalServerData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LocalServerData.cs" />
+    <Compile Include="LocalServerDataImpl.cs" />
     <Compile Include="ShiftScheduleCreation\IShiftScheduleCreator.cs" />
     <Compile Include="ShiftScheduleCreation\ShiftScheduleCreator.cs" />
     <Compile Include="Sms\ISmsSending.cs" />

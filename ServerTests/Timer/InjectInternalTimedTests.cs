@@ -5,7 +5,7 @@ using Common.Communication;
 using NSubstitute;
 using Common.Communication.Server;
 
-namespace ServerTests.Timer
+namespace Server.Timer.Tests
 {
     [TestClass]
     public class InjectInternalTimedTests

@@ -71,6 +71,7 @@
     <Compile Include="Sms\SmsSendingTests.cs" />
     <Compile Include="Timer\TimerTests.cs" />
     <Compile Include="Timer\InjectInternalTimedTests.cs" />
+    <Compile Include="LocalServerDataImplTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Commands\Common.Commands.csproj">

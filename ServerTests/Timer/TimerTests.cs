@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace ServerTests.Timer
+namespace Server.Timer.Tests
 {
     [TestClass]
     public class TimerTests
