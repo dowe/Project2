@@ -40,7 +40,7 @@ namespace Server.CmdHandler
                 Test test = db.GetTest(command.TestID);
                 Order order = db.GetOrder(command.OrderID);
                 test.AlarmState = AlarmState.SECOND_ALARM_TRANSMITTED;
-                sms.Send(order.Customer.MobileNumber, "2. Alarm-Meldung: Das Testresultat des Test " + test.Analysis.Name + " des Patienten " + test.PatientID + " der Bestellung" + command.OrderID + " überschritt die Grenzwerte.");
+                sms.Send(order.Customer.MobileNumber, "2. Alarm-Meldung: Das Testresultat des Test [" + test.Analysis.Name + "] des Patienten [" + test.PatientID + "] der Bestellung [" + command.OrderID + "] überschritt die Grenzwerte.");
                 db.EndTransaction(TransactionEndOperation.SAVE);
             }
         }

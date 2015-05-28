@@ -90,7 +90,7 @@ namespace Server
             connection.RegisterCommandHandler(new CmdGenerateBillsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdGetAllOccupiedCarsHandler(connection, db));
             connection.RegisterCommandHandler(new CmdSetOrderReceivedHandler(db));
-            connection.RegisterCommandHandler(new CmdSetTestResultHandler(db, checker, smsSending, data, connection, TimerFactorys.TenMinuteOnce()));
+            connection.RegisterCommandHandler(new CmdSetTestResultHandler(db, checker, smsSending, data, connection, TimerFactorys.TenMinuteOnceForSecondAlarmTransmmit()));
             connection.RegisterCommandHandler(new CmdSetFirstAlertReceivedHandler(db, data));
             connection.RegisterCommandHandler(new CmdCheckAlarmTenMinutesLeftHandler(connection, db, smsSending ,data));
 

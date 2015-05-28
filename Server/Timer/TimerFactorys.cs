@@ -14,7 +14,7 @@ namespace Server.Timer
     [ExcludeFromCodeCoverage]
     public class TimerFactorys
     {
-        public static ITimerFactory TenMinuteOnce()
+        public static ITimerFactory TenMinuteOnceForSecondAlarmTransmmit()
         {
             return new TimerFactory(() => TimeSpan.FromMinutes(10.0), true);
         }

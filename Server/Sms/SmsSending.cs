@@ -69,6 +69,10 @@ namespace Server.Sms
                     Console.WriteLine("Fehler beim Senden der Mail (" + e.Message + ")");
                 }
             }
+            else
+            {
+                Console.WriteLine("SMS to {0}: {1}", number, message);
+            }
         }
     }
 }

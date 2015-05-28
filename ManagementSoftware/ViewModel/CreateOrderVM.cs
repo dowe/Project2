@@ -38,7 +38,7 @@ namespace ManagementSoftware.ViewModel
 
         private bool CanCreateOrder()
         {
-            return model.Validate() == null;
+            return model.Validate().Count == 0;
         }
 
         public void SetBox(MyListBox box)
@@ -104,7 +104,7 @@ namespace ManagementSoftware.ViewModel
             model.CreateOrder();
         }
 
-        public string ValidationText
+        public List<string> ValidationText
         {
             get
             {

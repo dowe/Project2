@@ -14,6 +14,12 @@ namespace ManagementSoftware.Model
         public static readonly string SUCCESS_CREATE_ORDER_PREFIX = "Bestellung erstellt!\nBestellungs ID: ";
         public static readonly string FAILURE_CREATE_ORDER = "Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut";
 
+        public static readonly string INVALID_ADDRESS = "Invalider Kunde\n     Kundenadresse unbekannt";
+        public static readonly string INVALID_USERNAME = "Kunden ID fehlt";
+        public static readonly string INVALID_PATIENT_COUNT = "Kein Patient hinzugefügt";
+        public static readonly string INVALID_TEST_COUNT = "Einem oder mehreren Patienten\n   wurde keine Untersuchung zugewiesen";
+
+
         private IClientConnection _Connection;
         private Dictionary<String, List<Analysis>> _PatientTests; //Key = Patientid
         private IMessageBox _MessageBox;
@@ -66,12 +72,14 @@ namespace ManagementSoftware.Model
             {
                 if (CustomerAddress != null)
                 {
-                    return CustomerAddress.Street + "\n"
-                      + CustomerAddress.PostalCode + " " + CustomerAddress.City;
+                    return String.Format("{0}\n{1} {2}",
+                        CustomerAddress.Street,
+                        CustomerAddress.PostalCode,
+                        CustomerAddress.City);
                 }
                 else
                 {
-                    return "Kundennummer nicht gefunden.";
+                    return "Kunde nicht gefunden.";
                 }
             }
         }
@@ -115,7 +123,7 @@ namespace ManagementSoftware.Model
                 }
                 else
                 {
-                    return "Für [" + SelectedPatient + "]";
+                    return String.Format("Für [{0}]", SelectedPatient);
                 }
             }
         }
@@ -159,7 +167,7 @@ namespace ManagementSoftware.Model
             response = _Connection.SendWait<CmdReturnAddOrder>(request);
             if (response != null)
             {
-                _MessageBox.Show(SUCCESS_CREATE_ORDER_PREFIX 
+                _MessageBox.Show(SUCCESS_CREATE_ORDER_PREFIX
                     + response.CreatedOrderId);
             }
             else
@@ -168,47 +176,38 @@ namespace ManagementSoftware.Model
             }
         }
 
-        public string Validate()
+        public List<string> Validate()
         {
-            string message = null; 
+            List<string> message = new List<string>();
             if (CustomerUsername.Trim().Length == 0)
             {
-                message = append(message, "Kunden ID fehlt");
+                append(message, INVALID_USERNAME);
             }
 
             if (CustomerAddress == null)
             {
-                message = append(message, "Invalider Kunde"
-                    + "\n   Kundenadresse unbekannt");
+                append(message, INVALID_ADDRESS);
             }
 
             if (_PatientTests.Count == 0)
             {
-                message = append(message, "Kein Patient hinzugefügt");
+                append(message, INVALID_PATIENT_COUNT);
             }
 
-            foreach (KeyValuePair<String, List<Analysis>>  item in _PatientTests)
+            foreach (KeyValuePair<String, List<Analysis>> item in _PatientTests)
             {
                 if (item.Value.Count == 0)
                 {
-                    return  append(message, "Einem oder mehreren Patienten"
-                    + "\n   wurde keine Untersuchung zugewiesen");
+                    append(message, INVALID_TEST_COUNT);
                 }
             }
 
             return message;
         }
 
-        private string append(string p, string message)
+        private void append(List<string> l, string message)
         {
-            if (p == null)
-            {
-                return " - " + message;
-            }
-            else
-            {
-                return p + "\n - " + message;
-            }
+            l.Add(message);
         }
 
         public Address CustomerAddress { get; set; }
