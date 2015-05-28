@@ -83,7 +83,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Helper\AnalysisNameConverter.cs" />
     <Compile Include="Helper\BindingProxy.cs" />
     <Compile Include="Helper\ColumnVisibilityConverter.cs" />
     <Compile Include="Helper\EmployeeTypeConverter.cs" />
@@ -104,6 +103,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\AnalysisM.cs" />
     <Compile Include="ViewModel\CreateOrderVM.cs" />
     <Compile Include="ViewModel\CustomerListVM.cs" />
     <Compile Include="ViewModel\DailyStatisticVM.cs" />

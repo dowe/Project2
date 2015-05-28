@@ -17,15 +17,6 @@ namespace ManagementSoftware.Tests.Helper
     public class Helper
     {
         [TestMethod]
-        public void AnalysisNameConverterTest()
-        {
-            string name = "hikl";
-            Analysis a = new Analysis() {Name=name};
-            AnalysisNameConverter testee = new AnalysisNameConverter();
-            Assert.AreEqual(testee.Convert(a, typeof(string), null, default(CultureInfo)), name);
-        }
-
-        [TestMethod]
         public void ColumnVisibilityConverterTest()
         {
             ColumnVisibilityConverter testee = new ColumnVisibilityConverter();

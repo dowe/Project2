@@ -21,7 +21,7 @@ namespace ManagementSoftware.Model
 
 
         private IClientConnection _Connection;
-        private Dictionary<String, List<Analysis>> _PatientTests; //Key = Patientid
+        private Dictionary<String, List<AnalysisM>> _PatientTests; //Key = Patientid
         private IMessageBox _MessageBox;
 
         public CreateOrderM(
@@ -30,10 +30,10 @@ namespace ManagementSoftware.Model
         {
             this._MessageBox = _MessageBox;
             this._Connection = _Connection;
-            this._PatientTests = new Dictionary<String, List<Analysis>>();
+            this._PatientTests = new Dictionary<String, List<AnalysisM>>();
 
             CustomerAddress = null;
-            AvaibleAnalysis = new List<Analysis>();
+            AvaibleAnalysis = new List<AnalysisM>();
             CustomerUsername = "";
             NewPatientID = "";
             SelectedPatient = null;
@@ -62,7 +62,12 @@ namespace ManagementSoftware.Model
             response = _Connection.SendWait<CmdReturnGetAnalyses>(request);
             if (response != null)
             {
-                AvaibleAnalysis = new List<Analysis>(response.Analyses);
+                List<AnalysisM> list = new List<AnalysisM>();
+                foreach (Analysis obj in response.Analyses)
+                {
+                    list.Add(new AnalysisM(obj));
+                }
+                AvaibleAnalysis = list;
             }
         }
 
@@ -84,14 +89,14 @@ namespace ManagementSoftware.Model
             }
         }
 
-        public List<Analysis> SelectedAnalysis
+        public List<AnalysisM> SelectedAnalysis
         {
             get
             {
                 if (SelectedPatient == null
                     || !_PatientTests.ContainsKey(SelectedPatient))
                 {
-                    return new List<Analysis>();
+                    return new List<AnalysisM>();
                 }
 
                 return _PatientTests[SelectedPatient];
@@ -143,7 +148,7 @@ namespace ManagementSoftware.Model
                 && patientID.Trim().Length > 0
                 && !_PatientTests.ContainsKey(patientID))
             {
-                _PatientTests.Add(patientID, new List<Analysis>());
+                _PatientTests.Add(patientID, new List<AnalysisM>());
                 NewPatientID = "";
                 return patientID;
             }
@@ -162,7 +167,20 @@ namespace ManagementSoftware.Model
         public void CreateOrder()
         {
 
-            Command request = new CmdAddOrder(_PatientTests, CustomerUsername);
+            Dictionary<String, List<Analysis>> _dict = new Dictionary<String, List<Analysis>>();
+
+            foreach (KeyValuePair<String, List<AnalysisM>> item in _PatientTests)
+            {
+                List<Analysis> list = new List<Analysis>();
+                foreach (AnalysisM a in item.Value)
+                {
+                    list.Add(a.Analysis);
+                }
+                _dict.Add(item.Key, list);
+            }
+
+
+            Command request = new CmdAddOrder(_dict, CustomerUsername);
             CmdReturnAddOrder response;
             response = _Connection.SendWait<CmdReturnAddOrder>(request);
             if (response != null)
@@ -194,7 +212,7 @@ namespace ManagementSoftware.Model
                 append(message, INVALID_PATIENT_COUNT);
             }
 
-            foreach (KeyValuePair<String, List<Analysis>> item in _PatientTests)
+            foreach (KeyValuePair<String, List<AnalysisM>> item in _PatientTests)
             {
                 if (item.Value.Count == 0)
                 {
@@ -210,11 +228,31 @@ namespace ManagementSoftware.Model
             l.Add(message);
         }
 
+        public float Cost
+        {
+            get
+            {
+                float f = 0.0F;
+
+                foreach (KeyValuePair<String, List<AnalysisM>> item in _PatientTests)
+                {
+                    foreach (AnalysisM a in item.Value)
+                    {
+                        f += a.Analysis.PriceInEuro;
+                    }
+                }
+
+                return f;
+            }
+        }
+
         public Address CustomerAddress { get; set; }
         public String SelectedPatient { get; set; }
         public string NewPatientID { get; set; }
-        public List<Analysis> AvaibleAnalysis { get; set; }
+        public List<AnalysisM> AvaibleAnalysis { get; set; }
         public string CustomerUsername { get; set; }
 
+
+        
     }
 }

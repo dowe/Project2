@@ -1,5 +1,4 @@
 ﻿using Common.Communication.Client;
-using Common.DataTransferObjects;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -8,11 +7,13 @@ using System.Windows.Documents;
 using ManagementSoftware.Helper;
 using ManagementSoftware.Model;
 using GalaSoft.MvvmLight.Command;
+using Common.Util;
 
 namespace ManagementSoftware.ViewModel
 {
     public class CreateOrderVM : ViewModelBase
     {
+        public static readonly string TOTAL_COST_PATTERN = "{0}€";
 
         private CreateOrderM model;
         private MyListBox AvaibleAnalysisBox;
@@ -75,6 +76,7 @@ namespace ManagementSoftware.ViewModel
             SelectedPatient = null;
             RaisePropertyChanged(() => ValidationText);
             RaisePropertyChanged(() => PatientIDs);
+            RaisePropertyChanged(() => Cost);
         }
 
         private void AddPatient()
@@ -83,6 +85,7 @@ namespace ManagementSoftware.ViewModel
             RaisePropertyChanged(() => ValidationText);
             RaisePropertyChanged(() => PatientIDs);
             RaisePropertyChanged(() => NewPatientID);
+            RaisePropertyChanged(() => Cost);
         }
 
         private void CancelOrder()
@@ -97,6 +100,7 @@ namespace ManagementSoftware.ViewModel
             RaisePropertyChanged(() => NewPatientID);
             RaisePropertyChanged(() => PatientIDText);
             RaisePropertyChanged(() => ValidationText);
+            RaisePropertyChanged(() => Cost);
         }
 
         private void CreateOrder()
@@ -113,7 +117,7 @@ namespace ManagementSoftware.ViewModel
             }
         }
 
-        public List<Analysis> AvaibleAnalysis
+        public List<AnalysisM> AvaibleAnalysis
         {
             get
             {
@@ -128,18 +132,19 @@ namespace ManagementSoftware.ViewModel
                 return;
             }
 
-            List<Analysis> list = new List<Analysis>();
-            foreach (Analysis item in AvaibleAnalysisBox.SelectedItems)
+            List<AnalysisM> list = new List<AnalysisM>();
+            foreach (AnalysisM item in AvaibleAnalysisBox.SelectedItems)
             {
                 list.Add(item);
             }
 
             model.SelectedAnalysis = list;
+            RaisePropertyChanged(() => Cost);
             RaisePropertyChanged(() => ValidationText);
             RaisePropertyChanged(() => SelectedAnalysis);
         }
 
-        public List<Analysis> SelectedAnalysis
+        public List<AnalysisM> SelectedAnalysis
         {
             get
             {
@@ -213,6 +218,14 @@ namespace ManagementSoftware.ViewModel
             get
             {
                 return model.PatientIDText;
+            }
+        }
+
+        public string Cost
+        {
+            get
+            {
+                return String.Format(TOTAL_COST_PATTERN, Util.ToCost(model.Cost));
             }
         }
 

@@ -13,6 +13,21 @@ namespace Common.Util
     {
         private static Random rnd = new Random(DateTime.Now.Second);
 
+        public static string ToCost(float f)
+        {
+            string price = f.ToString();
+            string[] at = price.Split(',');
+            if (at.Length > 1 && at[1].Length == 1)
+            {
+                price += "0";
+            }
+            else if (at.Length == 1)
+            {
+                price += ",00";
+            }
+            return price;
+        }
+
         public static Dictionary<T, string> EnumValues<T>()
         {
             Type enumType = typeof(T);
