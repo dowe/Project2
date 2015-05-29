@@ -76,7 +76,7 @@ namespace ManagementSoftware.Tests.ViewModel
             vm.RegisterCustomerAction.Execute(0);
 
             fakeConnection.Received().SendWait<CmdReturnRegisterCustomer>(Arg.Is<CmdRegisterCustomer>(a => VerifyCustomer(a, c, title, smsRequested)));
-            fakeMessageBox.Received().Show(Arg.Is<string>(s => s == RegisterCustomerM.CONNECTTION_FAILED_MESSAGE));
+            fakeMessageBox.Received().Show(Arg.Is<string>(s => s == RegisterCustomerModel.CONNECTTION_FAILED_MESSAGE));
         }
 
         private bool VerifyCustomer(CmdRegisterCustomer a, Customer c2, ETitle title, ESMSRequested smsRequested)

@@ -1,16 +1,9 @@
 ﻿using Common.Communication.Client;
-using Common.DataTransferObjects;
-using Common.Util;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using ManagementSoftware.Helper;
 using ManagementSoftware.Model;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace ManagementSoftware.ViewModel
 {
@@ -18,9 +11,11 @@ namespace ManagementSoftware.ViewModel
     {
         private ShiftScheduleModel _ShiftScheduleModel;
         
-        public ShiftScheduleVM(IClientConnection _Connection)
+        public ShiftScheduleVM(
+            IClientConnection _Connection,
+            IMessageBox _MessageBox)
         {
-            this._ShiftScheduleModel = new ShiftScheduleModel(this, _Connection);
+            this._ShiftScheduleModel = new ShiftScheduleModel(this, _Connection, _MessageBox);
 
             this.LoadRawModelCommand = new RelayCommand(() => LoadRawModel());
             this.SwitchMonthDataCommand = new RelayCommand(() => SwitchMonthData());
@@ -94,12 +89,12 @@ namespace ManagementSoftware.ViewModel
 
         public void SwitchToShiftScheduleMonthVM()
         {
-            CurrentViewModel = _ShiftScheduleModel.ShiftScheduleMonthVM;
+            CurrentViewModel = ShiftScheduleMonthVM;
         }
 
         public void SwitchToShiftScheduleDayVM()
         {
-            CurrentViewModel = _ShiftScheduleModel.ShiftScheduleDayVM;
+            CurrentViewModel = ShiftScheduleDayVM;
         }
     }
 }

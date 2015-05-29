@@ -21,7 +21,7 @@ namespace ManagementSoftware.Tests.ViewModel
     {
 
         private MyListBox listBoxAvaibleAnalysis;
-        private List<AnalysisM> listAvaibleAnalysis;
+        private List<AnalysisModel> listAvaibleAnalysis;
 
         private IClientConnection fakeConnection;
         private IMessageBox fakeMessageBox;
@@ -61,28 +61,28 @@ namespace ManagementSoftware.Tests.ViewModel
             Assert.AreEqual(null, To(null));
             Assert.AreEqual(null, Copy(null));
 
-            List<AnalysisM> avaibleAnalysis = testee.AvaibleAnalysis;
+            List<AnalysisModel> avaibleAnalysis = testee.AvaibleAnalysis;
 
             CollectionAssert.AreEqual(avaibleAnalysis, Copy(listAvaibleAnalysis));
 
             Assert.AreEqual(testee.Cost, String.Format(CreateOrderVM.TOTAL_COST_PATTERN, Util.ToCost(0.0F)));
 
-            Assert.AreEqual(testee.CustomerAddressText, CreateOrderM.UNKNOWN_CUSTOMER_ADDRESS_TEXT);
+            Assert.AreEqual(testee.CustomerAddressText, CreateOrderModel.UNKNOWN_CUSTOMER_ADDRESS_TEXT);
             Assert.AreEqual(testee.CustomerUsername, "");
             Assert.AreEqual(testee.NewPatientID, "");
             CollectionAssert.AreEqual(testee.PatientIDs, new List<String>());
-            Assert.AreEqual(testee.PatientIDText, CreateOrderM.UNSELECTED_PATIENT_TEXT);
+            Assert.AreEqual(testee.PatientIDText, CreateOrderModel.UNSELECTED_PATIENT_TEXT);
             Assert.AreEqual(testee.RemovePatientAction.CanExecute(0), false);
             Assert.AreEqual(testee.CreateOrderAction.CanExecute(0), false);
-            CollectionAssert.AreEqual(testee.SelectedAnalysis, new List<AnalysisM>());
+            CollectionAssert.AreEqual(testee.SelectedAnalysis, new List<AnalysisModel>());
             Assert.AreEqual(testee.SelectedPatient, null);
 
 
             List<string> validationList = new List<string>();
 
-            validationList.Add(CreateOrderM.INVALID_USERNAME);
-            validationList.Add(CreateOrderM.INVALID_ADDRESS);
-            validationList.Add(CreateOrderM.INVALID_PATIENT_COUNT);
+            validationList.Add(CreateOrderModel.INVALID_USERNAME);
+            validationList.Add(CreateOrderModel.INVALID_ADDRESS);
+            validationList.Add(CreateOrderModel.INVALID_PATIENT_COUNT);
             CollectionAssert.AreEqual(testee.ValidationText, validationList);
 
         }
@@ -98,12 +98,12 @@ namespace ManagementSoftware.Tests.ViewModel
 
 
             fakeConnection.Received().SendWait<CmdReturnGetCustomerAddress>(Arg.Is<CmdGetCustomerAddress>((cmd) => cmd.CustomerUsername == unknownUsername));
-            fakeMessageBox.Received().Show(Arg.Is<string>(s => s == CreateOrderM.NORESPONSE_LOAD_CUSTOMER_ADDRESS));
+            fakeMessageBox.Received().Show(Arg.Is<string>(s => s == CreateOrderModel.NORESPONSE_LOAD_CUSTOMER_ADDRESS));
 
             List<string> validationList = new List<string>();
 
-            validationList.Add(CreateOrderM.INVALID_ADDRESS);
-            validationList.Add(CreateOrderM.INVALID_PATIENT_COUNT);
+            validationList.Add(CreateOrderModel.INVALID_ADDRESS);
+            validationList.Add(CreateOrderModel.INVALID_PATIENT_COUNT);
             CollectionAssert.AreEqual(testee.ValidationText, validationList);
         }
 
@@ -119,12 +119,12 @@ namespace ManagementSoftware.Tests.ViewModel
 
             fakeConnection.Received().SendWait<CmdReturnGetCustomerAddress>(Arg.Is<CmdGetCustomerAddress>((cmd) => cmd.CustomerUsername == unknownUsername));
 
-            Assert.AreEqual(testee.CustomerAddressText, CreateOrderM.UNKNOWN_CUSTOMER_ADDRESS_TEXT);
+            Assert.AreEqual(testee.CustomerAddressText, CreateOrderModel.UNKNOWN_CUSTOMER_ADDRESS_TEXT);
 
             List<string> validationList = new List<string>();
 
-            validationList.Add(CreateOrderM.INVALID_ADDRESS);
-            validationList.Add(CreateOrderM.INVALID_PATIENT_COUNT);
+            validationList.Add(CreateOrderModel.INVALID_ADDRESS);
+            validationList.Add(CreateOrderModel.INVALID_PATIENT_COUNT);
             CollectionAssert.AreEqual(testee.ValidationText, validationList);
         }
 
@@ -141,7 +141,7 @@ namespace ManagementSoftware.Tests.ViewModel
 
             fakeConnection.Received().SendWait<CmdReturnGetCustomerAddress>(Arg.Is<CmdGetCustomerAddress>((cmd) => cmd.CustomerUsername == knownUsername));
 
-            string addressText = String.Format(CreateOrderM.CUSTOMER_ADRESS_TEXT_PATTERN,
+            string addressText = String.Format(CreateOrderModel.CUSTOMER_ADRESS_TEXT_PATTERN,
                 knownAddress.Street, knownAddress.PostalCode, knownAddress.City);
             Assert.AreEqual(testee.CustomerAddressText, addressText);
             Assert.AreEqual(testee.CustomerUsername, knownUsername);
@@ -149,7 +149,7 @@ namespace ManagementSoftware.Tests.ViewModel
 
             List<string> validationList = new List<string>();
 
-            validationList.Add(CreateOrderM.INVALID_PATIENT_COUNT);
+            validationList.Add(CreateOrderModel.INVALID_PATIENT_COUNT);
             CollectionAssert.AreEqual(testee.ValidationText, validationList);
         }
 
@@ -161,9 +161,9 @@ namespace ManagementSoftware.Tests.ViewModel
 
             List<string> validationList = new List<string>();
 
-            validationList.Add(CreateOrderM.INVALID_USERNAME);
-            validationList.Add(CreateOrderM.INVALID_ADDRESS);
-            validationList.Add(CreateOrderM.INVALID_PATIENT_COUNT);
+            validationList.Add(CreateOrderModel.INVALID_USERNAME);
+            validationList.Add(CreateOrderModel.INVALID_ADDRESS);
+            validationList.Add(CreateOrderModel.INVALID_PATIENT_COUNT);
             CollectionAssert.AreEqual(testee.ValidationText, validationList);
         }
 
@@ -175,8 +175,8 @@ namespace ManagementSoftware.Tests.ViewModel
 
             List<string> validationList = new List<string>();
 
-            validationList.Add(CreateOrderM.INVALID_ADDRESS);
-            validationList.Add(CreateOrderM.INVALID_PATIENT_COUNT);
+            validationList.Add(CreateOrderModel.INVALID_ADDRESS);
+            validationList.Add(CreateOrderModel.INVALID_PATIENT_COUNT);
             CollectionAssert.AreEqual(testee.ValidationText, validationList);
         }
 
@@ -194,13 +194,13 @@ namespace ManagementSoftware.Tests.ViewModel
 
             CollectionAssert.AreEqual(testee.PatientIDs, patientList);
             Assert.AreEqual(testee.SelectedPatient, samePatient);
-            Assert.AreEqual(testee.PatientIDText, String.Format(CreateOrderM.SELECTED_PATIENT_PATTERN, samePatient));
+            Assert.AreEqual(testee.PatientIDText, String.Format(CreateOrderModel.SELECTED_PATIENT_PATTERN, samePatient));
 
             List<string> validationList = new List<string>();
 
-            validationList.Add(CreateOrderM.INVALID_USERNAME);
-            validationList.Add(CreateOrderM.INVALID_ADDRESS);
-            validationList.Add(CreateOrderM.INVALID_TEST_COUNT);
+            validationList.Add(CreateOrderModel.INVALID_USERNAME);
+            validationList.Add(CreateOrderModel.INVALID_ADDRESS);
+            validationList.Add(CreateOrderModel.INVALID_TEST_COUNT);
             CollectionAssert.AreEqual(testee.ValidationText, validationList);
 
         }
@@ -211,7 +211,7 @@ namespace ManagementSoftware.Tests.ViewModel
             string a = "A";
             string b = "B";
             List<string> pIDs = new List<string>();
-            List<AnalysisM> selAnalysis = new List<AnalysisM>();
+            List<AnalysisModel> selAnalysis = new List<AnalysisModel>();
 
             //Add A 
             testee.NewPatientID = a;
@@ -220,7 +220,7 @@ namespace ManagementSoftware.Tests.ViewModel
             //?just A
             pIDs.Add(a);
             CollectionAssert.AreEqual(pIDs, testee.PatientIDs);
-            Assert.AreEqual(testee.PatientIDText, String.Format(CreateOrderM.SELECTED_PATIENT_PATTERN, a));
+            Assert.AreEqual(testee.PatientIDText, String.Format(CreateOrderModel.SELECTED_PATIENT_PATTERN, a));
 
             //Select analyses 0
             selAnalysis.Add(listAvaibleAnalysis[0]);
@@ -237,7 +237,7 @@ namespace ManagementSoftware.Tests.ViewModel
             //?just A+B 
             pIDs.Add(b);
             CollectionAssert.AreEqual(pIDs, testee.PatientIDs);
-            Assert.AreEqual(testee.PatientIDText, String.Format(CreateOrderM.SELECTED_PATIENT_PATTERN, b));
+            Assert.AreEqual(testee.PatientIDText, String.Format(CreateOrderModel.SELECTED_PATIENT_PATTERN, b));
 
             //Select analyses 1
             selAnalysis.Clear();
@@ -257,7 +257,7 @@ namespace ManagementSoftware.Tests.ViewModel
             //Remove B
             Assert.IsTrue(testee.RemovePatientAction.CanExecute(0));
             testee.RemovePatientAction.Execute(0);
-            Assert.AreEqual(testee.PatientIDText, CreateOrderM.UNSELECTED_PATIENT_TEXT);
+            Assert.AreEqual(testee.PatientIDText, CreateOrderModel.UNSELECTED_PATIENT_TEXT);
             Assert.AreEqual(testee.SelectedPatient, null);
 
             //?just A
@@ -268,7 +268,7 @@ namespace ManagementSoftware.Tests.ViewModel
             //Select patient A
             testee.SelectedPatient = a;
             Assert.AreEqual(a, testee.SelectedPatient);
-            Assert.AreEqual(testee.PatientIDText, String.Format(CreateOrderM.SELECTED_PATIENT_PATTERN, a));
+            Assert.AreEqual(testee.PatientIDText, String.Format(CreateOrderModel.SELECTED_PATIENT_PATTERN, a));
 
             //?just 0 selected
             selAnalysis.Clear();
@@ -277,8 +277,8 @@ namespace ManagementSoftware.Tests.ViewModel
 
             //?validation
             List<string> validationList = new List<string>();
-            validationList.Add(CreateOrderM.INVALID_USERNAME);
-            validationList.Add(CreateOrderM.INVALID_ADDRESS);
+            validationList.Add(CreateOrderModel.INVALID_USERNAME);
+            validationList.Add(CreateOrderModel.INVALID_ADDRESS);
             CollectionAssert.AreEqual(testee.ValidationText, validationList);
 
         }
@@ -305,7 +305,7 @@ namespace ManagementSoftware.Tests.ViewModel
 
             testee.SelectedPatient = null;
 
-            CollectionAssert.AreEqual(testee.SelectedAnalysis, new List<AnalysisM>());
+            CollectionAssert.AreEqual(testee.SelectedAnalysis, new List<AnalysisModel>());
         }
 
         [TestMethod]
@@ -313,7 +313,7 @@ namespace ManagementSoftware.Tests.ViewModel
         {
             testee.SelectedPatient = null;
 
-            List<AnalysisM> selAnalysis = new List<AnalysisM>();
+            List<AnalysisModel> selAnalysis = new List<AnalysisModel>();
             selAnalysis.Add(listAvaibleAnalysis[1]);
             listBoxAvaibleAnalysis.Select(selAnalysis);
             testee.SelectedAnalysisChanged();
@@ -339,7 +339,7 @@ namespace ManagementSoftware.Tests.ViewModel
             testee.CreateOrderAction.Execute(0);
 
             fakeConnection.Received().SendWait<CmdReturnAddOrder>(Arg.Is<CmdAddOrder>((x) => Validate(x)));
-            fakeMessageBox.Received().Show(Arg.Is<string>(s => s == CreateOrderM.NORESPONSE_CREATE_ORDER));
+            fakeMessageBox.Received().Show(Arg.Is<string>(s => s == CreateOrderModel.NORESPONSE_CREATE_ORDER));
         }
 
         [TestMethod]
@@ -352,7 +352,7 @@ namespace ManagementSoftware.Tests.ViewModel
 
             testee.CreateOrderAction.Execute(0);
 
-            fakeMessageBox.Received().Show(Arg.Is<string>(s => s == CreateOrderM.SUCCESS_CREATE_ORDER_PREFIX + 333));
+            fakeMessageBox.Received().Show(Arg.Is<string>(s => s == CreateOrderModel.SUCCESS_CREATE_ORDER_PREFIX + 333));
         }
 
         private bool Validate(CmdAddOrder x)
@@ -376,7 +376,7 @@ namespace ManagementSoftware.Tests.ViewModel
             testee.NewPatientID = a;
             testee.AddPatientAction.Execute(0);
 
-            List<AnalysisM> sel = new List<AnalysisM>();
+            List<AnalysisModel> sel = new List<AnalysisModel>();
             sel.Add(listAvaibleAnalysis[0]);
             listBoxAvaibleAnalysis.Select(sel);
             testee.SelectedAnalysisChanged();
@@ -402,28 +402,28 @@ namespace ManagementSoftware.Tests.ViewModel
                 messageBox);
         }
 
-        private List<AnalysisM> To(List<Analysis> list)
+        private List<AnalysisModel> To(List<Analysis> list)
         {
             if (list == null)
             {
                 return null;
             }
-            List<AnalysisM> toList = new List<AnalysisM>();
+            List<AnalysisModel> toList = new List<AnalysisModel>();
             foreach (Analysis item in list)
             {
-                toList.Add(new AnalysisM(item));
+                toList.Add(new AnalysisModel(item));
             }
             return toList;
         }
 
-        private List<AnalysisM> Copy(List<AnalysisM> list)
+        private List<AnalysisModel> Copy(List<AnalysisModel> list)
         {
             if (list == null)
             {
                 return null;
             }
-            List<AnalysisM> toList = new List<AnalysisM>();
-            foreach (AnalysisM item in list)
+            List<AnalysisModel> toList = new List<AnalysisModel>();
+            foreach (AnalysisModel item in list)
             {
                 toList.Add(item);
             }

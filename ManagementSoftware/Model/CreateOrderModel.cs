@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ManagementSoftware.Model
 {
-    public class CreateOrderM
+    public class CreateOrderModel
     {
         public static readonly string NORESPONSE_LOAD_CUSTOMER_ADDRESS = "Fehler beim versenden der Anfrage zur Kundenadresse \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut";
         public static readonly string SUCCESS_CREATE_ORDER_PREFIX = "Bestellung erstellt!\nBestellungs ID: ";
@@ -26,22 +26,22 @@ namespace ManagementSoftware.Model
         public static readonly string CUSTOMER_ADRESS_TEXT_PATTERN = "{0}\n{1} {2}";
 
         private IClientConnection _Connection;
-        private Dictionary<String, List<AnalysisM>> _PatientTests; //Key = Patientid
+        private Dictionary<String, List<AnalysisModel>> _PatientTests; //Key = Patientid
         private IMessageBox _MessageBox;
         
         
         
 
-        public CreateOrderM(
+        public CreateOrderModel(
             IClientConnection _Connection,
             IMessageBox _MessageBox)
         {
             this._MessageBox = _MessageBox;
             this._Connection = _Connection;
-            this._PatientTests = new Dictionary<String, List<AnalysisM>>();
+            this._PatientTests = new Dictionary<String, List<AnalysisModel>>();
 
             CustomerAddress = null;
-            AvaibleAnalysis = new List<AnalysisM>();
+            AvaibleAnalysis = new List<AnalysisModel>();
             CustomerUsername = "";
             NewPatientID = "";
             SelectedPatient = null;
@@ -70,10 +70,10 @@ namespace ManagementSoftware.Model
             response = _Connection.SendWait<CmdReturnGetAnalyses>(request);
             if (response != null)
             {
-                List<AnalysisM> list = new List<AnalysisM>();
+                List<AnalysisModel> list = new List<AnalysisModel>();
                 foreach (Analysis obj in response.Analyses)
                 {
-                    list.Add(new AnalysisM(obj));
+                    list.Add(new AnalysisModel(obj));
                 }
                 AvaibleAnalysis = list;
             }
@@ -97,14 +97,14 @@ namespace ManagementSoftware.Model
             }
         }
 
-        public List<AnalysisM> SelectedAnalysis
+        public List<AnalysisModel> SelectedAnalysis
         {
             get
             {
                 if (SelectedPatient == null
                     || !_PatientTests.ContainsKey(SelectedPatient))
                 {
-                    return new List<AnalysisM>();
+                    return new List<AnalysisModel>();
                 }
 
                 return _PatientTests[SelectedPatient];
@@ -156,7 +156,7 @@ namespace ManagementSoftware.Model
                 && patientID.Trim().Length > 0
                 && !_PatientTests.ContainsKey(patientID))
             {
-                _PatientTests.Add(patientID, new List<AnalysisM>());
+                _PatientTests.Add(patientID, new List<AnalysisModel>());
                 NewPatientID = "";
                 return patientID;
             }
@@ -177,10 +177,10 @@ namespace ManagementSoftware.Model
 
             Dictionary<String, List<Analysis>> _dict = new Dictionary<String, List<Analysis>>();
 
-            foreach (KeyValuePair<String, List<AnalysisM>> item in _PatientTests)
+            foreach (KeyValuePair<String, List<AnalysisModel>> item in _PatientTests)
             {
                 List<Analysis> list = new List<Analysis>();
-                foreach (AnalysisM a in item.Value)
+                foreach (AnalysisModel a in item.Value)
                 {
                     list.Add(a.Analysis);
                 }
@@ -220,7 +220,7 @@ namespace ManagementSoftware.Model
                 append(message, INVALID_PATIENT_COUNT);
             }
 
-            foreach (KeyValuePair<String, List<AnalysisM>> item in _PatientTests)
+            foreach (KeyValuePair<String, List<AnalysisModel>> item in _PatientTests)
             {
                 if (item.Value.Count == 0)
                 {
@@ -242,9 +242,9 @@ namespace ManagementSoftware.Model
             {
                 float f = 0.0F;
 
-                foreach (KeyValuePair<String, List<AnalysisM>> item in _PatientTests)
+                foreach (KeyValuePair<String, List<AnalysisModel>> item in _PatientTests)
                 {
-                    foreach (AnalysisM a in item.Value)
+                    foreach (AnalysisModel a in item.Value)
                     {
                         f += a.Analysis.PriceInEuro;
                     }
@@ -257,7 +257,7 @@ namespace ManagementSoftware.Model
         public Address CustomerAddress { get; set; }
         public String SelectedPatient { get; set; }
         public string NewPatientID { get; set; }
-        public List<AnalysisM> AvaibleAnalysis { get; set; }
+        public List<AnalysisModel> AvaibleAnalysis { get; set; }
         public string CustomerUsername { get; set; }
 
 

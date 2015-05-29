@@ -16,7 +16,7 @@ namespace ManagementSoftware.Model
 
 
 
-    public class RegisterCustomerM
+    public class RegisterCustomerModel
     {
         public static readonly string CONNECTTION_FAILED_MESSAGE = "Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut";
         public static readonly string ILLEGAL_STATE_MESSAGE = "Success is false and Error null. Illegal State";
@@ -28,7 +28,7 @@ namespace ManagementSoftware.Model
         private KeyValuePair<ESMSRequested, string> _SMSRequested;
 
 
-        public RegisterCustomerM(
+        public RegisterCustomerModel(
             IClientConnection _ClientConnection)
         {
             this._ClientConnection = _ClientConnection;

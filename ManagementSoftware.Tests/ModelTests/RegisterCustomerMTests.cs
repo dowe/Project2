@@ -33,7 +33,7 @@ namespace ManagementSoftware.Tests.Model
 
             CmdReturnRegisterCustomer response;
             response = new CmdReturnRegisterCustomer(Guid.NewGuid(), true, null);
-            Assert.AreEqual(RegisterCustomer(response), RegisterCustomerM.SUCCESS_MESSAGE);
+            Assert.AreEqual(RegisterCustomer(response), RegisterCustomerModel.SUCCESS_MESSAGE);
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace ManagementSoftware.Tests.Model
         {
                 CmdReturnRegisterCustomer response;
                 response = new CmdReturnRegisterCustomer(Guid.NewGuid(), false, null);
-                Assert.AreEqual(RegisterCustomer(response), RegisterCustomerM.ILLEGAL_STATE_MESSAGE);
+                Assert.AreEqual(RegisterCustomer(response), RegisterCustomerModel.ILLEGAL_STATE_MESSAGE);
         }
 
         public string RegisterCustomer(CmdReturnRegisterCustomer cmd)
@@ -60,7 +60,7 @@ namespace ManagementSoftware.Tests.Model
             var fakeConnection = Substitute.For<IClientConnection>();
             fakeConnection.SendWait<CmdReturnRegisterCustomer>(Arg.Any<CmdRegisterCustomer>()).Returns<CmdReturnRegisterCustomer>(cmd);
 
-            RegisterCustomerM model = CreateTestee(fakeConnection);
+            RegisterCustomerModel model = CreateTestee(fakeConnection);
 
             model.Customer = TestData.CreateTestData(ETitle.Mr, ESMSRequested.Yes);
 
@@ -68,10 +68,10 @@ namespace ManagementSoftware.Tests.Model
         }
 
 
-        private RegisterCustomerM CreateTestee(
+        private RegisterCustomerModel CreateTestee(
             IClientConnection connection)
         {
-            return new RegisterCustomerM(connection);
+            return new RegisterCustomerModel(connection);
         }
 
     }

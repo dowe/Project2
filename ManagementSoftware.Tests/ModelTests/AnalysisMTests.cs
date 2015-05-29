@@ -15,11 +15,12 @@ namespace ManagementSoftware.Tests.Model
         {
             Analysis a = TestData.CreateAnalysis()[0];
 
-            AnalysisM testee = new AnalysisM(a);
+            AnalysisModel testee = new AnalysisModel(a);
 
-            string text = String.Format(AnalysisM.FORMAT_PATTERN, a.Name, Util.ToCost(a.PriceInEuro));
+            string text = String.Format(AnalysisModel.FORMAT_PATTERN, a.Name, Util.ToCost(a.PriceInEuro));
 
             Assert.AreEqual(testee.ToString(), text);
+            Assert.AreEqual(testee.GetHashCode(), a.Name.GetHashCode());
         }
     }
 }

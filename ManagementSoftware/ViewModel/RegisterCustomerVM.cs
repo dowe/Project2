@@ -10,14 +10,14 @@ namespace ManagementSoftware.ViewModel
 {
     public class RegisterCustomerVM : ViewModelBase
     {
-        private RegisterCustomerM model;
+        private RegisterCustomerModel model;
         private IMessageBox _MessageBox;
 
         public RegisterCustomerVM(
             IClientConnection _ClientConnection, IMessageBox _MessageBox)
         {
             this._MessageBox = _MessageBox;
-            this.model = new RegisterCustomerM(_ClientConnection);
+            this.model = new RegisterCustomerModel(_ClientConnection);
 
             RegisterCustomerAction = new RelayCommand(RegisterCustomer);
         }

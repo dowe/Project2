@@ -97,18 +97,18 @@
     <Compile Include="Model\ShiftScheduleRawModel.cs" />
     <Compile Include="Model\TestDetailModel.cs" />
     <Compile Include="Model\TestEntryModel.cs" />
-    <Compile Include="Model\CreateOrderM.cs" />
+    <Compile Include="Model\CreateOrderModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Model\AnalysisM.cs" />
+    <Compile Include="Model\AnalysisModel.cs" />
     <Compile Include="ViewModel\CreateOrderVM.cs" />
     <Compile Include="ViewModel\CustomerListVM.cs" />
     <Compile Include="ViewModel\DailyStatisticVM.cs" />
     <Compile Include="ViewModel\MapVM.cs" />
-    <Compile Include="Model\RegisterCustomerM.cs" />
+    <Compile Include="Model\RegisterCustomerModel.cs" />
     <Compile Include="ViewModel\RegisterCustomerVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleDayVM.cs" />
     <Compile Include="ViewModel\ShiftScheduleMonthVM.cs" />

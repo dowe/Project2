@@ -15,14 +15,14 @@ namespace ManagementSoftware.ViewModel
     {
         public static readonly string TOTAL_COST_PATTERN = "{0}€";
 
-        private CreateOrderM model;
+        private CreateOrderModel model;
         private MyListBox AvaibleAnalysisBox;
 
 
         public CreateOrderVM(IClientConnection _Connection,
             IMessageBox _MessageBox)
         {
-            model = new CreateOrderM(_Connection, _MessageBox);
+            model = new CreateOrderModel(_Connection, _MessageBox);
 
             new Thread(LoadAnalysis).Start();
 
@@ -117,7 +117,7 @@ namespace ManagementSoftware.ViewModel
             }
         }
 
-        public List<AnalysisM> AvaibleAnalysis
+        public List<AnalysisModel> AvaibleAnalysis
         {
             get
             {
@@ -132,8 +132,8 @@ namespace ManagementSoftware.ViewModel
                 return;
             }
 
-            List<AnalysisM> list = new List<AnalysisM>();
-            foreach (AnalysisM item in AvaibleAnalysisBox.SelectedItems)
+            List<AnalysisModel> list = new List<AnalysisModel>();
+            foreach (AnalysisModel item in AvaibleAnalysisBox.SelectedItems)
             {
                 list.Add(item);
             }
@@ -144,7 +144,7 @@ namespace ManagementSoftware.ViewModel
             RaisePropertyChanged(() => SelectedAnalysis);
         }
 
-        public List<AnalysisM> SelectedAnalysis
+        public List<AnalysisModel> SelectedAnalysis
         {
             get
             {

@@ -1,28 +1,31 @@
 ﻿using Common.Communication.Client;
 using Common.Commands;
 using Common.DataTransferObjects;
-using Common.Util;
 using GalaSoft.MvvmLight;
 using ManagementSoftware.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using ManagementSoftware.Helper;
 
 namespace ManagementSoftware.Model
 {
     public class ShiftScheduleModel
     {
-        private static readonly CultureInfo GERMAN_CULTURE_INFO = new CultureInfo("de-DE");
+        public static readonly string SWITCH_TO_NEXT_MONTH_TEXT = "Zum nächsten Monat";
+        public static readonly string SWITCH_TO_CURRENT_MONTH_TEXT = "Zum aktuellen Monat";
+        public static readonly string CURRENT_MONTH_TEXT_NO_DATA = "Keine Daten geladen/vorhanden";
+
+        public static readonly CultureInfo GERMAN_CULTURE_INFO = new CultureInfo("de-DE");
+
         private IClientConnection _Connection;
+        private IMessageBox _MessageBox;
 
         public ShiftScheduleModel(
             ISwitchShiftScheduleView _ISwitchShiftScheduleView,
-            IClientConnection _Connection)
+            IClientConnection _Connection,
+            IMessageBox _MessageBox)
         {
+            this._MessageBox = _MessageBox;
             this._Connection = _Connection;
             this.ShiftScheduleRawModel = new ShiftScheduleRawModel(); ;
 
@@ -41,7 +44,7 @@ namespace ManagementSoftware.Model
                 ShiftSchedule data = ShiftScheduleRawModel.CurrentData;
                 if (data == null)
                 {
-                    return "Keine Daten geladen/vorhanden";
+                    return CURRENT_MONTH_TEXT_NO_DATA;
                 }
 
                 DateTime date = data.Date;
@@ -56,11 +59,11 @@ namespace ManagementSoftware.Model
             {
                 if (ShiftScheduleRawModel.CurrentDataIndex == 0)
                 {
-                    return "Zum nächsten Monat";
+                    return SWITCH_TO_NEXT_MONTH_TEXT;
                 }
                 else
                 {
-                    return "Zum aktuellen Monat";
+                    return SWITCH_TO_CURRENT_MONTH_TEXT;
                 }
             }
         }
@@ -77,7 +80,7 @@ namespace ManagementSoftware.Model
 
             if (response == null)
             {
-                MessageBox.Show("Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");
+                _MessageBox.Show("Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut");
             }
             else
             {
@@ -88,7 +91,7 @@ namespace ManagementSoftware.Model
 
                 ShiftScheduleRawModel.Data = _Data;
 
-                MessageBox.Show("Daten abgerufen");
+                _MessageBox.Show("Daten abgerufen");
             }
         }
 

@@ -7,11 +7,11 @@ using System.Text;
 
 namespace ManagementSoftware.Model
 {
-    public class AnalysisM
+    public class AnalysisModel
     {
         public static readonly string FORMAT_PATTERN = "{0} ({1}€)";
 
-        public AnalysisM(Analysis a)
+        public AnalysisModel(Analysis a)
         {
             Analysis = a;
         }
@@ -25,7 +25,12 @@ namespace ManagementSoftware.Model
 
         public override bool Equals(object other)
         {
-            return Analysis.Name.Equals(((AnalysisM)other).Analysis.Name);
+            return Analysis.Name.Equals(((AnalysisModel)other).Analysis.Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return Analysis.Name.GetHashCode();
         }
     }
 }
