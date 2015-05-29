@@ -72,9 +72,11 @@
   <ItemGroup>
     <Compile Include="HelperTests\HelperTests.cs" />
     <Compile Include="ModelTests\RegisterCustomerMTests.cs" />
+    <Compile Include="ModelTests\AnalysisMTests.cs" />
     <Compile Include="ViewModelTests\RegisterCustomerVMTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelTests\CustomerListVMTests.cs" />
+    <Compile Include="ViewModelTests\CreateOrderVMTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Commands\Common.Commands.csproj">

@@ -22,5 +22,10 @@ namespace ManagementSoftware.Model
         {
             return String.Format(FORMAT_PATTERN, Analysis.Name, Util.ToCost(Analysis.PriceInEuro));
         }
+
+        public override bool Equals(object other)
+        {
+            return Analysis.Name.Equals(((AnalysisM)other).Analysis.Name);
+        }
     }
 }

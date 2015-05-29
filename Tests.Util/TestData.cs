@@ -26,5 +26,16 @@ namespace Tests.Data
             _Customer.BankAccount = new BankAccount("12345-DE", "Hans feil");
             return _Customer;
         }
+
+        public static List<Analysis> CreateAnalysis()
+        {
+            List<Analysis> list = new List<Analysis>();
+
+            list.Add(new Analysis("a", 0.0F, 100.0F, "m", 3.5F, SampleType.BLOOD));
+            list.Add(new Analysis("b", 0.0F, 100.0F, "m", 3.0F, SampleType.BLOOD));
+            list.Add(new Analysis("c", 0.0F, 100.0F, "m", 3.55F, SampleType.BLOOD));
+
+            return list;
+        }
     }
 }

@@ -10,19 +10,27 @@ namespace ManagementSoftware.Model
 {
     public class CreateOrderM
     {
-        public static readonly string FAILURE_LOAD_CUSTOMER_ADDRESS = "Fehler beim versenden der Anfrage zur Kundenadresse \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut";
+        public static readonly string NORESPONSE_LOAD_CUSTOMER_ADDRESS = "Fehler beim versenden der Anfrage zur Kundenadresse \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut";
         public static readonly string SUCCESS_CREATE_ORDER_PREFIX = "Bestellung erstellt!\nBestellungs ID: ";
-        public static readonly string FAILURE_CREATE_ORDER = "Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut";
+        public static readonly string NORESPONSE_CREATE_ORDER = "Fehler beim versenden der Anfrage zur Registrierung des Kunden. \n - Überprüfen Sie ihre Internetverbindung\n - Versuchen Sie es später erneut";
 
         public static readonly string INVALID_ADDRESS = "Invalider Kunde\n     Kundenadresse unbekannt";
         public static readonly string INVALID_USERNAME = "Kunden ID fehlt";
         public static readonly string INVALID_PATIENT_COUNT = "Kein Patient hinzugefügt";
         public static readonly string INVALID_TEST_COUNT = "Einem oder mehreren Patienten\n   wurde keine Untersuchung zugewiesen";
 
+        public static readonly string UNSELECTED_PATIENT_TEXT = "Keine Patienten ID ausgewählt";
+        public static readonly string SELECTED_PATIENT_PATTERN = "Für [{0}]";
+
+        public static readonly string UNKNOWN_CUSTOMER_ADDRESS_TEXT = "Kunde nicht gefunden.";
+        public static readonly string CUSTOMER_ADRESS_TEXT_PATTERN = "{0}\n{1} {2}";
 
         private IClientConnection _Connection;
         private Dictionary<String, List<AnalysisM>> _PatientTests; //Key = Patientid
         private IMessageBox _MessageBox;
+        
+        
+        
 
         public CreateOrderM(
             IClientConnection _Connection,
@@ -51,7 +59,7 @@ namespace ManagementSoftware.Model
             }
             else
             {
-                _MessageBox.Show(FAILURE_LOAD_CUSTOMER_ADDRESS);
+                _MessageBox.Show(NORESPONSE_LOAD_CUSTOMER_ADDRESS);
             }
         }
 
@@ -77,14 +85,14 @@ namespace ManagementSoftware.Model
             {
                 if (CustomerAddress != null)
                 {
-                    return String.Format("{0}\n{1} {2}",
+                    return String.Format(CUSTOMER_ADRESS_TEXT_PATTERN,
                         CustomerAddress.Street,
                         CustomerAddress.PostalCode,
                         CustomerAddress.City);
                 }
                 else
                 {
-                    return "Kunde nicht gefunden.";
+                    return UNKNOWN_CUSTOMER_ADDRESS_TEXT;
                 }
             }
         }
@@ -124,11 +132,11 @@ namespace ManagementSoftware.Model
             {
                 if (SelectedPatient == null)
                 {
-                    return "Keine Patienten ID ausgewählt";
+                    return UNSELECTED_PATIENT_TEXT;
                 }
                 else
                 {
-                    return String.Format("Für [{0}]", SelectedPatient);
+                    return String.Format(SELECTED_PATIENT_PATTERN, SelectedPatient);
                 }
             }
         }
@@ -190,7 +198,7 @@ namespace ManagementSoftware.Model
             }
             else
             {
-                _MessageBox.Show(FAILURE_CREATE_ORDER);
+                _MessageBox.Show(NORESPONSE_CREATE_ORDER);
             }
         }
 
