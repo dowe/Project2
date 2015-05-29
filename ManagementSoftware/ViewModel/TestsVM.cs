@@ -26,7 +26,7 @@ namespace ManagementSoftware.ViewModel
          private String _ResultatDetailEnabled;
          private String _ResultatDetail;
          private String _ButtonDetail;
-
+         public enum DetailButtonStatus {ORDERED, RECEIVED, COMPLETED, ALARM_CONFIRMED };
          private String _ButtonDetailVisible;
 
          private TestEntryModel _SelectedTestEntry;
@@ -39,7 +39,8 @@ namespace ManagementSoftware.ViewModel
             _SelectedTestEntry = new TestEntryModel();
             _Detail = new TestDetailModel();
             ButtonPressAction = new RelayCommand(ButtonPress);
-            ButtonDetail = "Eingetroffen";
+            DetailButton = DetailButtonStatus.ORDERED;
+            DetailButtonText = "Eingetroffen";
             ButtonDetailVisible = "Hidden";
             ResultatDetailEnabled ="False";
             ResultatDetail = "";
@@ -47,17 +48,26 @@ namespace ManagementSoftware.ViewModel
 
          private void ButtonPress()
          {
+             switch(SelectedTestEntry.Test.TestState)
+             {
+                 case TestState.ORDERED:
+                     _ClientConnection.Send(new CmdSetOrderCollected(null, currentOrder.OrderID));
+                     break;
+                 case TestState.IN_PROGRESS:
+                     if (ResultatDetail != "")
+                     {
+                         _ClientConnection.Send(new CmdSetTestResult(SelectedTestEntry.Test.TestID, Convert.ToSingle(ResultatDetail)));
+                     }
+                         break;
+                 case TestState.COMPLETED:
+                     if(SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_TRANSMITTED)
+                     { 
+                         _ClientConnection.Send(new CmdSetFirstAlertReceived(SelectedTestEntry.Test.TestID));
+                     } 
+                     break;
 
-             if (ButtonDetail.Equals("Eingetroffen"))
-                 _ClientConnection.Send(new CmdSetOrderReceived(currentOrder.OrderID));
-             else if(ButtonDetail.Equals("Test fertig"))
-                if (ResultatDetail != "")
-                     _ClientConnection.Send( new CmdSetTestResult(SelectedTestEntry.Test.TestID, Convert.ToSingle(ResultatDetail)));
-             else if(ButtonDetail.Equals("Alarm Bestätigt"))
-                  _ClientConnection.Send(new CmdSetFirstAlertReceived(SelectedTestEntry.Test.TestID));
-             else if (ButtonDetail.Equals("Bestellt"))
-                _ClientConnection.Send( new CmdSetOrderCollected("Taxi", currentOrder.OrderID));
-             
+             }
+
              LoadData();
              RefreshDetail();   
          }
@@ -85,25 +95,23 @@ namespace ManagementSoftware.ViewModel
                      ResultatDetail = SelectedTestEntry.Test.ResultValue.ToString();
                  else
                      ResultatDetail = "";
+
                 if (SelectedTestEntry.BringDate != "")
                     BringDatumDetail = SelectedTestEntry.BringDate;
                 else
                     BringDatumDetail = "#";
-             
+
                 if (SelectedTestEntry.TestID != null)
                     TestIDDetail = SelectedTestEntry.TestID;
                 else
                     TestIDDetail = "#";
-               
                 if (SelectedTestEntry.Test.Analysis.UnitOfMeasure != null)
                     Detail.Einheit = SelectedTestEntry.Test.Analysis.UnitOfMeasure;
                 else
                     Detail.Einheit = "#";
                 
-                if (SelectedTestEntry.Test.Analysis.ExtremeMinValue != 0 && SelectedTestEntry.Test.Analysis.ExtremeMaxValue != 0)
-                    Detail.Grenzwerte = SelectedTestEntry.Test.Analysis.ExtremeMinValue + " - " + SelectedTestEntry.Test.Analysis.ExtremeMaxValue;
-                else
-                    Detail.Grenzwerte = "# - #";
+                Detail.Grenzwerte = SelectedTestEntry.Test.Analysis.ExtremeMinValue + " - " + SelectedTestEntry.Test.Analysis.ExtremeMaxValue;
+                
                 if (SelectedTestEntry.Test.ResultValue != 0)
                     Detail.Resultat = SelectedTestEntry.Test.ResultValue.ToString();
                 else
@@ -132,6 +140,15 @@ namespace ManagementSoftware.ViewModel
                     
                 }
 
+                if (currentOrder.Driver != null)
+                    DriverDetail = currentOrder.Driver.UserName;
+                else
+                    DriverDetail = "Taxi";
+
+                if (currentOrder.Customer.UserName != "")
+                    CustomerDetail = currentOrder.Customer.UserName;
+                else
+                    CustomerDetail = "#";
                 //ButtonDetails
                 if (SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_CONFIRMED || SelectedTestEntry.Test.AlarmState == AlarmState.SECOND_ALARM_TRANSMITTED)
                 {
@@ -141,7 +158,7 @@ namespace ManagementSoftware.ViewModel
                 }
                 else if (SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_TRANSMITTED && SelectedTestEntry.Test.TestState == TestState.COMPLETED)
                 {
-                    ButtonDetail = "Alarm Bestätigt";
+                    DetailButtonText = "Alarm Bestätigt";
                     ButtonDetailVisible = "Visible";
                     ResultatDetailEnabled = "False";
 
@@ -156,19 +173,19 @@ namespace ManagementSoftware.ViewModel
 
                     ResultatDetailEnabled = "True";
                     ButtonDetailVisible = "Visible";
-                    ButtonDetail = "Test fertig";
+                    DetailButtonText = "Test fertig";
                 }
                 
                 else if (SelectedTestEntry.Test.TestState == TestState.ORDERED && currentOrder.Driver == null)
                 {
                     ResultatDetailEnabled = "False";
-                    ButtonDetail = "Eingetroffen";
+                    DetailButtonText = "Eingetroffen";
                     ButtonDetailVisible = "Visible";
                 }
                 else if (SelectedTestEntry.Test.TestState == TestState.ORDERED)
                 {
                     ResultatDetailEnabled = "False";
-                    ButtonDetail = "Eingetroffen";
+                    DetailButtonText = "Eingetroffen";
                     ButtonDetailVisible = "Hidden";
                 }
 
@@ -184,7 +201,7 @@ namespace ManagementSoftware.ViewModel
                 RaisePropertyChanged(() => EinheitDetail);
                 RaisePropertyChanged(() => BestellDatumDetail);
                 RaisePropertyChanged(() => TestIDDetail);
-                RaisePropertyChanged(() => ButtonDetail);
+                RaisePropertyChanged(() => DetailButtonText);
                 RaisePropertyChanged(() => ButtonDetailVisible);
              }
          }
@@ -362,6 +379,30 @@ namespace ManagementSoftware.ViewModel
                  RaisePropertyChanged();
              }
          }
+         public String DriverDetail
+         {
+             get
+             {
+                 return _Detail.Driver;
+             }
+             set
+             {
+                 _Detail.Driver = value;
+                 RaisePropertyChanged();
+             }
+         }
+         public String CustomerDetail
+         {
+             get
+             {
+                 return _Detail.Customer;
+             }
+             set
+             {
+                 _Detail.Customer = value;
+                 RaisePropertyChanged();
+             }
+         }
          public String TestIDDetail
          {
              get
@@ -401,7 +442,9 @@ namespace ManagementSoftware.ViewModel
                  RaisePropertyChanged();
              }
          }
-         public String ButtonDetail
+         public DetailButtonStatus DetailButton
+         { get; set; }
+         public String DetailButtonText
          {
              get
              {

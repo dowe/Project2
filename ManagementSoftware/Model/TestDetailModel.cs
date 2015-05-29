@@ -9,7 +9,19 @@ namespace ManagementSoftware.Model
     public class TestDetailModel
     {
 
-        String _BestellDatum, _Telefon, _KundenAdresse, _Grenzwerte, _Resultat, _Einheit, _TestID, _BringDatum;
+        String _BestellDatum, _Telefon, _KundenAdresse, _Grenzwerte, _Resultat, _Einheit, _TestID, _BringDatum, _Customer, _Driver;
+
+        public String Driver
+        {
+            get { return _Driver; }
+            set { _Driver = value; }
+        }
+
+        public String Customer
+        {
+            get { return _Customer; }
+            set { _Customer = value; }
+        }
 
         public String BringDatum
         {
