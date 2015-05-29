@@ -39,6 +39,7 @@ namespace Server.DatabaseCommunication
         public DbSet<Analysis> Analysis { get; set; }
         public DbSet<Bill> Bill { get; set; }
         public DbSet<Car> Car { get; set; }
+        public DbSet<CarLogbookEntry> CarLogbookEntries { get; set; }
         public DbSet<GPSPosition> GpsPosition { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<DailyStatistic> DailyStatistic { get; set; }

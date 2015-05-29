@@ -191,10 +191,9 @@ namespace Server.DatabaseCommunication
             return Context.Car.Find(carID).CarLogbook.CarLogbookEntry.FirstOrDefault();
         }
 
-        //ist die nötig?
         public void CreateCarLogbookEnry(CarLogbookEntry entry)
         {
-            throw new NotImplementedException();
+            Context.CarLogbookEntries.Add(entry);
         }
 
 	    public GPSPosition CreateGPSPosition(GPSPosition position)

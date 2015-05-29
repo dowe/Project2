@@ -34,18 +34,16 @@ namespace Server.CmdHandler
                 Driver newDriver = db.GetDriver(command.Username);
                 car.Roadworthy = true;
                 car.CurrentDriver = newDriver;
-                if (car.CarLogbook == null)
-                {
-                    car.CarLogbook = new CarLogbook();
-                }
-                car.CarLogbook.CarLogbookEntry.Add(new CarLogbookEntry
+                var entry = new CarLogbookEntry
                 {
                     Driver = newDriver,
                     StartDate = DateTime.Now,
                     StartKM = command.StartKm,
                     EndDateOrNull = null,
                     EndKMOrNull = null
-                });
+                };
+                db.CreateCarLogbookEnry(entry);
+                car.CarLogbook.CarLogbookEntry.Add(entry);
             }
             else
             {
