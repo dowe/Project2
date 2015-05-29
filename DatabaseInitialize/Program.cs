@@ -257,8 +257,29 @@ namespace DatabaseInitialize
             AddCar(con, "OG-LA-005");
             AddCar(con, "OG-LA-006");
 
-            con.Car.Find("OG-LA-001").CurrentDriver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault();
-            con.Car.Find("OG-LA-002").CurrentDriver = con.Driver.Where(d => d.UserName == "Driv2").FirstOrDefault();
+            var driver1 = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault();
+            var car1 = con.Car.Find("OG-LA-001");
+            car1.CurrentDriver = driver1;
+            var entry1 = new CarLogbookEntry
+            {
+                Driver = driver1,
+                StartDate = DateTime.Now.Subtract(TimeSpan.FromHours(3)),
+                StartKM = 2
+            };
+            con.CarLogbookEntries.Add(entry1);
+            car1.CarLogbook.CarLogbookEntry.Add(entry1);
+
+            var driver2 = con.Driver.Where(d => d.UserName == "Driv2").FirstOrDefault();
+            var car2 = con.Car.Find("OG-LA-002");
+            car2.CurrentDriver = driver2;
+            var entry2 = new CarLogbookEntry
+            {
+                Driver = driver2,
+                StartDate = DateTime.Now.Subtract(TimeSpan.FromHours(3)),
+                StartKM = 2
+            };
+            con.CarLogbookEntries.Add(entry2);
+            car2.CarLogbook.CarLogbookEntry.Add(entry2);
 
             try
             {
@@ -287,7 +308,7 @@ namespace DatabaseInitialize
         {
             GPSPosition position = new GPSPosition { Latitude = 48.4580221f, Longitude = 7.9423354f };
             context.GpsPosition.Add(position);
-            Car car = new Car() { CarID = carID, CarLogbook = new CarLogbook() { CarId = carID}, Roadworthy = true, LastPosition = position };
+            Car car = new Car() { CarID = carID, CarLogbook = new CarLogbook() { CarId = carID, CarLogbookEntry = new List<CarLogbookEntry>() }, Roadworthy = true, LastPosition = position };
             context.Car.Add(car);
         }
 
