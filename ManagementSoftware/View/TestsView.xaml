@@ -37,8 +37,8 @@
         <GroupBox Name="DetailsGroupBox" Header="Probendetails" Grid.Row="2" IsEnabled="True"  >
             <Grid>
 
-                <Label Content="Test ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
-                <Label Name="TestID"   HorizontalAlignment="Left" Margin="64,10,0,0" VerticalAlignment="Top" Width="268" Content="{Binding TestIDDetail}" Height="26"/>
+                <Label Content="Kunde:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                <Label Name="TestID"   HorizontalAlignment="Left" Margin="64,10,0,0" VerticalAlignment="Top" Width="156" Content="{Binding CustomerDetail}" Height="26"/>
                 <Label Content="Bringdatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,41,0,0"/>
                 <Label Name="Bringdatum"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,41,0,0" Content="{Binding BringDatumDetail}" Width="100" Height="26"/>
                 <Label Content="Bestelldatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,72,0,0"/>
@@ -53,7 +53,9 @@
                 <Label Name="Einheit" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="170,130,0,0" Content="{Binding EinheitDetail}" Height="32" Width="50"/>
                 <Label Content="Grenzwerte:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,130,0,0"/>
                 <Label Name="Grenzwert" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="298,130,0,0" Content="{Binding GrenzwerteDetail}" RenderTransformOrigin="1.1,5.5" Height="26" Width="91"/>
-                <Button Name="Btn_Fertig"  Command="{Binding ButtonPressAction}" Content="{Binding ButtonDetail}" HorizontalAlignment="Left" Margin="70,161,0,0" VerticalAlignment="Top" Width="95" Visibility="{Binding ButtonDetailVisible}" Height="25"/>
+                <Button Name="Btn_Fertig"  Command="{Binding ButtonPressAction}" Content="{Binding DetailButtonText}" HorizontalAlignment="Left" Margin="70,161,0,0" VerticalAlignment="Top" Width="95" Visibility="{Binding ButtonDetailVisible}" Height="25"/>
+                <Label Content="Fahrer:" HorizontalAlignment="Left" Margin="220,15,0,0" VerticalAlignment="Top" Height="26"/>
+                <Label  HorizontalAlignment="Left" Margin="271,15,0,0" VerticalAlignment="Top" Width="170" Content="{Binding DriverDetail}"/>
             </Grid>
 
         </GroupBox>
