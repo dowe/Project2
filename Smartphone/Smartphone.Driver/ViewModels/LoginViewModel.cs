@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.AspNet.SignalR.Client;
+using Smartphone.Driver.GPS;
 using Smartphone.Driver.Models;
 using Smartphone.Driver.Messages;
 using Smartphone.Driver.NativeServices;
@@ -25,17 +26,19 @@ namespace Smartphone.Driver.ViewModels
 		private IClientConnection connection = null;
 		private Session session = null;
 		private IToaster toaster = null;
+	    private GPSPositionSender positionSender = null;
 
 		private string username = null;
 		private string password = null;
 		private bool communicating = false;
 		private RelayCommand loginCommand = null;
 
-		public LoginViewModel (IClientConnection connection, Session session, IToaster toaster)
+		public LoginViewModel (IClientConnection connection, Session session, IToaster toaster, GPSPositionSender positionSender)
 		{
 			this.connection = connection;
 			this.session = session;
 			this.toaster = toaster;
+		    this.positionSender = positionSender;
 
 			username = "Driv3";
 			password = "Driv3";
@@ -154,6 +157,8 @@ namespace Smartphone.Driver.ViewModels
 
 				CmdGetDriversUnfinishedOrders cmdGetOrders = new CmdGetDriversUnfinishedOrders (session.Username);
 				connection.Send (cmdGetOrders);
+
+                positionSender.Start();
 
 				Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
 			}
