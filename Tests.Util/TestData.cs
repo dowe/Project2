@@ -10,6 +10,21 @@ namespace Tests.Data
 {
     public class TestData
     {
+
+
+        public static DailyStatistic CreateDailyStatistic(String date)
+        {
+            DailyStatistic _MyDailyStatistic = new DailyStatistic();
+            _MyDailyStatistic.Date = Convert.ToDateTime(date);
+            _MyDailyStatistic.NumberOfNewOrders = 22;
+            _MyDailyStatistic.NumberOfCompletedTests = 11;
+            _MyDailyStatistic.NumberOfCompletedOrders = 100;
+            _MyDailyStatistic.NumberOfTestsInProgress = 33;
+            _MyDailyStatistic.NumberOfOrdersInProgress = 42;
+            return _MyDailyStatistic;
+        }
+        
+
         public static Customer CreateTestData(ETitle title, ESMSRequested smsRequested)
         {
 
