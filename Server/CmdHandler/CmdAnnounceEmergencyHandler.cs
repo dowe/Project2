@@ -91,7 +91,7 @@ namespace Server.CmdHandler
                         }
                     }
                     o.CollectDate = null;
-                    PushNotificationToDriverOrTaxi(o, optimalDriverOrNull);
+                    OrderNotificationPushHelper.PushNotificationToDriverOrTaxi(connection, driverMapping, smsSending, serverData, o, optimalDriverOrNull);
                 }
             }
             else
@@ -104,34 +104,5 @@ namespace Server.CmdHandler
             connection.Unicast(response, connectionIdOrNull);
         }
 
-        private void PushNotificationToDriverOrTaxi(Order orderToPush, Driver driverOrNull)
-        {
-            if (driverOrNull != null)
-            {
-                string connectionIDOrNull = driverMapping.ResolveConnectionIDOrNull(driverOrNull.UserName);
-                if (connectionIDOrNull != null)
-                {
-                    CmdSendNotification sendNotification = new CmdSendNotification(orderToPush);
-                    connection.Unicast(sendNotification, connectionIDOrNull);
-                }
-            }
-            else
-            {
-                if (orderToPush.EmergencyPosition != null)
-                {
-                    smsSending.Send(serverData.TaxiPhoneNumber,
-                        "New order " + orderToPush.OrderID + ". Please collect at " +
-                        orderToPush.EmergencyPosition.Latitude +
-                        ", " + orderToPush.EmergencyPosition.Longitude + ".");
-                }
-                else
-                {
-                    smsSending.Send(serverData.TaxiPhoneNumber,
-                        "New order " + orderToPush.OrderID + ". Please collect at " +
-                        orderToPush.Customer.Address.Street +
-                        ", " + orderToPush.Customer.Address.PostalCode + ", " + orderToPush.Customer.Address.City + ".");
-                }
-            }
-        }
     }
 }
