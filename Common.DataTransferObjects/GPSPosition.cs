@@ -16,9 +16,9 @@ namespace Common.DataTransferObjects
 	public class GPSPosition
 	{
         [Key]
-        public Guid GPSPositionID { get; set; }
-	    public float Latitude { get; set; }
-	    public float Longitude { get; set; }
+        public virtual Guid GPSPositionID { get; set; }
+	    public virtual float Latitude { get; set; }
+	    public virtual float Longitude { get; set; }
 
 	    public GPSPosition()
 	    {
