@@ -119,6 +119,7 @@
     <Compile Include="CmdHandler\CmdSetOrderReceivedHandler.cs" />
     <Compile Include="CmdHandler\CmdSetTestResultHandler.cs" />
     <Compile Include="CmdHandler\CmdStoreDriverGPSPositionHandler.cs" />
+    <Compile Include="CmdHandler\OrderNotificationPushHelper.cs" />
     <Compile Include="DatabaseCommunication\DatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\IDatabaseCommunicator.cs" />
     <Compile Include="DatabaseCommunication\LaborContext.cs" />

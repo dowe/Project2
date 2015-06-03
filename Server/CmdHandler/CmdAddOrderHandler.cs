@@ -10,6 +10,7 @@ using Common.Communication.Server;
 using Common.DataTransferObjects;
 using Server.DatabaseCommunication;
 using Server.DriverControlling;
+using Server.Sms;
 
 namespace Server.CmdHandler
 {
@@ -19,14 +20,18 @@ namespace Server.CmdHandler
         private IServerConnection connection = null;
         private IDatabaseCommunicator db = null;
         private IDriverController driverController = null;
-        private UsernameToConnectionIdMapping driverMap = null;
+        private UsernameToConnectionIdMapping driverMapping = null;
+        private ISmsSending smsSending = null;
+        private ILocalServerData serverData = null;
 
-        public CmdAddOrderHandler(IServerConnection connection, IDatabaseCommunicator db, IDriverController driverController, UsernameToConnectionIdMapping driverMap)
+        public CmdAddOrderHandler(IServerConnection connection, IDatabaseCommunicator db, IDriverController driverController, UsernameToConnectionIdMapping driverMapping, ISmsSending smsSending, ILocalServerData serverData)
         {
             this.connection = connection;
             this.db = db;
             this.driverController = driverController;
-            this.driverMap = driverMap;
+            this.driverMapping = driverMapping;
+            this.smsSending = smsSending;
+            this.serverData = serverData;
         }
 
         protected override void Handle(CmdAddOrder command, string connectionIdOrNull)
@@ -47,20 +52,7 @@ namespace Server.CmdHandler
 
             db.StartTransaction();
             db.AttachOrder(order);
-            if (optimalDriverOrNull != null)
-            {
-                Console.WriteLine("Assigned order to driver " + optimalDriverOrNull.UserName + ".");
-                var sendNotification = new CmdSendNotification(order);
-                string connectionId = driverMap.ResolveConnectionIDOrNull(optimalDriverOrNull.UserName);
-                if(connectionId != null)
-                {
-                    connection.Unicast(sendNotification, connectionId);
-                }
-            }
-            else
-            {
-                // TODO: Call taxi.
-            }
+            OrderNotificationPushHelper.PushNotificationToDriverOrTaxi(connection, driverMapping, smsSending, serverData, order, optimalDriverOrNull);
 
             CmdReturnAddOrder ret = new CmdReturnAddOrder(command.Id, order.OrderID);
             connection.Unicast(ret, connectionIdOrNull);

@@ -197,3 +197,6 @@ FakesAssemblies/
 *.opt
 /ManagementSoftware/Model/TestDetailModel.cs
 /ASPServer/App_Data/Thumbs.db
+
+# Runtime files
+ASPServer/App_Data/
