@@ -18,8 +18,8 @@
 			</Grid>
 			<ActivityIndicator VerticalOptions="CenterAndExpand" IsRunning="false" />
 			<StackLayout Orientation="Horizontal" VerticalOptions="End" >
-				<Button Text="Launch Map" HorizontalOptions="StartAndExpand" Command="{Binding LaunchMapCommand}" />
-				<Button Text="Collected" HorizontalOptions="EndAndExpand" Command="{Binding CollectedCommand}" />
+				<Button Text="Starte Map" HorizontalOptions="StartAndExpand" Command="{Binding LaunchMapCommand}" />
+				<Button Text="Abgeholt" HorizontalOptions="EndAndExpand" Command="{Binding CollectedCommand}" />
 			</StackLayout>
 		</StackLayout>
 	</ContentPage.Content>

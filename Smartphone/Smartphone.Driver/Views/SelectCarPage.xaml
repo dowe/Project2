@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Smartphone.Driver.SelectCarPage">
 	<ContentPage.Content>
 		<StackLayout>
+      <Label>Bitte wählen Sie ein verfügbares Auto aus und tragen Sie den Start KM Stand ein.</Label>
 			<Grid HorizontalOptions="Center">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
@@ -11,13 +12,13 @@
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
-				<Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Text="Car:" />
+				<Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Text="Auto:" />
 				<Picker x:Name="carPicker" Grid.Row="0" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" SelectedIndex="{Binding SelectedCarIndex}" IsEnabled="{Binding IsNotCommunicating}" />
-				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Start km:" />
-				<Entry Grid.Row="1" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="Start km" Text="{Binding StartKm}" Keyboard="Numeric" IsEnabled="{Binding IsNotCommunicating}" />
+				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Start KM:" />
+				<Entry Grid.Row="1" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="Start KM" Text="{Binding StartKm}" Keyboard="Numeric" IsEnabled="{Binding IsNotCommunicating}" />
 			</Grid>
 			<ActivityIndicator VerticalOptions="CenterAndExpand" IsRunning="{Binding IsCommunicating}" />
-			<Button VerticalOptions="End" Text="Select Car" Command="{Binding SelectCarCommand}" IsEnabled="{Binding IsNotCommunicating}" />
+			<Button VerticalOptions="End" Text="Auto auswählen" Command="{Binding SelectCarCommand}" IsEnabled="{Binding IsNotCommunicating}" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

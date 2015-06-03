@@ -4,16 +4,19 @@ namespace Smartphone.Driver.Const
 {
 	public static class ToastTexts
 	{
-		public const string FAILED_LOGIN = "Login failed.";
-		public const string FAILED_EMERGENCY = "Emergency failed.";
-		public const string FAILED_LOGOUT_ORDERS_LEFT = "You still have orders left.";
-		public const string FAILED_LAUNCH_MAP = "Could not start the map. Make sure you have Google Maps installed.";
-		public const string FAILED_SET_COLLECTED = "Set collected failed.";
-		public const string FAILED_SELECT_CAR = "Select car failed.";
-		public const string SERVER_NO_ANSWER = "Server did not answer.";
+	    public const string FAILED_LOGIN = "Falscher Username oder falsches Passwort.";
+		public const string FAILED_EMERGENCY = "Notfall konnte nicht gemeldet werden.";
+	    public const string FAILED_LOGOUT_ORDERS_LEFT = "Sie haben noch Bestellung abzuholen.";
+
+	    public const string FAILED_LAUNCH_MAP =
+	        "Google Maps konnte nicht gestartet werden. Haben Sie die App installiert?";
+
+	    public const string FAILED_SET_COLLECTED = "Bestellung konnte nicht als abgeholt gemeldet werden.";
+	    public const string FAILED_SELECT_CAR = "Auto konnte Ihnen nicht zugewiesen werden.";
+	    public const string SERVER_NO_ANSWER = "Keine Antwort vom Server.";
 		public static string AlreadyAssignedToCar(string carID)
 		{
-			return "Already assigned to " + carID;
+		    return "Sie sind bereits Auto " + carID + "zugewiesen.";
 		}
 	}
 }

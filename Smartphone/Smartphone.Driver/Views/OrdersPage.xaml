@@ -11,7 +11,7 @@
 			</ListView>
 			<StackLayout Orientation="Horizontal" VerticalOptions="End" >
 				<Button Text="Logout" HorizontalOptions="StartAndExpand" Command="{Binding LogoutCommand}" />
-				<Button Text="Emergency" HorizontalOptions="EndAndExpand" Command="{Binding EmergencyCommand}" />
+				<Button Text="Notfall" HorizontalOptions="EndAndExpand" Command="{Binding EmergencyCommand}" />
 			</StackLayout>
 		</StackLayout>
 	</ContentPage.Content>
