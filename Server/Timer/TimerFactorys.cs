@@ -26,7 +26,18 @@ namespace Server.Timer
         {
             return new InjectInternalTimed(connection, timerFactory.CreateInstance(), command);
         }
-
+        public static InjectInternalTimed GenerateBillTimer(IServerConnection connection)
+        {
+            //Get the Time until next Sunday Midnight 
+            int days = Convert.ToInt32(DateTime.Now.DayOfWeek); 
+            TimeSpan hoursToSundayMidnight = new TimeSpan(days+1,0,0,0) - DateTime.Now.TimeOfDay;
+            
+            return InjectCmdTimer(connection, new TimerFactory(() => hoursToSundayMidnight, false), () => new CmdGenerateBills());
+        }
+        public static InjectInternalTimed GenerateDailyStatisticTimer(IServerConnection connection)
+        {
+            return InjectCmdTimer(connection, new TimerFactory(() => TimeSpan.FromDays(1.0), false), () => new CmdGenerateDailyStatistic());
+        }
         public static InjectInternalTimed GenerateShiftScheduleTimer(IServerConnection connection)
         {
             return InjectCmdTimer(connection, new TimerFactory(() => TimeSpan.FromDays(1.0), false), () => new CmdGenerateShiftSchedule());

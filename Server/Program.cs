@@ -105,6 +105,10 @@ namespace Server
             data.GenerateShiftScheduleTimer.Start();
             data.CheckOrdersFiveHoursLeftScheduledTimer = TimerFactorys.CheckOrdersFiveHoursLeftScheduledTimer(connection);
             data.CheckOrdersFiveHoursLeftScheduledTimer.Start();
+            data.GenerateDailyStatisticTimer = TimerFactorys.GenerateDailyStatisticTimer(connection);
+            data.GenerateDailyStatisticTimer.Start();
+            data.GenerateBillTimer = TimerFactorys.GenerateBillTimer(connection);
+            data.GenerateBillTimer.Start();
 
             connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
             connection.InjectInternal(new CmdGenerateDailyStatistic());
