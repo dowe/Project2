@@ -30,6 +30,8 @@ namespace Server
         public Address ZmsAddress { get; private set; }
         public string TaxiPhoneNumber { get; private set; }
         public float RoadCostInEuroPerKm { get; private set; }
+        public InjectInternalTimed GenerateBillTimer { get; set; }
+        public InjectInternalTimed GenerateDailyStatisticTimer { get; set; }
         public InjectInternalTimed GenerateShiftScheduleTimer { get; set; }
         public InjectInternalTimed CheckOrdersFiveHoursLeftScheduledTimer { get; set; }
         public Dictionary<Guid, InjectInternalTimed> TimerList { get; private set; }

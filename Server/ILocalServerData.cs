@@ -13,6 +13,8 @@ namespace Server
         Address ZmsAddress { get; }
         string TaxiPhoneNumber { get; }
         float RoadCostInEuroPerKm { get; }
+        InjectInternalTimed GenerateDailyStatisticTimer { get; set; }
+        InjectInternalTimed GenerateBillTimer { get; set; }
         InjectInternalTimed GenerateShiftScheduleTimer { get; set; }
         InjectInternalTimed CheckOrdersFiveHoursLeftScheduledTimer { get; set; }
         Dictionary<Guid, InjectInternalTimed> TimerList { get; }
