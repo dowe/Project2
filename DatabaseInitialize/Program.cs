@@ -127,7 +127,6 @@ namespace DatabaseInitialize
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault())
             {
                 OrderDate = DateTime.Now,
-                Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault()
             });
             orders.Add(new Order()
             {
@@ -136,9 +135,11 @@ namespace DatabaseInitialize
                 BringDate = DateTime.Now,
                 CollectDate = DateTime.Now,
                 CompleteDate = DateTime.Now,
+                
                 Invoiced = false,
                 RemindedAfterFiveHours = false,
                 Customer = con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault(),
+                
                 Test = new List<Test>()
                 {
                     new Test("NochNPatient", con.Analysis.Find("Blut_Hämoglobin"))
@@ -173,6 +174,12 @@ namespace DatabaseInitialize
                         AlarmState = AlarmState.FIRST_ALARM_TRANSMITTED,
                         Critical = true,
                         TestState = TestState.COMPLETED
+                    },
+                    new Test("NochNPatient", con.Analysis.Find("Stuhl_Candida"))
+                    {
+                        
+                        TestState = TestState.WAITING_FOR_DRIVER,
+                        
                     },
                 }
             });
@@ -319,7 +326,7 @@ namespace DatabaseInitialize
             customers.Add(new Customer("Dr.", "House", "house", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Dr. House imba Werkstatt", new BankAccount("SDLFKJSDLKFJ", "Dr. House")){TwoWayRoadCostInEuro = 11.11f});
             customers.Add(new Customer("Alice", "Vette", "vette", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Vetter Alice Fachärztin für Allgemeinmedizin", new BankAccount("1asdf243ew", "Alice Vette")) { TwoWayRoadCostInEuro = 1.11f });
             customers.Add(new Customer("Wolfgang", "Bätz", "lolo", "asdf", new Address("Am Marktplatz 7", "77652", "Offenburg"), "Bätz Wolfgang Dr.med. Gefäßchirurg", new BankAccount("ASDLF23456", "Wolfgang Bätz"), true, "107438570935") { TwoWayRoadCostInEuro = 2.11f });
-            customers.Add(new Customer("Michael", "Brake", "holzmichel", "asdf", new Address("Hauptstr. 98", "77652", "Offenburg"), "Brake Michael Dr. med. Arzt für Urologie", new BankAccount("ALKFJ34565768", "Michael Brake"), true, "9347983476") { TwoWayRoadCostInEuro = 44.11f });
+            customers.Add(new Customer("Michael", "Brake", "holzmichel", "asdf", new Address("Hauptstr. 98", "77652", "Offenburg"), "Brake Michael Dr. med. Arzt für Urologie", new BankAccount("ALKFJ34565768", "Michael Brake"), true, "017655524473") { TwoWayRoadCostInEuro = 44.11f });
             customers.Add(new Customer("Elke", "Brüderle", "Elli", "asdf", new Address("Ebertplatz 12", "77652", "Offenburg"), "Brüderle Elke Dr. Frauenärztin", new BankAccount("LKFJGFG23456", "Brüderle Elke")) { TwoWayRoadCostInEuro = 1.11f });
             customers.Add(new Customer("Traunecker", "Ulrich", "ulli", "asdf", new Address("Leutkirchstraße 13", "77723", "Gengenbach"), "Dr. med. Ulrich Traunecker", new BankAccount("UZJH87698347", "Ulrich Traunecker"), true, "379786546") { TwoWayRoadCostInEuro = 0.11f });
             customers.Add(new Customer("Matthias", "Ruff", "ruffi", "asdf", new Address("Hauptstraße 24", "77723", "Gengenbach"), "Dr. med. Matthias Ruff", new BankAccount("HUGZGU87687625", "Matthias Ruff")) { TwoWayRoadCostInEuro = 5.11f });

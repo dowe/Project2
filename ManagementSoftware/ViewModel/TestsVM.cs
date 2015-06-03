@@ -26,7 +26,6 @@ namespace ManagementSoftware.ViewModel
          private String _ResultatDetailEnabled;
          private String _ResultatDetail;
          private String _ButtonDetail;
-         public enum DetailButtonStatus {ORDERED, RECEIVED, COMPLETED, ALARM_CONFIRMED };
          private String _ButtonDetailVisible;
 
          private TestEntryModel _SelectedTestEntry;
@@ -39,11 +38,10 @@ namespace ManagementSoftware.ViewModel
             _SelectedTestEntry = new TestEntryModel();
             _Detail = new TestDetailModel();
             ButtonPressAction = new RelayCommand(ButtonPress);
-            DetailButton = DetailButtonStatus.ORDERED;
-            DetailButtonText = "Eingetroffen";
             ButtonDetailVisible = "Hidden";
             ResultatDetailEnabled ="False";
             ResultatDetail = "";
+            LoadData();
         }
 
          private void ButtonPress()
@@ -51,23 +49,30 @@ namespace ManagementSoftware.ViewModel
              switch(SelectedTestEntry.Test.TestState)
              {
                  case TestState.ORDERED:
-                     _ClientConnection.Send(new CmdSetOrderCollected(null, currentOrder.OrderID));
+                     _ClientConnection.Send(new CmdSetOrderReceived(currentOrder.OrderID));
+                     break;
+                 case TestState.WAITING_FOR_DRIVER:
+                     _ClientConnection.Send(new CmdSetOrderReceived(currentOrder.OrderID));
                      break;
                  case TestState.IN_PROGRESS:
                      if (ResultatDetail != "")
                      {
                          _ClientConnection.Send(new CmdSetTestResult(SelectedTestEntry.Test.TestID, Convert.ToSingle(ResultatDetail)));
                      }
-                         break;
+                     else
+                     {
+                         MessageBox.Show("Fehler: Kein Resultatwert eingetragen");
+                     }
+                     break;
                  case TestState.COMPLETED:
                      if(SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_TRANSMITTED)
                      { 
                          _ClientConnection.Send(new CmdSetFirstAlertReceived(SelectedTestEntry.Test.TestID));
                      } 
+                     
                      break;
-
              }
-
+             SelectedTestEntry = null;
              LoadData();
              RefreshDetail();   
          }
@@ -86,11 +91,10 @@ namespace ManagementSoftware.ViewModel
          }
          public RelayCommand LoadCommand { get; set; }
          public RelayCommand ButtonPressAction { get; set; }
-         private void RefreshDetail()
+         public void RefreshDetail()
          {
              if (_SelectedTestEntry != null)
              {
-
                  if (_SelectedTestEntry.Test.ResultValue != 0)
                      ResultatDetail = SelectedTestEntry.Test.ResultValue.ToString();
                  else
@@ -101,10 +105,7 @@ namespace ManagementSoftware.ViewModel
                 else
                     BringDatumDetail = "#";
 
-                if (SelectedTestEntry.TestID != null)
-                    TestIDDetail = SelectedTestEntry.TestID;
-                else
-                    TestIDDetail = "#";
+               
                 if (SelectedTestEntry.Test.Analysis.UnitOfMeasure != null)
                     Detail.Einheit = SelectedTestEntry.Test.Analysis.UnitOfMeasure;
                 else
@@ -150,46 +151,70 @@ namespace ManagementSoftware.ViewModel
                 else
                     CustomerDetail = "#";
                 //ButtonDetails
-                if (SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_CONFIRMED || SelectedTestEntry.Test.AlarmState == AlarmState.SECOND_ALARM_TRANSMITTED)
+                switch(SelectedTestEntry.Test.TestState)
                 {
-                    ButtonDetailVisible = "Hidden";
-                    ResultatDetailEnabled = "False";
+                    case TestState.ORDERED:
+                        if(currentOrder.Driver == null)
+                        {
+                            ResultatDetailEnabled = "False";
+                            DetailButtonText = "Eingetroffen";
+                            ButtonDetailVisible = "Visible";
+                        }else
+                        {
+                            ResultatDetailEnabled = "False";
+                            ButtonDetailVisible = "Hidden";
+                        }
+                        break;
+                    case TestState.WAITING_FOR_DRIVER:
+                        ResultatDetailEnabled = "False";
+                        DetailButtonText = "Eingetroffen";
+                        ButtonDetailVisible = "Visible";
+                        break;
+                    case TestState.IN_PROGRESS:
+                        ResultatDetailEnabled = "True";
+                        DetailButtonText = "Test fertig";
+                        ButtonDetailVisible = "Visible";
+                        break;
+                    case TestState.COMPLETED:
+                        if(SelectedTestEntry.Test.AlarmState == AlarmState.NO_ALARM)
+                        {
+                            ResultatDetailEnabled = "False";
+                            ButtonDetailVisible = "Hidden";
+                        }
+                        else if (SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_TRANSMITTED)
+                        {
+                            ResultatDetailEnabled = "False";
+                            ButtonDetailVisible = "Visible";
+                            DetailButtonText = "Alarm bestätigt";
+                        }
+                        else if(SelectedTestEntry.Test.AlarmState == AlarmState.SECOND_ALARM_TRANSMITTED)
+                        {
+                            ResultatDetailEnabled = "False";
+                            ButtonDetailVisible = "Hidden";
+                        }
+                        else if(SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_CONFIRMED)
+                        {
+                            ResultatDetailEnabled = "False";
+                            ButtonDetailVisible = "Hidden";
+                        }
+                        break;
+                }   
+                }else{
+                    ResultatDetail ="";
+                    DriverDetail = "";
+                    GrenzwerteDetail= "";
+                    EinheitDetail="";
+                    ButtonDetailVisible="Hidden";
+                    ResultatDetailEnabled="False";
+                    ResultatDetail = "";
+                    BestellDatumDetail="";
+                    BringDatumDetail="";
+                    CustomerDetail="";
+                    KundenAdresseDetail="";
+                    TelefonDetail="";
+                 }
 
-                }
-                else if (SelectedTestEntry.Test.AlarmState == AlarmState.FIRST_ALARM_TRANSMITTED && SelectedTestEntry.Test.TestState == TestState.COMPLETED)
-                {
-                    DetailButtonText = "Alarm Bestätigt";
-                    ButtonDetailVisible = "Visible";
-                    ResultatDetailEnabled = "False";
-
-                }
-                else if(SelectedTestEntry.Test.TestState == TestState.COMPLETED)
-                {
-                    ButtonDetailVisible = "Hidden";
-                    ResultatDetailEnabled = "False";
-                }
-                else if(SelectedTestEntry.Test.TestState == TestState.IN_PROGRESS)
-                {
-
-                    ResultatDetailEnabled = "True";
-                    ButtonDetailVisible = "Visible";
-                    DetailButtonText = "Test fertig";
-                }
-                
-                else if (SelectedTestEntry.Test.TestState == TestState.ORDERED && currentOrder.Driver == null)
-                {
-                    ResultatDetailEnabled = "False";
-                    DetailButtonText = "Eingetroffen";
-                    ButtonDetailVisible = "Visible";
-                }
-                else if (SelectedTestEntry.Test.TestState == TestState.ORDERED)
-                {
-                    ResultatDetailEnabled = "False";
-                    DetailButtonText = "Eingetroffen";
-                    ButtonDetailVisible = "Hidden";
-                }
-
-
+           
                 RaisePropertyChanged();
                 RaisePropertyChanged(() => Detail);
                 RaisePropertyChanged(() => BringDatumDetail);
@@ -200,10 +225,9 @@ namespace ManagementSoftware.ViewModel
                 RaisePropertyChanged(() => GrenzwerteDetail);
                 RaisePropertyChanged(() => EinheitDetail);
                 RaisePropertyChanged(() => BestellDatumDetail);
-                RaisePropertyChanged(() => TestIDDetail);
                 RaisePropertyChanged(() => DetailButtonText);
                 RaisePropertyChanged(() => ButtonDetailVisible);
-             }
+             
          }
          private void LoadData()
          {
@@ -403,18 +427,7 @@ namespace ManagementSoftware.ViewModel
                  RaisePropertyChanged();
              }
          }
-         public String TestIDDetail
-         {
-             get
-             {
-                 return _Detail.TestID;
-             }
-             set
-             {
-                 _Detail.TestID = value;
-                 RaisePropertyChanged();
-             }
-         }
+
          public TestEntryModel SelectedTestEntry
          {
              get
@@ -442,8 +455,7 @@ namespace ManagementSoftware.ViewModel
                  RaisePropertyChanged();
              }
          }
-         public DetailButtonStatus DetailButton
-         { get; set; }
+         
          public String DetailButtonText
          {
              get

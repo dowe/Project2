@@ -79,6 +79,7 @@
     <Compile Include="ViewModelTests\CustomerListVMTests.cs" />
     <Compile Include="ViewModelTests\CreateOrderVMTests.cs" />
     <Compile Include="ViewModelTests\ShiftScheduleVMTests.cs" />
+    <Compile Include="ViewModelTests\TestsVMTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Commands\Common.Commands.csproj">

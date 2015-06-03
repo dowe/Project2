@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UML", "UML\UML.modelproj", "{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.DataTransferObjects", "Common.DataTransferObjects\Common.DataTransferObjects.csproj", "{3476B14D-B58A-457C-8357-CE9801106AAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Communication.Client", "Common.Communication.Client\Common.Communication.Client.csproj", "{2B9228E8-BD74-4D56-AA96-551FC8031595}"
@@ -41,10 +39,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E942C1FF-0B3C-4628-8773-9D69AD80BAC0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3476B14D-B58A-457C-8357-CE9801106AAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3476B14D-B58A-457C-8357-CE9801106AAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3476B14D-B58A-457C-8357-CE9801106AAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
