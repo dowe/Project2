@@ -5,10 +5,10 @@ namespace Smartphone.Driver.Const
 	public static class NotificationTexts
 	{
 
-		public const string ORDER_REMINDER_TEXT = "Only one hour left to collect the samples. Hurry up!";
+		public const string ORDER_REMINDER_TEXT = "Nur noch eine Stunde üprig, um die Bestellung einzusammeln. Beeilen Sie sich!";
 		public static string OrderReminderTitle(long orderID)
 		{
-			return "Order " + orderID;
+			return "Bestellung " + orderID;
 		}
 
 	}
