@@ -127,9 +127,7 @@ namespace DatabaseInitialize
            {
                OrderDate = DateTime.Now,
                Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault(),
-               BringDate = DateTime.Now,
-               CollectDate = DateTime.Now,
-               CompleteDate = DateTime.Now,
+               
 
                Invoiced = false,
                RemindedAfterFiveHours = false,
@@ -183,10 +181,11 @@ namespace DatabaseInitialize
                       new Test("NochNPatient", con.Analysis.Find("Urin_Albumin"))
                     {
                         StartDate = DateTime.Now,
-                        
+                        EndDate = DateTime.Now,
+                        ResultValue = 15f,
                         AlarmState = AlarmState.NO_ALARM,
-                        Critical = true,
-                        TestState = TestState.IN_PROGRESS
+                        Critical = false,
+                        TestState = TestState.COMPLETED
                     },
                     new Test("NochNPatient", con.Analysis.Find("Stuhl_Candida"))
                     {
@@ -197,12 +196,7 @@ namespace DatabaseInitialize
                         Critical = true,
                         TestState = TestState.COMPLETED
                     },
-                    new Test("NochNPatient", con.Analysis.Find("Stuhl_Candida"))
-                    {
-                        
-                        TestState = TestState.WAITING_FOR_DRIVER,
-                        
-                    },
+                   
                 }
             });
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "ulli").FirstOrDefault())
@@ -224,8 +218,39 @@ namespace DatabaseInitialize
             {
                 OrderDate = DateTime.Now.Subtract(TimeSpan.FromHours(5)),
                 Driver = con.Driver.Where(d => d.UserName == "Driv3").FirstOrDefault(),
-                BringDate = DateTime.Now.Subtract(TimeSpan.FromHours(1)),
-                CollectDate = DateTime.Now.Subtract(TimeSpan.FromHours(2))
+            });
+            orders.Add(new Order()
+            {
+                OrderDate = DateTime.Now,
+                Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault(),
+                CollectDate = DateTime.Now,
+
+                Invoiced = false,
+                RemindedAfterFiveHours = false,
+                Customer = con.Customer.Where(c => c.UserName == "Elli").FirstOrDefault(),
+
+                Test = new List<Test>()
+                {
+                    new Test("Peterle", con.Analysis.Find("Blut_Hämoglobin"))
+                    {
+                        TestState = TestState.WAITING_FOR_DRIVER
+                    },
+                    new Test("Peterle", con.Analysis.Find("Urin_Gewicht"))
+                    {
+                         TestState = TestState.WAITING_FOR_DRIVER
+
+                    },
+                      new Test("Hansi", con.Analysis.Find("Urin_Albumin"))
+                    {
+                         TestState = TestState.WAITING_FOR_DRIVER
+
+                    },
+                    new Test("Hansi", con.Analysis.Find("Stuhl_Candida"))
+                    {
+                        TestState = TestState.WAITING_FOR_DRIVER
+                    },
+                   
+                }
             });
             con.Order.AddRange(orders);
             con.SaveChanges();
