@@ -18,7 +18,7 @@ namespace Common.DataTransferObjects
 		BLOOD,
         [Description("Urin")]
 		URINE,
-        [Description("Exkremente")]
+        [Description("Stuhl")]
 		EXCREMENT,
         [Description("Speichel")]
 		SALIVA,
