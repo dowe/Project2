@@ -5,12 +5,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kundenapp", "Kundenapp_test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kundenapp.Droid", "Droid\Kundenapp.Droid.csproj", "{C7BEB808-0C57-4B14-913C-4F52586E6593}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KundenappTest", "KundenappTest\KundenappTest.csproj", "{2813217A-72B6-4449-9CC4-C270B4B67115}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2813217A-72B6-4449-9CC4-C270B4B67115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2813217A-72B6-4449-9CC4-C270B4B67115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2813217A-72B6-4449-9CC4-C270B4B67115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2813217A-72B6-4449-9CC4-C270B4B67115}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F0B907D-2B51-4C31-A527-3E1C11BE49E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F0B907D-2B51-4C31-A527-3E1C11BE49E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F0B907D-2B51-4C31-A527-3E1C11BE49E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
