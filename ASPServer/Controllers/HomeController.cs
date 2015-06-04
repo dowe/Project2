@@ -22,7 +22,7 @@ namespace ASPServer.Controllers
         private const string SessionOrdered = "orderedAnalysisList";
         private const string SessionPatientsList = "patientsList";
         private const string LastActionTime = "lastActionTime";
-        private const int LogoutIdleTimeInSec = 300;
+        private const int LogoutIdleTimeInSec = 600;
 
         IClientConnection _clientConnection;
 
@@ -367,7 +367,7 @@ namespace ASPServer.Controllers
                 {
                     // Check how long since the last user action in a authenticated context
                     TimeSpan span = new TimeSpan(DateTime.UtcNow.Ticks - ((long)Session[LastActionTime]));
-                    if (span.Seconds < LogoutIdleTimeInSec)
+                    if (span.TotalSeconds < LogoutIdleTimeInSec)
                     {
                         // If the user was within the time we set the new time
                         Session[LastActionTime] = DateTime.UtcNow.Ticks;
