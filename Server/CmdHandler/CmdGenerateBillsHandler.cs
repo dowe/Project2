@@ -193,17 +193,6 @@ namespace Server.CmdHandler
                          TestAmount++;
 
                      }
-
-                   /*  foreach (Test t in _TestList)
-                     {
-                         pricetotal += t.Analysis.PriceInEuro;
-                         XRect tests = new XRect(marginLeft, y, page.Width/2, fontHeightSmall);
-                         gfx.DrawString(t.Analysis.Name, fontSmall, XBrushes.Black, tests, XStringFormats.TopLeft);
-                         tf.DrawString(t.Analysis.PriceInEuro.ToString("C"), fontSmall, XBrushes.Black, tests, XStringFormats.TopLeft);
-                         y += fontHeightSmall;
-                         TestAmount++;
-                     }
-                 */
                      gfx.DrawRectangle(pen, marginLeft - 5, y - 5 - ((TestAmount +1) * fontHeightSmall) - absatz  , page.Width - (2 * marginLeft),  ((TestAmount+1)*fontHeightSmall)+absatz+ 10);
 
                      y += 2*absatz;
@@ -237,6 +226,7 @@ namespace Server.CmdHandler
                      }
                      else
                      {
+                         
                          doc.Save(b.PDFPath);
                          db.CreateBill(b);
                      }

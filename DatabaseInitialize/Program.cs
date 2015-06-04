@@ -123,7 +123,29 @@ namespace DatabaseInitialize
                 con.Analysis.Find("Blut_Hämoglobin"),
                  con.Analysis.Find("Speichel_Cortisol")
             });
+            orders.Add(new Order()
+           {
+               OrderDate = DateTime.Now,
+               Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault(),
+               BringDate = DateTime.Now,
+               CollectDate = DateTime.Now,
+               CompleteDate = DateTime.Now,
 
+               Invoiced = false,
+               RemindedAfterFiveHours = false,
+               Customer = con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault(),
+
+               Test = new List<Test>()
+                {
+            new Test("Hypochonda", con.Analysis.Find("Stuhl_Candida"))
+                    {
+                        
+                        TestState = TestState.WAITING_FOR_DRIVER,
+                        
+                    }
+                }
+           });
+                
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault())
             {
                 OrderDate = DateTime.Now,

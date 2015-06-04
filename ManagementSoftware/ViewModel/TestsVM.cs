@@ -251,7 +251,14 @@ namespace ManagementSoftware.ViewModel
                          TestEntryModel temp = new TestEntryModel();
                          temp.OrderID = o.OrderID.ToString();
                          temp.PatientID = t.PatientID;
-                         temp.BringDate = o.BringDate.ToString(); 
+                         if (o.BringDate != null)
+                         {
+                             temp.BringDate = o.BringDate.ToString();
+                         }
+                         else
+                         {
+                             temp.BringDate = "-";
+                         }
                          temp.CustomerLabel = o.Customer.Label;
                          temp.SampleTypeAndAnalysis = t.Analysis.Name;
                          temp.TestID = t.TestID.ToString();
@@ -284,8 +291,15 @@ namespace ManagementSoftware.ViewModel
                          switch (t.AlarmState)
                          {
                              case AlarmState.NO_ALARM:
-                                 temp.AlarmState = "Kein Alarm gesendet";
-                                 break;
+                                 if (t.TestState == TestState.COMPLETED)
+                                 {
+                                     temp.AlarmState = "Kein Alarm";
+                                 }
+                                 else
+                                 {
+                                     temp.AlarmState = "-";
+                                 }
+                                     break;
                              case AlarmState.FIRST_ALARM_TRANSMITTED:
                                  temp.AlarmState = "Erster Alarm gesendet";
                                  break;
