@@ -42,7 +42,11 @@ namespace Server.ShiftScheduleCreation
             DayEntry lastOfLastMonth = new DayEntry();
             lastOfLastMonth.Date = schedule.Date.AddDays(-1);
             var daysLastMonth = DateTime.DaysInMonth(lastOfLastMonth.Date.Year, lastOfLastMonth.Date.Month);
-            lastOfLastMonth.PM = last.DayEntry[daysLastMonth - 1].PM;
+            if (last.DayEntry != null)
+            {
+                lastOfLastMonth.PM = last.DayEntry[daysLastMonth - 1].PM;
+            }
+
             entries.Add(lastOfLastMonth);
 
             var entry = new DayEntry();
@@ -64,22 +68,34 @@ namespace Server.ShiftScheduleCreation
             {
                 iOffset++;
             }
+
+
             for (int d = (daysLastMonth - iOffset); d < daysLastMonth; d++)
             {
-                for (int e = 0; e < empl.Count; e++)
+                if (last.DayEntry != null)
                 {
-                    if (last.DayEntry[d].AM.Contains(empl[e]))
+                    for (int e = 0; e < empl.Count; e++)
                     {
-                        amountOfShifts[e]++;
-                        shiftsAM[e]++;
-                    }
-                    else if (last.DayEntry[d].PM.Contains(empl[e]))
-                    {
-                        amountOfShifts[e]++;
-                        shiftsAM[e]--;
+                        if (last.DayEntry[d].AM.Contains(empl[e]))
+                        {
+                            amountOfShifts[e]++;
+                            shiftsAM[e]++;
+                        }
+                        else if (last.DayEntry[d].PM.Contains(empl[e]))
+                        {
+                            amountOfShifts[e]++;
+                            shiftsAM[e]--;
+                        }
                     }
                 }
+                else
+                {
+                    List<Employee> pmLastOfLastMonth = new List<Employee>();
+                    entries[0].PM = pmLastOfLastMonth;
+                }
             }
+
+
             int cntEmployees = 0;
             int cntDriverAM = 0;
             int cntLabsAM = 0;
@@ -89,36 +105,33 @@ namespace Server.ShiftScheduleCreation
             int cntLabsPM = 0;
             int cntAdminsPM = 0;
 
-            for (int d = 1; d < daysCur+1; d++)
+            for (int d = 1; d < daysCur + 1; d++)
             {
-                while (cntEmployees < 12)
+                while (cntEmployees < 6)
                 {
-             
+
                     for (int e = 0; e < empl.Count; e++)
                     {
                         if (!entries[d - 1].PM.Contains(empl[e]) && amountOfShifts[e] < 3 && shiftsAM[e] <= 0)
                         {
-                            if (empl[e].EmployeeType.Equals(EEmployeeType.TypeDriver) && cntDriverAM < 2)
+                            if (empl[e].EmployeeType.Equals(EEmployeeType.TypeDriver) && cntDriverAM < 1)
                             {
                                 entries[d].AM.Add(empl[e]);
-                                Console.WriteLine("Added Driver AM " + empl[e].FirstName + " at" + entries[d].Date);
                                 cntDriverAM++;
                                 amountOfShifts[e]++;
                                 shiftsAM[e]++;
                                 cntEmployees++;
                             }
-                            else if (empl[e].EmployeeType.Equals(EEmployeeType.TypeAdministrationAssistant) && cntAdminsAM < 2)
+                            else if (empl[e].EmployeeType.Equals(EEmployeeType.TypeAdministrationAssistant) && cntAdminsAM < 1)
                             {
                                 entries[d].AM.Add(empl[e]);
-                                Console.WriteLine("Added Admin AM " + empl[e].FirstName + " at" + entries[d].Date);
                                 cntAdminsAM++;
                                 amountOfShifts[e]++;
                                 shiftsAM[e]++;
                                 cntEmployees++;
                             }
-                            else if (empl[e].EmployeeType.Equals(EEmployeeType.TypeLabAssistant) && cntLabsAM < 2)
+                            else if (empl[e].EmployeeType.Equals(EEmployeeType.TypeLabAssistant) && cntLabsAM < 1)
                             {
-                                Console.WriteLine("Added Lab AM " + empl[e].FirstName  + " at" + entries[d].Date);
                                 entries[d].AM.Add(empl[e]);
                                 cntLabsAM++;
                                 amountOfShifts[e]++;
@@ -128,27 +141,24 @@ namespace Server.ShiftScheduleCreation
                         }
                         if (!entries[d].AM.Contains(empl[e]) && amountOfShifts[e] < 3 && shiftsAM[e] >= 0)
                         {
-                            if (empl[e].EmployeeType.Equals(EEmployeeType.TypeDriver) && cntDriverPM < 2)
+                            if (empl[e].EmployeeType.Equals(EEmployeeType.TypeDriver) && cntDriverPM < 1)
                             {
-                                Console.WriteLine("Added Driver PM " + empl[e].FirstName  + " at" + entries[d].Date);
                                 entries[d].PM.Add(empl[e]);
                                 cntDriverPM++;
                                 amountOfShifts[e]++;
                                 shiftsAM[e]--;
                                 cntEmployees++;
                             }
-                            else if (empl[e].EmployeeType.Equals(EEmployeeType.TypeAdministrationAssistant) && cntAdminsPM < 2)
+                            else if (empl[e].EmployeeType.Equals(EEmployeeType.TypeAdministrationAssistant) && cntAdminsPM < 1)
                             {
-                                Console.WriteLine("Added Admin PM " + empl[e].FirstName + " at" + entries[d].Date);
                                 entries[d].PM.Add(empl[e]);
                                 cntAdminsPM++;
                                 amountOfShifts[e]++;
                                 shiftsAM[e]--;
                                 cntEmployees++;
                             }
-                            else if (empl[e].EmployeeType.Equals(EEmployeeType.TypeLabAssistant) && cntLabsPM < 2)
+                            else if (empl[e].EmployeeType.Equals(EEmployeeType.TypeLabAssistant) && cntLabsPM < 1)
                             {
-                                Console.WriteLine("Added Lab PM " + empl[e].FirstName  + " at" + entries[d].Date);
                                 entries[d].PM.Add(empl[e]);
                                 cntLabsPM++;
                                 amountOfShifts[e]++;
@@ -159,13 +169,13 @@ namespace Server.ShiftScheduleCreation
                     }
                 }
 
-                    if ((iOffset + d) % 7 == 0)
+                if ((iOffset + d) % 7 == 0)
+                {
+                    for (int e = 0; e < empl.Count; e++)
                     {
-                        for (int e = 0; e < empl.Count; e++)
-                        {
-                            amountOfShifts[e] = 0;
-                        }
+                        amountOfShifts[e] = 0;
                     }
+                }
 
                 cntEmployees = 0;
                 cntAdminsAM = 0;
@@ -179,20 +189,7 @@ namespace Server.ShiftScheduleCreation
             entries.RemoveAt(0);
             schedule.DayEntry = entries;
 
-            for (int d = 0; d < schedule.DayEntry.Count; d++)
-            {
-                for (int e = 0; e < schedule.DayEntry[d].AM.Count; e++)
-                {
-                    Console.WriteLine("Date: " + schedule.DayEntry[d].Date + "Employee AM " + e + " " + schedule.DayEntry[d].AM[e].FirstName);
-                }
 
-                for (int e = 0; e < schedule.DayEntry[d].PM.Count; e++)
-                {
-                    Console.WriteLine("Date: " + schedule.DayEntry[d].Date + "Employee PM " + e + " " + schedule.DayEntry[d].PM[e].FirstName);
-                }
-            
-            }
-            
             return schedule;
         }
     }
