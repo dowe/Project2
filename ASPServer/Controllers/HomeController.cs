@@ -12,6 +12,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace ASPServer.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         private const string SessionBills = "billsData";
@@ -214,8 +215,6 @@ namespace ASPServer.Controllers
 
             return View(bills);
         }
-
-
 
         [HttpPost]
         public ActionResult Bill(string submitBtn)
