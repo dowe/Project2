@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.DataTransferObjects;
 using Server.DatabaseCommunication;
-using System.Data.Entity;
-using Common.DataTransferObjects;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 namespace DatabaseInitialize
 {
     class Program
@@ -13,6 +11,33 @@ namespace DatabaseInitialize
         static void Main(string[] args)
         {
             Initialize();
+            RemoveAllBills();
+        }
+
+        private static void RemoveAllBills()
+        {
+            try
+            {
+                string workingDir = Directory.GetCurrentDirectory();
+                Console.WriteLine("INFO: Running from " + workingDir + " (works only if you run it from the bin/debug directory).");
+                DirectoryInfo appData = new DirectoryInfo("../../../ASPServer/App_Data");
+                if (appData.Exists)
+                {
+                    foreach (DirectoryInfo dir in appData.GetDirectories())
+                    {
+                        dir.Delete(true);
+                        Console.WriteLine("INFO: " + dir.FullName + " deleted");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("WARNING: ASPServer/App_Data directory does not exist or was not found.");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ERROR: Deleting failed (" + e.Message + ").");
+            }
         }
 
         private static void Initialize()
@@ -32,7 +57,7 @@ namespace DatabaseInitialize
         {
             LaborContext con = new LaborContext();
             List<Order> orders = new List<Order>();
-            
+
 
             //Start Creating a Mockorder for testing
             Order MockOrder1 = new Order();
@@ -44,7 +69,7 @@ namespace DatabaseInitialize
             MockCustomer.FirstName = "Hans";
 
             MockCustomer.BankAccount = new BankAccount("DE 2323 1212 3333 1111", "Hans Müller");
-            MockCustomer.Address = new Address("Kurzestr","3333","Offenburg");
+            MockCustomer.Address = new Address("Kurzestr", "3333", "Offenburg");
 
             MockCustomer.TwoWayRoadCostInEuro = 42.11f;
             MockOrder1.Customer = MockCustomer;
@@ -62,7 +87,7 @@ namespace DatabaseInitialize
             MockOrder1.Test[0].EndDate = DateTime.Now;
             MockOrder1.Test[1].EndDate = DateTime.Now;
             MockOrder1.Test[2].EndDate = DateTime.Now;
-            
+
 
 
             orders.Add(MockOrder1);
@@ -71,8 +96,8 @@ namespace DatabaseInitialize
             Order MockOrder2 = new Order();
             MockOrder2.CollectDate = DateTime.Now;
             MockOrder2.OrderDate = DateTime.Now.AddDays(-1);
-        
-            
+
+
             MockOrder2.Invoiced = false;
             Customer MockCustomer2 = new Customer();
             MockCustomer2.UserName = "otherUsername";
@@ -88,9 +113,9 @@ namespace DatabaseInitialize
             List<Test> MockTest2 = new List<Test>();
             MockTest2.Add(new Test("Patientenid333", Anal1));
             MockTest2.Add(new Test("Patientenid222", Anal2));
-          
+
             MockOrder2.Test = MockTest2;
-         
+
             orders.Add(MockOrder2);
 
             //Start MockOrder 3, same customer as 1
@@ -145,7 +170,7 @@ namespace DatabaseInitialize
                     }
                 }
            });
-                
+
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault())
             {
                 OrderDate = DateTime.Now,
@@ -157,11 +182,11 @@ namespace DatabaseInitialize
                 BringDate = DateTime.Now,
                 CollectDate = DateTime.Now,
                 CompleteDate = DateTime.Now,
-                
+
                 Invoiced = false,
                 RemindedAfterFiveHours = false,
                 Customer = con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault(),
-                
+
                 Test = new List<Test>()
                 {
                     new Test("NochNPatient", con.Analysis.Find("Blut_Hämoglobin"))
@@ -278,7 +303,7 @@ namespace DatabaseInitialize
         private static void InitializeCars()
         {
             LaborContext con = new LaborContext();
-            
+
             AddCar(con, "OG-LA-001");
             AddCar(con, "OG-LA-002");
             AddCar(con, "OG-LA-003");
@@ -345,7 +370,7 @@ namespace DatabaseInitialize
         {
             LaborContext con = new LaborContext();
             List<Customer> customers = new List<Customer>();
-            customers.Add(new Customer("Dr.", "House", "house", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Dr. House imba Werkstatt", new BankAccount("SDLFKJSDLKFJ", "Dr. House")){TwoWayRoadCostInEuro = 11.11f});
+            customers.Add(new Customer("Dr.", "House", "house", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Dr. House imba Werkstatt", new BankAccount("SDLFKJSDLKFJ", "Dr. House")) { TwoWayRoadCostInEuro = 11.11f });
             customers.Add(new Customer("Alice", "Vette", "vette", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Vetter Alice Fachärztin für Allgemeinmedizin", new BankAccount("1asdf243ew", "Alice Vette")) { TwoWayRoadCostInEuro = 1.11f });
             customers.Add(new Customer("Wolfgang", "Bätz", "lolo", "asdf", new Address("Am Marktplatz 7", "77652", "Offenburg"), "Bätz Wolfgang Dr.med. Gefäßchirurg", new BankAccount("ASDLF23456", "Wolfgang Bätz"), true, "107438570935") { TwoWayRoadCostInEuro = 2.11f });
             customers.Add(new Customer("Michael", "Brake", "holzmichel", "asdf", new Address("Hauptstr. 98", "77652", "Offenburg"), "Brake Michael Dr. med. Arzt für Urologie", new BankAccount("ALKFJ34565768", "Michael Brake"), true, "017655524473") { TwoWayRoadCostInEuro = 44.11f });
