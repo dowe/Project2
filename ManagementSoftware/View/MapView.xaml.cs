@@ -92,7 +92,13 @@ namespace ManagementSoftware.View
                     sb.Append("Außergewöhnliche Abholung bei\n");
                     sb.Append("GPS Position: " + _driversOrders.FirstOrDefault().EmergencyPosition.Latitude + "/" + _driversOrders.FirstOrDefault().EmergencyPosition.Longitude + "\n");
                 }
-                sb.Append("Proben abzuholen: " + _driversOrders.FirstOrDefault().Test.Count + "\n");
+                var samples = new List<SampleType>();
+                foreach (var test in _driversOrders.FirstOrDefault().Test)
+                {
+                    if (!samples.Contains(test.Analysis.SampleType))
+                        samples.Add(test.Analysis.SampleType);
+                }
+                sb.Append("Proben abzuholen: " + samples.Count + "\n");
             }
             else
             {
