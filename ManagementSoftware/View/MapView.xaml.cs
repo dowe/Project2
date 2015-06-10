@@ -92,13 +92,22 @@ namespace ManagementSoftware.View
                     sb.Append("Außergewöhnliche Abholung bei\n");
                     sb.Append("GPS Position: " + _driversOrders.FirstOrDefault().EmergencyPosition.Latitude + "/" + _driversOrders.FirstOrDefault().EmergencyPosition.Longitude + "\n");
                 }
-                var samples = new List<SampleType>();
+                var dic = new Dictionary<String, List<SampleType>>();
                 foreach (var test in _driversOrders.FirstOrDefault().Test)
                 {
-                    if (!samples.Contains(test.Analysis.SampleType))
-                        samples.Add(test.Analysis.SampleType);
+                    if (!dic.ContainsKey(test.PatientID))
+                        dic.Add(test.PatientID, new List<SampleType>());
+
+                    if (!dic[test.PatientID].Contains(test.Analysis.SampleType))
+                        dic[test.PatientID].Add(test.Analysis.SampleType);
                 }
-                sb.Append("Proben abzuholen: " + samples.Count + "\n");
+                int count = 0;
+                foreach (var pat in dic)
+                {
+                    count += pat.Value.Count;
+                }
+
+                sb.Append("Proben abzuholen: " + count + "\n");
             }
             else
             {
@@ -221,11 +230,6 @@ namespace ManagementSoftware.View
         private void NavigateOnMap(GPSPosition from, Address to)
         {
             WebBrowserGoogle.InvokeScript("navigateToAddress", new Object[] { from.Latitude, from.Longitude, to.Street + ", " + to.PostalCode + " " + to.City });
-        }
-
-        private void GetDriverDestinations(Car car)
-        {
-
         }
 
         private void SetMapIcons()
