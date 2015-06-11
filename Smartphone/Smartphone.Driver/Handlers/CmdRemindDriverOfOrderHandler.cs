@@ -20,8 +20,8 @@ namespace Smartphone.Driver.Handlers
 			
 		protected override void Handle (CmdRemindDriverOfOrder command, string connectionIdOrNull)
 		{
-			string title = NotificationTexts.OrderReminderTitle (command.OrderId);
-			string message = NotificationTexts.ORDER_REMINDER_TEXT;
+			string title = TextDefinitions.OrderReminderTitle (command.OrderId);
+			string message = TextDefinitions.ORDER_REMINDER_TEXT;
 
 			notificationController.PutNotification (title, message, command.OrderId);
 		}

@@ -117,17 +117,17 @@ namespace Smartphone.Driver.ViewModels
                     }
                     else
                     {
-                        toaster.MakeToast(ToastTexts.FAILED_LOGIN);
+                        toaster.MakeToast(TextDefinitions.FAILED_LOGIN);
                     }
                 }
                 else
                 {
-                    toaster.MakeToast(ToastTexts.SERVER_NO_ANSWER);
+                    toaster.MakeToast(TextDefinitions.SERVER_NO_ANSWER);
                 }
             }
             else
             {
-                toaster.MakeToast(ToastTexts.SERVER_NO_ANSWER);
+                toaster.MakeToast(TextDefinitions.SERVER_NO_ANSWER);
             }
             IsCommunicating = false;
         }
@@ -158,7 +158,7 @@ namespace Smartphone.Driver.ViewModels
             {
                 // Driver already has a car assigned. Skip the car selection.
                 session.CarID = assignedCarIDOrNull;
-                toaster.MakeToast(ToastTexts.AlreadyAssignedToCar(assignedCarIDOrNull));
+                toaster.MakeToast(TextDefinitions.AlreadyAssignedToCar(assignedCarIDOrNull));
 
                 CmdGetDriversUnfinishedOrders cmdGetOrders = new CmdGetDriversUnfinishedOrders(session.Username);
                 connection.Send(cmdGetOrders);
