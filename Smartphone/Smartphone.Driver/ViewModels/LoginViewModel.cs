@@ -17,6 +17,7 @@ namespace Smartphone.Driver.ViewModels
     public class LoginViewModel : ViewModelBase
     {
 
+        public const string ServerURLProperty = "ServerURL";
         public const string UsernameProperty = "Username";
         public const string PasswordProperty = "Password";
         public const string CanConnectProperty = "CanConnect";
@@ -28,6 +29,7 @@ namespace Smartphone.Driver.ViewModels
         private IToaster toaster = null;
         private GPSPositionSender positionSender = null;
 
+        private string serverURL = null;
         private string username = null;
         private string password = null;
         private bool communicating = false;
@@ -40,9 +42,23 @@ namespace Smartphone.Driver.ViewModels
             this.toaster = toaster;
             this.positionSender = positionSender;
 
+            serverURL = "http://192.168.56.1:8080/commands";
             username = "Driv3";
             password = "Driv3";
             communicating = false;
+        }
+
+        public string ServerURL
+        {
+            get { return serverURL; }
+            set
+            {
+                if (!string.Equals(serverURL, value))
+                {
+                    serverURL = value;
+                    RaisePropertyChanged(ServerURLProperty);
+                }
+            }
         }
 
         public string Username
@@ -101,7 +117,7 @@ namespace Smartphone.Driver.ViewModels
         private async void Login()
         {
             IsCommunicating = true;
-            if (!connection.ConnectionState.Equals(ConnectionState.Connected))
+            if (!connection.ConnectionState.Equals(ConnectionState.Connected) || !string.Equals(serverURL, connection.ServerURL))
             {
                 await Connect();
             }
@@ -134,12 +150,13 @@ namespace Smartphone.Driver.ViewModels
 
         private Task<bool> Connect()
         {
+
             return Task.Run(() =>
             {
                 bool success = false;
                 try
                 {
-                    connection.Connect();
+                    connection.Connect(serverURL);
                     success = true;
                 }
                 catch (ConnectionException)
