@@ -50,7 +50,7 @@ namespace ManagementSoftware.View
         {
             InitializeComponent();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 5, 0);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 30);
             _connection = SimpleIoc.Default.GetInstance<IClientConnection>();
             _laborPos = new LocalServerDataImpl().ZmsAddress;
             WebBrowserGoogle.ObjectForScripting = new ExposedJSObject(WebBrowserGoogle, this);
@@ -65,7 +65,21 @@ namespace ManagementSoftware.View
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            RefreshData();
+            int attempts = 0;
+            while (attempts < 3)
+            {
+                attempts++;
+                try
+                {
+                    RefreshData();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    string curDir = Directory.GetCurrentDirectory();
+                    this.WebBrowserGoogle.Navigate(new Uri(String.Format("file:///{0}/Resources/GoogleMaps.html", curDir)));
+                }
+            }
         }
 
 
@@ -94,7 +108,22 @@ namespace ManagementSoftware.View
                     sb.Append("Außergewöhnliche Abholung bei\n");
                     sb.Append("GPS Position: " + _driversOrders.FirstOrDefault().EmergencyPosition.Latitude + "/" + _driversOrders.FirstOrDefault().EmergencyPosition.Longitude + "\n");
                 }
-                sb.Append("Proben abzuholen: " + _driversOrders.FirstOrDefault().Test.Count + "\n");
+                var dic = new Dictionary<String, List<SampleType>>();
+                foreach (var test in _driversOrders.FirstOrDefault().Test)
+                {
+                    if (!dic.ContainsKey(test.PatientID))
+                        dic.Add(test.PatientID, new List<SampleType>());
+
+                    if (!dic[test.PatientID].Contains(test.Analysis.SampleType))
+                        dic[test.PatientID].Add(test.Analysis.SampleType);
+                }
+                int count = 0;
+                foreach (var pat in dic)
+                {
+                    count += pat.Value.Count;
+                }
+
+                sb.Append("Proben abzuholen: " + count + "\n");
             }
             else
             {
@@ -112,7 +141,7 @@ namespace ManagementSoftware.View
                 for (int i = 1; i < _driversOrders.Count; i++)
                 {
                     var cust = _driversOrders[i].Customer;
-                    sb.Append(cust.Label ?? cust.FirstName + " " + cust.LastName + "\n");
+                    sb.Append(cust.Label + "\n" ?? cust.FirstName + " " + cust.LastName + "\n");
                     if (_driversOrders[i].EmergencyPosition == null)
                     {
                         sb.Append(cust.Address.Street + "\n");
@@ -131,7 +160,7 @@ namespace ManagementSoftware.View
 
         public void RefreshData()
         {
-            Mouse.OverrideCursor = Cursors.Wait;
+
             var cars = _connection.SendWait<CmdReturnGetAllOccupiedCars>(new CmdGetAllOccupiedCars());
             var cust = _connection.SendWait<CmdReturnGetAllCustomers>(new CmdGetAllCustomers());
             if (cars == null || cust == null)
@@ -140,8 +169,8 @@ namespace ManagementSoftware.View
                 return;
             }
             Car oldcar = null;
-            if(_cars!=null && _cars.Count > _carIndex)
-                 oldcar = _cars[_carIndex];
+            if (_cars != null && _cars.Count > _carIndex)
+                oldcar = _cars[_carIndex];
             _cars = cars.OccupiedCars.ToList();
             _customers = cust.Customers.ToList();
 
@@ -154,7 +183,7 @@ namespace ManagementSoftware.View
 
             SetMapIcons();
             RefreshDriver(_carIndex);
-            Mouse.OverrideCursor = null;
+
         }
 
         private void RefreshDriver(int carindex)
@@ -163,7 +192,7 @@ namespace ManagementSoftware.View
                 return;
 
             if (_cars.Count <= carindex)
-                _carIndex = carindex = 0;             
+                _carIndex = carindex = 0;
 
             var car = _cars[carindex];
 
@@ -181,7 +210,7 @@ namespace ManagementSoftware.View
 
             var address = _laborPos;
             Order order = _driversOrders.FirstOrDefault();
-            if (order!=null)
+            if (order != null)
             {
                 address = order.Customer.Address;
                 if (order.EmergencyPosition == null)
@@ -193,18 +222,17 @@ namespace ManagementSoftware.View
                 NavigateOnMap(car.LastPosition, _laborPos);
 
             IDistanceMatrixPlace destination = (order != null && order.EmergencyPosition != null)
-                ? (IDistanceMatrixPlace) new DistanceMatrixGPSPosition(order.EmergencyPosition)
+                ? (IDistanceMatrixPlace)new DistanceMatrixGPSPosition(order.EmergencyPosition)
                 : new DistanceMatrixAddress(address);
             var distance = DistanceCalculation.CalculateDistanceInKm(new DistanceMatrixGPSPosition(car.LastPosition), destination);
-           
+
             SetCarText(distance);
         }
 
-        
+
 
         private void ShowErrorMessagebox()
         {
-            Mouse.OverrideCursor = null;
             MessageBox.Show(
                     "Fehler: Bitte überprüfen Sie ihre Internetverbindung oder kontaktieren Sie den nicht vorhandenen Kundendienst.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -219,20 +247,19 @@ namespace ManagementSoftware.View
             WebBrowserGoogle.InvokeScript("navigateToAddress", new Object[] { from.Latitude, from.Longitude, to.Street + ", " + to.PostalCode + " " + to.City });
         }
 
-        private void GetDriverDestinations(Car car)
-        {
-
-        }
-
         private void SetMapIcons()
         {
+            WebBrowserGoogle.InvokeScript("clearMarkers");
             WebBrowserGoogle.InvokeScript("addLaboratory", new Object[] { _laborPos.Street + ", " + _laborPos.PostalCode + " " + _laborPos.City, "Zentrallabor", "Zentrallabor<br/>" + _laborPos.Street + "<br/>" + _laborPos.PostalCode + " " + _laborPos.City });
 
             if (_customers != null)
                 foreach (var cust in _customers)
                 {
                     var name = String.IsNullOrWhiteSpace(cust.Label) ? cust.FirstName + " " + cust.LastName : cust.Label;
-                    WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, name, name + "<br/>" + cust.Address.Street + "<br/>" + cust.Address.PostalCode + " " + cust.Address.City });
+                    if (cust.GpsPosition != null)
+                        WebBrowserGoogle.InvokeScript("addGpsAddress", new Object[] { cust.GpsPosition.Latitude, cust.GpsPosition.Longitude, name, name + "<br/>" + cust.Address.Street + "<br/>" + cust.Address.PostalCode + " " + cust.Address.City });
+                    else
+                        WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, name, name + "<br/>" + cust.Address.Street + "<br/>" + cust.Address.PostalCode + " " + cust.Address.City });
                 }
 
             if (_cars != null)

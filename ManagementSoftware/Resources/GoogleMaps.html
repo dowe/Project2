@@ -128,7 +128,7 @@
 
         });
         marker1.setMap(map);
-
+        addMarker(marker1);
         //hänge click-event an marker an
         window.google.maps.event.addListener(marker1, 'click', function() {
             var infowindow = new google.maps.InfoWindow({
@@ -156,7 +156,7 @@
                     zIndex: normalMarker()
                 });
                 marker1.setMap(map);
-
+                addMarker(marker1);
                 //hänge click-event an marker an
                 window.google.maps.event.addListener(marker1, 'click', function() {
                     var infowindow = new google.maps.InfoWindow({
@@ -167,6 +167,31 @@
             } else {
                 alert("JS-addAddress: Geocode of " + address + " was not successful for the following reason: " + status);
             }
+        });
+    }
+
+    //add marker für eine Adresse
+    function addGpsAddress(lat, long, title, tooltip) {
+        var latLng = new window.google.maps.LatLng(lat, long);
+        var marker1 = new MarkerWithLabel({
+            position: latLng,
+            map: map,
+            icon: 'doctor.png',
+            labelContent: title,
+            labelAnchor: new google.maps.Point(150, 0),
+            labelClass: "labelsHouse", // the CSS class for the label
+            labelStyle: { opacity: 0.75 },
+            title: tooltip,
+            zIndex: normalMarker()
+        });
+        marker1.setMap(map);
+        addMarker(marker1);
+        //hänge click-event an marker an
+        window.google.maps.event.addListener(marker1, 'click', function () {
+            var infowindow = new google.maps.InfoWindow({
+                content: marker1.title
+            });
+            infowindow.open(map, marker1);
         });
     }
 
@@ -186,7 +211,7 @@
                     zIndex: normalMarker()
                 });
                 marker1.setMap(map);
-
+                addMarker(marker1);
                 //hänge click-event an marker an
                 window.google.maps.event.addListener(marker1, 'click', function() {
                     var infowindow = new google.maps.InfoWindow({
@@ -208,29 +233,19 @@
         return Math.floor(Math.random() * 1000);
     }
 
-//addHouse für eine Adresse NICHT BENÖTIGT
-    //function addHouse(lat, long, title) {
-    //    var latLng = new window.google.maps.LatLng(lat, long);
-    //    var marker1 = new MarkerWithLabel({
-    //        position: latLng,
-    //        map: map,
-    //        icon: 'hobbitHouse.png',
-    //        labelContent: title,
-    //        labelAnchor: new google.maps.Point(50, 0),
-    //        labelClass: "labelsHouse", // the CSS class for the label
-    //        labelStyle: { opacity: 0.75 },
-    //        title: title
-    //    });
-    //    marker1.setMap(map);
+    //um marker wieder löschen zu können
+    var markers = new Array();
 
-    //    //hänge click-event an marker an
-    //    window.google.maps.event.addListener(marker1, 'click', function () {
-    //        var infowindow = new google.maps.InfoWindow({
-    //            content: marker1.title
-    //        });
-    //        infowindow.open(map, marker1);
-    //    });
-    //}
+    function addMarker(marker) {
+        this.markers[this.markers.length] = marker;
+    };
+
+    function clearMarkers() {
+        for (var i = 0; i < this.markers.length; i++) {
+            this.markers[i].setMap(null);
+        }
+        this.markers = new Array();
+    };
 
     //rufe initialize bei fensteraufruf auf
     google.maps.event.addDomListener(window, 'load', initialize);

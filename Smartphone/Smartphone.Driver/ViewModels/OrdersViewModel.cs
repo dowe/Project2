@@ -96,7 +96,7 @@ namespace Smartphone.Driver.ViewModels
 			}
 			else
 			{
-				toaster.MakeToast (ToastTexts.FAILED_LOGOUT_ORDERS_LEFT);
+				toaster.MakeToast (TextDefinitions.FAILED_LOGOUT_ORDERS_LEFT);
 			}
 		}
 
@@ -116,12 +116,12 @@ namespace Smartphone.Driver.ViewModels
 					OnEmergencySuccessful ();
 				} else
 				{
-					toaster.MakeToast (ToastTexts.FAILED_EMERGENCY);
+					toaster.MakeToast (TextDefinitions.FAILED_EMERGENCY);
 				}
 			}
 			else
 			{
-				toaster.MakeToast (ToastTexts.SERVER_NO_ANSWER);
+				toaster.MakeToast (TextDefinitions.SERVER_NO_ANSWER);
 			}
 
 		}

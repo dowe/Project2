@@ -18,7 +18,7 @@ namespace Smartphone.Driver.ViewModels
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
 			// Connection
-			IClientConnection clientConnection = new ClientConnection ("http://192.168.56.1:8080/commands");
+            IClientConnection clientConnection = new ClientConnection("http://192.168.2.106:8080/commands");
 			clientConnection.Start ();
 			SimpleIoc.Default.Register<IClientConnection> (() => clientConnection);
 

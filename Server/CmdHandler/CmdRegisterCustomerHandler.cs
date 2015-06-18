@@ -37,6 +37,8 @@ namespace Server.CmdHandler
 
             if (errorMessage == null)
             {
+                customer.GpsPosition = Geolocation.ConvertToGPS(new DistanceMatrixAddress(customer.Address));
+
                 db.StartTransaction();
                 db.CreateCustomer(customer);
                 db.EndTransaction(TransactionEndOperation.SAVE);

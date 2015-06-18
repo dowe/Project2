@@ -32,7 +32,7 @@ namespace Server.CmdHandler
 
         protected override void Handle(CmdGenerateDailyStatistic command, string connectionIdOrNull)
         {
-          
+            ds = new DailyStatistic();
             db.StartTransaction();
             _OrderList = db.GetAllOrders(null);
             

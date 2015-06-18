@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.DataTransferObjects;
 using Server.DatabaseCommunication;
-using System.Data.Entity;
-using Common.DataTransferObjects;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Server.DistanceCalculation;
+
 namespace DatabaseInitialize
 {
     class Program
@@ -13,6 +13,33 @@ namespace DatabaseInitialize
         static void Main(string[] args)
         {
             Initialize();
+            RemoveAllBills();
+        }
+
+        private static void RemoveAllBills()
+        {
+            try
+            {
+                string workingDir = Directory.GetCurrentDirectory();
+                Console.WriteLine("INFO: Running from " + workingDir + " (works only if you run it from the bin/debug directory).");
+                DirectoryInfo appData = new DirectoryInfo("../../../ASPServer/App_Data");
+                if (appData.Exists)
+                {
+                    foreach (DirectoryInfo dir in appData.GetDirectories())
+                    {
+                        dir.Delete(true);
+                        Console.WriteLine("INFO: " + dir.FullName + " deleted");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("WARNING: ASPServer/App_Data directory does not exist or was not found.");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ERROR: Deleting failed (" + e.Message + ").");
+            }
         }
 
         private static void Initialize()
@@ -32,7 +59,7 @@ namespace DatabaseInitialize
         {
             LaborContext con = new LaborContext();
             List<Order> orders = new List<Order>();
-            
+
 
             //Start Creating a Mockorder for testing
             Order MockOrder1 = new Order();
@@ -44,7 +71,7 @@ namespace DatabaseInitialize
             MockCustomer.FirstName = "Hans";
 
             MockCustomer.BankAccount = new BankAccount("DE 2323 1212 3333 1111", "Hans Müller");
-            MockCustomer.Address = new Address("Kurzestr","3333","Offenburg");
+            MockCustomer.Address = new Address("Kurzestr", "3333", "Offenburg");
 
             MockCustomer.TwoWayRoadCostInEuro = 42.11f;
             MockOrder1.Customer = MockCustomer;
@@ -62,7 +89,7 @@ namespace DatabaseInitialize
             MockOrder1.Test[0].EndDate = DateTime.Now;
             MockOrder1.Test[1].EndDate = DateTime.Now;
             MockOrder1.Test[2].EndDate = DateTime.Now;
-            
+
 
 
             orders.Add(MockOrder1);
@@ -71,8 +98,8 @@ namespace DatabaseInitialize
             Order MockOrder2 = new Order();
             MockOrder2.CollectDate = DateTime.Now;
             MockOrder2.OrderDate = DateTime.Now.AddDays(-1);
-        
-            
+
+
             MockOrder2.Invoiced = false;
             Customer MockCustomer2 = new Customer();
             MockCustomer2.UserName = "otherUsername";
@@ -88,9 +115,9 @@ namespace DatabaseInitialize
             List<Test> MockTest2 = new List<Test>();
             MockTest2.Add(new Test("Patientenid333", Anal1));
             MockTest2.Add(new Test("Patientenid222", Anal2));
-          
+
             MockOrder2.Test = MockTest2;
-         
+
             orders.Add(MockOrder2);
 
             //Start MockOrder 3, same customer as 1
@@ -127,9 +154,7 @@ namespace DatabaseInitialize
            {
                OrderDate = DateTime.Now,
                Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault(),
-               BringDate = DateTime.Now,
-               CollectDate = DateTime.Now,
-               CompleteDate = DateTime.Now,
+               
 
                Invoiced = false,
                RemindedAfterFiveHours = false,
@@ -145,7 +170,7 @@ namespace DatabaseInitialize
                     }
                 }
            });
-                
+
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault())
             {
                 OrderDate = DateTime.Now,
@@ -157,11 +182,11 @@ namespace DatabaseInitialize
                 BringDate = DateTime.Now,
                 CollectDate = DateTime.Now,
                 CompleteDate = DateTime.Now,
-                
+
                 Invoiced = false,
                 RemindedAfterFiveHours = false,
                 Customer = con.Customer.Where(c => c.UserName == "holzmichel").FirstOrDefault(),
-                
+
                 Test = new List<Test>()
                 {
                     new Test("NochNPatient", con.Analysis.Find("Blut_Hämoglobin"))
@@ -183,10 +208,11 @@ namespace DatabaseInitialize
                       new Test("NochNPatient", con.Analysis.Find("Urin_Albumin"))
                     {
                         StartDate = DateTime.Now,
-                        
+                        EndDate = DateTime.Now,
+                        ResultValue = 15f,
                         AlarmState = AlarmState.NO_ALARM,
-                        Critical = true,
-                        TestState = TestState.IN_PROGRESS
+                        Critical = false,
+                        TestState = TestState.COMPLETED
                     },
                     new Test("NochNPatient", con.Analysis.Find("Stuhl_Candida"))
                     {
@@ -197,12 +223,7 @@ namespace DatabaseInitialize
                         Critical = true,
                         TestState = TestState.COMPLETED
                     },
-                    new Test("NochNPatient", con.Analysis.Find("Stuhl_Candida"))
-                    {
-                        
-                        TestState = TestState.WAITING_FOR_DRIVER,
-                        
-                    },
+                   
                 }
             });
             orders.Add(new Order(anal, con.Customer.Where(c => c.UserName == "ulli").FirstOrDefault())
@@ -224,8 +245,39 @@ namespace DatabaseInitialize
             {
                 OrderDate = DateTime.Now.Subtract(TimeSpan.FromHours(5)),
                 Driver = con.Driver.Where(d => d.UserName == "Driv3").FirstOrDefault(),
-                BringDate = DateTime.Now.Subtract(TimeSpan.FromHours(1)),
-                CollectDate = DateTime.Now.Subtract(TimeSpan.FromHours(2))
+            });
+            orders.Add(new Order()
+            {
+                OrderDate = DateTime.Now,
+                Driver = con.Driver.Where(d => d.UserName == "Driv1").FirstOrDefault(),
+                CollectDate = DateTime.Now,
+
+                Invoiced = false,
+                RemindedAfterFiveHours = false,
+                Customer = con.Customer.Where(c => c.UserName == "Elli").FirstOrDefault(),
+
+                Test = new List<Test>()
+                {
+                    new Test("Peterle", con.Analysis.Find("Blut_Hämoglobin"))
+                    {
+                        TestState = TestState.WAITING_FOR_DRIVER
+                    },
+                    new Test("Peterle", con.Analysis.Find("Urin_Gewicht"))
+                    {
+                         TestState = TestState.WAITING_FOR_DRIVER
+
+                    },
+                      new Test("Hansi", con.Analysis.Find("Urin_Albumin"))
+                    {
+                         TestState = TestState.WAITING_FOR_DRIVER
+
+                    },
+                    new Test("Hansi", con.Analysis.Find("Stuhl_Candida"))
+                    {
+                        TestState = TestState.WAITING_FOR_DRIVER
+                    },
+                   
+                }
             });
             con.Order.AddRange(orders);
             con.SaveChanges();
@@ -278,7 +330,7 @@ namespace DatabaseInitialize
         private static void InitializeCars()
         {
             LaborContext con = new LaborContext();
-            
+
             AddCar(con, "OG-LA-001");
             AddCar(con, "OG-LA-002");
             AddCar(con, "OG-LA-003");
@@ -345,14 +397,14 @@ namespace DatabaseInitialize
         {
             LaborContext con = new LaborContext();
             List<Customer> customers = new List<Customer>();
-            customers.Add(new Customer("Dr.", "House", "house", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Dr. House imba Werkstatt", new BankAccount("SDLFKJSDLKFJ", "Dr. House")){TwoWayRoadCostInEuro = 11.11f});
-            customers.Add(new Customer("Alice", "Vette", "vette", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Vetter Alice Fachärztin für Allgemeinmedizin", new BankAccount("1asdf243ew", "Alice Vette")) { TwoWayRoadCostInEuro = 1.11f });
-            customers.Add(new Customer("Wolfgang", "Bätz", "lolo", "asdf", new Address("Am Marktplatz 7", "77652", "Offenburg"), "Bätz Wolfgang Dr.med. Gefäßchirurg", new BankAccount("ASDLF23456", "Wolfgang Bätz"), true, "107438570935") { TwoWayRoadCostInEuro = 2.11f });
-            customers.Add(new Customer("Michael", "Brake", "holzmichel", "asdf", new Address("Hauptstr. 98", "77652", "Offenburg"), "Brake Michael Dr. med. Arzt für Urologie", new BankAccount("ALKFJ34565768", "Michael Brake"), true, "017655524473") { TwoWayRoadCostInEuro = 44.11f });
-            customers.Add(new Customer("Elke", "Brüderle", "Elli", "asdf", new Address("Ebertplatz 12", "77652", "Offenburg"), "Brüderle Elke Dr. Frauenärztin", new BankAccount("LKFJGFG23456", "Brüderle Elke")) { TwoWayRoadCostInEuro = 1.11f });
-            customers.Add(new Customer("Traunecker", "Ulrich", "ulli", "asdf", new Address("Leutkirchstraße 13", "77723", "Gengenbach"), "Dr. med. Ulrich Traunecker", new BankAccount("UZJH87698347", "Ulrich Traunecker"), true, "379786546") { TwoWayRoadCostInEuro = 0.11f });
-            customers.Add(new Customer("Matthias", "Ruff", "ruffi", "asdf", new Address("Hauptstraße 24", "77723", "Gengenbach"), "Dr. med. Matthias Ruff", new BankAccount("HUGZGU87687625", "Matthias Ruff")) { TwoWayRoadCostInEuro = 5.11f });
-            customers.Add(new Customer("Stefan", "Leuthner", "leuti", "asdf", new Address("Hauptstraße 61", "77799", "Ortenberg"), "Herr Dr. med. Stefan Leuthner", new BankAccount("UIGUZ7868", "Leuthners Frau")) { TwoWayRoadCostInEuro = 6.11f });
+            customers.Add(new Customer("Dr.", "House", "house", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Dr. House imba Werkstatt", new BankAccount("SDLFKJSDLKFJ", "Dr. House")) { TwoWayRoadCostInEuro = 11.11f, GpsPosition = new GPSPosition(48.46973f, 7.94229f) });
+            customers.Add(new Customer("Alice", "Vette", "vette", "asdf", new Address("Hauptstr. 88", "77652", "Offenburg"), "Vetter Alice Fachärztin für Allgemeinmedizin", new BankAccount("1asdf243ew", "Alice Vette")) { TwoWayRoadCostInEuro = 1.11f, GpsPosition = new GPSPosition(48.46973f, 7.94229f) });
+            customers.Add(new Customer("Wolfgang", "Bätz", "lolo", "asdf", new Address("Am Marktplatz 7", "77652", "Offenburg"), "Bätz Wolfgang Dr.med. Gefäßchirurg", new BankAccount("ASDLF23456", "Wolfgang Bätz"), true, "107438570935") { TwoWayRoadCostInEuro = 2.11f, GpsPosition = new GPSPosition(48.4696894f, 7.9417479f) });
+            customers.Add(new Customer("Michael", "Brake", "holzmichel", "asdf", new Address("Hauptstr. 98", "77652", "Offenburg"), "Brake Michael Dr. med. Arzt für Urologie", new BankAccount("ALKFJ34565768", "Michael Brake"), true, "017655524473") { TwoWayRoadCostInEuro = 44.11f, GpsPosition = new GPSPosition(48.46874f, 7.94229f) });
+            customers.Add(new Customer("Elke", "Brüderle", "Elli", "asdf", new Address("Ebertplatz 12", "77652", "Offenburg"), "Brüderle Elke Dr. Frauenärztin", new BankAccount("LKFJGFG23456", "Brüderle Elke")) { TwoWayRoadCostInEuro = 1.11f, GpsPosition = new GPSPosition(48.47598f, 7.95548f) });
+            customers.Add(new Customer("Traunecker", "Ulrich", "ulli", "asdf", new Address("Leutkirchstraße 13", "77723", "Gengenbach"), "Dr. med. Ulrich Traunecker", new BankAccount("UZJH87698347", "Ulrich Traunecker"), true, "379786546") { TwoWayRoadCostInEuro = 0.11f, GpsPosition = new GPSPosition(48.40413f, 8.01221f) });
+            customers.Add(new Customer("Matthias", "Ruff", "ruffi", "asdf", new Address("Hauptstraße 24", "77723", "Gengenbach"), "Dr. med. Matthias Ruff", new BankAccount("HUGZGU87687625", "Matthias Ruff")) { TwoWayRoadCostInEuro = 5.11f, GpsPosition = new GPSPosition(48.404f, 8.01388f) });
+            customers.Add(new Customer("Stefan", "Leuthner", "leuti", "asdf", new Address("Hauptstraße 61", "77799", "Ortenberg"), "Herr Dr. med. Stefan Leuthner", new BankAccount("UIGUZ7868", "Leuthners Frau")) { TwoWayRoadCostInEuro = 6.11f, GpsPosition = new GPSPosition(48.44926f, 7.97155f) });
             con.Customer.AddRange(customers);
             con.SaveChanges();
         }

@@ -65,6 +65,7 @@
     <Compile Include="DatabaseCommunication\DatabaseCommunicatorTests.cs" />
     <Compile Include="DistanceCalculation\DistanceCalculationTests.cs" />
     <Compile Include="DistanceCalculation\DirectionsRouteDistanceCalculatorTests.cs" />
+    <Compile Include="DistanceCalculation\GeolocationTests.cs" />
     <Compile Include="DriverControlling\OptionsEvaluatorTests.cs" />
     <Compile Include="DriverControlling\DriverControllerIntegrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

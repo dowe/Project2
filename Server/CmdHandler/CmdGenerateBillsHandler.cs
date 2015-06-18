@@ -219,7 +219,6 @@ namespace Server.CmdHandler
                    
 
                      //Check if PDF File already Exists 
-                     //TODO: Throw Exception
                      if (File.Exists(b.PDFPath))
                      {
                          Console.WriteLine("Error, Bill already Exists at: " + b.PDFPath);
