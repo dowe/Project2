@@ -157,6 +157,7 @@ namespace Smartphone.Driver.ViewModels
 						toaster.MakeToast(TextDefinitions.SERVER_NO_ANSWER_RELOGIN);
                         // Prevent inconsistent state.
                         session.Reset();
+					    SelectedCarIndex = -1;
 					    Messenger.Default.Send<MsgSwitchLoginPage>(new MsgSwitchLoginPage());
 					}
 				}
@@ -176,6 +177,7 @@ namespace Smartphone.Driver.ViewModels
 
 			gpsSender.Start ();
 
+		    SelectedCarIndex = -1; // Reset spinner selection.
 			Messenger.Default.Send<MsgSwitchOrdersPage> (new MsgSwitchOrdersPage ());
 		}
 
