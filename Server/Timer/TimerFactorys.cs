@@ -36,7 +36,10 @@ namespace Server.Timer
         }
         public static InjectInternalTimed GenerateDailyStatisticTimer(IServerConnection connection)
         {
-            return InjectCmdTimer(connection, new TimerFactory(() => TimeSpan.FromDays(1.0), false), () => new CmdGenerateDailyStatistic());
+            //Get Time until next morning seven o'clock
+            TimeSpan hoursToSevenNextDay = new TimeSpan( 24+7, 0, 0) - DateTime.Now.TimeOfDay;
+
+            return InjectCmdTimer(connection, new TimerFactory(() => hoursToSevenNextDay, false), () => new CmdGenerateDailyStatistic());
         }
         public static InjectInternalTimed GenerateShiftScheduleTimer(IServerConnection connection)
         {
