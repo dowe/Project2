@@ -29,15 +29,14 @@ namespace Server.Timer
         public static InjectInternalTimed GenerateBillTimer(IServerConnection connection)
         {
             //Get the Time until next Sunday Midnight 
-            int days = Convert.ToInt32(DateTime.Now.DayOfWeek); 
-            TimeSpan hoursToSundayMidnight = new TimeSpan(days+1,0,0,0) - DateTime.Now.TimeOfDay;
-            
+            int days = (7 - Convert.ToInt32(DateTime.Now.DayOfWeek)) % 7;
+            TimeSpan hoursToSundayMidnight = new TimeSpan(days + 1, 0, 0, 0) - DateTime.Now.TimeOfDay;
             return InjectCmdTimer(connection, new TimerFactory(() => hoursToSundayMidnight, false), () => new CmdGenerateBills());
         }
         public static InjectInternalTimed GenerateDailyStatisticTimer(IServerConnection connection)
         {
             //Get Time until next morning seven o'clock
-            TimeSpan hoursToSevenNextDay = new TimeSpan( 24+7, 0, 0) - DateTime.Now.TimeOfDay;
+            TimeSpan hoursToSevenNextDay = new TimeSpan(24 + 7, 0, 0) - DateTime.Now.TimeOfDay;
 
             return InjectCmdTimer(connection, new TimerFactory(() => hoursToSevenNextDay, false), () => new CmdGenerateDailyStatistic());
         }
