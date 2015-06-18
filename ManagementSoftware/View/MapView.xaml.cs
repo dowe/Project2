@@ -144,7 +144,7 @@ namespace ManagementSoftware.View
 
         public void RefreshData()
         {
-            Mouse.OverrideCursor = Cursors.Wait;
+
             var cars = _connection.SendWait<CmdReturnGetAllOccupiedCars>(new CmdGetAllOccupiedCars());
             var cust = _connection.SendWait<CmdReturnGetAllCustomers>(new CmdGetAllCustomers());
             if (cars == null || cust == null)
@@ -167,7 +167,7 @@ namespace ManagementSoftware.View
 
             SetMapIcons();
             RefreshDriver(_carIndex);
-            Mouse.OverrideCursor = null;
+
         }
 
         private void RefreshDriver(int carindex)
@@ -217,7 +217,6 @@ namespace ManagementSoftware.View
 
         private void ShowErrorMessagebox()
         {
-            Mouse.OverrideCursor = null;
             MessageBox.Show(
                     "Fehler: Bitte überprüfen Sie ihre Internetverbindung oder kontaktieren Sie den nicht vorhandenen Kundendienst.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -240,6 +239,7 @@ namespace ManagementSoftware.View
             if (_customers != null)
                 foreach (var cust in _customers)
                 {
+                    System.Threading.Thread.Sleep(200);
                     var name = String.IsNullOrWhiteSpace(cust.Label) ? cust.FirstName + " " + cust.LastName : cust.Label;
                     WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, name, name + "<br/>" + cust.Address.Street + "<br/>" + cust.Address.PostalCode + " " + cust.Address.City });
                 }
