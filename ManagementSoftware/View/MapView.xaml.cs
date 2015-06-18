@@ -48,7 +48,7 @@ namespace ManagementSoftware.View
         {
             InitializeComponent();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 5, 0);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 30);
             _connection = SimpleIoc.Default.GetInstance<IClientConnection>();
             _laborPos = new LocalServerDataImpl().ZmsAddress;
             WebBrowserGoogle.ObjectForScripting = new ExposedJSObject(WebBrowserGoogle, this);
@@ -125,7 +125,7 @@ namespace ManagementSoftware.View
                 for (int i = 1; i < _driversOrders.Count; i++)
                 {
                     var cust = _driversOrders[i].Customer;
-                    sb.Append(cust.Label ?? cust.FirstName + " " + cust.LastName + "\n");
+                    sb.Append(cust.Label + "\n" ?? cust.FirstName + " " + cust.LastName + "\n");
                     if (_driversOrders[i].EmergencyPosition == null)
                     {
                         sb.Append(cust.Address.Street + "\n");
@@ -144,7 +144,7 @@ namespace ManagementSoftware.View
 
         public void RefreshData()
         {
-            Mouse.OverrideCursor = Cursors.Wait;
+
             var cars = _connection.SendWait<CmdReturnGetAllOccupiedCars>(new CmdGetAllOccupiedCars());
             var cust = _connection.SendWait<CmdReturnGetAllCustomers>(new CmdGetAllCustomers());
             if (cars == null || cust == null)
@@ -167,7 +167,7 @@ namespace ManagementSoftware.View
 
             SetMapIcons();
             RefreshDriver(_carIndex);
-            Mouse.OverrideCursor = null;
+
         }
 
         private void RefreshDriver(int carindex)
@@ -217,7 +217,6 @@ namespace ManagementSoftware.View
 
         private void ShowErrorMessagebox()
         {
-            Mouse.OverrideCursor = null;
             MessageBox.Show(
                     "Fehler: Bitte überprüfen Sie ihre Internetverbindung oder kontaktieren Sie den nicht vorhandenen Kundendienst.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -234,11 +233,13 @@ namespace ManagementSoftware.View
 
         private void SetMapIcons()
         {
+            WebBrowserGoogle.InvokeScript("clearMarkers");
             WebBrowserGoogle.InvokeScript("addLaboratory", new Object[] { _laborPos.Street + ", " + _laborPos.PostalCode + " " + _laborPos.City, "Zentrallabor", "Zentrallabor<br/>" + _laborPos.Street + "<br/>" + _laborPos.PostalCode + " " + _laborPos.City });
 
             if (_customers != null)
                 foreach (var cust in _customers)
                 {
+                    System.Threading.Thread.Sleep(200);
                     var name = String.IsNullOrWhiteSpace(cust.Label) ? cust.FirstName + " " + cust.LastName : cust.Label;
                     WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, name, name + "<br/>" + cust.Address.Street + "<br/>" + cust.Address.PostalCode + " " + cust.Address.City });
                 }
