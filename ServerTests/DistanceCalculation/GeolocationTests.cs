@@ -17,5 +17,12 @@ namespace Server.DistanceCalculation.Tests
             var gps = Geolocation.ConvertToGPS(new DistanceMatrixAddress(new Address("Jauschbach 6", "77784", "Oberharmersbach")));
             Assert.IsTrue(gps.Latitude > 48.3840300 - 100 && gps.Latitude < 48.3840300 + 100);
         }
+
+        [TestMethod()]
+        public void ConvertToGPSNullTest()
+        {
+            var gps = Geolocation.ConvertToGPS(new DistanceMatrixAddress(new Address()));
+            Assert.IsNull(gps);
+        }
     }
 }

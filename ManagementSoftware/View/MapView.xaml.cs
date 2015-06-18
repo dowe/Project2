@@ -253,9 +253,11 @@ namespace ManagementSoftware.View
             if (_customers != null)
                 foreach (var cust in _customers)
                 {
-                    //System.Threading.Thread.Sleep(200);
                     var name = String.IsNullOrWhiteSpace(cust.Label) ? cust.FirstName + " " + cust.LastName : cust.Label;
-                    WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, name, name + "<br/>" + cust.Address.Street + "<br/>" + cust.Address.PostalCode + " " + cust.Address.City });
+                    if (cust.GpsPosition != null)
+                        WebBrowserGoogle.InvokeScript("addGpsAddress", new Object[] { cust.GpsPosition.Latitude, cust.GpsPosition.Longitude, name, name + "<br/>" + cust.Address.Street + "<br/>" + cust.Address.PostalCode + " " + cust.Address.City });
+                    else
+                        WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, name, name + "<br/>" + cust.Address.Street + "<br/>" + cust.Address.PostalCode + " " + cust.Address.City });
                 }
 
             if (_cars != null)

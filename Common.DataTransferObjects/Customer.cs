@@ -82,6 +82,12 @@ namespace Common.DataTransferObjects
 			set;
 		}
 
+	    public virtual GPSPosition GpsPosition
+	    {
+	        get; 
+            set; 
+        }
+
 	    public Customer()
 	    {
 	        

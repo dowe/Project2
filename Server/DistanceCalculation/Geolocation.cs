@@ -42,11 +42,10 @@ namespace Server.DistanceCalculation
                         gps.Longitude = (float)xmlResponse.Descendants("geometry").Descendants("location").Descendants("lng").FirstOrDefault();
                         return gps;
                     }
-
                 }
             }
 
-            return new GPSPosition();
+            return null;
         }
     }
 }

@@ -25,6 +25,13 @@ namespace Common.DataTransferObjects
 	        GPSPositionID = Guid.NewGuid();
 	    }
 
+	    public GPSPosition(float lat, float lng)
+	    {
+            GPSPositionID = Guid.NewGuid();
+	        Latitude = lat;
+	        Longitude = lng;
+	    }
+
 	}
 }
 
