@@ -22,6 +22,7 @@ using Common.Util;
 using GalaSoft.MvvmLight.Ioc;
 using Server;
 using Server.DistanceCalculation;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ManagementSoftware.View
 {
@@ -31,6 +32,7 @@ namespace ManagementSoftware.View
 
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     [ComVisible(true)]
+    [ExcludeFromCodeCoverage]
     public partial class MapView : UserControl
     {
         List<Car> _cars;
@@ -309,6 +311,7 @@ namespace ManagementSoftware.View
     }
 
     [ComVisible(true)]
+    [ExcludeFromCodeCoverage]
     public class MapFunctions : IMapFunctions
     {
         private readonly WebBrowser _browser;
@@ -335,6 +338,7 @@ namespace ManagementSoftware.View
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(IExposedJSObject))]
+    [ExcludeFromCodeCoverage]
     public class ExposedJSObject : IExposedJSObject
     {
         private readonly MapFunctions _app;
