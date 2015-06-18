@@ -129,6 +129,7 @@
     <Compile Include="DistanceCalculation\DistanceContainer.cs" />
     <Compile Include="DistanceCalculation\DistanceCalculation.cs" />
     <Compile Include="DistanceCalculation\DistanceMatrixGPSPosition.cs" />
+    <Compile Include="DistanceCalculation\Geolocation.cs" />
     <Compile Include="DistanceCalculation\IDistanceMatrixPlace.cs" />
     <Compile Include="DistanceCalculation\IRouteDistanceCalculator.cs" />
     <Compile Include="DriverControlling\DriverController.cs" />

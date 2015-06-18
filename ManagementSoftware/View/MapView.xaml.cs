@@ -63,7 +63,21 @@ namespace ManagementSoftware.View
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            RefreshData();
+            int attempts = 0;
+            while (attempts < 3)
+            {
+                attempts++;
+                try
+                {
+                    RefreshData();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    string curDir = Directory.GetCurrentDirectory();
+                    this.WebBrowserGoogle.Navigate(new Uri(String.Format("file:///{0}/Resources/GoogleMaps.html", curDir)));
+                }
+            }
         }
 
 
@@ -153,8 +167,8 @@ namespace ManagementSoftware.View
                 return;
             }
             Car oldcar = null;
-            if(_cars!=null && _cars.Count > _carIndex)
-                 oldcar = _cars[_carIndex];
+            if (_cars != null && _cars.Count > _carIndex)
+                oldcar = _cars[_carIndex];
             _cars = cars.OccupiedCars.ToList();
             _customers = cust.Customers.ToList();
 
@@ -176,7 +190,7 @@ namespace ManagementSoftware.View
                 return;
 
             if (_cars.Count <= carindex)
-                _carIndex = carindex = 0;             
+                _carIndex = carindex = 0;
 
             var car = _cars[carindex];
 
@@ -194,7 +208,7 @@ namespace ManagementSoftware.View
 
             var address = _laborPos;
             Order order = _driversOrders.FirstOrDefault();
-            if (order!=null)
+            if (order != null)
             {
                 address = order.Customer.Address;
                 if (order.EmergencyPosition == null)
@@ -206,14 +220,14 @@ namespace ManagementSoftware.View
                 NavigateOnMap(car.LastPosition, _laborPos);
 
             IDistanceMatrixPlace destination = (order != null && order.EmergencyPosition != null)
-                ? (IDistanceMatrixPlace) new DistanceMatrixGPSPosition(order.EmergencyPosition)
+                ? (IDistanceMatrixPlace)new DistanceMatrixGPSPosition(order.EmergencyPosition)
                 : new DistanceMatrixAddress(address);
             var distance = DistanceCalculation.CalculateDistanceInKm(new DistanceMatrixGPSPosition(car.LastPosition), destination);
-           
+
             SetCarText(distance);
         }
 
-        
+
 
         private void ShowErrorMessagebox()
         {
@@ -239,7 +253,7 @@ namespace ManagementSoftware.View
             if (_customers != null)
                 foreach (var cust in _customers)
                 {
-                    System.Threading.Thread.Sleep(200);
+                    //System.Threading.Thread.Sleep(200);
                     var name = String.IsNullOrWhiteSpace(cust.Label) ? cust.FirstName + " " + cust.LastName : cust.Label;
                     WebBrowserGoogle.InvokeScript("addAddress", new Object[] { cust.Address.Street + ", " + cust.Address.PostalCode + " " + cust.Address.City, name, name + "<br/>" + cust.Address.Street + "<br/>" + cust.Address.PostalCode + " " + cust.Address.City });
                 }
