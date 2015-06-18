@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
@@ -39,26 +40,26 @@ namespace ManagementSoftware.View
         private int _carIndex = 0;
         private readonly IClientConnection _connection;
         private readonly Address _laborPos;
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-        private bool executed = false;
+        readonly System.Windows.Threading.DispatcherTimer _dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        private bool _executed = false;
 
 
 
         public MapView()
         {
             InitializeComponent();
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 30);
+            _dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, 30);
             _connection = SimpleIoc.Default.GetInstance<IClientConnection>();
             _laborPos = new LocalServerDataImpl().ZmsAddress;
             WebBrowserGoogle.ObjectForScripting = new ExposedJSObject(WebBrowserGoogle, this);
-            //WebBrowserGoogle.NavigateToString(Properties.Resources.GoogleMaps);
+            
+            WebBrowserGoogle.Navigated += new NavigatedEventHandler(WebBrowser_Navigated);
             string curDir = Directory.GetCurrentDirectory();
             this.WebBrowserGoogle.Navigate(new Uri(String.Format("file:///{0}/Resources/GoogleMaps.html", curDir)));
             TxtCar.Text = "Fahrer: Max Mustermann";
             LblCar.Content = "DummyCar";
-
-
+            
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -79,7 +80,26 @@ namespace ManagementSoftware.View
                 }
             }
         }
+        void WebBrowser_Navigated(object sender, NavigationEventArgs e)
+        {
+            HideJsScriptErrors((WebBrowser)sender);
+        }
 
+        public void HideJsScriptErrors(WebBrowser wb)
+        {
+            // IWebBrowser2 interface
+            // Exposes methods that are implemented by the WebBrowser control  
+            // Searches for the specified field, using the specified binding constraints.
+            FieldInfo fld = typeof(WebBrowser).GetField("_axIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (fld == null)
+                return;
+            object obj = fld.GetValue(wb);
+            if (obj == null)
+                return;
+            // Silent: Sets or gets a value that indicates whether the object can display dialog boxes.
+            // HRESULT IWebBrowser2::get_Silent(VARIANT_BOOL *pbSilent);HRESULT IWebBrowser2::put_Silent(VARIANT_BOOL bSilent);
+            obj.GetType().InvokeMember("Silent", BindingFlags.SetProperty, null, obj, new object[] { true });
+        }
 
         public void SetCarText(DistanceContainer distance)
         {
@@ -309,10 +329,10 @@ namespace ManagementSoftware.View
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (this.IsVisible && executed == false)
+            if (this.IsVisible && _executed == false)
             {
-                executed = true;
-                dispatcherTimer.Start();
+                _executed = true;
+                _dispatcherTimer.Start();
             }
         }
 
