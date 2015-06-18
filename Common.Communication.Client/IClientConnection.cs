@@ -11,10 +11,12 @@ namespace Common.Communication.Client
         void Start();
         void Stop();
         void Connect();
+        void Connect(string serverAddress);
         void Send(Command command);
         T SendWait<T>(Command command) where T : Command;
         T SendWait<T>(Command command, int timeout) where T : Command;
         void RegisterCommandHandler(ICommandHandler handler);
         ConnectionState ConnectionState{ get; }
+        string ServerURL { get; }
     }
 }

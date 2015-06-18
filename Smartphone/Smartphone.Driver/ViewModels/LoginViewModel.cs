@@ -17,6 +17,7 @@ namespace Smartphone.Driver.ViewModels
     public class LoginViewModel : ViewModelBase
     {
 
+        public const string ServerURLProperty = "ServerURL";
         public const string UsernameProperty = "Username";
         public const string PasswordProperty = "Password";
         public const string CanConnectProperty = "CanConnect";
@@ -28,6 +29,7 @@ namespace Smartphone.Driver.ViewModels
         private IToaster toaster = null;
         private GPSPositionSender positionSender = null;
 
+        private string serverURL = null;
         private string username = null;
         private string password = null;
         private bool communicating = false;
@@ -40,9 +42,23 @@ namespace Smartphone.Driver.ViewModels
             this.toaster = toaster;
             this.positionSender = positionSender;
 
+            serverURL = "http://192.168.56.1:8080/commands";
             username = "Driv3";
             password = "Driv3";
             communicating = false;
+        }
+
+        public string ServerURL
+        {
+            get { return serverURL; }
+            set
+            {
+                if (!string.Equals(serverURL, value))
+                {
+                    serverURL = value;
+                    RaisePropertyChanged(ServerURLProperty);
+                }
+            }
         }
 
         public string Username
@@ -101,7 +117,7 @@ namespace Smartphone.Driver.ViewModels
         private async void Login()
         {
             IsCommunicating = true;
-            if (!connection.ConnectionState.Equals(ConnectionState.Connected))
+            if (!connection.ConnectionState.Equals(ConnectionState.Connected) || !string.Equals(serverURL, connection.ServerURL))
             {
                 await Connect();
             }
@@ -117,29 +133,30 @@ namespace Smartphone.Driver.ViewModels
                     }
                     else
                     {
-                        toaster.MakeToast(ToastTexts.FAILED_LOGIN);
+                        toaster.MakeToast(TextDefinitions.FAILED_LOGIN);
                     }
                 }
                 else
                 {
-                    toaster.MakeToast(ToastTexts.SERVER_NO_ANSWER);
+                    toaster.MakeToast(TextDefinitions.SERVER_NO_ANSWER);
                 }
             }
             else
             {
-                toaster.MakeToast(ToastTexts.SERVER_NO_ANSWER);
+                toaster.MakeToast(TextDefinitions.SERVER_NO_ANSWER);
             }
             IsCommunicating = false;
         }
 
         private Task<bool> Connect()
         {
+
             return Task.Run(() =>
             {
                 bool success = false;
                 try
                 {
-                    connection.Connect();
+                    connection.Connect(serverURL);
                     success = true;
                 }
                 catch (ConnectionException)
@@ -158,7 +175,7 @@ namespace Smartphone.Driver.ViewModels
             {
                 // Driver already has a car assigned. Skip the car selection.
                 session.CarID = assignedCarIDOrNull;
-                toaster.MakeToast(ToastTexts.AlreadyAssignedToCar(assignedCarIDOrNull));
+                toaster.MakeToast(TextDefinitions.AlreadyAssignedToCar(assignedCarIDOrNull));
 
                 CmdGetDriversUnfinishedOrders cmdGetOrders = new CmdGetDriversUnfinishedOrders(session.Username);
                 connection.Send(cmdGetOrders);

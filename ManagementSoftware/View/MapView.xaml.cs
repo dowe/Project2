@@ -48,7 +48,7 @@ namespace ManagementSoftware.View
         {
             InitializeComponent();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 5, 0);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 30);
             _connection = SimpleIoc.Default.GetInstance<IClientConnection>();
             _laborPos = new LocalServerDataImpl().ZmsAddress;
             WebBrowserGoogle.ObjectForScripting = new ExposedJSObject(WebBrowserGoogle, this);
@@ -92,7 +92,22 @@ namespace ManagementSoftware.View
                     sb.Append("Außergewöhnliche Abholung bei\n");
                     sb.Append("GPS Position: " + _driversOrders.FirstOrDefault().EmergencyPosition.Latitude + "/" + _driversOrders.FirstOrDefault().EmergencyPosition.Longitude + "\n");
                 }
-                sb.Append("Proben abzuholen: " + _driversOrders.FirstOrDefault().Test.Count + "\n");
+                var dic = new Dictionary<String, List<SampleType>>();
+                foreach (var test in _driversOrders.FirstOrDefault().Test)
+                {
+                    if (!dic.ContainsKey(test.PatientID))
+                        dic.Add(test.PatientID, new List<SampleType>());
+
+                    if (!dic[test.PatientID].Contains(test.Analysis.SampleType))
+                        dic[test.PatientID].Add(test.Analysis.SampleType);
+                }
+                int count = 0;
+                foreach (var pat in dic)
+                {
+                    count += pat.Value.Count;
+                }
+
+                sb.Append("Proben abzuholen: " + count + "\n");
             }
             else
             {
@@ -110,7 +125,7 @@ namespace ManagementSoftware.View
                 for (int i = 1; i < _driversOrders.Count; i++)
                 {
                     var cust = _driversOrders[i].Customer;
-                    sb.Append(cust.Label ?? cust.FirstName + " " + cust.LastName + "\n");
+                    sb.Append(cust.Label + "\n" ?? cust.FirstName + " " + cust.LastName + "\n");
                     if (_driversOrders[i].EmergencyPosition == null)
                     {
                         sb.Append(cust.Address.Street + "\n");
@@ -217,13 +232,9 @@ namespace ManagementSoftware.View
             WebBrowserGoogle.InvokeScript("navigateToAddress", new Object[] { from.Latitude, from.Longitude, to.Street + ", " + to.PostalCode + " " + to.City });
         }
 
-        private void GetDriverDestinations(Car car)
-        {
-
-        }
-
         private void SetMapIcons()
         {
+            WebBrowserGoogle.InvokeScript("clearMarkers");
             WebBrowserGoogle.InvokeScript("addLaboratory", new Object[] { _laborPos.Street + ", " + _laborPos.PostalCode + " " + _laborPos.City, "Zentrallabor", "Zentrallabor<br/>" + _laborPos.Street + "<br/>" + _laborPos.PostalCode + " " + _laborPos.City });
 
             if (_customers != null)

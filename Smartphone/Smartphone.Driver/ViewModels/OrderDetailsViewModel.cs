@@ -137,7 +137,7 @@ namespace Smartphone.Driver.ViewModels
 				}
 				catch (Exception)
 				{
-					toaster.MakeToast (ToastTexts.FAILED_LAUNCH_MAP);
+					toaster.MakeToast (TextDefinitions.FAILED_LAUNCH_MAP);
 				}
 			}
 		}
@@ -166,13 +166,14 @@ namespace Smartphone.Driver.ViewModels
 				}
 				else
 				{
-					toaster.MakeToast (ToastTexts.FAILED_SET_COLLECTED);
+					toaster.MakeToast (TextDefinitions.FAILED_SET_COLLECTED);
 					connection.Send (new CmdGetDriversUnfinishedOrders (session.Username));
 				}
 			}
 			else
 			{
-				toaster.MakeToast (ToastTexts.SERVER_NO_ANSWER);
+				toaster.MakeToast (TextDefinitions.SERVER_NO_ANSWER);
+                connection.Send (new CmdGetDriversUnfinishedOrders (session.Username));
 			}
 		}
 

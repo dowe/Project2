@@ -103,7 +103,7 @@ namespace Server.CmdHandler
                 {
                     if (item.Analysis.SampleType == sampleType)
                     {
-                        if (item.TestState == TestState.COMPLETED)
+                        if (item.TestState != TestState.COMPLETED)
                         {
                             return false;
                         }

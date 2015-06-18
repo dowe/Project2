@@ -128,7 +128,7 @@
 
         });
         marker1.setMap(map);
-
+        addMarker(marker1);
         //hänge click-event an marker an
         window.google.maps.event.addListener(marker1, 'click', function() {
             var infowindow = new google.maps.InfoWindow({
@@ -156,7 +156,7 @@
                     zIndex: normalMarker()
                 });
                 marker1.setMap(map);
-
+                addMarker(marker1);
                 //hänge click-event an marker an
                 window.google.maps.event.addListener(marker1, 'click', function() {
                     var infowindow = new google.maps.InfoWindow({
@@ -186,7 +186,7 @@
                     zIndex: normalMarker()
                 });
                 marker1.setMap(map);
-
+                addMarker(marker1);
                 //hänge click-event an marker an
                 window.google.maps.event.addListener(marker1, 'click', function() {
                     var infowindow = new google.maps.InfoWindow({
@@ -208,6 +208,19 @@
         return Math.floor(Math.random() * 1000);
     }
 
+    //um marker wieder löschen zu können
+    var markers = new Array();
+
+    function addMarker(marker) {
+        this.markers[this.markers.length] = marker;
+    };
+
+    function clearMarkers() {
+        for (var i = 0; i < this.markers.length; i++) {
+            this.markers[i].setMap(null);
+        }
+        this.markers = new Array();
+    };
 //addHouse für eine Adresse NICHT BENÖTIGT
     //function addHouse(lat, long, title) {
     //    var latLng = new window.google.maps.LatLng(lat, long);

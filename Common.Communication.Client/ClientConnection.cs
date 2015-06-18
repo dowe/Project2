@@ -35,13 +35,7 @@ namespace Common.Communication.Client
         {
             connectionLock = new ReaderWriterLockSlim();
 
-            connection = new Connection(serverAddress);
-            connection.TransportConnectTimeout = TimeSpan.FromMilliseconds(CONNECT_TIMEOUT_IN_MS);
-            connection.Received += connection_Received;
-            connection.Reconnecting += connection_Reconnecting;
-            connection.Reconnected += connection_Reconnected;
-            connection.Closed += connection_Closed;
-
+            UnsyncReplaceConnection(serverAddress);
             input = new InputCommandPipeline(serializer);
             output = new OutputCommandPipeline(serializer);
         }
@@ -86,6 +80,51 @@ namespace Common.Communication.Client
             connectionLock.EnterWriteLock();
             try
             {
+                connection.Stop();
+                UnsyncConnect();
+            }
+            finally
+            {
+                connectionLock.ExitWriteLock();
+            }
+        }
+
+        public void Connect(string serverAddress)
+        {
+            connectionLock.EnterWriteLock();
+            try
+            {
+                UnsyncReplaceConnection(serverAddress);
+                UnsyncConnect();
+            }
+            finally
+            {
+                connectionLock.ExitWriteLock();
+            }
+        }
+
+        private void UnsyncReplaceConnection(string serverAddress)
+        {
+            if (connection != null)
+            {
+                connection.Stop();
+                connection.Received -= connection_Received;
+                connection.Reconnecting -= connection_Reconnecting;
+                connection.Reconnected -= connection_Reconnected;
+                connection.Closed -= connection_Closed;
+            }
+            connection = new Connection(serverAddress);
+            connection.TransportConnectTimeout = TimeSpan.FromMilliseconds(CONNECT_TIMEOUT_IN_MS);
+            connection.Received += connection_Received;
+            connection.Reconnecting += connection_Reconnecting;
+            connection.Reconnected += connection_Reconnected;
+            connection.Closed += connection_Closed;
+        }
+
+        private void UnsyncConnect()
+        {
+            try
+            {
                 IClientTransport transport = new ServerSentEventsTransport
                 {
                     ReconnectDelay = TimeSpan.FromMilliseconds(CONNECT_TIMEOUT_IN_MS)
@@ -96,10 +135,6 @@ namespace Common.Communication.Client
             catch (AggregateException e)
             {
                 throw new ConnectionException("Failed to build up a connection to the server.", e);
-            }
-            finally
-            {
-                connectionLock.ExitWriteLock();
             }
         }
 
@@ -195,6 +230,20 @@ namespace Common.Communication.Client
                 {
                     connectionLock.ExitReadLock();
                 }
+            }
+        }
+
+        public string ServerURL
+        {
+            get
+            {
+                string serverURL = "";
+                if (connection != null)
+                {
+                    serverURL = connection.Url;
+                }
+
+                return serverURL;
             }
         }
 

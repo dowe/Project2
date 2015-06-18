@@ -7,15 +7,18 @@
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
-				<Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Text="User:" />
-				<Entry Grid.Row="0" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="Username" Text="{Binding Username}" IsEnabled="{Binding IsNotCommunicating}" />
-				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Passwort:" />
-				<Entry Grid.Row="1" Grid.Column="1" IsPassword="true" VerticalOptions="Center" WidthRequest="200" Placeholder="Passwort" Text="{Binding Password}" IsEnabled="{Binding IsNotCommunicating}" />
+        <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Text="Server URL:" />
+        <Entry Grid.Row="0" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="URL" Text="{Binding ServerURL}" IsEnabled="{Binding IsNotCommunicating}" />
+				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="User:" />
+				<Entry Grid.Row="1" Grid.Column="1" VerticalOptions="Center" WidthRequest="200" Placeholder="Username" Text="{Binding Username}" IsEnabled="{Binding IsNotCommunicating}" />
+				<Label Grid.Row="2" Grid.Column="0" VerticalOptions="Center" Text="Passwort:" />
+				<Entry Grid.Row="2" Grid.Column="1" IsPassword="true" VerticalOptions="Center" WidthRequest="200" Placeholder="Passwort" Text="{Binding Password}" IsEnabled="{Binding IsNotCommunicating}" />
 			</Grid>
 			<ActivityIndicator VerticalOptions="CenterAndExpand" IsRunning="{Binding IsCommunicating}" />
 			<Button Text="Login" Command="{Binding LoginCommand}" IsEnabled="{Binding IsNotCommunicating}" />

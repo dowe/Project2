@@ -146,7 +146,7 @@ namespace Smartphone.Driver.ViewModels
 						}
 						else
 						{
-							toaster.MakeToast(ToastTexts.FAILED_SELECT_CAR);
+							toaster.MakeToast(TextDefinitions.FAILED_SELECT_CAR);
 							// Update the cars. Maybe the user selected a car that was already assigned to another user.
 							CmdGetAvailableCars getAvailableCars = new CmdGetAvailableCars ();
 							connection.Send (getAvailableCars);
@@ -154,7 +154,10 @@ namespace Smartphone.Driver.ViewModels
 					}
 					else
 					{
-						toaster.MakeToast(ToastTexts.SERVER_NO_ANSWER);
+						toaster.MakeToast(TextDefinitions.SERVER_NO_ANSWER_RELOGIN);
+                        // Prevent inconsistent state.
+                        session.Reset();
+					    Messenger.Default.Send<MsgSwitchLoginPage>(new MsgSwitchLoginPage());
 					}
 				}
 			}
