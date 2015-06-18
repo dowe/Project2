@@ -48,7 +48,7 @@ namespace ManagementSoftware.View
         {
             InitializeComponent();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 5, 0);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 30);
             _connection = SimpleIoc.Default.GetInstance<IClientConnection>();
             _laborPos = new LocalServerDataImpl().ZmsAddress;
             WebBrowserGoogle.ObjectForScripting = new ExposedJSObject(WebBrowserGoogle, this);
@@ -125,7 +125,7 @@ namespace ManagementSoftware.View
                 for (int i = 1; i < _driversOrders.Count; i++)
                 {
                     var cust = _driversOrders[i].Customer;
-                    sb.Append(cust.Label ?? cust.FirstName + " " + cust.LastName + "\n");
+                    sb.Append(cust.Label + "\n" ?? cust.FirstName + " " + cust.LastName + "\n");
                     if (_driversOrders[i].EmergencyPosition == null)
                     {
                         sb.Append(cust.Address.Street + "\n");
@@ -234,6 +234,7 @@ namespace ManagementSoftware.View
 
         private void SetMapIcons()
         {
+            WebBrowserGoogle.InvokeScript("clearMarkers");
             WebBrowserGoogle.InvokeScript("addLaboratory", new Object[] { _laborPos.Street + ", " + _laborPos.PostalCode + " " + _laborPos.City, "Zentrallabor", "Zentrallabor<br/>" + _laborPos.Street + "<br/>" + _laborPos.PostalCode + " " + _laborPos.City });
 
             if (_customers != null)
