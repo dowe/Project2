@@ -22,7 +22,8 @@ namespace KundenappTest
 
 		#region IClientConnection implementation
 
-		public event Action Closed;
+	    public string ServerURL { get; private set; }
+	    public event Action Closed;
 
 		public event Action Reconnecting;
 
@@ -43,7 +44,12 @@ namespace KundenappTest
 			throw new NotImplementedException ();
 		}
 
-		public void Send (Common.Communication.Command command)
+	    public void Connect(string serverAddress)
+	    {
+	        throw new NotImplementedException();
+	    }
+
+	    public void Send (Common.Communication.Command command)
 		{
 			throw new NotImplementedException ();
 		}
