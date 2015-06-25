@@ -11,10 +11,12 @@ namespace Common.Commands
     {
 
         public bool Success { get; private set; }
+        public float MinKm { get; private set; }
 
-        public CmdReturnLogoutDriver(Guid requestId, bool success) : base(requestId)
+        public CmdReturnLogoutDriver(Guid requestId, bool success, float minKm) : base(requestId)
         {
             Success = success;
+            MinKm = minKm;
         }
 
     }

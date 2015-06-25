@@ -28,6 +28,7 @@ namespace Server.CmdHandler
         protected override void Handle(CmdLogoutDriver command, string connectionIdOrNull)
         {
             bool success = true;
+            float minKm = 0;
 
             db.StartTransaction();
             Car car = db.GetCar(command.CarId);
@@ -36,12 +37,23 @@ namespace Server.CmdHandler
                 CarLogbookEntry latestEntry = car.CarLogbook.CarLogbookEntry.LastOrDefault();
                 if (latestEntry != null)
                 {
-                    latestEntry.EndDateOrNull = DateTime.Now;
-                    latestEntry.EndKMOrNull = command.EndKm;
+                    minKm = latestEntry.StartKM;
                 }
-                if (car.CurrentDriver != null && car.CurrentDriver.UserName.Equals(command.Username))
+                if (command.EndKm >= minKm)
                 {
-                    car.CurrentDriver = null;
+                    if (latestEntry != null)
+                    {
+                        latestEntry.EndDateOrNull = DateTime.Now;
+                        latestEntry.EndKMOrNull = command.EndKm;
+                    }
+                    if (car.CurrentDriver != null && car.CurrentDriver.UserName.Equals(command.Username))
+                    {
+                        car.CurrentDriver = null;
+                    }
+                }
+                else
+                {
+                    success = false;
                 }
             }
             else
@@ -50,7 +62,7 @@ namespace Server.CmdHandler
             }
             db.EndTransaction(TransactionEndOperation.SAVE);
             driverMapping.Remove(command.Username);
-            CmdReturnLogoutDriver response = new CmdReturnLogoutDriver(command.Id, success);
+            CmdReturnLogoutDriver response = new CmdReturnLogoutDriver(command.Id, success, minKm);
             connection.Unicast(response, connectionIdOrNull);
         }
     }

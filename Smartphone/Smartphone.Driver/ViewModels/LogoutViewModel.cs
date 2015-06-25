@@ -93,6 +93,17 @@ namespace Smartphone.Driver.ViewModels
 		        {
 		            OnLogoutSuccessful();
 		        }
+		        else
+		        {
+		            if (endKm < response.MinKm)
+		            {
+		                toaster.MakeToast(TextDefinitions.KmIsLowerThanDB(response.MinKm));
+		            }
+		            else
+		            {
+                        toaster.MakeToast(TextDefinitions.FAILED_LOGOUT);
+		            }
+		        }
 		    }
 		    else
 		    {

@@ -7,6 +7,7 @@ namespace Smartphone.Driver.Const
 	    public const string FAILED_LOGIN = "Falscher Username oder falsches Passwort.";
 		public const string FAILED_EMERGENCY = "Notfall konnte nicht gemeldet werden.";
 	    public const string FAILED_LOGOUT_ORDERS_LEFT = "Sie haben noch Bestellung abzuholen.";
+	    public const string FAILED_LOGOUT = "Sie konnten nicht ausgeloggt werden.";
 
 	    public const string FAILED_LAUNCH_MAP =
 	        "Google Maps konnte nicht gestartet werden. Haben Sie die App installiert?";
