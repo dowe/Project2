@@ -146,10 +146,17 @@ namespace Smartphone.Driver.ViewModels
 						}
 						else
 						{
-							toaster.MakeToast(TextDefinitions.FAILED_SELECT_CAR);
-							// Update the cars. Maybe the user selected a car that was already assigned to another user.
-							CmdGetAvailableCars getAvailableCars = new CmdGetAvailableCars ();
-							connection.Send (getAvailableCars);
+						    if (startKm < response.MinKm)
+						    {
+						        toaster.MakeToast(TextDefinitions.KmIsLowerThanDB(response.MinKm));
+						    }
+						    else
+						    {
+                                toaster.MakeToast(TextDefinitions.FAILED_SELECT_CAR);
+						    }
+                            // Update the cars. Maybe the user selected a car that was already assigned to another user.
+                            CmdGetAvailableCars getAvailableCars = new CmdGetAvailableCars ();
+                            connection.Send (getAvailableCars);
 						}
 					}
 					else

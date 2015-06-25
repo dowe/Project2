@@ -26,32 +26,56 @@ namespace Server.CmdHandler
         protected override void Handle(CmdSelectCar command, string connectionIdOrNull)
         {
             bool success = true;
+            float minKm = 0;
 
             db.StartTransaction();
             Car car = db.GetCar(command.SelectedCarId);
             if (car.CurrentDriver == null)
             {
-                Driver newDriver = db.GetDriver(command.Username);
-                car.Roadworthy = true;
-                car.CurrentDriver = newDriver;
-                var entry = new CarLogbookEntry
+                if (car.CarLogbook.CarLogbookEntry.Count != 0)
                 {
-                    Driver = newDriver,
-                    StartDate = DateTime.Now,
-                    StartKM = command.StartKm,
-                    EndDateOrNull = null,
-                    EndKMOrNull = null
-                };
-                db.CreateCarLogbookEnry(entry);
-                car.CarLogbook.CarLogbookEntry.Add(entry);
+                    var lastEntry = car.CarLogbook.CarLogbookEntry.Last();
+                    if (lastEntry.EndKMOrNull.HasValue)
+                    {
+                        minKm = lastEntry.EndKMOrNull.Value;
+                    }
+                    else
+                    {
+                        minKm = lastEntry.StartKM;
+                    }
+                }
+                else
+                {
+                    minKm = 0;
+                }
+                if (command.StartKm >= minKm)
+                {
+                    Driver newDriver = db.GetDriver(command.Username);
+                    car.Roadworthy = true;
+                    car.CurrentDriver = newDriver;
+                    var entry = new CarLogbookEntry
+                    {
+                        Driver = newDriver,
+                        StartDate = DateTime.Now,
+                        StartKM = command.StartKm,
+                        EndDateOrNull = null,
+                        EndKMOrNull = null
+                    };
+                    db.CreateCarLogbookEnry(entry);
+                    car.CarLogbook.CarLogbookEntry.Add(entry);
+                }
+                else
+                {
+                    success = false;
+                }
             }
             else
             {
                 success = false;
             }
             db.EndTransaction(TransactionEndOperation.SAVE);
-            
-            CmdReturnSelectCar response = new CmdReturnSelectCar(command.Id, success);
+
+            CmdReturnSelectCar response = new CmdReturnSelectCar(command.Id, success, minKm);
 
             connection.Unicast(response, connectionIdOrNull);
         }
