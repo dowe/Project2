@@ -42,7 +42,7 @@ namespace Smartphone.Driver.ViewModels
             this.toaster = toaster;
             this.positionSender = positionSender;
 
-            serverURL = "http://192.168.56.1:8080/commands";
+            serverURL = "http://langy.duckdns.org:8008/commands";
             username = "Driv3";
             password = "Driv3";
             communicating = false;
