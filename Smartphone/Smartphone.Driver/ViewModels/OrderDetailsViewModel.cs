@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GalaSoft.MvvmLight;
 using Common.Communication.Client;
 using Common.DataTransferObjects;
@@ -17,6 +19,7 @@ namespace Smartphone.Driver.ViewModels
 
 		private const string OrderIDProperty = "OrderID";
 		private const string CustomerAddressProperty = "CustomerAddress";
+	    private const string NumberOfSamplesProperty = "NumberOfSamples";
 
 		private IClientConnection connection = null;
 		private Session session = null;
@@ -26,6 +29,7 @@ namespace Smartphone.Driver.ViewModels
 
 		private string orderID = null;
 		private string customerAddress = null;
+	    private string numberOfSamples = null;
 		private RelayCommand launchMapCommand = null;
 		private RelayCommand collectedCommand = null;
 
@@ -46,7 +50,7 @@ namespace Smartphone.Driver.ViewModels
 			set {
 				if (value != order)
 				{
-					order = value;
+                    order = value;
 					// Set view model props.
 					if (value != null)
 					{
@@ -54,7 +58,7 @@ namespace Smartphone.Driver.ViewModels
 					}
 					else
 					{
-						orderID = string.Empty;
+						OrderID = string.Empty;
 					}
 					if (value != null)
 					{
@@ -68,13 +72,33 @@ namespace Smartphone.Driver.ViewModels
 						}
 						else
 						{
-							customerAddress = string.Empty;
+							CustomerAddress = string.Empty;
 						}
 					}
 					else
 					{
 						CustomerAddress = string.Empty;
 					}
+				    if (value != null)
+				    {
+				        // Count sample type diversity.
+				        var allPatientsEffectiveNumberOfSamples = new Dictionary<string, HashSet<SampleType>>();
+				        NumberOfSamples = value.Test.Count(t =>
+				        {
+				            HashSet<SampleType> patientsEffectiveNumberOfSamples = null;
+				            if (!allPatientsEffectiveNumberOfSamples.TryGetValue(t.PatientID, out patientsEffectiveNumberOfSamples))
+				            {
+				                patientsEffectiveNumberOfSamples = new HashSet<SampleType>();
+				                allPatientsEffectiveNumberOfSamples[t.PatientID] = patientsEffectiveNumberOfSamples;
+				            }
+
+				            return patientsEffectiveNumberOfSamples.Add(t.Analysis.SampleType);
+				        }).ToString();
+				    }
+				    else
+				    {
+				        NumberOfSamples = string.Empty;
+				    }
 				}
 			}
 		}
@@ -106,6 +130,22 @@ namespace Smartphone.Driver.ViewModels
 				}
 			}
 		}
+
+	    public string NumberOfSamples
+	    {
+	        get
+	        {
+	            return numberOfSamples;
+	        }
+	        set
+	        {
+	            if (!value.Equals(numberOfSamples))
+	            {
+	                numberOfSamples = value;
+                    RaisePropertyChanged(NumberOfSamplesProperty);
+	            }
+	        }
+	    }
 
 		public RelayCommand LaunchMapCommand
 		{

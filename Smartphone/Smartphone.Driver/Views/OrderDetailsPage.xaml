@@ -6,6 +6,7 @@
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
@@ -15,6 +16,8 @@
 				<Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="{Binding OrderID}" />
 				<Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Addresse:" />
 				<Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Text="{Binding CustomerAddress}" />
+				<Label Grid.Row="2" Grid.Column="0" VerticalOptions="Center" Text="Anzahl der abzuholenden Proben:" />
+				<Label Grid.Row="2" Grid.Column="1" VerticalOptions="Center" Text="{Binding NumberOfSamples}" />
 			</Grid>
 			<ActivityIndicator VerticalOptions="CenterAndExpand" IsRunning="false" />
 			<StackLayout Orientation="Horizontal" VerticalOptions="End" >
