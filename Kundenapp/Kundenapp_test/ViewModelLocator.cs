@@ -10,7 +10,7 @@ namespace Kundenapp
 		static ViewModelLocator()
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-			IClientConnection clientConnection = new ClientConnection ("http://192.168.0.13:8080/commands");
+			IClientConnection clientConnection = new ClientConnection ("http://langy.duckdns.org:8008/commands");
 			clientConnection.Start ();
 			clientConnection.Connect ();
 			SimpleIoc.Default.Register<IClientConnection> (() => clientConnection);
