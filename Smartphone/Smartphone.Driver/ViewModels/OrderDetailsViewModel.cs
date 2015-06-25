@@ -68,7 +68,7 @@ namespace Smartphone.Driver.ViewModels
 						}
 						else if (value.Customer != null && value.Customer.Address != null)
 						{
-							CustomerAddress = value.Customer.Address.Street + "\n" + value.Customer.Address.PostalCode + value.Customer.Address.City;
+							CustomerAddress = value.Customer.Address.Street + "\n" + value.Customer.Address.PostalCode + " " + value.Customer.Address.City;
 						}
 						else
 						{
