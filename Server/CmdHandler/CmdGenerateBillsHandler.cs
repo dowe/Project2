@@ -83,7 +83,7 @@ namespace Server.CmdHandler
                      b.Date = now;
                      String mainDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent( Directory.GetCurrentDirectory().ToString()).ToString()).ToString()).ToString();
                      String targetdir = mainDirectory + "/ASPServer/App_Data/" + _OrderList[i].Customer.UserName;
-                     b.PDFPath = mainDirectory + "/ASPServer/App_Data/" + _OrderList[i].Customer.UserName + "/" + now.ToString("dd-MM-yyyy")+".pdf";
+                     b.PDFPath = mainDirectory + "/ASPServer/App_Data/" + _OrderList[i].Customer.UserName + "/" + now.ToString("dd-MM-yyyy-HH-mm-ss") + ".pdf";
                      
                      //Add Testlist from Order
                     _TestList = (List<Test>) _OrderList[i].Test;
