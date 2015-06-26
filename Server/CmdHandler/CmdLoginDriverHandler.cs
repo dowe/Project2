@@ -48,6 +48,14 @@ namespace Server.CmdHandler
             bool success = false;
             if (driverOrNull != null && driverOrNull.Password.Equals(command.Password))
             {
+                // Logout existing session if existing.
+                string oldSessionConnectionStringOrNull = driverMapping.ResolveConnectionIDOrNull(driverOrNull.UserName);
+                if (oldSessionConnectionStringOrNull != null)
+                {
+                    var cmdForceDriverLogout = new CmdForceDriverLogout();
+                    connection.Unicast(cmdForceDriverLogout, oldSessionConnectionStringOrNull);
+                }
+
                 driverMapping.Set(driverOrNull.UserName, connectionIdOrNull);
                 success = true;
             }

@@ -30,6 +30,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Handlers\CmdForceDriverLogoutHandler.cs" />
     <Compile Include="Smartphone.Driver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\LoginPage.xaml.cs">

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CmdCheckAlarmTenMinutesLeft.cs" />
     <Compile Include="CmdCheckOrdersFiveHoursLeft.cs" />
+    <Compile Include="CmdForceDriverLogout.cs" />
     <Compile Include="CmdSendNotification.cs" />
     <Compile Include="CmdAddOrder.cs" />
     <Compile Include="CmdAnnounceEmergency.cs" />

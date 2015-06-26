@@ -30,6 +30,8 @@ namespace Smartphone.Driver.Const
 		{
 			return "Bestellung " + orderID;
 		}
+
+	    public const string FORCED_LOGOUT = "Jemand hat sich mit ihrem User eingeloggt.";
 	}
 }
 
