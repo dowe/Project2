@@ -34,7 +34,7 @@ namespace Server
             UsernameToConnectionIdMapping driverToConnectionIdMapping = new UsernameToConnectionIdMapping();
             ISmsSending smsSending = new SmsSending();
             IExtremeValueChecker checker = new ExtremeValueChecker();
-            IShiftScheduleCreator shiftScheduleCreator = new DummyShiftScheduleCreator(); //TODO: Use Real Impl
+            IShiftScheduleCreator shiftScheduleCreator = new ShiftScheduleCreator(); //TODO: Use Real Impl
 
             connection.ServerStarted += (object sender, EventArgs e) => OnServerStarted(connection, db, data);
             connection.BeforeHandlingCommand += connection_BeforeHandlingCommand;
