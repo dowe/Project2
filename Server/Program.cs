@@ -34,7 +34,7 @@ namespace Server
             UsernameToConnectionIdMapping driverToConnectionIdMapping = new UsernameToConnectionIdMapping();
             ISmsSending smsSending = new SmsSending();
             IExtremeValueChecker checker = new ExtremeValueChecker();
-            IShiftScheduleCreator shiftScheduleCreator = new ShiftScheduleCreator(); //TODO: Use Real Impl
+            IShiftScheduleCreator shiftScheduleCreator = new ShiftScheduleCreator();
 
             connection.ServerStarted += (object sender, EventArgs e) => OnServerStarted(connection, db, data);
             connection.BeforeHandlingCommand += connection_BeforeHandlingCommand;
@@ -110,7 +110,7 @@ namespace Server
             data.GenerateBillTimer = TimerFactorys.GenerateBillTimer(connection);
             data.GenerateBillTimer.Start();
 
-            connection.InjectInternal(new CmdGenerateShiftSchedule(GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH));
+            connection.InjectInternal(new CmdGenerateShiftSchedule());
             connection.InjectInternal(new CmdGenerateDailyStatistic());
             connection.InjectInternal(new CmdGenerateBills());
         }

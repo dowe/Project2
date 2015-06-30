@@ -6,20 +6,23 @@
 //------------------------------------------------------------------------------
 namespace Server.DatabaseCommunication
 {
-	using Common.DataTransferObjects;
+    using Common.DataTransferObjects;
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Data.Entity.Core.Objects;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Text;
 
-	public class DatabaseCommunicator : IDatabaseCommunicator
-	{
+    public class DatabaseCommunicator : IDatabaseCommunicator
+    {
 
         private LaborContext Context;
         private List<Analysis> Analysises;
         public List<Analysis> GetAllAnalysis(Func<Analysis, bool> lambda = null)
         {
-            if(lambda != null)
+            if (lambda != null)
             {
                 return Context.Analysis.Where(lambda).ToList();
             }
@@ -53,11 +56,11 @@ namespace Server.DatabaseCommunication
 
         public void EndTransaction(TransactionEndOperation operation)
         {
-            if(Context == null)
+            if (Context == null)
             {
                 throw new Exception("no transaction started, when trying to end transaction");
             }
-            if(operation == TransactionEndOperation.SAVE)
+            if (operation == TransactionEndOperation.SAVE)
             {
                 try
                 {
@@ -88,7 +91,7 @@ namespace Server.DatabaseCommunication
 
         public void StartTransaction()
         {
-            if(Context != null)
+            if (Context != null)
             {
                 throw new Exception("Transaction is already started");
             }
@@ -196,14 +199,26 @@ namespace Server.DatabaseCommunication
             Context.CarLogbookEntries.Add(entry);
         }
 
-	    public GPSPosition CreateGPSPosition(GPSPosition position)
-	    {
-	        return Context.GpsPosition.Add(position);
-	    }
+        public GPSPosition CreateGPSPosition(GPSPosition position)
+        {
+            return Context.GpsPosition.Add(position);
+        }
 
         public void CreateShiftSchedule(ShiftSchedule shift)
         {
             Context.ShiftSchedule.Add(shift);
+        }
+
+        public void RemoveShiftSchedule(ShiftSchedule shift)
+        {
+            foreach (DayEntry d in shift.DayEntry)
+            {
+                Context.Database.ExecuteSqlCommand("DELETE dbo.AMShiftEmployees WHERE ShiftDate = @date", new SqlParameter("@date", d.Date));
+                Context.Database.ExecuteSqlCommand("DELETE dbo.PMShiftEmployees WHERE ShiftDate = @date", new SqlParameter("@date", d.Date));
+                Context.Database.ExecuteSqlCommand("DELETE dbo.DayEntries WHERE Date = @date", new SqlParameter("@date", d.Date));
+            }
+            
+            Context.Database.ExecuteSqlCommand("DELETE dbo.ShiftSchedules WHERE Date = @date", new SqlParameter("@date", shift.Date));
         }
 
 
@@ -226,22 +241,22 @@ namespace Server.DatabaseCommunication
                     listtoadd.Add(found);
                 }
             }
-            foreach(Analysis an in listtorem)
+            foreach (Analysis an in listtorem)
             {
                 analysises.Remove(an);
             }
             analysises.AddRange(listtoadd);
         }
 
-	    public void AttachOrder(Order order)
-	    {
-	        Context.Order.Attach(order);
-	    }
+        public void AttachOrder(Order order)
+        {
+            Context.Order.Attach(order);
+        }
 
-	    public void CreateBill(Bill bill)
-	    {
-	        Context.Bill.Add(bill);
-	    }
+        public void CreateBill(Bill bill)
+        {
+            Context.Bill.Add(bill);
+        }
 
 
         public List<Employee> GetAllEmployee()

@@ -15,7 +15,7 @@ namespace Common.DataTransferObjects
 	public class ShiftSchedule
 	{
         [Key]
-        public DateTime Date
+        public virtual DateTime Date
         {
             get;
             set;

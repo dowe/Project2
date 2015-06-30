@@ -42,7 +42,28 @@ namespace Server.Timer
         }
         public static InjectInternalTimed GenerateShiftScheduleTimer(IServerConnection connection)
         {
-            return InjectCmdTimer(connection, new TimerFactory(() => TimeSpan.FromDays(1.0), false), () => new CmdGenerateShiftSchedule());
+            return InjectCmdTimer(connection, new TimerFactory(GetShiftScheduleTimeSpan, false), () => new CmdGenerateShiftSchedule());
+        }
+
+        private static TimeSpan GetShiftScheduleTimeSpan()
+        {
+            /*
+            DateTime month;
+
+            if (DateTime.Now.Day >= 25)
+            {
+                month = DateTime.Now.AddMonths(1);
+            }
+            else
+            {
+                month = DateTime.Now;
+            }
+
+            DateTime nextDate = new DateTime(month.Year, month.Month, 25, 12, 0, 0);
+            return nextDate - DateTime.Now;
+            */
+
+            return TimeSpan.FromMinutes(10.0);
         }
 
         public static InjectInternalTimed CheckOrdersFiveHoursLeftScheduledTimer(IServerConnection connection)

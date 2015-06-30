@@ -66,6 +66,8 @@ namespace Server.DatabaseCommunication
 
         void CreateShiftSchedule(ShiftSchedule shift);
 
+        void RemoveShiftSchedule(ShiftSchedule shift);
+
         void AttachAnalysises(List<Analysis> analysises);
 
 	    void AttachOrder(Order order);

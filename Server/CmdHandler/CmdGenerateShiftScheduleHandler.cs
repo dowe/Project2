@@ -34,77 +34,21 @@ namespace Server.CmdHandler
 
         protected override void Handle(CmdGenerateShiftSchedule command, string connectionIdOrNull)
         {
-
-            DateTime refDate;
-
-            switch (command.Mode)
-            {
-                case GenerateMonthMode.DEFAULT_NEXT_MONTH:
-                    DateTime now = DateTime.Now;
-                    DateTime nextMonth = now.AddMonths(1);
-                    DateTime dateInSevenDays = now.AddDays(7.0);
-                    if (dateInSevenDays.Month == nextMonth.Month
-                            && dateInSevenDays.Year == nextMonth.Year)
-                    {
-                        refDate = nextMonth;
-                    }
-                    else
-                    {
-                        return;
-                    }
-                    break;
-
-                case GenerateMonthMode.IMMEDIATELY_CURRENT_MONTH:
-                    refDate = DateTime.Now;
-                    break;
-
-                case GenerateMonthMode.IMMEDIATELY_NEXT_MONTH:
-                    refDate = DateTime.Now.AddMonths(1);
-                    break;
-                default:
-                    throw new Exception("Unknonw GenerateMonthMode <" + command.Mode + ">");
-            }
-
-            CreateForMonth(refDate);
-        }
-
-        private void CreateForMonth(DateTime refDate)
-        {
-
+            DateTime currentMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime previousMonth = currentMonth.AddMonths(-1);
             ShiftSchedule previousShiftSchedule = new ShiftSchedule();
-            DateTime previousMonth = refDate.AddMonths(-1);
 
-            //GET ALL ShiftSchedules
-            db.StartTransaction();
-            IList<ShiftSchedule> list = db.GetShiftSchedules();
-            bool existShiftSchedule = false;
-            foreach (ShiftSchedule obj in list)
-            {
-                //test ShiftSchedule for Month not created
-                if (obj.Date.Month == refDate.Month
-                    && obj.Date.Year == refDate.Year)
-                {
-                    existShiftSchedule = true;
-                    break;
-                }
-
-                //search previousShiftSchedule
-                if (obj.Date.Month == previousMonth.Month
-                    && obj.Date.Year == previousMonth.Year)
-                {
-                    previousShiftSchedule = obj;
-                }
-            }
+            Remove(db, currentMonth);
             
-
-            if (existShiftSchedule)
+            //GET PREVIOUS ShiftSchedules and create new
+            db.StartTransaction();
+            previousShiftSchedule = Get(db.GetShiftSchedules(), previousMonth);
+            if (previousShiftSchedule == null)
             {
-                db.EndTransaction(TransactionEndOperation.READONLY);
-                return;
-            }
+                previousShiftSchedule = new ShiftSchedule();
+            } 
 
             List<Employee> emps = db.GetAllEmployee();
-
             if (emps.Count == 0)
             {
                 Console.WriteLine("\n   DB not initialized\n   Employee.Count == 0 !!!\n");
@@ -112,13 +56,44 @@ namespace Server.CmdHandler
                 return;
             }
 
-            ShiftSchedule cur = creator.createShiftSchedule(previousShiftSchedule, emps,new DateTime(refDate.Year, refDate.Month, 1));
-            
+            ShiftSchedule cur = creator.createShiftSchedule(previousShiftSchedule, emps, currentMonth);
+
             //store ShiftSchedule in db
             db.CreateShiftSchedule(cur);
             db.EndTransaction(TransactionEndOperation.SAVE);
 
-            Console.WriteLine("SHIFT_SCHEDULE CREATED FOR <{0}>", refDate);
+            Console.WriteLine("SHIFT_SCHEDULE CREATED FOR <{0}> at <{1}>", cur.Date, DateTime.Now);
+            
+        }
+
+        private ShiftSchedule Get(IList<ShiftSchedule> list, DateTime date)
+        {
+            foreach (ShiftSchedule obj in list)
+            {
+                //test ShiftSchedule for Month not created
+                if (obj.Date.Month == date.Month
+                    && obj.Date.Year == date.Year)
+                {
+                    return obj;
+                }
+            }
+            return null;
+        }
+
+        private void Remove(IDatabaseCommunicator db, DateTime date)
+        {
+            db.StartTransaction();
+
+            ShiftSchedule shift = Get(db.GetShiftSchedules(), date);
+
+            if (shift == null)
+            {
+                db.EndTransaction(TransactionEndOperation.READONLY);
+                return;
+            }
+
+            db.RemoveShiftSchedule(shift);
+            db.EndTransaction(TransactionEndOperation.SAVE);
         }
     }
 }

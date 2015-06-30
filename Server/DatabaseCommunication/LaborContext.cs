@@ -32,7 +32,7 @@ namespace Server.DatabaseCommunication
                   m.ToTable("PMShiftEmployees");
               });
 
-
+           
         }
 
         public DbSet<AdministrationAssistant> AdministrationAssistant { get; set; }
@@ -48,5 +48,6 @@ namespace Server.DatabaseCommunication
         public DbSet<ShiftSchedule> ShiftSchedule { get; set; }
         public DbSet<Test> Test { get; set; }
         public DbSet<Driver> Driver { get; set; }
+        public DbSet<DayEntry> DayEntry { get; set; }
     }
 }
