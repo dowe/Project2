@@ -71,6 +71,11 @@ namespace Server.CmdHandler
             {
                 error = "Benutzername bereits vergeben";
             }
+            Customer c = db.GetAllCustomer((x) => x.BankAccount.IBAN.Equals(customer.BankAccount.IBAN)).FirstOrDefault();
+            if (c != null)
+            {
+                customer.BankAccount = c.BankAccount;
+            }
             db.EndTransaction(TransactionEndOperation.READONLY);
             if (error != null)
             {
