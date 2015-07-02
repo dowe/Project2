@@ -34,7 +34,7 @@ namespace Server.CmdHandler
 
         protected override void Handle(CmdGenerateShiftSchedule command, string connectionIdOrNull)
         {
-            DateTime currentMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime currentMonth = new DateTime(command.MonthForShiftSchedule.Year, command.MonthForShiftSchedule.Month, 1);
             DateTime previousMonth = currentMonth.AddMonths(-1);
             ShiftSchedule previousShiftSchedule = new ShiftSchedule();
 

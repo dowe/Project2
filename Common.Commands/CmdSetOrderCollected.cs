@@ -10,12 +10,10 @@ namespace Common.Commands
     public class CmdSetOrderCollected : Command
     {
 
-        public string Username { get; private set; }
         public long OrderId { get; private set; }
 
-        public CmdSetOrderCollected(string username, long orderId)
+        public CmdSetOrderCollected(long orderId)
         {
-            Username = username;
             OrderId = orderId;
         }
 

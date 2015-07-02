@@ -9,9 +9,17 @@ namespace Common.Commands
 {
     public class CmdGenerateShiftSchedule : Command
     {
+
+        public DateTime MonthForShiftSchedule { get; set; }
+
         public CmdGenerateShiftSchedule()
         {
-            
+            MonthForShiftSchedule = DateTime.Now;
+        }
+
+        public CmdGenerateShiftSchedule(DateTime monthForShiftSchedule)
+        {
+            MonthForShiftSchedule = monthForShiftSchedule;
         }
     }
 }

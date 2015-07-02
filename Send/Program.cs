@@ -2,37 +2,65 @@
 using Common.Communication.Client;
 using Common.Util;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Send
 {
     [ExcludeFromCodeCoverage]
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             IClientConnection c = null;
-            CmdReturnSetOrderCollected response;
 
             do
             {
-                string user = Console.ReadLine();
-                long l;
-                long.TryParse(Console.ReadLine(), out l);
+                string command = Console.ReadLine();
+
                 if (c == null)
                 {
                     c = new ClientConnection("http://localhost:8080/commands");
                     c.Start();
                     c.Connect();
                 }
-                CmdSetOrderCollected request = new CmdSetOrderCollected(user, l);
-                response = c.SendWait<CmdReturnSetOrderCollected>(request);
-                Console.WriteLine(Util.ToString(response));
+
+                switch (command)
+                {
+                    case "SHIFT":
+                        SendShift(c);
+                        break;
+                    case "COLLECTED":
+                        SendCollected(c);
+                        break;
+
+                    default:
+                        Console.WriteLine("Unknown Command <{0}>", command);
+                        break;
+                }
+                
             } while (true);
+        }
+
+        private static void SendCollected(IClientConnection c)
+        {
+            Console.WriteLine("ORDER-ID: ");
+            long orderId;
+            long.TryParse(Console.ReadLine(), out orderId);
+
+            CmdSetOrderCollected request = new CmdSetOrderCollected(orderId);
+            CmdReturnSetOrderCollected response = c.SendWait<CmdReturnSetOrderCollected>(request);
+            Console.WriteLine(Util.ToString(response));
+        }
+
+        private static void SendShift(IClientConnection c)
+        {
+            Console.WriteLine("MONTH (1-12): ");
+            int month;
+            int.TryParse(Console.ReadLine(), out month);
+
+            CmdGenerateShiftSchedule request = new CmdGenerateShiftSchedule(new DateTime(DateTime.Now.Year, month, 1));
+            c.Send(request);
+            Console.WriteLine("SUCCESS");
         }
     }
 }
