@@ -47,7 +47,7 @@ namespace ManagementSoftware.ViewModel
 
         private static IClientConnection CreateClientConnection()
         {
-            IClientConnection c = new ClientConnection("http://localhost:8080/commands");
+            IClientConnection c = new ClientConnection("http://langy.duckdns.org:8008/commands");
 
             c.Start();
             c.Connect();
