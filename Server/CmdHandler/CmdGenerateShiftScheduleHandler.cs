@@ -62,10 +62,10 @@ namespace Server.CmdHandler
             if (cur != null)
             {
                 db.CreateShiftSchedule(cur);
+                Console.WriteLine("SHIFT_SCHEDULE CREATED FOR <{0}> at <{1}>", cur.Date, DateTime.Now);
             }
             db.EndTransaction(TransactionEndOperation.SAVE);
 
-            Console.WriteLine("SHIFT_SCHEDULE CREATED FOR <{0}> at <{1}>", cur.Date, DateTime.Now);
             
         }
 
