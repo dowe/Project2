@@ -58,8 +58,11 @@ namespace Server.CmdHandler
 
             ShiftSchedule cur = creator.createShiftSchedule(previousShiftSchedule, emps, currentMonth);
 
-            //store ShiftSchedule in db
-            db.CreateShiftSchedule(cur);
+            //store ShiftSchedule in db if a valid one could be created.
+            if (cur != null)
+            {
+                db.CreateShiftSchedule(cur);
+            }
             db.EndTransaction(TransactionEndOperation.SAVE);
 
             Console.WriteLine("SHIFT_SCHEDULE CREATED FOR <{0}> at <{1}>", cur.Date, DateTime.Now);
