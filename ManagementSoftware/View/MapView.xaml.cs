@@ -75,7 +75,7 @@ namespace ManagementSoftware.View
                     RefreshData();
                     break;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     string curDir = Directory.GetCurrentDirectory();
                     this.WebBrowserGoogle.Navigate(new Uri(String.Format("file:///{0}/Resources/GoogleMaps.html", curDir)));
