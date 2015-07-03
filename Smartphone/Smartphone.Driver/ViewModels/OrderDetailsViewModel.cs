@@ -195,7 +195,7 @@ namespace Smartphone.Driver.ViewModels
 
 		private void SetCollected()
 		{
-			CmdSetOrderCollected setOrderCollected = new CmdSetOrderCollected (session.Username, order.OrderID);
+			CmdSetOrderCollected setOrderCollected = new CmdSetOrderCollected (order.OrderID);
 			CmdReturnSetOrderCollected response = connection.SendWait<CmdReturnSetOrderCollected>(setOrderCollected);
 			if (response != null)
 			{

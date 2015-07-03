@@ -13,7 +13,7 @@ namespace Common.Communication.Client
     {
 
         private const int CONNECT_TIMEOUT_IN_MS = 10000;
-        private const int DEFAULT_RESPONSE_TIMEOUT_IN_MS = 5000;
+        private const int DEFAULT_RESPONSE_TIMEOUT_IN_MS = 10000;
 
         private Connection connection = null;
 
